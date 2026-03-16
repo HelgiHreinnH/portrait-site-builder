@@ -1,13 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Hero } from "@/components/Hero";
+import { QuoteBreak } from "@/components/QuoteBreak";
+import { Services } from "@/components/Services";
+import { Methodology } from "@/components/Methodology";
+import { Projects } from "@/components/Projects";
+import { About } from "@/components/About";
+import { Contact } from "@/components/Contact";
+import { GlobalAmbientLayer } from "@/components/GlobalAmbientLayer";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        element?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, [location]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <>
+      <GlobalAmbientLayer />
+      <div className="relative z-10">
+        <QuoteBreak />
+        <div id="sub-hero">
+          <Hero />
+        </div>
+        <Services />
+        <Methodology />
+        <Projects />
+        <About />
+        <Contact />
       </div>
-    </div>
+    </>
   );
 };
 
