@@ -102,7 +102,7 @@ export function Nav() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
             className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border overflow-hidden"
           >
             <div className="flex flex-col items-center gap-6 py-8">

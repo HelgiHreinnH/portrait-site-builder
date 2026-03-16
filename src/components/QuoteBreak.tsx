@@ -40,7 +40,7 @@ export function QuoteBreak() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const }}
             style={{ paddingLeft: indentMap[i] || "0" }}
           >
             <span

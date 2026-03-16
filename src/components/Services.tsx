@@ -152,7 +152,7 @@ export function Services() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
                     className="overflow-hidden"
                   >
                     <p className="text-base leading-relaxed text-muted-foreground pb-8 pl-20 md:pl-32 max-w-2xl">

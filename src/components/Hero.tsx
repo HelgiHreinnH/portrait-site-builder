@@ -45,7 +45,7 @@ export function Hero() {
                   key={word}
                   initial={{ opacity: 0, y: 40 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 1, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 1, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
                 >
                   <span
                     className={`block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] ${

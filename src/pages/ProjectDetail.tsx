@@ -59,7 +59,7 @@ export function ProjectDetail() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
             <div className="flex items-center gap-4 mb-4">
               <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-primary-foreground/70">
