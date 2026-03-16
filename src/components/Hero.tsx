@@ -6,8 +6,8 @@ const PORTRAIT =
   "https://images.unsplash.com/photo-1571059314690-91e84c43dc0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhcmNoaXRlY3QlMjBtYW4lMjBwb3J0cmFpdCUyMG1pbmltYWx8ZW58MXx8fHwxNzczMTQxNjYwfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
 const CLIENTS = [
-  "LEGO", "Novo Nordisk", "MAERSK", "Barclays", "Haldor Topsoe", "Colliers",
-  "LEGO", "Novo Nordisk", "MAERSK", "Barclays", "Haldor Topsoe", "Colliers",
+  "LEGO", "Barclays", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
+  "LEGO", "Barclays", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
 ];
 
 export function Hero() {
@@ -33,7 +33,7 @@ export function Hero() {
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8"
             >
-              About the practice
+              People · Buildings · Technology
             </motion.p>
 
             {/* Headline */}
@@ -64,15 +64,15 @@ export function Hero() {
               className="mt-8 md:mt-12"
             >
               <p className="text-[15px] leading-relaxed text-muted-foreground max-w-md">
-                Designing environments that naturally encourage positive human behaviors through
-                evidence-based analysis and applied behavioral science.
+                I analyse the real problem, build a strategy around the findings,
+                design something communicable, and follow through to delivery.
               </p>
 
               <div className="flex gap-8 mt-8">
                 {[
                   { v: "10+", l: "Years" },
-                  { v: "F500", l: "Clients" },
-                  { v: "AEC", l: "Award" },
+                  { v: "10K+", l: "People impacted" },
+                  { v: "3", l: "Countries" },
                 ].map(({ v, l }) => (
                   <div key={l} className="text-center">
                     <div className="font-display text-2xl font-bold text-foreground">{v}</div>
@@ -91,22 +91,22 @@ export function Hero() {
             className="relative"
           >
             <p className="font-mono text-[11px] leading-relaxed text-muted-foreground max-w-xs mb-6 text-right ml-auto">
-              Behavioral science meets design craft — every decision grounded in how people actually think.
+              Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
             </p>
 
             <div className="relative overflow-hidden" style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}>
               <img
                 src={PORTRAIT}
-                alt="Helgi Hreinn Hjalmarsson"
+                alt="Helgi Hreinn Hjálmarsson"
                 className="w-full aspect-[3/4] object-cover"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-foreground/60 to-transparent">
-                <p className="font-display text-primary-foreground text-lg font-medium">Helgi Hreinn Hjalmarsson</p>
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">Founder · USER_</p>
+                <p className="font-display text-primary-foreground text-lg font-medium">Helgi Hreinn Hjálmarsson</p>
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">Architect · Copenhagen</p>
               </div>
               <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm px-3 py-2 text-center">
-                <div className="font-display text-xl font-bold text-foreground">+40%</div>
-                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">Collab</div>
+                <div className="font-display text-xl font-bold text-foreground">580</div>
+                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">Largest project</div>
               </div>
             </div>
 

@@ -3,27 +3,27 @@ import { ArrowUpRight, Mail, Phone, MapPin, Github, Linkedin } from "lucide-reac
 
 const engagementTypes = [
   {
-    type: "Product Development",
+    type: "Full-Scope Project",
     duration: "3 – 12 months",
-    description: "Full-stack digital tool development from concept to market-ready product.",
+    description: "End-to-end from analysis to delivery — workplace strategy, digital product, or both.",
     color: "#D5DEF4",
   },
   {
-    type: "Innovation Sprint",
+    type: "Strategic Brief",
     duration: "4 – 8 weeks",
-    description: "Rapid prototyping and validation through real design projects.",
+    description: "Analytical, strategic, or design brief — clarity before commitment.",
     color: "#B8C9EE",
   },
   {
-    type: "Integration Services",
+    type: "Product Sprint",
     duration: "2 – 6 weeks",
-    description: "Adding behavioral intelligence to existing tools and workflows.",
+    description: "Rapid prototyping and validation for digital tools and platforms.",
     color: "#DCE8E6",
   },
   {
-    type: "Retainer Partnership",
+    type: "Advisory & Workshops",
     duration: "Ongoing",
-    description: "Continuous product evolution, feature development, and strategic advisory.",
+    description: "Workshops, frameworks, and strategic advice for teams navigating complex problems.",
     color: "#C5D5EC",
   },
 ];
@@ -52,12 +52,12 @@ export function Contact() {
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
-              Let's Build<br />Something Better
+              Have a Project<br />in Mind?
             </h2>
             <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
-              Ready to transform your environment through evidence-based behavioral design?
-              Whether you're building a PropTech tool, optimizing a workspace, or seeking an
-              innovation partner — let's talk.
+              Whether it's a workplace strategy, a digital product, or something
+              that spans all three fields — get in touch and let's talk about
+              what you're working on.
             </p>
 
             {/* Contact details */}
@@ -85,7 +85,6 @@ export function Contact() {
               {[
                 { Icon: Github, label: "GitHub", href: "https://github.com/HelgiHreinnH" },
                 { Icon: Linkedin, label: "LinkedIn", href: "#" },
-                { Icon: ArrowUpRight, label: "Live Site", href: "#" },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
@@ -109,7 +108,7 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
-              Engagement Types
+              Ways to Work Together
             </p>
 
             <div className="space-y-4">
@@ -137,11 +136,11 @@ export function Contact() {
         {/* Footer */}
         <div className="mt-24 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <span className="font-display text-2xl font-bold text-foreground">U</span>
-            <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">USER_</span>
+            <span className="font-display text-2xl font-bold text-foreground">H</span>
+            <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">Helgi Hreinn Hjálmarsson</span>
           </div>
           <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/50">
-            © 2025 USER. All rights reserved. — Copenhagen, Denmark
+            © 2025 All rights reserved. — Copenhagen, Denmark
           </p>
         </div>
       </div>

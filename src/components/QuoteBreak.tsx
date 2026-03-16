@@ -27,7 +27,7 @@ export function QuoteBreak() {
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         className="absolute top-12 right-8 md:right-16 max-w-xs font-mono text-[11px] leading-relaxed text-muted-foreground text-right"
       >
-        Behavioral science meets design craft — every decision grounded in how people actually think.
+        Analyse the real problem. Build a strategy. Design something communicable. Follow through to delivery.
       </motion.p>
 
       {/* Main quote */}
@@ -55,7 +55,7 @@ export function QuoteBreak() {
       {/* Bottom scroll cue */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 mt-16 flex justify-between items-center">
         <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
-          USER_ · Behavioral Design Consultancy
+          Helgi Hreinn Hjálmarsson · People, Buildings, Technology
         </span>
         <motion.button
           onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
@@ -63,7 +63,7 @@ export function QuoteBreak() {
           whileTap={{ scale: 0.96 }}
           className="hidden md:flex font-mono text-[11px] tracking-widest uppercase rounded-full px-5 py-2 transition-all duration-300 bg-foreground/5 text-foreground/65 border border-foreground/10 hover:bg-foreground/10"
         >
-          Let's Talk →
+          Get in touch →
         </motion.button>
       </div>
     </section>

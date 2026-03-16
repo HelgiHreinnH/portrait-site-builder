@@ -3,29 +3,38 @@ import { motion } from "framer-motion";
 const phases = [
   {
     num: "01",
-    title: "Behavioral Intelligence Gathering",
-    label: "Observe",
+    title: "Understand the real problem before solving it",
+    label: "Analyse",
     description:
-      "Ethnographic observation and behavioral mapping combined with quantitative data collection via occupancy sensors and usage analytics.",
-    methods: ["Ethnographic Observation", "Sensor Data", "Behavioral Mapping", "Cultural Analysis"],
+      "Workshops, user research, stakeholder mapping, data, and observation. The goal is clarity — not a finished product. Output: an analytical brief that frames the problem and the opportunity.",
+    methods: ["User Research", "Stakeholder Mapping", "Data Collection", "Workshops"],
     bg: "#D5DEF4",
   },
   {
     num: "02",
-    title: "Strategic Behavioral Design",
-    label: "Design",
+    title: "Turn findings into a clear direction",
+    label: "Strategise",
     description:
-      "Evidence-based spatial intervention design with cross-functional collaboration. Integration of behavioral psychology principles with architectural solutions.",
-    methods: ["Spatial Intervention", "Behavioral Psychology", "Iterative Testing", "Co-design"],
+      "Translate findings into priorities, a framework, or a shared understanding of what to build and why. This requires working across disciplines — talking to managers, sociologists, developers, and users in a shared language.",
+    methods: ["Strategic Brief", "Framework Design", "Cross-discipline Alignment", "Prioritisation"],
     bg: "#B8C9EE",
   },
   {
     num: "03",
-    title: "Impact Evaluation & Learning",
-    label: "Measure",
+    title: "Give the strategy a communicable form",
+    label: "Design",
     description:
-      "Post-occupancy behavioral assessment and documentation of behavioral change outcomes. Continuous optimization based on observed patterns.",
-    methods: ["Post-occupancy Eval", "Behavioral Metrics", "Continuous Optimization", "Knowledge Transfer"],
+      "Produce something concrete — a spatial concept, a product interface, a design brief, a wireframe, a prototype. The output is designed to communicate intent clearly enough to be tested and reacted to.",
+    methods: ["Design Brief", "Wireframing", "Prototyping", "Spatial Concept"],
+    bg: "#DCE8E6",
+  },
+  {
+    num: "04",
+    title: "Follow through until it exists in reality",
+    label: "Deliver",
+    description:
+      "Ensure what was designed actually comes to life as intended. From design manuals to built environments, from prototypes to launched products.",
+    methods: ["Project Management", "Quality Assurance", "Handover", "Implementation"],
     bg: "#C5D5EC",
   },
 ];
@@ -82,10 +91,10 @@ export function Methodology() {
         {/* Header */}
         <div className="mb-16">
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
-            Three-Phase Framework
+            How I Work
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
-            From observation to transformation — a systematic approach that turns complex human behavior into actionable design.
+            The same four steps apply to every project — whether the problem is spatial, organisational, or digital. The first three phases typically produce briefs. That is where the most expensive mistakes get prevented.
           </p>
         </div>
 
@@ -103,9 +112,9 @@ export function Methodology() {
           className="mt-20 text-center"
         >
           <p className="font-display text-2xl md:text-3xl italic text-foreground/80 max-w-2xl mx-auto">
-            "Environments that don't fight human nature —
+            "Brief-making at a high level is where
             <br />
-            they work with it."
+            the most expensive decisions get made."
           </p>
         </motion.div>
       </div>

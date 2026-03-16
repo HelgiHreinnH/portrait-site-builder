@@ -5,47 +5,47 @@ import { ArrowUpRight } from "lucide-react";
 const services = [
   {
     number: "01",
-    title: "Digital Product Design & Development",
-    discipline: "Product & Tech",
-    tags: ["PropTech", "DesignTech", "AI Tools"],
+    title: "Workplace Strategy",
+    discipline: "People + Buildings",
+    tags: ["Analysis", "Strategy", "Design Brief"],
     description:
-      "Building tools that transform how spaces are created. Behavioral analytics platforms, spatial optimization tools powered by AI, and digital twins for spatial planning.",
+      "From analysis to design brief. Activity-based environments, employee experience, and spatial strategy grounded in how people actually use space.",
     accent: "#D5DEF4",
   },
   {
     number: "02",
-    title: "Behavioral Intelligence as a Service",
-    discipline: "Data & Intelligence",
-    tags: ["APIs", "Data Platform", "Automation"],
+    title: "Digital Product Development",
+    discipline: "People + Technology",
+    tags: ["UX Research", "Product Strategy", "UI/UX"],
     description:
-      "Packaging expertise into scalable digital tools. Behavioral pattern recognition, space utilization prediction models, and automated behavioral analysis workflows.",
+      "User research, product strategy, and interface design. From user insight to working prototype — applying the same analytical method to digital tools.",
     accent: "#B8C9EE",
   },
   {
     number: "03",
-    title: "Innovation Partnerships",
-    discipline: "Co-creation",
-    tags: ["Co-creation", "UX Design", "Pilots"],
+    title: "Full-Scope Projects",
+    discipline: "All Three Fields",
+    tags: ["End-to-End", "Brief to Delivery", "Cross-discipline"],
     description:
-      "Co-creating next-generation design technology. User research for design tech products, interface design for complex spatial data, and pilot program validation.",
+      "End-to-end from brief to delivery. For teams that need someone who understands the whole picture — people, buildings, and technology together.",
     accent: "#DCE8E6",
   },
   {
     number: "04",
-    title: "Design System Development",
-    discipline: "Systems & Patterns",
-    tags: ["Libraries", "Parametric", "Patterns"],
+    title: "Innovation & PropTech",
+    discipline: "Buildings + Technology",
+    tags: ["PropTech", "Data Tools", "AI"],
     description:
-      "Creating reusable, intelligent design components. Pre-validated spatial configurations, evidence-based design pattern databases, and parametric design templates.",
+      "Building tools that connect spatial design with data. Occupancy analytics, AR tools, and platforms that make better design decisions possible.",
     accent: "#C5D5EC",
   },
   {
     number: "05",
-    title: "Education & Enablement",
+    title: "Strategic Advisory",
     discipline: "Knowledge Transfer",
-    tags: ["Workshops", "Training", "Frameworks"],
+    tags: ["Workshops", "Briefs", "Frameworks"],
     description:
-      "Enabling teams to apply behavioral design principles. Workshops, train-the-trainer programs, and self-service frameworks for internal teams.",
+      "Analytical, strategic, and design briefs for teams who need clarity before committing to a direction. The first three phases are where the most expensive mistakes get prevented.",
     accent: "#D5DEF4",
   },
 ];
@@ -59,10 +59,10 @@ export function Services() {
         {/* Section header */}
         <div className="mb-16">
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
-            What I Build
+            What I Do
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
-            Five disciplines that turn behavioral insight into tangible products, tools, and systems.
+            Working at the intersection of people, buildings, and technology. The same method applies regardless of the medium.
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export function Services() {
         {/* Bottom note */}
         <div className="mt-8 flex justify-between items-center">
           <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
-            5 Core Disciplines
+            People · Buildings · Technology
           </span>
         </div>
       </div>

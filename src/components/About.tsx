@@ -5,10 +5,10 @@ const ABOUT_IMG =
 
 const table = [
   ["Assume how spaces should be used", "Observe how spaces are actually used"],
-  ["Design for average user", "Design for behavioral patterns"],
-  ["One-time delivery", "Continuous optimization"],
-  ["Satisfaction surveys", "Behavioral outcome measurement"],
-  ["Space-centered", "Human-centered"],
+  ["Design for average user", "Design for real behavioural patterns"],
+  ["One-time delivery", "Continuous learning and optimisation"],
+  ["Satisfaction surveys", "Outcome-based measurement"],
+  ["Space-centered thinking", "People-centered thinking"],
 ];
 
 export function About() {
@@ -26,10 +26,10 @@ export function About() {
             className="relative"
           >
             <div className="relative overflow-hidden" style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}>
-              <img src={ABOUT_IMG} alt="Behavioral research" className="w-full aspect-[4/5] object-cover" />
+              <img src={ABOUT_IMG} alt="Workplace research" className="w-full aspect-[4/5] object-cover" />
               <div className="absolute bottom-4 left-4 bg-background/90 backdrop-blur-sm px-4 py-3">
                 <p className="font-display text-sm font-semibold text-foreground">10+ Years Experience</p>
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Behavioral Design</p>
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Architecture · Strategy · Digital Product</p>
               </div>
             </div>
           </motion.div>
@@ -46,20 +46,20 @@ export function About() {
             </p>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
-              Helgi Hreinn<br />Hjalmarsson
+              Helgi Hreinn<br />Hjálmarsson
             </h2>
 
             <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">
-              Founder of USER_, a behavioral design consultancy at the intersection of
-              architecture, behavioral psychology, and digital innovation. Based in
-              Copenhagen with a global perspective.
+              Copenhagen-based architect with 10+ years across workplace strategy,
+              digital product development, and hands-on making. My background is
+              architectural, but my practice is wider — I work across the boundary
+              between physical space, organisational thinking, and digital product.
             </p>
             <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
-              With 10+ years transforming environments for Fortune 500 companies — LEGO, Novo
-              Nordisk, MAERSK, Barclays — my work is rooted in a simple belief: spaces should
-              be designed for how people{" "}
-              <em className="text-foreground">actually</em>{" "}
-              behave, not how we assume they will.
+              I've worked with LEGO, Barclays, Beumer Group, Bygningsstyrelsen,
+              Colliers, and Ubiqisense — always applying the same method: analyse
+              the real problem first, build a strategy, design something
+              communicable, and follow through to delivery.
             </p>
 
             <div className="space-y-3">
@@ -85,7 +85,7 @@ export function About() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8 text-center">
-            The USER_ Difference
+            The Difference
           </p>
 
           <div className="border border-border overflow-hidden">
@@ -95,7 +95,7 @@ export function About() {
                 Traditional
               </div>
               <div className="px-6 py-4 font-mono text-[11px] tracking-[0.2em] uppercase text-foreground border-l border-border">
-                USER_
+                My Approach
               </div>
             </div>
 

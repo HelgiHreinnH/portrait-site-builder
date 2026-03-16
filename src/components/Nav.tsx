@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Methodology", href: "#methodology" },
-  { label: "Projects", href: "#projects" },
+  { label: "Work", href: "#services" },
+  { label: "Method", href: "#methodology" },
+  { label: "Examples", href: "#projects" },
   { label: "About", href: "#about" },
 ];
 
@@ -82,7 +82,7 @@ export function Nav() {
           whileTap={{ scale: 0.96 }}
           className="hidden md:block font-mono text-[11px] tracking-widest uppercase px-5 py-2 border border-foreground/10 bg-foreground/5 text-foreground/65 rounded-full transition-all duration-300 hover:bg-foreground/10"
         >
-          Contact
+          Get in touch
         </motion.button>
 
         {/* Mobile toggle */}
