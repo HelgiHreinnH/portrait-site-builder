@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
+const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
+
 const PORTRAIT =
   "https://images.unsplash.com/photo-1571059314690-91e84c43dc0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhcmNoaXRlY3QlMjBtYW4lMjBwb3J0cmFpdCUyMG1pbmltYWx8ZW58MXx8fHwxNzczMTQxNjYwfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
@@ -28,9 +30,9 @@ export function Hero() {
           {/* Left side - Typography */}
           <div className="flex flex-col justify-center">
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ ...smooth, delay: 0.1 }}
               className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8"
             >
               People · Buildings · Technology
@@ -41,9 +43,9 @@ export function Hero() {
               {["TURN", "KNOWLEDGE", "INTO", "DESIGN"].map((word, i) => (
                 <motion.div
                   key={word}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 40 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.1 * i, ease: [0.25, 0.1, 0.25, 1] }}
+                  transition={{ duration: 1, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
                 >
                   <span
                     className={`block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] ${
@@ -58,9 +60,9 @@ export function Hero() {
 
             {/* Description and stats */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ ...smooth, delay: 0.6 }}
               className="mt-8 md:mt-12"
             >
               <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
@@ -85,9 +87,9 @@ export function Hero() {
 
           {/* Right side - Portrait */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ ...smooth, delay: 0.3 }}
             className="relative"
           >
             <p className="font-mono text-[11px] leading-relaxed text-muted-foreground max-w-xs mb-6 text-right ml-auto">
@@ -112,15 +114,17 @@ export function Hero() {
 
             {/* Explore button */}
             <div className="flex justify-center mt-8">
-              <button
+              <motion.button
                 onClick={() => {
                   document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
                 }}
+                whileHover={{ y: 3 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="flex items-center gap-3 group"
               >
-                <ArrowDown size={16} className="text-muted-foreground group-hover:translate-y-1 transition-transform" />
+                <ArrowDown size={16} className="text-muted-foreground" />
                 <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">Explore</span>
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         </div>

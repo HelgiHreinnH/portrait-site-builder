@@ -2,6 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
+const smooth = { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const };
+const smoothFast = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
+
 const services = [
   {
     number: "01",
@@ -58,12 +61,24 @@ export function Services() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Section header */}
         <div className="mb-16">
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth, duration: 0.8 }}
+            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground"
+          >
             What I Do
-          </h2>
-          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth, duration: 0.8, delay: 0.1 }}
+            className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl"
+          >
             Working at the intersection of people, buildings, and technology. The same method applies regardless of the medium.
-          </p>
+          </motion.p>
         </div>
 
         {/* Service rows */}
@@ -71,16 +86,21 @@ export function Services() {
           {services.map((service, i) => (
             <motion.div
               key={service.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ ...smooth, delay: i * 0.06 }}
               onHoverStart={() => setActive(i)}
               onHoverEnd={() => setActive(null)}
               className="relative cursor-default overflow-hidden border-b border-border"
             >
               {/* Hover background */}
               <motion.div
-                className="absolute inset-0 opacity-0"
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
                 animate={{ opacity: active === i ? 0.3 : 0 }}
                 style={{ background: service.accent }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               />
 
               {/* Main row */}
@@ -96,9 +116,13 @@ export function Services() {
                 </div>
 
                 {/* Title */}
-                <h3 className="flex-1 font-display text-xl md:text-3xl lg:text-4xl font-semibold text-foreground">
+                <motion.h3
+                  animate={{ x: active === i ? 8 : 0 }}
+                  transition={smoothFast}
+                  className="flex-1 font-display text-xl md:text-3xl lg:text-4xl font-semibold text-foreground"
+                >
                   {service.title}
-                </h3>
+                </motion.h3>
 
                 {/* Tags */}
                 <div className="hidden md:flex gap-2">
@@ -113,7 +137,12 @@ export function Services() {
                 </div>
 
                 {/* Arrow */}
-                <ArrowUpRight size={20} className="text-muted-foreground shrink-0" />
+                <motion.div
+                  animate={{ x: active === i ? 4 : 0, y: active === i ? -4 : 0 }}
+                  transition={smoothFast}
+                >
+                  <ArrowUpRight size={20} className="text-muted-foreground shrink-0" />
+                </motion.div>
               </div>
 
               {/* Expanding description */}
@@ -123,7 +152,7 @@ export function Services() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
                     className="overflow-hidden"
                   >
                     <p className="text-base leading-relaxed text-muted-foreground pb-8 pl-20 md:pl-32 max-w-2xl">
