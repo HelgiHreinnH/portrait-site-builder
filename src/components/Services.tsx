@@ -84,19 +84,19 @@ export function Services() {
               />
 
               {/* Main row */}
-              <div className="relative flex items-center gap-4 md:gap-8 py-6 md:py-8">
+              <div className="relative flex items-center gap-4 md:gap-8 py-7 md:py-10">
                 {/* Number + discipline */}
-                <div className="w-20 md:w-28 shrink-0">
-                  <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">
+                <div className="w-20 md:w-32 shrink-0">
+                  <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
                     {service.number}
                   </span>
-                  <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/60 mt-1 hidden md:block">
+                  <p className="font-mono text-[11px] tracking-[0.1em] text-muted-foreground/60 mt-1 hidden md:block">
                     {service.discipline}
                   </p>
                 </div>
 
                 {/* Title */}
-                <h3 className="flex-1 font-display text-lg md:text-2xl font-semibold text-foreground">
+                <h3 className="flex-1 font-display text-xl md:text-3xl lg:text-4xl font-semibold text-foreground">
                   {service.title}
                 </h3>
 
@@ -105,7 +105,7 @@ export function Services() {
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[10px] tracking-[0.1em] uppercase px-3 py-1 border border-border text-muted-foreground"
+                      className="font-mono text-[11px] tracking-[0.1em] uppercase px-3 py-1.5 border border-border text-muted-foreground"
                     >
                       {tag}
                     </span>
@@ -113,7 +113,7 @@ export function Services() {
                 </div>
 
                 {/* Arrow */}
-                <ArrowUpRight size={16} className="text-muted-foreground shrink-0" />
+                <ArrowUpRight size={20} className="text-muted-foreground shrink-0" />
               </div>
 
               {/* Expanding description */}
