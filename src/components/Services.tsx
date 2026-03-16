@@ -101,10 +101,17 @@ function ServiceColumn({
           {service.title}
         </motion.h3>
 
-        {/* Discipline */}
-        <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/60 mb-4">
-          {service.discipline}
-        </p>
+        {/* Tags — always visible */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {service.tags.map((tag) => (
+            <span
+              key={tag}
+              className="font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-1 border border-border text-muted-foreground"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
         {/* Expanding description */}
         <AnimatePresence>
@@ -116,19 +123,9 @@ function ServiceColumn({
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
               className="overflow-hidden"
             >
-              <p className="text-sm leading-relaxed text-muted-foreground mb-4">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 {service.description}
               </p>
-              <div className="flex flex-wrap gap-1.5">
-                {service.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-1 border border-border text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
