@@ -58,10 +58,10 @@ export function Services() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Section header */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
             What I Do
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
+          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
             Working at the intersection of people, buildings, and technology. The same method applies regardless of the medium.
           </p>
         </div>
