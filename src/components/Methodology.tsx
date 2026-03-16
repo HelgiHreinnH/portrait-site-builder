@@ -63,17 +63,17 @@ function PhaseBlock({ phase }: { phase: (typeof phases)[0] }) {
 
       {/* Content */}
       <div>
-        <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-3">
+        <h3 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-4">
           {phase.title}
         </h3>
-        <p className="text-[15px] leading-relaxed text-muted-foreground mb-6 max-w-xl">
+        <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-6 max-w-xl">
           {phase.description}
         </p>
         <div className="flex flex-wrap gap-2">
           {phase.methods.map((m) => (
             <span
               key={m}
-              className="font-mono text-[10px] tracking-[0.1em] uppercase px-3 py-1 border border-border text-muted-foreground"
+              className="font-mono text-[11px] tracking-[0.1em] uppercase px-3 py-1.5 border border-border text-muted-foreground"
             >
               {m}
             </span>
