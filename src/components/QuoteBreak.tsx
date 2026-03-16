@@ -41,7 +41,6 @@ export function QuoteBreak() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const }}
-            style={{ paddingLeft: indentMap[i] || "0" }}
           >
             <span
               className={`block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase ${
