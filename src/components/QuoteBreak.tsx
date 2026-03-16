@@ -48,7 +48,7 @@ export function QuoteBreak() {
       </div>
 
       {/* Bottom scroll cue */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 mt-16 flex justify-between items-center">
+      <div className="absolute bottom-6 left-0 right-0 z-10 px-6 md:px-10 flex justify-between items-center">
         <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
           Helgi Hreinn Hjálmarsson · People, Buildings, Technology
         </span>
