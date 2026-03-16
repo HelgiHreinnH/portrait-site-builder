@@ -58,10 +58,10 @@ export function Services() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Section header */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
             What I Do
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
+          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
             Working at the intersection of people, buildings, and technology. The same method applies regardless of the medium.
           </p>
         </div>
@@ -84,19 +84,19 @@ export function Services() {
               />
 
               {/* Main row */}
-              <div className="relative flex items-center gap-4 md:gap-8 py-6 md:py-8">
+              <div className="relative flex items-center gap-4 md:gap-8 py-7 md:py-10">
                 {/* Number + discipline */}
-                <div className="w-20 md:w-28 shrink-0">
-                  <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">
+                <div className="w-20 md:w-32 shrink-0">
+                  <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
                     {service.number}
                   </span>
-                  <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/60 mt-1 hidden md:block">
+                  <p className="font-mono text-[11px] tracking-[0.1em] text-muted-foreground/60 mt-1 hidden md:block">
                     {service.discipline}
                   </p>
                 </div>
 
                 {/* Title */}
-                <h3 className="flex-1 font-display text-lg md:text-2xl font-semibold text-foreground">
+                <h3 className="flex-1 font-display text-xl md:text-3xl lg:text-4xl font-semibold text-foreground">
                   {service.title}
                 </h3>
 
@@ -105,7 +105,7 @@ export function Services() {
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[10px] tracking-[0.1em] uppercase px-3 py-1 border border-border text-muted-foreground"
+                      className="font-mono text-[11px] tracking-[0.1em] uppercase px-3 py-1.5 border border-border text-muted-foreground"
                     >
                       {tag}
                     </span>
@@ -113,7 +113,7 @@ export function Services() {
                 </div>
 
                 {/* Arrow */}
-                <ArrowUpRight size={16} className="text-muted-foreground shrink-0" />
+                <ArrowUpRight size={20} className="text-muted-foreground shrink-0" />
               </div>
 
               {/* Expanding description */}
@@ -126,7 +126,7 @@ export function Services() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-[14px] leading-relaxed text-muted-foreground pb-6 pl-20 md:pl-28 max-w-2xl">
+                    <p className="text-base leading-relaxed text-muted-foreground pb-8 pl-20 md:pl-32 max-w-2xl">
                       {service.description}
                     </p>
                   </motion.div>
@@ -138,7 +138,7 @@ export function Services() {
 
         {/* Bottom note */}
         <div className="mt-8 flex justify-between items-center">
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
+          <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground/50">
             People · Buildings · Technology
           </span>
         </div>

@@ -45,17 +45,17 @@ export function About() {
               05 — About
             </p>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
               Helgi Hreinn<br />Hjálmarsson
             </h2>
 
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4">
               Copenhagen-based architect with 10+ years across workplace strategy,
               digital product development, and hands-on making. My background is
               architectural, but my practice is wider — I work across the boundary
               between physical space, organisational thinking, and digital product.
             </p>
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-8">
               I've worked with LEGO, Barclays, Beumer Group, Bygningsstyrelsen,
               Colliers, and Ubiqisense — always applying the same method: analyse
               the real problem first, build a strategy, design something
@@ -69,8 +69,8 @@ export function About() {
                 { l: "Base", v: "Copenhagen, Denmark" },
               ].map(({ l, v }) => (
                 <div key={l} className="flex items-center gap-4 border-b border-border pb-3">
-                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-16">{l}</span>
-                  <span className="text-[14px] text-foreground">{v}</span>
+                  <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground w-16">{l}</span>
+                  <span className="text-base text-foreground">{v}</span>
                 </div>
               ))}
             </div>
@@ -101,10 +101,10 @@ export function About() {
 
             {table.map(([trad, user], i) => (
               <div key={i} className="grid grid-cols-2 border-t border-border">
-                <div className="px-6 py-4 text-[14px] text-muted-foreground line-through decoration-muted-foreground/30">
+                <div className="px-6 py-4 text-base text-muted-foreground line-through decoration-muted-foreground/30">
                   {trad}
                 </div>
-                <div className="px-6 py-4 text-[14px] text-foreground font-medium border-l border-border">
+                <div className="px-6 py-4 text-base text-foreground font-medium border-l border-border">
                   {user}
                 </div>
               </div>

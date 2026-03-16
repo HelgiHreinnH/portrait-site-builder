@@ -64,7 +64,7 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
           <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
             {client}
           </p>
-          <h3 className="font-display text-lg md:text-xl font-semibold text-primary-foreground mb-2">
+          <h3 className="font-display text-xl md:text-2xl font-semibold text-primary-foreground mb-2">
             {title}
           </h3>
           <div className="flex flex-wrap gap-1.5">
@@ -90,10 +90,10 @@ export function Projects() {
     <section id="projects" className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="mb-12">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
             Examples
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
+          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
             A selection of projects across workplace strategy, digital product, and making — each mapped to the same method.
           </p>
         </div>

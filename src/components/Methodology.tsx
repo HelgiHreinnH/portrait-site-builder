@@ -63,17 +63,17 @@ function PhaseBlock({ phase }: { phase: (typeof phases)[0] }) {
 
       {/* Content */}
       <div>
-        <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-3">
+        <h3 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-4">
           {phase.title}
         </h3>
-        <p className="text-[15px] leading-relaxed text-muted-foreground mb-6 max-w-xl">
+        <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-6 max-w-xl">
           {phase.description}
         </p>
         <div className="flex flex-wrap gap-2">
           {phase.methods.map((m) => (
             <span
               key={m}
-              className="font-mono text-[10px] tracking-[0.1em] uppercase px-3 py-1 border border-border text-muted-foreground"
+              className="font-mono text-[11px] tracking-[0.1em] uppercase px-3 py-1.5 border border-border text-muted-foreground"
             >
               {m}
             </span>
@@ -90,10 +90,10 @@ export function Methodology() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
             How I Work
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
+          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
             The same four steps apply to every project — whether the problem is spatial, organisational, or digital. The first three phases typically produce briefs. That is where the most expensive mistakes get prevented.
           </p>
         </div>
@@ -111,7 +111,7 @@ export function Methodology() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="mt-20 text-center"
         >
-          <p className="font-display text-2xl md:text-3xl italic text-foreground/80 max-w-2xl mx-auto">
+          <p className="font-display text-3xl md:text-4xl italic text-foreground/80 max-w-2xl mx-auto">
             "Brief-making at a high level is where
             <br />
             the most expensive decisions get made."

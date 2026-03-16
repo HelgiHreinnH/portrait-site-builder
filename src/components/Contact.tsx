@@ -51,10 +51,10 @@ export function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
               Have a Project<br />in Mind?
             </h2>
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-8">
               Whether it's a workplace strategy, a digital product, or something
               that spans all three fields — get in touch and let's talk about
               what you're working on.
@@ -70,11 +70,11 @@ export function Contact() {
                 <div key={label} className="flex items-center gap-3">
                   <Icon size={16} className="text-muted-foreground" />
                   {href ? (
-                    <a href={href} className="text-[14px] text-foreground hover:text-user-blue transition-colors">
+                    <a href={href} className="text-base text-foreground hover:text-user-blue transition-colors">
                       {label}
                     </a>
                   ) : (
-                    <span className="text-[14px] text-foreground">{label}</span>
+                    <span className="text-base text-foreground">{label}</span>
                   )}
                 </div>
               ))}
@@ -126,7 +126,7 @@ export function Contact() {
                       {eng.duration}
                     </span>
                   </div>
-                  <p className="text-[13px] leading-relaxed text-muted-foreground">{eng.description}</p>
+                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground">{eng.description}</p>
                 </div>
               ))}
             </div>
