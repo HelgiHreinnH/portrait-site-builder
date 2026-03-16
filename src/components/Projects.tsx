@@ -84,7 +84,7 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24 md:py-32">
+    <section id="projects" className="min-h-screen flex flex-col justify-center py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="mb-16">
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">

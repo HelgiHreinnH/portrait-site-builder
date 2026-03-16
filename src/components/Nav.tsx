@@ -17,7 +17,12 @@ export function Nav() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const container = document.querySelector('.snap-container');
+    const onScroll = () => setScrolled((container?.scrollTop ?? window.scrollY) > 60);
+    if (container) {
+      container.addEventListener("scroll", onScroll, { passive: true });
+      return () => container.removeEventListener("scroll", onScroll);
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

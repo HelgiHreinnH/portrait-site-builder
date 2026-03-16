@@ -30,7 +30,7 @@ const engagementTypes = [
 
 export function Contact() {
   return (
-    <section id="contact" className="py-24 md:py-32 bg-muted/50">
+    <section id="contact" className="min-h-screen flex flex-col justify-center py-16 md:py-24 bg-muted/50">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header label */}
         <motion.p

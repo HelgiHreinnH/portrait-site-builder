@@ -24,16 +24,28 @@ const Index = () => {
   return (
     <>
       <GlobalAmbientLayer />
-      <div className="relative z-10">
-        <QuoteBreak />
-        <div id="sub-hero">
+      <div className="relative z-10 snap-container">
+        <div className="snap-section">
+          <QuoteBreak />
+        </div>
+        <div className="snap-section" id="sub-hero">
           <Hero />
         </div>
-        <Services />
-        <Methodology />
-        <Projects />
-        <About />
-        <Contact />
+        <div className="snap-section">
+          <Services />
+        </div>
+        <div className="snap-section">
+          <Methodology />
+        </div>
+        <div className="snap-section">
+          <Projects />
+        </div>
+        <div className="snap-section">
+          <About />
+        </div>
+        <div className="snap-section">
+          <Contact />
+        </div>
       </div>
     </>
   );
