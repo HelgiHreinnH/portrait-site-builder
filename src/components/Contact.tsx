@@ -70,11 +70,11 @@ export function Contact() {
                 <div key={label} className="flex items-center gap-3">
                   <Icon size={16} className="text-muted-foreground" />
                   {href ? (
-                    <a href={href} className="text-[14px] text-foreground hover:text-user-blue transition-colors">
+                    <a href={href} className="text-base text-foreground hover:text-user-blue transition-colors">
                       {label}
                     </a>
                   ) : (
-                    <span className="text-[14px] text-foreground">{label}</span>
+                    <span className="text-base text-foreground">{label}</span>
                   )}
                 </div>
               ))}
