@@ -249,8 +249,9 @@ function MobilePhase({
 
 export function Methodology() {
   const [active, setActive] = useState<number | null>(null);
-  const radius = 160;
-  const svgSize = 800;
+  const radius = 140;
+  const padding = 180; // space for labels outside the circle
+  const svgSize = (radius + padding) * 2;
   const center = svgSize / 2;
 
   return (
@@ -277,65 +278,69 @@ export function Methodology() {
         </motion.p>
       </div>
 
-      {/* Container 2: Diagram — centered */}
-      <div className="hidden md:flex items-center justify-center min-h-screen w-full">
-        <svg
-          viewBox={`0 0 ${svgSize} ${svgSize}`}
-          className="w-full max-w-[700px]"
-          style={{ overflow: "visible" }}
-        >
-          <g transform={`translate(${center}, ${center})`}>
-            {/* Circle ring */}
-            <motion.circle
-              cx={0}
-              cy={0}
-              r={radius}
-              fill="none"
-              stroke="hsl(0, 0%, 92%)"
-              strokeWidth={1}
-              initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ ...smooth, duration: 1.2 }}
-            />
-
-            {/* Connection lines between dots */}
-            {phases.map((phase, i) => {
-              const next = phases[(i + 1) % phases.length];
-              const p1 = getDotPosition(phase.angle, radius);
-              const p2 = getDotPosition(next.angle, radius);
-              return (
-                <motion.line
-                  key={`line-${i}`}
-                  x1={p1.x}
-                  y1={p1.y}
-                  x2={p2.x}
-                  y2={p2.y}
-                  stroke="hsl(0, 0%, 92%)"
-                  strokeWidth={0.5}
-                  strokeDasharray="4 4"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 0.5 }}
-                  viewport={{ once: true }}
-                  transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
-                />
-              );
-            })}
-
-            {/* Phase nodes */}
-            {phases.map((phase, i) => (
-              <PhaseNode
-                key={phase.num}
-                phase={phase}
-                index={i}
-                radius={radius}
-                active={active === i}
-                onHover={() => setActive(i)}
-                onLeave={() => setActive(null)}
+      {/* Container 2: Diagram — absolutely centered on screen */}
+      <div className="hidden md:block absolute inset-0">
+        <div className="flex items-center justify-center w-full h-full">
+          <svg
+            viewBox={`0 0 ${svgSize} ${svgSize}`}
+            width={svgSize}
+            height={svgSize}
+            className="max-w-full max-h-full"
+            style={{ overflow: "visible" }}
+          >
+            <g transform={`translate(${center}, ${center})`}>
+              {/* Circle ring */}
+              <motion.circle
+                cx={0}
+                cy={0}
+                r={radius}
+                fill="none"
+                stroke="hsl(0, 0%, 92%)"
+                strokeWidth={1}
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ ...smooth, duration: 1.2 }}
               />
-            ))}
-          </g>
-        </svg>
+
+              {/* Connection lines between dots */}
+              {phases.map((phase, i) => {
+                const next = phases[(i + 1) % phases.length];
+                const p1 = getDotPosition(phase.angle, radius);
+                const p2 = getDotPosition(next.angle, radius);
+                return (
+                  <motion.line
+                    key={`line-${i}`}
+                    x1={p1.x}
+                    y1={p1.y}
+                    x2={p2.x}
+                    y2={p2.y}
+                    stroke="hsl(0, 0%, 92%)"
+                    strokeWidth={0.5}
+                    strokeDasharray="4 4"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.5 }}
+                    viewport={{ once: true }}
+                    transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
+                  />
+                );
+              })}
+
+              {/* Phase nodes */}
+              {phases.map((phase, i) => (
+                <PhaseNode
+                  key={phase.num}
+                  phase={phase}
+                  index={i}
+                  radius={radius}
+                  active={active === i}
+                  onHover={() => setActive(i)}
+                  onLeave={() => setActive(null)}
+                />
+              ))}
+            </g>
+          </svg>
+        </div>
       </div>
 
       {/* Mobile: stacked */}
