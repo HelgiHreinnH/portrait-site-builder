@@ -47,21 +47,6 @@ const phases = [
   },
 ];
 
-// Position config for each dot: where the label block sits relative to the dot
-const labelPositions: Record<number, { 
-  align: string; 
-  offsetX: number; 
-  offsetY: number;
-  textAlign: "left" | "right" | "center";
-  anchorX: string;
-  anchorY: string;
-}> = {
-  270: { align: "top", offsetX: 0, offsetY: -24, textAlign: "center", anchorX: "-50%", anchorY: "-100%" },
-  0:   { align: "right", offsetX: 24, offsetY: 0, textAlign: "left", anchorX: "0%", anchorY: "-50%" },
-  90:  { align: "bottom", offsetX: 0, offsetY: 24, textAlign: "center", anchorX: "-50%", anchorY: "0%" },
-  180: { align: "left", offsetX: -24, offsetY: 0, textAlign: "right", anchorX: "-100%", anchorY: "-50%" },
-};
-
 function getDotPosition(angle: number, radius: number) {
   const rad = (angle * Math.PI) / 180;
   return {
@@ -70,9 +55,25 @@ function getDotPosition(angle: number, radius: number) {
   };
 }
 
-function PhaseNode({
+// Label alignment config per position
+const labelConfig: Record<number, {
+  anchor: string; // CSS translate to position label relative to dot
+  textAlign: "left" | "right" | "center";
+  justify: string;
+  offsetX: number;
+  offsetY: number;
+}> = {
+  270: { anchor: "translate(-50%, -100%)", textAlign: "center", justify: "center", offsetX: 0, offsetY: -18 },
+  0:   { anchor: "translate(0%, -50%)",    textAlign: "left",   justify: "flex-start", offsetX: 18, offsetY: 0 },
+  90:  { anchor: "translate(-50%, 0%)",     textAlign: "center", justify: "center", offsetX: 0, offsetY: 18 },
+  180: { anchor: "translate(-100%, -50%)",  textAlign: "right",  justify: "flex-end", offsetX: -18, offsetY: 0 },
+};
+
+function PhaseLabel({
   phase,
   index,
+  centerX,
+  centerY,
   radius,
   active,
   onHover,
@@ -80,109 +81,108 @@ function PhaseNode({
 }: {
   phase: (typeof phases)[0];
   index: number;
+  centerX: number;
+  centerY: number;
   radius: number;
   active: boolean;
   onHover: () => void;
   onLeave: () => void;
 }) {
   const pos = getDotPosition(phase.angle, radius);
-  const lp = labelPositions[phase.angle];
+  const cfg = labelConfig[phase.angle];
+  const dotX = centerX + pos.x;
+  const dotY = centerY + pos.y;
 
   return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ ...smooth, delay: index * 0.12 }}
-    >
+    <>
       {/* Dot */}
-      <motion.circle
-        cx={pos.x}
-        cy={pos.y}
-        r={active ? 10 : 7}
-        fill={phase.bg}
-        stroke="hsl(220, 40%, 13%)"
-        strokeWidth={2}
-        style={{ cursor: "pointer" }}
+      <motion.div
+        className="absolute rounded-full border-2 border-foreground"
+        style={{
+          left: dotX,
+          top: dotY,
+          transform: "translate(-50%, -50%)",
+          backgroundColor: phase.bg,
+          width: active ? 20 : 14,
+          height: active ? 20 : 14,
+          cursor: "pointer",
+          zIndex: 10,
+        }}
         onMouseEnter={onHover}
         onMouseLeave={onLeave}
-        transition={{ duration: 0.3 }}
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ ...smooth, delay: index * 0.12 }}
       />
 
-      {/* Label block — positioned via foreignObject */}
-      <foreignObject
-        x={pos.x + lp.offsetX}
-        y={pos.y + lp.offsetY}
-        width={280}
-        height={300}
+      {/* Label */}
+      <motion.div
+        className="absolute"
         style={{
-          overflow: "visible",
-          pointerEvents: "none",
+          left: dotX + cfg.offsetX,
+          top: dotY + cfg.offsetY,
+          transform: cfg.anchor,
+          textAlign: cfg.textAlign,
+          width: 240,
+          zIndex: 5,
         }}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ ...smooth, delay: 0.2 + index * 0.12 }}
       >
-        <div
-          onMouseEnter={onHover}
-          onMouseLeave={onLeave}
-          style={{
-            transform: `translate(${lp.anchorX}, ${lp.anchorY})`,
-            textAlign: lp.textAlign,
-            pointerEvents: "auto",
-            cursor: "default",
-            width: 260,
-          }}
-        >
-          {/* Number + Title */}
-          <div className="flex items-baseline gap-2" style={{ justifyContent: lp.textAlign === "center" ? "center" : lp.textAlign === "right" ? "flex-end" : "flex-start" }}>
-            <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
-              {phase.num}
-            </span>
-            <span
-              className="font-display text-lg md:text-xl font-semibold text-foreground"
-            >
-              {phase.title}
-            </span>
-          </div>
-
-          {/* Subtitle */}
-          <p className="text-xs text-muted-foreground mt-1 leading-snug">
-            {phase.subtitle}
-          </p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1 mt-2" style={{ justifyContent: lp.textAlign === "center" ? "center" : lp.textAlign === "right" ? "flex-end" : "flex-start" }}>
-            {phase.methods.map((m) => (
-              <span
-                key={m}
-                className="font-mono text-[8px] tracking-[0.1em] uppercase px-1.5 py-0.5 border border-border text-muted-foreground"
-              >
-                {m}
-              </span>
-            ))}
-          </div>
-
-          {/* Hover description */}
-          <AnimatePresence>
-            {active && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={smoothFast}
-                className="overflow-hidden"
-              >
-                <p className="text-sm leading-relaxed text-muted-foreground mt-2">
-                  {phase.description}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* Number + Title */}
+        <div className="flex items-baseline gap-2" style={{ justifyContent: cfg.justify }}>
+          <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
+            {phase.num}
+          </span>
+          <span className="font-display text-lg md:text-xl font-semibold text-foreground">
+            {phase.title}
+          </span>
         </div>
-      </foreignObject>
-    </motion.g>
+
+        {/* Subtitle */}
+        <p className="text-xs text-muted-foreground mt-1 leading-snug">
+          {phase.subtitle}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1 mt-2" style={{ justifyContent: cfg.justify }}>
+          {phase.methods.map((m) => (
+            <span
+              key={m}
+              className="font-mono text-[8px] tracking-[0.1em] uppercase px-1.5 py-0.5 border border-border text-muted-foreground"
+            >
+              {m}
+            </span>
+          ))}
+        </div>
+
+        {/* Hover description */}
+        <AnimatePresence>
+          {active && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={smoothFast}
+              className="overflow-hidden"
+            >
+              <p className="text-sm leading-relaxed text-muted-foreground mt-2">
+                {phase.description}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </>
   );
 }
 
-// Mobile version — stacked
+// Mobile version
 function MobilePhase({
   phase,
   index,
@@ -249,10 +249,10 @@ function MobilePhase({
 
 export function Methodology() {
   const [active, setActive] = useState<number | null>(null);
-  const radius = 140;
-  const padding = 180; // space for labels outside the circle
-  const svgSize = (radius + padding) * 2;
-  const center = svgSize / 2;
+  const radius = 120;
+  const diagramSize = 600; // px size of the diagram container
+  const centerX = diagramSize / 2;
+  const centerY = diagramSize / 2;
 
   return (
     <section id="methodology" className="min-h-screen relative py-16 md:py-24">
@@ -278,68 +278,67 @@ export function Methodology() {
         </motion.p>
       </div>
 
-      {/* Container 2: Diagram — absolutely centered on screen */}
-      <div className="hidden md:block absolute inset-0">
-        <div className="flex items-center justify-center w-full h-full">
+      {/* Container 2: Diagram — centered on screen */}
+      <div className="hidden md:flex items-center justify-center min-h-screen w-full">
+        <div
+          className="relative"
+          style={{ width: diagramSize, height: diagramSize }}
+        >
+          {/* SVG circle ring only */}
           <svg
-            viewBox={`0 0 ${svgSize} ${svgSize}`}
-            width={svgSize}
-            height={svgSize}
-            className="max-w-full max-h-full"
-            style={{ overflow: "visible" }}
+            className="absolute inset-0 w-full h-full"
+            viewBox={`0 0 ${diagramSize} ${diagramSize}`}
           >
-            <g transform={`translate(${center}, ${center})`}>
-              {/* Circle ring */}
-              <motion.circle
-                cx={0}
-                cy={0}
-                r={radius}
-                fill="none"
-                stroke="hsl(0, 0%, 92%)"
-                strokeWidth={1}
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ ...smooth, duration: 1.2 }}
-              />
-
-              {/* Connection lines between dots */}
-              {phases.map((phase, i) => {
-                const next = phases[(i + 1) % phases.length];
-                const p1 = getDotPosition(phase.angle, radius);
-                const p2 = getDotPosition(next.angle, radius);
-                return (
-                  <motion.line
-                    key={`line-${i}`}
-                    x1={p1.x}
-                    y1={p1.y}
-                    x2={p2.x}
-                    y2={p2.y}
-                    stroke="hsl(0, 0%, 92%)"
-                    strokeWidth={0.5}
-                    strokeDasharray="4 4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 0.5 }}
-                    viewport={{ once: true }}
-                    transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
-                  />
-                );
-              })}
-
-              {/* Phase nodes */}
-              {phases.map((phase, i) => (
-                <PhaseNode
-                  key={phase.num}
-                  phase={phase}
-                  index={i}
-                  radius={radius}
-                  active={active === i}
-                  onHover={() => setActive(i)}
-                  onLeave={() => setActive(null)}
+            <motion.circle
+              cx={centerX}
+              cy={centerY}
+              r={radius}
+              fill="none"
+              stroke="hsl(0, 0%, 92%)"
+              strokeWidth={1}
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ ...smooth, duration: 1.2 }}
+            />
+            {/* Dashed connection lines */}
+            {phases.map((phase, i) => {
+              const next = phases[(i + 1) % phases.length];
+              const p1 = getDotPosition(phase.angle, radius);
+              const p2 = getDotPosition(next.angle, radius);
+              return (
+                <motion.line
+                  key={`line-${i}`}
+                  x1={centerX + p1.x}
+                  y1={centerY + p1.y}
+                  x2={centerX + p2.x}
+                  y2={centerY + p2.y}
+                  stroke="hsl(0, 0%, 92%)"
+                  strokeWidth={0.5}
+                  strokeDasharray="4 4"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 0.5 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
                 />
-              ))}
-            </g>
+              );
+            })}
           </svg>
+
+          {/* HTML labels + dots — absolute positioned */}
+          {phases.map((phase, i) => (
+            <PhaseLabel
+              key={phase.num}
+              phase={phase}
+              index={i}
+              centerX={centerX}
+              centerY={centerY}
+              radius={radius}
+              active={active === i}
+              onHover={() => setActive(i)}
+              onLeave={() => setActive(null)}
+            />
+          ))}
         </div>
       </div>
 
