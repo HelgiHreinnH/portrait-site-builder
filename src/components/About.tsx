@@ -13,7 +13,7 @@ const table = [
 
 export function About() {
   return (
-    <section id="about" className="py-24 md:py-32">
+    <section id="about" className="min-h-screen flex flex-col justify-center py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Top half: image + bio */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-20">

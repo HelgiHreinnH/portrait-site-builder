@@ -54,7 +54,7 @@ export function Services() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="services" className="py-24 md:py-32">
+    <section id="services" className="min-h-screen flex flex-col justify-center py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Section header */}
         <div className="mb-16">

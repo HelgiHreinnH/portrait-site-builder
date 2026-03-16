@@ -15,7 +15,7 @@ export function QuoteBreak() {
   };
 
   return (
-    <section className="relative py-32 md:py-48 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-user-blue-light via-user-blue-mist to-user-sage opacity-40" />
 
