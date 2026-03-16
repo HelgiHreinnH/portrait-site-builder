@@ -254,7 +254,7 @@ export function Methodology() {
   const center = svgSize / 2;
 
   return (
-    <section id="methodology" className="min-h-screen flex flex-col justify-start pt-24 md:pt-32 pb-16 md:pb-24">
+    <section id="methodology" className="min-h-screen flex items-center justify-center py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10 w-full">
         {/* Header */}
         <div className="mb-12">
