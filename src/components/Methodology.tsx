@@ -249,8 +249,9 @@ function MobilePhase({
 
 export function Methodology() {
   const [active, setActive] = useState<number | null>(null);
-  const radius = 160;
-  const svgSize = 800;
+  const radius = 140;
+  const padding = 180; // space for labels outside the circle
+  const svgSize = (radius + padding) * 2;
   const center = svgSize / 2;
 
   return (
