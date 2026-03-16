@@ -255,7 +255,7 @@ export function Methodology() {
 
   return (
     <section id="methodology" className="min-h-screen relative py-16 md:py-24">
-      {/* Header — top left */}
+      {/* Container 1: Header — top left */}
       <div className="absolute top-24 md:top-32 left-6 md:left-10 z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -277,98 +277,94 @@ export function Methodology() {
         </motion.p>
       </div>
 
-      {/* Centered diagram */}
-      <div className="flex items-center justify-center min-h-screen w-full px-6 md:px-10">
-
-        {/* Desktop: Circle diagram */}
-        <div className="hidden md:flex justify-center">
-          <svg
-            viewBox={`0 0 ${svgSize} ${svgSize}`}
-            className="w-full max-w-[700px]"
-            style={{ overflow: "visible" }}
-          >
-            <g transform={`translate(${center}, ${center})`}>
-              {/* Circle ring */}
-              <motion.circle
-                cx={0}
-                cy={0}
-                r={radius}
-                fill="none"
-                stroke="hsl(0, 0%, 92%)"
-                strokeWidth={1}
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ ...smooth, duration: 1.2 }}
-              />
-
-              {/* Connection lines between dots */}
-              {phases.map((phase, i) => {
-                const next = phases[(i + 1) % phases.length];
-                const p1 = getDotPosition(phase.angle, radius);
-                const p2 = getDotPosition(next.angle, radius);
-                return (
-                  <motion.line
-                    key={`line-${i}`}
-                    x1={p1.x}
-                    y1={p1.y}
-                    x2={p2.x}
-                    y2={p2.y}
-                    stroke="hsl(0, 0%, 92%)"
-                    strokeWidth={0.5}
-                    strokeDasharray="4 4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 0.5 }}
-                    viewport={{ once: true }}
-                    transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
-                  />
-                );
-              })}
-
-              {/* Phase nodes */}
-              {phases.map((phase, i) => (
-                <PhaseNode
-                  key={phase.num}
-                  phase={phase}
-                  index={i}
-                  radius={radius}
-                  active={active === i}
-                  onHover={() => setActive(i)}
-                  onLeave={() => setActive(null)}
-                />
-              ))}
-            </g>
-          </svg>
-        </div>
-
-        {/* Mobile: stacked */}
-        <div className="md:hidden border-t border-border">
-          {phases.map((phase, i) => (
-            <MobilePhase
-              key={phase.num}
-              phase={phase}
-              index={i}
-              active={active === i}
-              onTap={() => setActive(active === i ? null : i)}
-            />
-          ))}
-        </div>
-
-        {/* Bottom quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ ...smooth, duration: 1 }}
-          className="mt-16 text-center"
+      {/* Container 2: Diagram — centered */}
+      <div className="hidden md:flex items-center justify-center min-h-screen w-full">
+        <svg
+          viewBox={`0 0 ${svgSize} ${svgSize}`}
+          className="w-full max-w-[700px]"
+          style={{ overflow: "visible" }}
         >
-          <p className="font-display text-2xl md:text-3xl italic text-foreground/80 max-w-2xl mx-auto">
-            "Brief-making at a high level is where
-            <br />
-            the most expensive decisions get made."
-          </p>
-        </motion.div>
+          <g transform={`translate(${center}, ${center})`}>
+            {/* Circle ring */}
+            <motion.circle
+              cx={0}
+              cy={0}
+              r={radius}
+              fill="none"
+              stroke="hsl(0, 0%, 92%)"
+              strokeWidth={1}
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ ...smooth, duration: 1.2 }}
+            />
+
+            {/* Connection lines between dots */}
+            {phases.map((phase, i) => {
+              const next = phases[(i + 1) % phases.length];
+              const p1 = getDotPosition(phase.angle, radius);
+              const p2 = getDotPosition(next.angle, radius);
+              return (
+                <motion.line
+                  key={`line-${i}`}
+                  x1={p1.x}
+                  y1={p1.y}
+                  x2={p2.x}
+                  y2={p2.y}
+                  stroke="hsl(0, 0%, 92%)"
+                  strokeWidth={0.5}
+                  strokeDasharray="4 4"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 0.5 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
+                />
+              );
+            })}
+
+            {/* Phase nodes */}
+            {phases.map((phase, i) => (
+              <PhaseNode
+                key={phase.num}
+                phase={phase}
+                index={i}
+                radius={radius}
+                active={active === i}
+                onHover={() => setActive(i)}
+                onLeave={() => setActive(null)}
+              />
+            ))}
+          </g>
+        </svg>
       </div>
+
+      {/* Mobile: stacked */}
+      <div className="md:hidden border-t border-border mt-40 px-6">
+        {phases.map((phase, i) => (
+          <MobilePhase
+            key={phase.num}
+            phase={phase}
+            index={i}
+            active={active === i}
+            onTap={() => setActive(active === i ? null : i)}
+          />
+        ))}
+      </div>
+
+      {/* Bottom quote */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ ...smooth, duration: 1 }}
+        className="absolute bottom-12 left-0 right-0 text-center"
+      >
+        <p className="font-display text-2xl md:text-3xl italic text-foreground/80 max-w-2xl mx-auto">
+          "Brief-making at a high level is where
+          <br />
+          the most expensive decisions get made."
+        </p>
+      </motion.div>
     </section>
   );
 }
