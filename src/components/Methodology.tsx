@@ -90,10 +90,10 @@ export function Methodology() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
             How I Work
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-lg">
+          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
             The same four steps apply to every project — whether the problem is spatial, organisational, or digital. The first three phases typically produce briefs. That is where the most expensive mistakes get prevented.
           </p>
         </div>
