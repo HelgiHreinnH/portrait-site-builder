@@ -51,7 +51,7 @@ export function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
               Have a Project<br />in Mind?
             </h2>
             <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
