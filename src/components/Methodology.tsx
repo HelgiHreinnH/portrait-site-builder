@@ -13,7 +13,6 @@ const phases = [
       "Workshops, user research, stakeholder mapping, data, and observation. The goal is clarity — not a finished product.",
     methods: ["User Research", "Stakeholder Mapping", "Data Collection", "Workshops"],
     bg: "#D5DEF4",
-    angle: 270, // top
   },
   {
     num: "02",
@@ -21,9 +20,8 @@ const phases = [
     subtitle: "Turn findings into a clear direction",
     description:
       "Translate findings into priorities, a framework, or a shared understanding of what to build and why.",
-    methods: ["Strategic Brief", "Framework Design", "Cross-discipline Alignment", "Prioritisation"],
+    methods: ["Strategic Brief", "Framework Design", "Alignment", "Prioritisation"],
     bg: "#B8C9EE",
-    angle: 0, // right
   },
   {
     num: "03",
@@ -33,7 +31,6 @@ const phases = [
       "Produce something concrete — a spatial concept, a product interface, a design brief, a wireframe, a prototype.",
     methods: ["Design Brief", "Wireframing", "Prototyping", "Spatial Concept"],
     bg: "#DCE8E6",
-    angle: 90, // bottom
   },
   {
     num: "04",
@@ -43,146 +40,54 @@ const phases = [
       "Ensure what was designed actually comes to life as intended. From prototypes to launched products.",
     methods: ["Project Management", "Quality Assurance", "Handover", "Implementation"],
     bg: "#C5D5EC",
-    angle: 180, // left
   },
 ];
 
-function getDotPosition(angle: number, radius: number) {
-  const rad = (angle * Math.PI) / 180;
-  return {
-    x: Math.cos(rad) * radius,
-    y: Math.sin(rad) * radius,
-  };
-}
+// Each phase is positioned using CSS (top/left + transform) relative to the diagram container.
+// The circle is drawn centered. Labels sit outside.
+// Layout: Top(Analyse), Right(Strategise), Bottom(Design), Left(Deliver)
 
-// Label alignment config per position
-const labelConfig: Record<number, {
-  anchor: string; // CSS translate to position label relative to dot
+interface LabelLayout {
+  dotStyle: React.CSSProperties;
+  labelStyle: React.CSSProperties;
   textAlign: "left" | "right" | "center";
   justify: string;
-  offsetX: number;
-  offsetY: number;
-}> = {
-  270: { anchor: "translate(-50%, -100%)", textAlign: "center", justify: "center", offsetX: 0, offsetY: -18 },
-  0:   { anchor: "translate(0%, -50%)",    textAlign: "left",   justify: "flex-start", offsetX: 18, offsetY: 0 },
-  90:  { anchor: "translate(-50%, 0%)",     textAlign: "center", justify: "center", offsetX: 0, offsetY: 18 },
-  180: { anchor: "translate(-100%, -50%)",  textAlign: "right",  justify: "flex-end", offsetX: -18, offsetY: 0 },
-};
-
-function PhaseLabel({
-  phase,
-  index,
-  centerX,
-  centerY,
-  radius,
-  active,
-  onHover,
-  onLeave,
-}: {
-  phase: (typeof phases)[0];
-  index: number;
-  centerX: number;
-  centerY: number;
-  radius: number;
-  active: boolean;
-  onHover: () => void;
-  onLeave: () => void;
-}) {
-  const pos = getDotPosition(phase.angle, radius);
-  const cfg = labelConfig[phase.angle];
-  const dotX = centerX + pos.x;
-  const dotY = centerY + pos.y;
-
-  return (
-    <>
-      {/* Dot */}
-      <motion.div
-        className="absolute rounded-full border-2 border-foreground"
-        style={{
-          left: dotX,
-          top: dotY,
-          transform: "translate(-50%, -50%)",
-          backgroundColor: phase.bg,
-          width: active ? 20 : 14,
-          height: active ? 20 : 14,
-          cursor: "pointer",
-          zIndex: 10,
-        }}
-        onMouseEnter={onHover}
-        onMouseLeave={onLeave}
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ ...smooth, delay: index * 0.12 }}
-      />
-
-      {/* Label */}
-      <motion.div
-        className="absolute"
-        style={{
-          left: dotX + cfg.offsetX,
-          top: dotY + cfg.offsetY,
-          transform: cfg.anchor,
-          textAlign: cfg.textAlign,
-          width: 240,
-          zIndex: 5,
-        }}
-        onMouseEnter={onHover}
-        onMouseLeave={onLeave}
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ ...smooth, delay: 0.2 + index * 0.12 }}
-      >
-        {/* Number + Title */}
-        <div className="flex items-baseline gap-2" style={{ justifyContent: cfg.justify }}>
-          <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
-            {phase.num}
-          </span>
-          <span className="font-display text-lg md:text-xl font-semibold text-foreground">
-            {phase.title}
-          </span>
-        </div>
-
-        {/* Subtitle */}
-        <p className="text-xs text-muted-foreground mt-1 leading-snug">
-          {phase.subtitle}
-        </p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1 mt-2" style={{ justifyContent: cfg.justify }}>
-          {phase.methods.map((m) => (
-            <span
-              key={m}
-              className="font-mono text-[8px] tracking-[0.1em] uppercase px-1.5 py-0.5 border border-border text-muted-foreground"
-            >
-              {m}
-            </span>
-          ))}
-        </div>
-
-        {/* Hover description */}
-        <AnimatePresence>
-          {active && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={smoothFast}
-              className="overflow-hidden"
-            >
-              <p className="text-sm leading-relaxed text-muted-foreground mt-2">
-                {phase.description}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </>
-  );
 }
 
-// Mobile version
+function getLayouts(cx: number, cy: number, r: number): LabelLayout[] {
+  const gap = 20; // space between dot edge and label
+  return [
+    // 01 Analyse — top
+    {
+      dotStyle: { left: cx, top: cy - r, transform: "translate(-50%, -50%)" },
+      labelStyle: { left: cx, top: cy - r - gap, transform: "translate(-50%, -100%)", width: 260 },
+      textAlign: "center",
+      justify: "center",
+    },
+    // 02 Strategise — right
+    {
+      dotStyle: { left: cx + r, top: cy, transform: "translate(-50%, -50%)" },
+      labelStyle: { left: cx + r + gap, top: cy, transform: "translate(0%, -50%)", width: 240 },
+      textAlign: "left",
+      justify: "flex-start",
+    },
+    // 03 Design — bottom
+    {
+      dotStyle: { left: cx, top: cy + r, transform: "translate(-50%, -50%)" },
+      labelStyle: { left: cx, top: cy + r + gap, transform: "translate(-50%, 0%)", width: 260 },
+      textAlign: "center",
+      justify: "center",
+    },
+    // 04 Deliver — left
+    {
+      dotStyle: { left: cx + -r, top: cy, transform: "translate(-50%, -50%)" },
+      labelStyle: { left: cx - r - gap, top: cy, transform: "translate(-100%, -50%)", width: 240 },
+      textAlign: "right",
+      justify: "flex-end",
+    },
+  ];
+}
+
 function MobilePhase({
   phase,
   index,
@@ -210,53 +115,50 @@ function MobilePhase({
         style={{ background: phase.bg }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       />
-      <div className="relative flex items-center justify-between gap-4">
-        <div>
-          <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
-            {phase.num}
-          </span>
-          <h3 className="font-display text-lg font-semibold text-foreground mt-1">
-            {phase.title}
-          </h3>
-          <p className="text-xs text-muted-foreground mt-0.5">{phase.subtitle}</p>
+      <div className="relative">
+        <div className="flex items-baseline gap-2">
+          <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">{phase.num}</span>
+          <h3 className="font-display text-lg font-semibold text-foreground">{phase.title}</h3>
         </div>
+        <p className="text-xs text-muted-foreground mt-1">{phase.subtitle}</p>
+        <div className="flex flex-wrap gap-1 mt-2">
+          {phase.methods.map((m) => (
+            <span key={m} className="font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-1 border border-border text-muted-foreground">{m}</span>
+          ))}
+        </div>
+        <AnimatePresence>
+          {active && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={smoothFast}
+              className="overflow-hidden"
+            >
+              <p className="text-sm leading-relaxed text-muted-foreground mt-3">{phase.description}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <div className="flex flex-wrap gap-1 mt-2 relative">
-        {phase.methods.map((m) => (
-          <span key={m} className="font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-1 border border-border text-muted-foreground">
-            {m}
-          </span>
-        ))}
-      </div>
-      <AnimatePresence>
-        {active && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
-            className="overflow-hidden relative"
-          >
-            <p className="text-sm leading-relaxed text-muted-foreground mt-3">
-              {phase.description}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }
 
 export function Methodology() {
   const [active, setActive] = useState<number | null>(null);
-  const radius = 120;
-  const diagramSize = 600; // px size of the diagram container
-  const centerX = diagramSize / 2;
-  const centerY = diagramSize / 2;
+
+  // Diagram dimensions
+  const containerW = 900;
+  const containerH = 620;
+  const cx = containerW / 2;
+  const cy = containerH / 2;
+  const r = 140;
+
+  const layouts = getLayouts(cx, cy, r);
 
   return (
     <section id="methodology" className="min-h-screen relative py-16 md:py-24">
-      {/* Container 1: Header — top left */}
+      {/* Header — top left */}
       <div className="absolute top-24 md:top-32 left-6 md:left-10 z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -278,71 +180,145 @@ export function Methodology() {
         </motion.p>
       </div>
 
-      {/* Container 2: Diagram — centered on screen */}
+      {/* Diagram — centered */}
       <div className="hidden md:flex items-center justify-center min-h-screen w-full">
-        <div
-          className="relative"
-          style={{ width: diagramSize, height: diagramSize }}
-        >
-          {/* SVG circle ring only */}
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox={`0 0 ${diagramSize} ${diagramSize}`}
-          >
+        <div className="relative" style={{ width: containerW, height: containerH }}>
+
+          {/* SVG: circle + dashed connectors */}
+          <svg className="absolute inset-0 w-full h-full" viewBox={`0 0 ${containerW} ${containerH}`}>
+            {/* Main circle */}
             <motion.circle
-              cx={centerX}
-              cy={centerY}
-              r={radius}
+              cx={cx} cy={cy} r={r}
               fill="none"
-              stroke="hsl(0, 0%, 92%)"
+              stroke="hsl(0, 0%, 88%)"
               strokeWidth={1}
               initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ ...smooth, duration: 1.2 }}
             />
-            {/* Dashed connection lines */}
-            {phases.map((phase, i) => {
-              const next = phases[(i + 1) % phases.length];
-              const p1 = getDotPosition(phase.angle, radius);
-              const p2 = getDotPosition(next.angle, radius);
+            {/* Dashed cross lines */}
+            {[0, 1, 2, 3].map((i) => {
+              const a1 = [270, 0, 90, 180][i];
+              const a2 = [270, 0, 90, 180][(i + 1) % 4];
+              const rad1 = (a1 * Math.PI) / 180;
+              const rad2 = (a2 * Math.PI) / 180;
               return (
                 <motion.line
-                  key={`line-${i}`}
-                  x1={centerX + p1.x}
-                  y1={centerY + p1.y}
-                  x2={centerX + p2.x}
-                  y2={centerY + p2.y}
-                  stroke="hsl(0, 0%, 92%)"
+                  key={i}
+                  x1={cx + Math.cos(rad1) * r} y1={cy + Math.sin(rad1) * r}
+                  x2={cx + Math.cos(rad2) * r} y2={cy + Math.sin(rad2) * r}
+                  stroke="hsl(0, 0%, 90%)"
                   strokeWidth={0.5}
                   strokeDasharray="4 4"
                   initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 0.5 }}
+                  whileInView={{ opacity: 0.4 }}
                   viewport={{ once: true }}
-                  transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
+                  transition={{ ...smooth, delay: 0.5 + i * 0.1 }}
                 />
               );
             })}
           </svg>
 
-          {/* HTML labels + dots — absolute positioned */}
-          {phases.map((phase, i) => (
-            <PhaseLabel
-              key={phase.num}
-              phase={phase}
-              index={i}
-              centerX={centerX}
-              centerY={centerY}
-              radius={radius}
-              active={active === i}
-              onHover={() => setActive(i)}
-              onLeave={() => setActive(null)}
-            />
-          ))}
+          {/* Phase dots + labels */}
+          {phases.map((phase, i) => {
+            const layout = layouts[i];
+            const isActive = active === i;
+
+            return (
+              <div key={phase.num}>
+                {/* Dot */}
+                <motion.div
+                  className="absolute rounded-full border-2 border-foreground z-10"
+                  style={{
+                    ...layout.dotStyle,
+                    backgroundColor: phase.bg,
+                    width: isActive ? 20 : 14,
+                    height: isActive ? 20 : 14,
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={() => setActive(i)}
+                  onMouseLeave={() => setActive(null)}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: 0.3 + i * 0.1 }}
+                />
+
+                {/* Label block */}
+                <motion.div
+                  className="absolute z-5"
+                  style={{ ...layout.labelStyle, position: "absolute" }}
+                  onMouseEnter={() => setActive(i)}
+                  onMouseLeave={() => setActive(null)}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: 0.4 + i * 0.1 }}
+                >
+                  {/* Num + Title */}
+                  <div
+                    className="flex items-baseline gap-2"
+                    style={{ justifyContent: layout.justify }}
+                  >
+                    <span className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
+                      {phase.num}
+                    </span>
+                    <span className="font-display text-xl font-semibold text-foreground">
+                      {phase.title}
+                    </span>
+                  </div>
+
+                  {/* Subtitle */}
+                  <p
+                    className="text-xs text-muted-foreground mt-1 leading-snug"
+                    style={{ textAlign: layout.textAlign }}
+                  >
+                    {phase.subtitle}
+                  </p>
+
+                  {/* Tags */}
+                  <div
+                    className="flex flex-wrap gap-1 mt-2"
+                    style={{ justifyContent: layout.justify }}
+                  >
+                    {phase.methods.map((m) => (
+                      <span
+                        key={m}
+                        className="font-mono text-[8px] tracking-[0.08em] uppercase px-1.5 py-0.5 border border-border text-muted-foreground whitespace-nowrap"
+                      >
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Hover: description */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={smoothFast}
+                        className="overflow-hidden"
+                      >
+                        <p
+                          className="text-sm leading-relaxed text-muted-foreground mt-2"
+                          style={{ textAlign: layout.textAlign }}
+                        >
+                          {phase.description}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Mobile: stacked */}
+      {/* Mobile */}
       <div className="md:hidden border-t border-border mt-40 px-6">
         {phases.map((phase, i) => (
           <MobilePhase
