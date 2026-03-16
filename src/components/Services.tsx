@@ -126,7 +126,7 @@ export function Services() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-[14px] leading-relaxed text-muted-foreground pb-6 pl-20 md:pl-28 max-w-2xl">
+                    <p className="text-base leading-relaxed text-muted-foreground pb-8 pl-20 md:pl-32 max-w-2xl">
                       {service.description}
                     </p>
                   </motion.div>
