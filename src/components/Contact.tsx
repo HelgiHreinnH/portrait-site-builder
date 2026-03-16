@@ -54,7 +54,7 @@ export function Contact() {
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
               Have a Project<br />in Mind?
             </h2>
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-8">
               Whether it's a workplace strategy, a digital product, or something
               that spans all three fields — get in touch and let's talk about
               what you're working on.
