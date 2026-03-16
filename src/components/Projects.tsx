@@ -10,6 +10,10 @@ const IMG_MAERSK =
   "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const IMG_AEC =
   "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
+const IMG_WORKSPACE =
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080";
+const IMG_RESEARCH =
+  "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1080";
 
 interface BentoCardProps {
   number: string;
@@ -33,8 +37,7 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
     >
       <Link
         to={`/projects/${projectId}`}
-        className={`group relative block overflow-hidden ${className}`}
-        style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}
+        className={`group relative block overflow-hidden rounded-2xl ${className}`}
       >
         {/* Image */}
         <img
@@ -44,14 +47,14 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-2xl" />
 
         {/* Top meta */}
         <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
           <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
             {number}
           </span>
-          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-1">
+          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-1 rounded-full">
             {outcome}
           </span>
         </div>
@@ -61,12 +64,12 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
           <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
             {client}
           </p>
-          <h3 className="font-display text-xl md:text-2xl font-semibold text-primary-foreground mb-3">
+          <h3 className="font-display text-lg md:text-xl font-semibold text-primary-foreground mb-2">
             {title}
           </h3>
           <div className="flex flex-wrap gap-1.5">
             {tags.map((tag) => (
-              <span key={tag} className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/50 border border-primary-foreground/20 px-2 py-0.5">
+              <span key={tag} className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/50 border border-primary-foreground/20 px-2 py-0.5 rounded-full">
                 {tag}
               </span>
             ))}
@@ -84,75 +87,121 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
 
 export function Projects() {
   return (
-    <section id="projects" className="min-h-screen flex flex-col justify-center py-16 md:py-24">
+    <section id="projects" className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="mb-16">
+        <div className="mb-12">
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
-            Selected Work
+            Examples
           </h2>
         </div>
 
-        {/* Desktop bento grid */}
-        <div className="hidden md:grid grid-cols-12 gap-4">
-          <div className="col-span-8 aspect-[16/10]">
+        {/* Desktop bento grid — 3 columns, 3 rows */}
+        <div className="hidden md:grid grid-cols-3 gap-4">
+          {/* Row 1 */}
+          <div className="col-span-2 aspect-[16/9]">
             <BentoCard
               number="01"
               client="LEGO"
               title="Billund Headquarters"
               outcome="+40% Collab"
-              tags={["Workplace Strategy", "Behavioral Mapping", "Space Analytics"]}
+              tags={["Workplace Strategy", "Behavioral Mapping"]}
               image={IMG_LEGO}
               projectId="lego-billund"
               className="h-full"
             />
           </div>
-          <div className="col-span-4 aspect-[4/5]">
+          <div className="col-span-1 aspect-[3/4]">
             <BentoCard
               number="02"
               client="Novo Nordisk"
               title="Innovation Campus"
               outcome="Evidence-Based"
-              tags={["Research Spaces", "Innovation Design"]}
+              tags={["Research Spaces"]}
               image={IMG_NOVO}
-              delay={0.1}
+              delay={0.05}
               projectId="novo-nordisk"
               className="h-full"
             />
           </div>
-          <div className="col-span-4 aspect-[4/5]">
+
+          {/* Row 2 */}
+          <div className="col-span-1 aspect-[3/4]">
             <BentoCard
               number="03"
               client="MAERSK"
-              title="Global Workplace Strategy"
+              title="Global Workplace"
               outcome="Cross-Cultural"
-              tags={["Global Strategy", "Change Management"]}
+              tags={["Global Strategy"]}
               image={IMG_MAERSK}
-              delay={0.2}
+              delay={0.1}
               projectId="maersk"
               className="h-full"
             />
           </div>
-          <div className="col-span-8 aspect-[16/10]">
+          <div className="col-span-2 aspect-[16/9]">
             <BentoCard
               number="04"
               client="AEC Hackathon"
               title="Behavioral Prediction Tool"
               outcome="🏆 Best Overall"
-              tags={["PropTech", "Machine Learning", "Predictive Analytics"]}
+              tags={["PropTech", "Machine Learning"]}
               image={IMG_AEC}
-              delay={0.3}
+              delay={0.15}
               projectId="aec-hackathon"
+              className="h-full"
+            />
+          </div>
+
+          {/* Row 3 */}
+          <div className="col-span-1 aspect-square">
+            <BentoCard
+              number="05"
+              client="LEGO"
+              title="Workspace Analytics"
+              outcome="Data-Driven"
+              tags={["Space Analytics"]}
+              image={IMG_WORKSPACE}
+              delay={0.2}
+              projectId="lego-billund"
+              className="h-full"
+            />
+          </div>
+          <div className="col-span-1 aspect-square">
+            <BentoCard
+              number="06"
+              client="Novo Nordisk"
+              title="Research Environments"
+              outcome="Innovation"
+              tags={["Innovation Design"]}
+              image={IMG_RESEARCH}
+              delay={0.25}
+              projectId="novo-nordisk"
+              className="h-full"
+            />
+          </div>
+          <div className="col-span-1 aspect-square">
+            <BentoCard
+              number="03"
+              client="MAERSK"
+              title="Cultural Adaptation"
+              outcome="Global"
+              tags={["Change Management"]}
+              image={IMG_MAERSK}
+              delay={0.3}
+              projectId="maersk"
               className="h-full"
             />
           </div>
         </div>
 
-        {/* Mobile stack */}
-        <div className="md:hidden space-y-4">
-          <BentoCard number="01" client="LEGO" title="Billund Headquarters" outcome="+40% Collab" tags={["Workplace Strategy"]} image={IMG_LEGO} projectId="lego-billund" className="aspect-[4/3]" />
-          <BentoCard number="02" client="Novo Nordisk" title="Innovation Campus" outcome="Evidence-Based" tags={["Research Spaces"]} image={IMG_NOVO} delay={0.1} projectId="novo-nordisk" className="aspect-[4/3]" />
-          <BentoCard number="03" client="MAERSK" title="Global Workplace Strategy" outcome="Cross-Cultural" tags={["Global Strategy"]} image={IMG_MAERSK} delay={0.2} projectId="maersk" className="aspect-[4/3]" />
-          <BentoCard number="04" client="AEC Hackathon" title="Behavioral Prediction Tool" outcome="🏆 Best Overall" tags={["PropTech"]} image={IMG_AEC} delay={0.3} projectId="aec-hackathon" className="aspect-[4/3]" />
+        {/* Mobile stack — 2 columns */}
+        <div className="md:hidden grid grid-cols-2 gap-3">
+          <BentoCard number="01" client="LEGO" title="Billund HQ" outcome="+40% Collab" tags={["Workplace"]} image={IMG_LEGO} projectId="lego-billund" className="aspect-[3/4]" />
+          <BentoCard number="02" client="Novo Nordisk" title="Innovation Campus" outcome="Evidence-Based" tags={["Research"]} image={IMG_NOVO} delay={0.05} projectId="novo-nordisk" className="aspect-[3/4]" />
+          <BentoCard number="03" client="MAERSK" title="Global Workplace" outcome="Cross-Cultural" tags={["Strategy"]} image={IMG_MAERSK} delay={0.1} projectId="maersk" className="aspect-[3/4]" />
+          <BentoCard number="04" client="AEC Hackathon" title="Prediction Tool" outcome="🏆 Best Overall" tags={["PropTech"]} image={IMG_AEC} delay={0.15} projectId="aec-hackathon" className="aspect-[3/4]" />
+          <BentoCard number="05" client="LEGO" title="Workspace Analytics" outcome="Data-Driven" tags={["Analytics"]} image={IMG_WORKSPACE} delay={0.2} projectId="lego-billund" className="aspect-[3/4]" />
+          <BentoCard number="06" client="Novo Nordisk" title="Research Environments" outcome="Innovation" tags={["Design"]} image={IMG_RESEARCH} delay={0.25} projectId="novo-nordisk" className="aspect-[3/4]" />
         </div>
       </div>
     </section>
