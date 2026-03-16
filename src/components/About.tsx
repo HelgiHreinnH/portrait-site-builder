@@ -45,7 +45,7 @@ export function About() {
               05 — About
             </p>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
               Helgi Hreinn<br />Hjálmarsson
             </h2>
 
