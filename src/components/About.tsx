@@ -69,8 +69,8 @@ export function About() {
                 { l: "Base", v: "Copenhagen, Denmark" },
               ].map(({ l, v }) => (
                 <div key={l} className="flex items-center gap-4 border-b border-border pb-3">
-                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-16">{l}</span>
-                  <span className="text-[14px] text-foreground">{v}</span>
+                  <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground w-16">{l}</span>
+                  <span className="text-base text-foreground">{v}</span>
                 </div>
               ))}
             </div>
