@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 
-const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] };
+const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
 const engagementTypes = [
   {
