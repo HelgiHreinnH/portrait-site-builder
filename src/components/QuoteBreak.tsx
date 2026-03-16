@@ -27,7 +27,7 @@ export function QuoteBreak() {
       </motion.p>
 
       {/* Main quote */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
+      <div className="relative z-10 max-w-7xl px-6 md:px-10">
         {quoteLines.map((line, i) => (
           <motion.div
             key={line.text}
