@@ -254,29 +254,31 @@ export function Methodology() {
   const center = svgSize / 2;
 
   return (
-    <section id="methodology" className="min-h-screen flex items-center justify-center py-16 md:py-24">
-      <div className="flex flex-col items-center w-full px-6 md:px-10">
-        {/* Header */}
-        <div className="mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={smooth}
-            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground"
-          >
-            How I Work
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ ...smooth, delay: 0.1 }}
-            className="mt-4 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl"
-          >
-            The same four steps apply to every project — whether the problem is spatial, organisational, or digital.
-          </motion.p>
-        </div>
+    <section id="methodology" className="min-h-screen relative py-16 md:py-24">
+      {/* Header — top left */}
+      <div className="absolute top-24 md:top-32 left-6 md:left-10 z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={smooth}
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground"
+        >
+          How I Work
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ ...smooth, delay: 0.1 }}
+          className="mt-4 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl"
+        >
+          The same four steps apply to every project — whether the problem is spatial, organisational, or digital.
+        </motion.p>
+      </div>
+
+      {/* Centered diagram */}
+      <div className="flex items-center justify-center min-h-screen w-full px-6 md:px-10">
 
         {/* Desktop: Circle diagram */}
         <div className="hidden md:flex justify-center">
