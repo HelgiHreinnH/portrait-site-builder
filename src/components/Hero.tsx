@@ -63,7 +63,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
               className="mt-8 md:mt-12"
             >
-              <p className="text-[15px] leading-relaxed text-muted-foreground max-w-md">
+              <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
                 I analyse the real problem, build a strategy around the findings,
                 design something communicable, and follow through to delivery.
               </p>
