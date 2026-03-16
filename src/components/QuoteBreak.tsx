@@ -10,12 +10,6 @@ export function QuoteBreak() {
     { text: "design", style: "accent" as const },
   ];
 
-  const indentMap: Record<number, string> = {
-    1: "clamp(24px, 5vw, 100px)",
-    2: "clamp(8px, 1.5vw, 32px)",
-    3: "clamp(40px, 8vw, 160px)",
-  };
-
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Gradient background */}
