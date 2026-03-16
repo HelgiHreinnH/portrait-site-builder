@@ -64,7 +64,7 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
           <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
             {client}
           </p>
-          <h3 className="font-display text-lg md:text-xl font-semibold text-primary-foreground mb-2">
+          <h3 className="font-display text-xl md:text-2xl font-semibold text-primary-foreground mb-2">
             {title}
           </h3>
           <div className="flex flex-wrap gap-1.5">

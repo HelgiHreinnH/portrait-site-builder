@@ -75,8 +75,8 @@ export function Hero() {
                   { v: "3", l: "Countries" },
                 ].map(({ v, l }) => (
                   <div key={l} className="text-center">
-                    <div className="font-display text-2xl font-bold text-foreground">{v}</div>
-                    <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">{l}</div>
+                    <div className="font-display text-3xl font-bold text-foreground">{v}</div>
+                    <div className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground">{l}</div>
                   </div>
                 ))}
               </div>

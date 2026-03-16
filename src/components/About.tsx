@@ -101,10 +101,10 @@ export function About() {
 
             {table.map(([trad, user], i) => (
               <div key={i} className="grid grid-cols-2 border-t border-border">
-                <div className="px-6 py-4 text-[14px] text-muted-foreground line-through decoration-muted-foreground/30">
+                <div className="px-6 py-4 text-base text-muted-foreground line-through decoration-muted-foreground/30">
                   {trad}
                 </div>
-                <div className="px-6 py-4 text-[14px] text-foreground font-medium border-l border-border">
+                <div className="px-6 py-4 text-base text-foreground font-medium border-l border-border">
                   {user}
                 </div>
               </div>

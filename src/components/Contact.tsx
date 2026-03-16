@@ -126,7 +126,7 @@ export function Contact() {
                       {eng.duration}
                     </span>
                   </div>
-                  <p className="text-[13px] leading-relaxed text-muted-foreground">{eng.description}</p>
+                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground">{eng.description}</p>
                 </div>
               ))}
             </div>

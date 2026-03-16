@@ -138,7 +138,7 @@ export function Services() {
 
         {/* Bottom note */}
         <div className="mt-8 flex justify-between items-center">
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
+          <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground/50">
             People · Buildings · Technology
           </span>
         </div>

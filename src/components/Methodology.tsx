@@ -111,7 +111,7 @@ export function Methodology() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="mt-20 text-center"
         >
-          <p className="font-display text-2xl md:text-3xl italic text-foreground/80 max-w-2xl mx-auto">
+          <p className="font-display text-3xl md:text-4xl italic text-foreground/80 max-w-2xl mx-auto">
             "Brief-making at a high level is where
             <br />
             the most expensive decisions get made."
