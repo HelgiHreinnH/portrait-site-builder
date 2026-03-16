@@ -255,7 +255,7 @@ export function Methodology() {
 
   return (
     <section id="methodology" className="min-h-screen flex items-center justify-center py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 w-full">
+      <div className="flex flex-col items-center w-full px-6 md:px-10">
         {/* Header */}
         <div className="mb-12">
           <motion.h2
