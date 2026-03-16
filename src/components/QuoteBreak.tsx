@@ -10,12 +10,6 @@ export function QuoteBreak() {
     { text: "design", style: "accent" as const },
   ];
 
-  const indentMap: Record<number, string> = {
-    1: "clamp(24px, 5vw, 100px)",
-    2: "clamp(8px, 1.5vw, 32px)",
-    3: "clamp(40px, 8vw, 160px)",
-  };
-
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Gradient background */}
@@ -41,7 +35,6 @@ export function QuoteBreak() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const }}
-            style={{ paddingLeft: indentMap[i] || "0" }}
           >
             <span
               className={`block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase ${
