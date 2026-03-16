@@ -151,7 +151,7 @@ export function Services() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="services" className="min-h-screen flex flex-col justify-center py-16 md:py-24">
+    <section id="services" className="min-h-screen flex flex-col justify-start pt-24 md:pt-32 pb-16 md:pb-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10 w-full">
         {/* Section header */}
         <div className="mb-12">
