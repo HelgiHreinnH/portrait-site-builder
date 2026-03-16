@@ -49,13 +49,13 @@ export function About() {
               Helgi Hreinn<br />Hjálmarsson
             </h2>
 
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4">
               Copenhagen-based architect with 10+ years across workplace strategy,
               digital product development, and hands-on making. My background is
               architectural, but my practice is wider — I work across the boundary
               between physical space, organisational thinking, and digital product.
             </p>
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-8">
               I've worked with LEGO, Barclays, Beumer Group, Bygningsstyrelsen,
               Colliers, and Ubiqisense — always applying the same method: analyse
               the real problem first, build a strategy, design something
