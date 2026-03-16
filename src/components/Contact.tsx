@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 
+const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] };
+
 const engagementTypes = [
   {
     type: "Full-Scope Project",
@@ -34,10 +36,10 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header label */}
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ ...smooth }}
           className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-12"
         >
           06 — Contact
@@ -46,10 +48,10 @@ export function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Left */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth }}
           >
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
               Have a Project<br />in Mind?
@@ -70,7 +72,7 @@ export function Contact() {
                 <div key={label} className="flex items-center gap-3">
                   <Icon size={16} className="text-muted-foreground" />
                   {href ? (
-                    <a href={href} className="text-base text-foreground hover:text-user-blue transition-colors">
+                    <a href={href} className="text-base text-foreground hover:text-user-blue transition-colors duration-300">
                       {label}
                     </a>
                   ) : (
@@ -86,36 +88,43 @@ export function Contact() {
                 { Icon: Github, label: "GitHub", href: "https://github.com/HelgiHreinnH" },
                 { Icon: Linkedin, label: "LinkedIn", href: "#" },
               ].map(({ Icon, label, href }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 border border-border px-3 py-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border px-3 py-2"
                 >
                   <Icon size={12} />
                   {label}
-                </a>
+                </motion.a>
               ))}
             </div>
           </motion.div>
 
           {/* Right: Engagement types */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth, delay: 0.15 }}
           >
             <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
               Ways to Work Together
             </p>
 
             <div className="space-y-4">
-              {engagementTypes.map((eng) => (
-                <div
+              {engagementTypes.map((eng, i) => (
+                <motion.div
                   key={eng.type}
-                  className="border border-border p-5 transition-all duration-300 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: i * 0.06 }}
+                  whileHover={{ y: -3, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                  className="border border-border p-5 transition-shadow duration-500 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-display text-base font-semibold text-foreground">{eng.type}</h3>
@@ -127,14 +136,20 @@ export function Contact() {
                     </span>
                   </div>
                   <p className="text-sm md:text-base leading-relaxed text-muted-foreground">{eng.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
 
         {/* Footer */}
-        <div className="mt-24 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ ...smooth, delay: 0.2 }}
+          className="mt-24 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"
+        >
           <div className="flex items-center gap-3">
             <span className="font-display text-2xl font-bold text-foreground">H</span>
             <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">Helgi Hreinn Hjálmarsson</span>
@@ -142,7 +157,7 @@ export function Contact() {
           <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/50">
             © 2025 All rights reserved. — Copenhagen, Denmark
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

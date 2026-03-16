@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] };
+
 const phases = [
   {
     num: "01",
@@ -39,13 +41,13 @@ const phases = [
   },
 ];
 
-function PhaseBlock({ phase }: { phase: (typeof phases)[0] }) {
+function PhaseBlock({ phase, index }: { phase: (typeof phases)[0]; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ ...smooth, delay: index * 0.08 }}
       className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-12 border-b border-border"
     >
       {/* Phase badge + giant number */}
@@ -90,25 +92,37 @@ export function Methodology() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="mb-16">
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth }}
+            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground"
+          >
             How I Work
-          </h2>
-          <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth, delay: 0.1 }}
+            className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl"
+          >
             The same four steps apply to every project — whether the problem is spatial, organisational, or digital. The first three phases typically produce briefs. That is where the most expensive mistakes get prevented.
-          </p>
+          </motion.p>
         </div>
 
         {/* Phases */}
-        {phases.map((phase) => (
-          <PhaseBlock key={phase.num} phase={phase} />
+        {phases.map((phase, i) => (
+          <PhaseBlock key={phase.num} phase={phase} index={i} />
         ))}
 
         {/* Quote */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ ...smooth, duration: 1 }}
           className="mt-20 text-center"
         >
           <p className="font-display text-3xl md:text-4xl italic text-foreground/80 max-w-2xl mx-auto">

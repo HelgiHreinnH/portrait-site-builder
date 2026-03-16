@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] };
+
 const ABOUT_IMG =
   "https://images.unsplash.com/photo-1634651754953-1565eca58d5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWhhdmlvcmFsJTIwcmVzZWFyY2glMjBvYnNlcnZhdGlvbiUyMHVzZXIlMjBzdHVkeSUyMGRhcmslMjBjaW5lbWF0aWN8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
@@ -19,10 +21,10 @@ export function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-20">
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth }}
             className="relative"
           >
             <div className="relative overflow-hidden" style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}>
@@ -36,10 +38,10 @@ export function About() {
 
           {/* Bio */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth, delay: 0.15 }}
           >
             <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
               05 — About
@@ -79,10 +81,10 @@ export function About() {
 
         {/* Comparison table */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ ...smooth }}
         >
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8 text-center">
             The Difference
@@ -100,14 +102,21 @@ export function About() {
             </div>
 
             {table.map(([trad, user], i) => (
-              <div key={i} className="grid grid-cols-2 border-t border-border">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ ...smooth, delay: i * 0.05 }}
+                className="grid grid-cols-2 border-t border-border"
+              >
                 <div className="px-6 py-4 text-base text-muted-foreground line-through decoration-muted-foreground/30">
                   {trad}
                 </div>
                 <div className="px-6 py-4 text-base text-foreground font-medium border-l border-border">
                   {user}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
