@@ -92,6 +92,11 @@
   position: relative;
 }
 
+.snap-section-auto {
+  min-height: auto;
+  justify-content: flex-start;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
