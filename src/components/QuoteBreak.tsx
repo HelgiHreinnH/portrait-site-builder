@@ -21,7 +21,7 @@ export function QuoteBreak() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ ...smooth, delay: 0.4 }}
-        className="absolute top-32 md:top-40 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base leading-relaxed text-muted-foreground text-right"
+        className="absolute top-52 md:top-60 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base leading-relaxed text-muted-foreground text-right"
       >
         Analyse the real problem. Build a strategy. Design something communicable. Follow through to delivery.
       </motion.p>
