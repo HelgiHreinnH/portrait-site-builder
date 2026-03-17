@@ -25,14 +25,17 @@ export function Hero() {
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* Left side - Typography */}
           <div className="flex flex-col justify-center">
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ ...smooth, delay: 0.1 }}
-              className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8"
+              className="mb-10"
             >
-              What I do
-            </motion.p>
+              <span className="font-display text-2xl md:text-4xl font-light italic text-muted-foreground tracking-tight">
+                What do I do
+              </span>
+              <span className="font-display text-2xl md:text-4xl font-light text-user-blue tracking-tight">?</span>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
