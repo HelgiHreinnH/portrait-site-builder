@@ -41,12 +41,12 @@ export function Hero() {
               className="flex flex-col gap-0"
             >
               <div className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] tracking-tight">
-                <span className="text-muted-foreground font-light">Turn </span>
+                <span className="text-muted-foreground font-light">I turn </span>
                 <span>knowledge</span>
               </div>
               <div className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] tracking-tight">
                 <span className="text-muted-foreground font-light">into </span>
-                <span>strategy</span>
+                <span>design</span>
               </div>
             </motion.div>
 
