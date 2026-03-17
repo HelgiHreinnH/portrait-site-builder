@@ -23,7 +23,7 @@ const Index = () => {
 
   return (
     <>
-      <GlobalAmbientLayer />
+      {/* <GlobalAmbientLayer /> */}
       <div className="relative z-10 snap-container">
         <div className="snap-section">
           <QuoteBreak />
