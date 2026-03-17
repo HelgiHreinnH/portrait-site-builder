@@ -31,7 +31,7 @@ export function Hero() {
               transition={{ ...smooth, delay: 0.1 }}
               className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8"
             >
-              People · Buildings · Technology
+              What I do
             </motion.p>
 
             <motion.div
