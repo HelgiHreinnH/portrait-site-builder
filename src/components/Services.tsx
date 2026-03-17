@@ -161,10 +161,10 @@ export function Services() {
                       className="text-foreground"
                     >
                       <ArrowUpRight size={20} />
-              </div>
+                    </motion.div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
