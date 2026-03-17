@@ -152,7 +152,7 @@ export function Methodology() {
                     style={{
                       width: "120px",
                       height: "120px",
-                      background: isActive ? phase.bg : "hsl(var(--background))",
+                      background: "hsl(var(--background))",
                       border: `3px solid ${isActive ? "hsl(var(--foreground))" : "hsl(var(--border))"}`,
                       boxShadow: isActive
                         ? "0 12px 40px hsl(var(--foreground) / 0.1)"
