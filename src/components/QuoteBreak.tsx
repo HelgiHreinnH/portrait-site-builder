@@ -131,16 +131,35 @@ export function QuoteBreak() {
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
 
+  // Variable timing: each word stays visible for a different duration
   useEffect(() => {
     if (!isInView) return;
-    const t = setInterval(() => setTopIndex((p) => (p + 1) % TOP_WORDS.length), 2800);
-    return () => clearInterval(t);
+    const topDurations = [4500, 3800, 5200, 4000, 4600, 3500, 5000, 4200];
+    let timeout: ReturnType<typeof setTimeout>;
+    const cycle = (idx: number) => {
+      timeout = setTimeout(() => {
+        const next = (idx + 1) % TOP_WORDS.length;
+        setTopIndex(next);
+        cycle(next);
+      }, topDurations[idx]);
+    };
+    cycle(topIndex);
+    return () => clearTimeout(timeout);
   }, [isInView]);
 
   useEffect(() => {
     if (!isInView) return;
-    const t = setInterval(() => setBottomIndex((p) => (p + 1) % BOTTOM_WORDS.length), 3500);
-    return () => clearInterval(t);
+    const bottomDurations = [5000, 4200, 4800, 3800, 5500, 4400];
+    let timeout: ReturnType<typeof setTimeout>;
+    const cycle = (idx: number) => {
+      timeout = setTimeout(() => {
+        const next = (idx + 1) % BOTTOM_WORDS.length;
+        setBottomIndex(next);
+        cycle(next);
+      }, bottomDurations[idx]);
+    };
+    cycle(bottomIndex);
+    return () => clearTimeout(timeout);
   }, [isInView]);
 
   return (
