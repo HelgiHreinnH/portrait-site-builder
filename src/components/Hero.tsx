@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
@@ -12,146 +12,9 @@ const CLIENTS = [
   "LEGO", "Barclays", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
 ];
 
-/* ── Two independent word pools ── */
-const TOP_WORDS = [
-  "knowledge", "complexity", "analysis", "research", "insight", "data", "ambition", "vision",
-];
-const BOTTOM_WORDS = [
-  "strategy", "clarity", "delivery", "results", "action", "impact",
-];
-
-type AnimStyle = "slideUp" | "typewriter" | "clipReveal" | "blur" | "scaleUp";
-const TOP_ANIMS: AnimStyle[] = ["slideUp", "typewriter", "clipReveal", "blur", "scaleUp", "slideUp", "clipReveal", "typewriter"];
-const BOTTOM_ANIMS: AnimStyle[] = ["clipReveal", "slideUp", "blur", "typewriter", "scaleUp", "clipReveal"];
-
-/* ── Typewriter hook ── */
-function useTypewriter(text: string, active: boolean, speed = 55) {
-  const [displayed, setDisplayed] = useState("");
-  useEffect(() => {
-    if (!active) { setDisplayed(""); return; }
-    setDisplayed("");
-    let i = 0;
-    const interval = setInterval(() => {
-      i++;
-      setDisplayed(text.slice(0, i));
-      if (i >= text.length) clearInterval(interval);
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, active, speed]);
-  return displayed;
-}
-
-/* ── Animation components ── */
-function SlideUpWord({ text }: { text: string }) {
-  return (
-    <span className="inline-block overflow-hidden">
-      <motion.span
-        className="inline-block"
-        initial={{ y: "110%", rotateX: -80 }}
-        animate={{ y: "0%", rotateX: 0 }}
-        exit={{ y: "-110%", rotateX: 80 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformOrigin: "bottom" }}
-      >
-        {text}
-      </motion.span>
-    </span>
-  );
-}
-
-function ClipRevealWord({ text }: { text: string }) {
-  return (
-    <motion.span
-      className="inline-block"
-      initial={{ clipPath: "inset(0 100% 0 0)" }}
-      animate={{ clipPath: "inset(0 0% 0 0)" }}
-      exit={{ clipPath: "inset(0 0 0 100%)" }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {text}
-    </motion.span>
-  );
-}
-
-function TypewriterWord({ text }: { text: string }) {
-  const displayed = useTypewriter(text, true, 65);
-  return (
-    <motion.span
-      className="inline-block"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.15 }}
-    >
-      {displayed}
-      <motion.span
-        className="inline-block w-[2px] h-[0.85em] bg-foreground ml-0.5 align-text-bottom"
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-      />
-    </motion.span>
-  );
-}
-
-function BlurWord({ text }: { text: string }) {
-  return (
-    <motion.span
-      className="inline-block"
-      initial={{ filter: "blur(12px)", opacity: 0 }}
-      animate={{ filter: "blur(0px)", opacity: 1 }}
-      exit={{ filter: "blur(12px)", opacity: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {text}
-    </motion.span>
-  );
-}
-
-function ScaleUpWord({ text }: { text: string }) {
-  return (
-    <span className="inline-block overflow-hidden">
-      <motion.span
-        className="inline-block"
-        initial={{ scale: 0.3, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 1.5, opacity: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {text}
-      </motion.span>
-    </span>
-  );
-}
-
-function AnimatedWord({ text, animStyle }: { text: string; animStyle: AnimStyle }) {
-  const Component =
-    animStyle === "typewriter" ? TypewriterWord
-    : animStyle === "clipReveal" ? ClipRevealWord
-    : animStyle === "blur" ? BlurWord
-    : animStyle === "scaleUp" ? ScaleUpWord
-    : SlideUpWord;
-
-  return <Component text={text} />;
-}
-
 export function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [topIndex, setTopIndex] = useState(0);
-  const [bottomIndex, setBottomIndex] = useState(0);
-
-  // Top word cycles every 2.8s, bottom every 3.5s — they drift apart naturally
-  useEffect(() => {
-    if (!isInView) return;
-    const t = setInterval(() => setTopIndex((p) => (p + 1) % TOP_WORDS.length), 2800);
-    return () => clearInterval(t);
-  }, [isInView]);
-
-  useEffect(() => {
-    if (!isInView) return;
-    const t = setInterval(() => setBottomIndex((p) => (p + 1) % BOTTOM_WORDS.length), 3500);
-    return () => clearInterval(t);
-  }, [isInView]);
 
   return (
     <section className="relative min-h-screen overflow-hidden" ref={ref}>
@@ -171,49 +34,19 @@ export function Hero() {
               People · Buildings · Technology
             </motion.p>
 
-            {/* Animated headline — two independent lines */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ ...smooth, delay: 0.3 }}
               className="flex flex-col gap-0"
             >
-              {/* Line 1: TURN {word} */}
               <div className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] tracking-tight">
                 <span className="text-muted-foreground font-light">Turn </span>
-                <span className="inline-block min-w-[180px] md:min-w-[300px]">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={topIndex}
-                      className="inline-block"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <AnimatedWord text={TOP_WORDS[topIndex]} animStyle={TOP_ANIMS[topIndex]} />
-                    </motion.span>
-                  </AnimatePresence>
-                </span>
+                <span>knowledge</span>
               </div>
-
-              {/* Line 2: INTO {word} */}
               <div className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] tracking-tight">
                 <span className="text-muted-foreground font-light">into </span>
-                <span className="inline-block min-w-[150px] md:min-w-[250px]">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={bottomIndex}
-                      className="inline-block"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <AnimatedWord text={BOTTOM_WORDS[bottomIndex]} animStyle={BOTTOM_ANIMS[bottomIndex]} />
-                    </motion.span>
-                  </AnimatePresence>
-                </span>
+                <span>strategy</span>
               </div>
             </motion.div>
 
