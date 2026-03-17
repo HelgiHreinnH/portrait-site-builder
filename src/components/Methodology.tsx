@@ -202,8 +202,7 @@ export function Methodology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className="rounded-2xl p-6 border-2 border-border"
-                style={{ background: phase.bg }}
+                className="rounded-2xl p-6 border-2 border-border bg-background"
                 onClick={() => setActivePhase(activePhase === i ? null : i)}
               >
                 <div className="flex items-center gap-4 mb-3">
