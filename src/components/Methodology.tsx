@@ -252,8 +252,7 @@ export function Methodology() {
                 transition={{ duration: 0.4 }}
               >
                 <div
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4"
-                  style={{ background: phases[activePhase].bg }}
+                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 border border-border bg-background"
                 >
                   <span className="font-display text-foreground text-sm font-bold">
                     Phase {phases[activePhase].num}
