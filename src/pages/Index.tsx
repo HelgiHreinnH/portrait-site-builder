@@ -41,9 +41,6 @@ const Index = () => {
           <Projects />
         </div>
         <div className="snap-section">
-          <About />
-        </div>
-        <div className="snap-section">
           <Contact />
         </div>
       </div>
