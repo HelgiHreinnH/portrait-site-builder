@@ -38,25 +38,6 @@ export function Hero() {
               People · Buildings · Technology
             </motion.p>
 
-            {/* Headline */}
-            <div className="space-y-0">
-              {["TURN", "KNOWLEDGE", "INTO", "DESIGN"].map((word, i) => (
-                <motion.div
-                  key={word}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 1, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
-                >
-                  <span
-                    className={`block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] ${
-                      word === "DESIGN" ? "text-user-blue" : "text-foreground"
-                    }`}
-                  >
-                    {word}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
 
             {/* Description and stats */}
             <motion.div
