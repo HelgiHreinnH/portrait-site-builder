@@ -62,28 +62,28 @@ export function Methodology() {
   return (
     <section
       id="methodology"
-      className="relative min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-14 overflow-hidden"
+      className="relative h-screen flex flex-col justify-center py-8 md:py-12 px-6 md:px-14 overflow-hidden"
     >
       <div className="relative z-10 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="mb-16 md:mb-20 text-center">
+        <div className="mb-6 md:mb-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-display text-foreground leading-tight tracking-tight mb-6 text-5xl md:text-6xl lg:text-7xl font-bold" style={{ lineHeight: 0.95 }}>
+            <h2 className="font-display text-foreground leading-tight tracking-tight mb-3 text-4xl md:text-5xl lg:text-6xl font-bold" style={{ lineHeight: 0.95 }}>
               How I Work
             </h2>
-            <p className="max-w-2xl mx-auto leading-relaxed text-muted-foreground text-lg">
+            <p className="max-w-2xl mx-auto leading-relaxed text-muted-foreground text-base">
               The same four steps apply to every project — whether the problem is spatial, organisational, or digital.
             </p>
           </motion.div>
         </div>
 
         {/* Circular Process Diagram */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 mb-16">
+        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 mb-8">
           {/* Circle Container - Desktop */}
           <div className="hidden lg:block relative" style={{ width: "640px", height: "640px" }}>
             {/* Center label */}
