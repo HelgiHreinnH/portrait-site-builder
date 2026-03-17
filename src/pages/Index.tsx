@@ -37,7 +37,7 @@ const Index = () => {
         <div className="snap-section">
           <Methodology />
         </div>
-        <div className="snap-section snap-section-auto">
+        <div className="snap-section">
           <Projects />
         </div>
         <div className="snap-section">

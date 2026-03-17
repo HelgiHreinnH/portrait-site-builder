@@ -32,59 +32,55 @@ interface BentoCardProps {
 function BentoCard({ number, client, title, outcome, tags, image, delay = 0, projectId, className = "" }: BentoCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-30px" }}
       transition={{ ...smooth, delay }}
     >
       <Link
         to={`/projects/${projectId}`}
-        className={`group relative block overflow-hidden rounded-2xl ${className}`}
+        className={`group relative block overflow-hidden rounded-xl ${className}`}
       >
-        {/* Image */}
         <img
           src={image}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
         />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-2xl transition-opacity duration-500 group-hover:from-foreground/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
 
         {/* Top meta */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
+        <div className="absolute top-2 left-3 right-3 flex justify-between items-start">
+          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
             {number}
           </span>
-          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-1 rounded-full">
+          <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
             {outcome}
           </span>
         </div>
 
         {/* Bottom content */}
-        <div className="absolute bottom-4 left-4 right-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[-4px]">
-          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
+        <div className="absolute bottom-2 left-3 right-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[-2px]">
+          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-0.5">
             {client}
           </p>
-          <h3 className="font-display text-xl md:text-2xl font-semibold text-primary-foreground mb-2">
+          <h3 className="font-display text-sm md:text-base font-semibold text-primary-foreground mb-1 leading-tight">
             {title}
           </h3>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1">
             {tags.map((tag) => (
-              <span key={tag} className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/50 border border-primary-foreground/20 px-2 py-0.5 rounded-full">
+              <span key={tag} className="font-mono text-[8px] tracking-[0.1em] uppercase text-primary-foreground/50 border border-primary-foreground/20 px-1.5 py-0.5 rounded-full">
                 {tag}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Hover arrow */}
         <motion.div
-          className="absolute top-4 right-4 opacity-0 group-hover:opacity-100"
+          className="absolute top-2 right-2 opacity-0 group-hover:opacity-100"
           initial={false}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <ArrowUpRight size={20} className="text-primary-foreground" />
+          <ArrowUpRight size={16} className="text-primary-foreground" />
         </motion.div>
       </Link>
     </motion.div>
@@ -93,62 +89,58 @@ function BentoCard({ number, client, title, outcome, tags, image, delay = 0, pro
 
 export function Projects() {
   return (
-    <section id="projects" className="py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="mb-12">
+    <section id="projects" className="h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full">
+        {/* Header */}
+        <div className="mb-6">
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ ...smooth }}
-            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] text-foreground"
+            viewport={{ once: true }}
+            transition={smooth}
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground"
           >
             Examples
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ ...smooth, delay: 0.1 }}
-            className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl"
+            className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground max-w-lg"
           >
             A selection of projects across workplace strategy, digital product, and making — each mapped to the same method.
           </motion.p>
         </div>
 
-        {/* Desktop bento grid */}
-        <div className="hidden md:grid grid-cols-3 gap-4">
-          <div className="col-span-2 aspect-[16/9]">
+        {/* Desktop bento grid — compact to fit one screen */}
+        <div className="hidden md:grid grid-cols-4 grid-rows-2 gap-3" style={{ height: "calc(100vh - 220px)" }}>
+          <div className="col-span-2 row-span-1">
             <BentoCard number="01" client="LEGO" title="Billund HQ — Atrium Experience" outcome="Full Scope" tags={["People", "Buildings", "Technology"]} image={IMG_LEGO} projectId="lego-billund" className="h-full" />
           </div>
-          <div className="col-span-1 aspect-[3/4]">
-            <BentoCard number="02" client="Barclays Bank" title="Employee Experience Strategy" outcome="10,000+ employees" tags={["People", "Buildings"]} image={IMG_BARCLAYS} delay={0.06} projectId="barclays" className="h-full" />
+          <div className="col-span-1 row-span-1">
+            <BentoCard number="02" client="Barclays Bank" title="Employee Experience Strategy" outcome="10,000+" tags={["People", "Buildings"]} image={IMG_BARCLAYS} delay={0.06} projectId="barclays" className="h-full" />
           </div>
-          <div className="col-span-1 aspect-[3/4]">
-            <BentoCard number="03" client="Beumer Group" title="Activity-Based Workplace" outcome="580 employees" tags={["People", "Buildings"]} image={IMG_BEUMER} delay={0.12} projectId="beumer" className="h-full" />
+          <div className="col-span-1 row-span-2">
+            <BentoCard number="03" client="Beumer Group" title="Activity-Based Workplace" outcome="580" tags={["People", "Buildings"]} image={IMG_BEUMER} delay={0.12} projectId="beumer" className="h-full" />
           </div>
-          <div className="col-span-2 aspect-[16/9]">
-            <BentoCard number="04" client="AEC Hackathon" title="Projector — AI File Management" outcome="Buildings + Tech" tags={["Buildings", "Technology"]} image={IMG_AEC} delay={0.18} projectId="aec-hackathon" className="h-full" />
+          <div className="col-span-1 row-span-1">
+            <BentoCard number="04" client="AEC Hackathon" title="Projector — AI File Management" outcome="Tech" tags={["Buildings", "Technology"]} image={IMG_AEC} delay={0.18} projectId="aec-hackathon" className="h-full" />
           </div>
-          <div className="col-span-1 aspect-square">
-            <BentoCard number="05" client="Ubiqisense" title="Occupancy Platform UI/UX" outcome="People + Tech" tags={["UI/UX", "Data"]} image={IMG_UBIQISENSE} delay={0.24} projectId="ubiqisense" className="h-full" />
+          <div className="col-span-1 row-span-1">
+            <BentoCard number="05" client="Ubiqisense" title="Occupancy Platform UI/UX" outcome="Data" tags={["UI/UX", "Data"]} image={IMG_UBIQISENSE} delay={0.24} projectId="ubiqisense" className="h-full" />
           </div>
-          <div className="col-span-1 aspect-square">
-            <BentoCard number="06" client="Felles" title="Property Platform" outcome="People + Tech" tags={["Product", "Strategy"]} image={IMG_FELLES} delay={0.3} projectId="felles" className="h-full" />
-          </div>
-          <div className="col-span-1 aspect-square">
-            <BentoCard number="07" client="Bygningsstyrelsen" title="Government Outplacement" outcome="300+ employees" tags={["People", "Buildings"]} image={IMG_BEUMER} delay={0.36} projectId="bygningsstyrelsen" className="h-full" />
+          <div className="col-span-1 row-span-1">
+            <BentoCard number="06" client="Felles" title="Property Platform" outcome="Product" tags={["Product", "Strategy"]} image={IMG_FELLES} delay={0.3} projectId="felles" className="h-full" />
           </div>
         </div>
 
-        {/* Mobile stack */}
-        <div className="md:hidden grid grid-cols-2 gap-3">
-          <BentoCard number="01" client="LEGO" title="Billund HQ" outcome="Full Scope" tags={["All Three"]} image={IMG_LEGO} projectId="lego-billund" className="aspect-[3/4]" />
-          <BentoCard number="02" client="Barclays" title="Employee Experience" outcome="10K+" tags={["People"]} image={IMG_BARCLAYS} delay={0.06} projectId="barclays" className="aspect-[3/4]" />
-          <BentoCard number="03" client="Beumer Group" title="Workplace Strategy" outcome="580" tags={["Strategy"]} image={IMG_BEUMER} delay={0.12} projectId="beumer" className="aspect-[3/4]" />
-          <BentoCard number="04" client="AEC Hackathon" title="Projector" outcome="AI Tool" tags={["Tech"]} image={IMG_AEC} delay={0.18} projectId="aec-hackathon" className="aspect-[3/4]" />
-          <BentoCard number="05" client="Ubiqisense" title="Platform UI/UX" outcome="Data" tags={["UI/UX"]} image={IMG_UBIQISENSE} delay={0.24} projectId="ubiqisense" className="aspect-[3/4]" />
-          <BentoCard number="06" client="Felles" title="Property Platform" outcome="Product" tags={["Digital"]} image={IMG_FELLES} delay={0.3} projectId="felles" className="aspect-[3/4]" />
+        {/* Mobile grid */}
+        <div className="md:hidden grid grid-cols-2 gap-2" style={{ height: "calc(100vh - 180px)" }}>
+          <BentoCard number="01" client="LEGO" title="Billund HQ" outcome="Full Scope" tags={["All Three"]} image={IMG_LEGO} projectId="lego-billund" className="h-full" />
+          <BentoCard number="02" client="Barclays" title="Employee Experience" outcome="10K+" tags={["People"]} image={IMG_BARCLAYS} delay={0.06} projectId="barclays" className="h-full" />
+          <BentoCard number="03" client="Beumer" title="Workplace Strategy" outcome="580" tags={["Strategy"]} image={IMG_BEUMER} delay={0.12} projectId="beumer" className="h-full" />
+          <BentoCard number="04" client="AEC" title="Projector" outcome="AI Tool" tags={["Tech"]} image={IMG_AEC} delay={0.18} projectId="aec-hackathon" className="h-full" />
         </div>
       </div>
     </section>
