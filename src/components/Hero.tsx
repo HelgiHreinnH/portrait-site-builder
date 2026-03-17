@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
@@ -12,19 +12,135 @@ const CLIENTS = [
   "LEGO", "Barclays", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
 ];
 
+/* ── Rotating phrases ── */
+const PHRASES = [
+  { prefix: "Turn", word: "analysis", suffix: "into results" },
+  { prefix: "Turn", word: "ideas", suffix: "into buildings" },
+  { prefix: "Turn", word: "complexity", suffix: "into clarity" },
+  { prefix: "Turn", word: "knowledge", suffix: "into strategy" },
+  { prefix: "Turn", word: "design", suffix: "into delivery" },
+];
+
+type AnimStyle = "slideUp" | "typewriter" | "clipReveal";
+const ANIM_STYLES: AnimStyle[] = ["slideUp", "typewriter", "clipReveal", "slideUp", "typewriter"];
+
+/* ── Typewriter hook ── */
+function useTypewriter(text: string, active: boolean, speed = 55) {
+  const [displayed, setDisplayed] = useState("");
+
+  useEffect(() => {
+    if (!active) {
+      setDisplayed("");
+      return;
+    }
+    setDisplayed("");
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, active, speed]);
+
+  return displayed;
+}
+
+/* ── SlideUp word component ── */
+function SlideUpWord({ text }: { text: string }) {
+  return (
+    <span className="inline-block overflow-hidden">
+      <motion.span
+        className="inline-block"
+        initial={{ y: "110%", rotateX: -80 }}
+        animate={{ y: "0%", rotateX: 0 }}
+        exit={{ y: "-110%", rotateX: 80 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: "bottom" }}
+      >
+        {text}
+      </motion.span>
+    </span>
+  );
+}
+
+/* ── ClipReveal word component ── */
+function ClipRevealWord({ text }: { text: string }) {
+  return (
+    <motion.span
+      className="inline-block"
+      initial={{ clipPath: "inset(0 100% 0 0)" }}
+      animate={{ clipPath: "inset(0 0% 0 0)" }}
+      exit={{ clipPath: "inset(0 0 0 100%)" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {text}
+    </motion.span>
+  );
+}
+
+/* ── Typewriter word component ── */
+function TypewriterWord({ text }: { text: string }) {
+  const displayed = useTypewriter(text, true, 65);
+  return (
+    <motion.span
+      className="inline-block"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
+    >
+      {displayed}
+      <motion.span
+        className="inline-block w-[2px] h-[1em] bg-foreground ml-0.5 align-text-bottom"
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
+      />
+    </motion.span>
+  );
+}
+
+/* ── Animated phrase ── */
+function AnimatedPhrase({ phrase, animStyle }: { phrase: typeof PHRASES[0]; animStyle: AnimStyle }) {
+  const WordComponent = animStyle === "typewriter" ? TypewriterWord
+    : animStyle === "clipReveal" ? ClipRevealWord
+    : SlideUpWord;
+
+  return (
+    <span className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] tracking-tight">
+      <span className="text-muted-foreground font-light">{phrase.prefix} </span>
+      <AnimatePresence mode="wait">
+        <WordComponent key={phrase.word} text={phrase.word} />
+      </AnimatePresence>
+      <br className="hidden md:block" />
+      <span className="text-muted-foreground font-light"> {phrase.suffix}</span>
+    </span>
+  );
+}
+
 export function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  const nextPhrase = useCallback(() => {
+    setPhraseIndex((prev) => (prev + 1) % PHRASES.length);
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const timer = setInterval(nextPhrase, 3000);
+    return () => clearInterval(timer);
+  }, [isInView, nextPhrase]);
+
+  const currentPhrase = PHRASES[phraseIndex];
+  const currentAnim = ANIM_STYLES[phraseIndex];
 
   return (
     <section className="relative min-h-screen overflow-hidden" ref={ref}>
-      {/* Clean background */}
       <div className="absolute inset-0 bg-background" />
-
-      {/* Top hairline */}
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
-      {/* Main content container */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-8 min-h-screen flex flex-col">
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* Left side - Typography */}
@@ -38,6 +154,45 @@ export function Hero() {
               People · Buildings · Technology
             </motion.p>
 
+            {/* Animated headline */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ ...smooth, delay: 0.3 }}
+              className="min-h-[120px] md:min-h-[160px] flex items-start"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={phraseIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <AnimatedPhrase phrase={currentPhrase} animStyle={currentAnim} />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Phrase indicators */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ ...smooth, delay: 0.5 }}
+              className="flex gap-2 mt-6"
+            >
+              {PHRASES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPhraseIndex(i)}
+                  className={`h-[2px] transition-all duration-500 ${
+                    i === phraseIndex
+                      ? "w-8 bg-foreground"
+                      : "w-4 bg-foreground/15 hover:bg-foreground/30"
+                  }`}
+                />
+              ))}
+            </motion.div>
 
             {/* Description and stats */}
             <motion.div
@@ -93,7 +248,6 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Explore button */}
             <div className="flex justify-center mt-8">
               <motion.button
                 onClick={() => {
