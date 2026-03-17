@@ -291,23 +291,6 @@ export function Methodology() {
             )}
           </motion.div>
         </div>
-
-        {/* Quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="pt-14 border-t border-border text-center"
-        >
-          <p
-            className="font-display italic text-foreground/20 leading-tight tracking-tight font-bold"
-            style={{ fontSize: "clamp(22px, 4vw, 56px)" }}
-          >
-            "Brief-making at a high level is where
-            <br className="hidden md:block" /> the most expensive decisions get made."
-          </p>
-        </motion.div>
       </div>
     </section>
   );
