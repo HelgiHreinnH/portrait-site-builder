@@ -18,8 +18,8 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden" ref={ref}>
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-user-blue-light via-background to-user-sage opacity-60" />
+      {/* Clean background */}
+      <div className="absolute inset-0 bg-background" />
 
       {/* Top hairline */}
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
