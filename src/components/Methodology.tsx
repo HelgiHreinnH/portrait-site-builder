@@ -178,11 +178,8 @@ export function Methodology() {
 
                     {/* Label badge */}
                     <div
-                      className="relative z-10 rounded-full px-4 py-2"
-                      style={{
-                        background: isActive ? "hsl(var(--background) / 0.9)" : phase.bg,
-                        border: isActive ? "1px solid hsl(var(--border))" : "none",
-                      }}
+                      className="relative z-10 rounded-full px-4 py-2 bg-background border border-border"
+                    >
                     >
                       <span
                         className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground"
