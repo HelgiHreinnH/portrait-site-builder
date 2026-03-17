@@ -152,7 +152,7 @@ export function Methodology() {
                     style={{
                       width: "120px",
                       height: "120px",
-                      background: isActive ? phase.bg : "hsl(var(--background))",
+                      background: "hsl(var(--background))",
                       border: `3px solid ${isActive ? "hsl(var(--foreground))" : "hsl(var(--border))"}`,
                       boxShadow: isActive
                         ? "0 12px 40px hsl(var(--foreground) / 0.1)"
@@ -178,11 +178,7 @@ export function Methodology() {
 
                     {/* Label badge */}
                     <div
-                      className="relative z-10 rounded-full px-4 py-2"
-                      style={{
-                        background: isActive ? "hsl(var(--background) / 0.9)" : phase.bg,
-                        border: isActive ? "1px solid hsl(var(--border))" : "none",
-                      }}
+                      className="relative z-10 rounded-full px-4 py-2 bg-background border border-border"
                     >
                       <span
                         className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground"
@@ -205,8 +201,7 @@ export function Methodology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className="rounded-2xl p-6 border-2 border-border"
-                style={{ background: phase.bg }}
+                className="rounded-2xl p-6 border-2 border-border bg-background"
                 onClick={() => setActivePhase(activePhase === i ? null : i)}
               >
                 <div className="flex items-center gap-4 mb-3">
@@ -257,8 +252,7 @@ export function Methodology() {
                 transition={{ duration: 0.4 }}
               >
                 <div
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4"
-                  style={{ background: phases[activePhase].bg }}
+                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 border border-border bg-background"
                 >
                   <span className="font-display text-foreground text-sm font-bold">
                     Phase {phases[activePhase].num}
@@ -281,8 +275,7 @@ export function Methodology() {
                   {phases[activePhase].methods.map((m) => (
                     <span
                       key={m}
-                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-3 py-1.5 text-foreground"
-                      style={{ background: phases[activePhase].bg }}
+                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-3 py-1.5 text-foreground border border-border bg-background"
                     >
                       {m}
                     </span>

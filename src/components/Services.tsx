@@ -91,12 +91,8 @@ export function Services() {
               onHoverEnd={() => setActive(null)}
               className="relative group cursor-default"
             >
-              <motion.div
-                className="relative h-full rounded-2xl overflow-hidden border border-border"
-                animate={{
-                  backgroundColor: active === i ? service.accent : "hsl(var(--muted) / 0.3)",
-                }}
-                transition={{ duration: 0.4 }}
+              <div
+                className="relative h-full rounded-2xl overflow-hidden border border-border bg-background"
               >
                 <div className="p-6 flex flex-col h-full min-h-[420px]">
                   {/* Large faded number */}
@@ -168,7 +164,7 @@ export function Services() {
                     </motion.div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
