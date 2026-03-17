@@ -12,8 +12,8 @@ export function QuoteBreak() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-user-blue-light via-user-blue-mist to-user-sage opacity-40" />
+      {/* Clean background */}
+      <div className="absolute inset-0 bg-background" />
 
       {/* Tagline */}
       <motion.p
