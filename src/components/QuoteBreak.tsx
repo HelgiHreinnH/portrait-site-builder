@@ -10,13 +10,17 @@ const BOTTOM_WORDS = [
   "strategy", "clarity", "delivery", "results", "action", "impact",
 ];
 
-const CHAR_SPEED = 70; // ms per character
+const CHAR_SPEED = 70;
 
-function TypewriterWord({ text, onComplete }: { text: string; onComplete?: () => void }) {
-  const [displayed, setDisplayed] = useState("");
+function TypewriterWord({ text, typing, onComplete }: { text: string; typing: boolean; onComplete?: () => void }) {
+  const [displayed, setDisplayed] = useState(typing ? "" : text);
   const completeCalled = useRef(false);
 
   useEffect(() => {
+    if (!typing) {
+      setDisplayed(text);
+      return;
+    }
     setDisplayed("");
     completeCalled.current = false;
     let i = 0;
@@ -32,22 +36,24 @@ function TypewriterWord({ text, onComplete }: { text: string; onComplete?: () =>
       }
     }, CHAR_SPEED);
     return () => clearInterval(interval);
-  }, [text, onComplete]);
+  }, [text, typing, onComplete]);
 
   return (
     <motion.span
       className="inline-block"
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.12 }}
     >
       {displayed}
-      <motion.span
-        className="inline-block w-[3px] h-[0.85em] bg-current ml-1 align-text-bottom"
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.55, repeat: Infinity, repeatType: "reverse" }}
-      />
+      {typing && (
+        <motion.span
+          className="inline-block w-[3px] h-[0.85em] bg-current ml-1 align-text-bottom"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.55, repeat: Infinity, repeatType: "reverse" }}
+        />
+      )}
     </motion.span>
   );
 }
@@ -57,42 +63,36 @@ export function QuoteBreak() {
   const isInView = useInView(ref, { once: true });
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
-  const [phase, setPhase] = useState<"idle" | "typingTop" | "waitAfterTop" | "typingBottom" | "waitAfterBottom">("idle");
+  const [topTyping, setTopTyping] = useState(false);
+  const [bottomTyping, setBottomTyping] = useState(false);
 
-  // Sequenced cycle: type top → pause → type bottom → long pause → repeat
+  // Start first cycle after entrance animation
   useEffect(() => {
     if (!isInView) return;
-    // Start first cycle after initial entrance animation
-    const start = setTimeout(() => setPhase("typingTop"), 2500);
-    return () => clearTimeout(start);
+    const t = setTimeout(() => {
+      setTopIndex(1); // move to second word to trigger first typewriter
+      setTopTyping(true);
+    }, 3000);
+    return () => clearTimeout(t);
   }, [isInView]);
 
-  // After top word finishes typing, wait then start bottom
   const onTopComplete = useCallback(() => {
-    setPhase("waitAfterTop");
+    setTopTyping(false);
+    // After top finishes, pause then type bottom
+    setTimeout(() => {
+      setBottomIndex((p) => (p + 1) % BOTTOM_WORDS.length);
+      setBottomTyping(true);
+    }, 800);
   }, []);
 
-  // After bottom word finishes typing, wait then restart cycle
   const onBottomComplete = useCallback(() => {
-    setPhase("waitAfterBottom");
+    setBottomTyping(false);
+    // Long reading pause, then cycle top again
+    setTimeout(() => {
+      setTopIndex((p) => (p + 1) % TOP_WORDS.length);
+      setTopTyping(true);
+    }, 3500);
   }, []);
-
-  useEffect(() => {
-    if (phase === "waitAfterTop") {
-      const t = setTimeout(() => {
-        setBottomIndex((p) => (p + 1) % BOTTOM_WORDS.length);
-        setPhase("typingBottom");
-      }, 800); // pause between top finishing and bottom starting
-      return () => clearTimeout(t);
-    }
-    if (phase === "waitAfterBottom") {
-      const t = setTimeout(() => {
-        setTopIndex((p) => (p + 1) % TOP_WORDS.length);
-        setPhase("typingTop");
-      }, 3500); // long pause to read the full sentence
-      return () => clearTimeout(t);
-    }
-  }, [phase]);
 
   return (
     <section ref={ref} className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden">
@@ -109,7 +109,6 @@ export function QuoteBreak() {
       </motion.p>
 
       <div className="relative z-10 max-w-7xl px-6 md:px-10">
-        {/* TURN */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +120,6 @@ export function QuoteBreak() {
           </span>
         </motion.div>
 
-        {/* TOP WORD */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -133,13 +131,13 @@ export function QuoteBreak() {
               <TypewriterWord
                 key={`top-${topIndex}`}
                 text={TOP_WORDS[topIndex]}
-                onComplete={phase === "typingTop" ? onTopComplete : undefined}
+                typing={topTyping}
+                onComplete={onTopComplete}
               />
             </AnimatePresence>
           </span>
         </motion.div>
 
-        {/* INTO */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +149,6 @@ export function QuoteBreak() {
           </span>
         </motion.div>
 
-        {/* BOTTOM WORD */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -163,7 +160,8 @@ export function QuoteBreak() {
               <TypewriterWord
                 key={`bottom-${bottomIndex}`}
                 text={BOTTOM_WORDS[bottomIndex]}
-                onComplete={phase === "typingBottom" ? onBottomComplete : undefined}
+                typing={bottomTyping}
+                onComplete={onBottomComplete}
               />
             </AnimatePresence>
           </span>
