@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: "Work", href: "#services" },
+  { label: "Services", href: "#services" },
   { label: "Method", href: "#methodology" },
-  { label: "Examples", href: "#projects" },
+  { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
 ];
 
