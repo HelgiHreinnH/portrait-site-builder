@@ -478,6 +478,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
     ],
     relatedProjects: ["barclays", "beumer"],
+    tier: 3,
   },
   "barclays": {
     id: "barclays",
