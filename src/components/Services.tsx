@@ -52,8 +52,8 @@ const services = [
   },
 ];
 
-function ServiceCard({ service, index: i, active, setActive }: {
-  service: typeof services[number]; index: number; active: number | null; setActive: (v: number | null) => void;
+function ServiceCard({ service, index: i, active, setActive, compact = false }: {
+  service: typeof services[number]; index: number; active: number | null; setActive: (v: number | null) => void; compact?: boolean;
 }) {
   return (
     <motion.div
@@ -65,17 +65,19 @@ function ServiceCard({ service, index: i, active, setActive }: {
       onHoverEnd={() => setActive(null)}
       className="relative group cursor-default"
     >
+      {/* Number outside the frame */}
+      <motion.div
+        className="font-display text-foreground leading-none mb-2"
+        style={{ fontWeight: 700, fontSize: "clamp(32px, 4vw, 44px)" }}
+        animate={{ opacity: active === i ? 0.25 : 0.1 }}
+        transition={{ duration: 0.3 }}
+      >
+        {service.number}
+      </motion.div>
+
       <div className="relative h-full rounded-2xl overflow-hidden border border-border bg-background">
-        <div className="p-6 flex flex-col h-full min-h-[380px]">
-          <motion.div
-            className="font-display text-foreground leading-none mb-4"
-            style={{ fontWeight: 700, fontSize: "clamp(40px, 5vw, 56px)" }}
-            animate={{ opacity: active === i ? 0.2 : 0.08 }}
-            transition={{ duration: 0.3 }}
-          >
-            {service.number}
-          </motion.div>
-          <div className="mb-4">
+        <div className={`p-6 flex flex-col h-full ${compact ? 'min-h-[240px]' : 'min-h-[320px]'}`}>
+          <div className="mb-3">
             <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
               {service.discipline}
             </span>
