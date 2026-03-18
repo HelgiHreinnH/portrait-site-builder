@@ -12,6 +12,9 @@ type TileType =
   | { kind: "quote"; text: string; author?: string }
   | { kind: "stat"; value: string; label: string; sublabel?: string };
 
+type ColWidth = "narrow" | "medium" | "wide";
+type ColumnDef = { tiles: TileType[]; width: ColWidth };
+
 /* Quote / stat filler content */
 const fillerTiles: Exclude<TileType, { kind: "project" }>[] = [
   { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
