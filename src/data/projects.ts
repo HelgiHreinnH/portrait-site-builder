@@ -34,6 +34,7 @@ export interface ProjectData {
   gallery: string[];
   quote?: { text: string; author: string; role: string };
   relatedProjects?: string[];
+  tier: 1 | 2 | 3;
 }
 
 const IMG_LEGO =
@@ -101,6 +102,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
     ],
     relatedProjects: ["kvitt", "a-place-to-work"],
+    tier: 1,
   },
   "aec-hackathon": {
     id: "aec-hackathon",
@@ -153,6 +155,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
     ],
     relatedProjects: ["ubiqisense", "archi-ar"],
+    tier: 2,
   },
   "archi-ar": {
     id: "archi-ar",
@@ -205,6 +208,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
     ],
     relatedProjects: ["aec-hackathon", "felles"],
+    tier: 2,
   },
   "lego-billund": {
     id: "lego-billund",
@@ -262,6 +266,7 @@ export const projects: Record<string, ProjectData> = {
       role: "Executive Chairman, LEGO Brand Group",
     },
     relatedProjects: ["barclays", "beumer"],
+    tier: 2,
   },
   "a-place-to-work": {
     id: "a-place-to-work",
@@ -314,6 +319,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
     ],
     relatedProjects: ["felles", "kvitt"],
+    tier: 2,
   },
   "kvitt": {
     id: "kvitt",
@@ -366,6 +372,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
     ],
     relatedProjects: ["felles", "a-place-to-work"],
+    tier: 1,
   },
   "ubiqisense": {
     id: "ubiqisense",
@@ -418,6 +425,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
     ],
     relatedProjects: ["aec-hackathon", "felles"],
+    tier: 1,
   },
   "htas": {
     id: "htas",
@@ -470,6 +478,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
     ],
     relatedProjects: ["barclays", "beumer"],
+    tier: 3,
   },
   "barclays": {
     id: "barclays",
@@ -522,6 +531,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
     ],
     relatedProjects: ["lego-billund", "htas"],
+    tier: 3,
   },
   "form": {
     id: "form",
@@ -574,6 +584,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
     ],
     relatedProjects: ["cln", "lego-billund"],
+    tier: 3,
   },
   "cln": {
     id: "cln",
@@ -626,6 +637,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600",
     ],
     relatedProjects: ["form", "lego-billund"],
+    tier: 3,
   },
   "beumer": {
     id: "beumer",
@@ -678,6 +690,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600",
     ],
     relatedProjects: ["lego-billund", "barclays"],
+    tier: 2,
   },
 };
 

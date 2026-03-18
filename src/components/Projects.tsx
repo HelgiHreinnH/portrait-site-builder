@@ -6,17 +6,18 @@ import { ProjectPopover } from "./ProjectPopover";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-/* ── Bento tile types ── */
+/* ── Tile types ── */
 type TileType =
-  | { kind: "project"; project: ProjectData; span: "1x1" | "2x1" | "1x2" }
+  | { kind: "project"; project: ProjectData; w: number; h: number }
+  | { kind: "quote"; text: string; author?: string; h: number }
+  | { kind: "stat"; value: string; label: string; sublabel?: string; h: number };
+
+/* Quote / stat filler content */
+type FillerBase =
   | { kind: "quote"; text: string; author?: string }
   | { kind: "stat"; value: string; label: string; sublabel?: string };
 
-type ColWidth = "narrow" | "medium" | "wide";
-type ColumnDef = { tiles: TileType[]; width: ColWidth };
-
-/* Quote / stat filler content */
-const fillerTiles: Exclude<TileType, { kind: "project" }>[] = [
+const fillerContent: FillerBase[] = [
   { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
   { kind: "stat", value: "12", label: "Projects", sublabel: "People · Buildings · Tech" },
   { kind: "quote", text: "Strategy without making is just commentary. Making without strategy is just decoration.", author: "— Method" },
@@ -26,71 +27,68 @@ const fillerTiles: Exclude<TileType, { kind: "project" }>[] = [
 ];
 
 /*
- * Layout: 3 rows, horizontal scroll.
- * Each column is one of: single-span (1 col × 1 row), double-wide (2 cols × 1 row), or tall (1 col × 2 rows).
- * No tile ever fills all 3 rows.
- *
- * We define the layout as an explicit sequence of "columns".
- * Each column entry says what goes in rows 0, 1, 2 of that column.
+ * Organic bento: each tile has explicit w (px) and h (fraction of container).
+ * Tiles are arranged in columns manually for a curated, non-uniform feel.
  */
 
-function buildTiles(allProjects: ProjectData[]): ColumnDef[] {
-  let pi = 0;
+type Column = { widthPx: number; tiles: TileType[]; offsetY?: number };
+
+function buildLayout(allProjects: ProjectData[]): Column[] {
+  const byTier: Record<number, ProjectData[]> = { 1: [], 2: [], 3: [] };
+  allProjects.forEach((p) => byTier[p.tier]?.push(p));
+
   let fi = 0;
+  const filler = (h: number): TileType => {
+    const f = fillerContent[fi++ % fillerContent.length];
+    return { ...f, h } as TileType;
+  };
 
-  const next = (): ProjectData => allProjects[pi++ % allProjects.length];
-  const nextFiller = () => fillerTiles[fi++ % fillerTiles.length];
+  const t1 = byTier[1];
+  const t2 = byTier[2];
+  const t3 = byTier[3];
 
-  const columns: ColumnDef[] = [];
+  const columns: Column[] = [];
 
-  // Col 1: narrow, 3 stacked
-  columns.push({ width: "narrow", tiles: [
-    { kind: "project", project: next(), span: "1x1" },
-    { kind: "project", project: next(), span: "1x1" },
-    { kind: "project", project: next(), span: "1x1" },
+  // Col 1: narrow — two tier-3 compacts + filler
+  columns.push({ widthPx: 220, offsetY: 24, tiles: [
+    { kind: "project", project: t3[0], w: 220, h: 0.32 },
+    { kind: "project", project: t3[1], w: 220, h: 0.32 },
+    filler(0.28),
   ]});
 
-  // Col 2: wide, tall project + filler
-  columns.push({ width: "wide", tiles: [
-    { kind: "project", project: next(), span: "1x2" },
-    nextFiller(),
+  // Col 2: wide — tier-1 hero (tall) + tier-3 small
+  columns.push({ widthPx: 380, offsetY: 0, tiles: [
+    { kind: "project", project: t1[0], w: 380, h: 0.62 },
+    { kind: "project", project: t3[2], w: 380, h: 0.3 },
   ]});
 
-  // Col 3: medium, quote + 2 projects
-  columns.push({ width: "medium", tiles: [
-    nextFiller(),
-    { kind: "project", project: next(), span: "1x1" },
-    { kind: "project", project: next(), span: "1x1" },
+  // Col 3: medium — filler + tier-2 standard + tier-2 standard
+  columns.push({ widthPx: 290, offsetY: 40, tiles: [
+    filler(0.22),
+    { kind: "project", project: t2[0], w: 290, h: 0.36 },
+    { kind: "project", project: t2[1], w: 290, h: 0.34 },
   ]});
 
-  // Col 4: wide, 3 stacked
-  columns.push({ width: "wide", tiles: [
-    { kind: "project", project: next(), span: "1x1" },
-    nextFiller(),
-    { kind: "project", project: next(), span: "1x1" },
+  // Col 4: wide — tier-1 hero (tall)
+  columns.push({ widthPx: 400, offsetY: 8, tiles: [
+    { kind: "project", project: t1[1], w: 400, h: 0.58 },
+    filler(0.16),
+    { kind: "project", project: t2[2], w: 400, h: 0.2 },
   ]});
 
-  // Col 5: narrow, filler + tall
-  columns.push({ width: "narrow", tiles: [
-    nextFiller(),
-    { kind: "project", project: next(), span: "1x2" },
+  // Col 5: narrow — tier-3 compact + stat
+  columns.push({ widthPx: 240, offsetY: 56, tiles: [
+    { kind: "project", project: t3[3] || t3[0], w: 240, h: 0.38 },
+    filler(0.26),
+    { kind: "project", project: t2[3] || t2[0], w: 240, h: 0.28 },
   ]});
 
-  // Col 6: medium, 3 stacked
-  columns.push({ width: "medium", tiles: [
-    { kind: "project", project: next(), span: "1x1" },
-    { kind: "project", project: next(), span: "1x1" },
-    nextFiller(),
+  // Col 6: wide — tier-1 large + filler
+  columns.push({ widthPx: 360, offsetY: 12, tiles: [
+    filler(0.2),
+    { kind: "project", project: t1[2], w: 360, h: 0.54 },
+    filler(0.18),
   ]});
-
-  // Col 7: wide, remaining
-  if (pi < allProjects.length) {
-    columns.push({ width: "wide", tiles: [
-      { kind: "project", project: next(), span: "1x1" },
-      nextFiller(),
-      pi < allProjects.length ? { kind: "project", project: next(), span: "1x1" } : nextFiller(),
-    ]});
-  }
 
   return columns;
 }
@@ -98,11 +96,10 @@ function buildTiles(allProjects: ProjectData[]): ColumnDef[] {
 /* ── Sub-components ── */
 
 function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; onClick: () => void }) {
-  const isTall = tile.span === "1x2";
   return (
     <button
       onClick={onClick}
-      className={`group relative block overflow-hidden rounded-xl w-full h-full text-left ${isTall ? "row-span-2" : ""}`}
+      className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
     >
       <img
         src={tile.project.heroImage}
@@ -175,13 +172,7 @@ export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
-  const columns = buildTiles(allProjects);
-
-  const widthClasses: Record<ColWidth, string> = {
-    narrow: "w-[200px] md:w-[240px]",
-    medium: "w-[260px] md:w-[300px]",
-    wide: "w-[320px] md:w-[380px]",
-  };
+  const columns = buildLayout(allProjects);
 
   const scroll = (dir: "left" | "right") => {
     scrollRef.current?.scrollBy({
@@ -233,44 +224,45 @@ export function Projects() {
             </div>
           </div>
 
-          {/* Horizontal scroll — 3-row grid */}
+          {/* Horizontal scroll — organic bento */}
           <div
             ref={scrollRef}
             className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide"
             style={{ scrollbarWidth: "none" }}
           >
-            <div className="flex gap-3 h-full min-w-max pr-10">
-              {columns.map((colDef, ci) => {
-                return (
-                  <motion.div
-                    key={ci}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-30px" }}
-                    transition={{ ...smooth, delay: ci * 0.05 }}
-                    className={`flex-shrink-0 flex flex-col gap-3 h-full ${widthClasses[colDef.width]}`}
-                  >
-                    {colDef.tiles.map((tile, ti) => {
-                      const isTallProject = tile.kind === "project" && tile.span === "1x2";
-                      return (
-                        <div
-                          key={ti}
-                          className={`min-h-0 overflow-hidden ${isTallProject ? "flex-[2]" : "flex-1"}`}
-                        >
-                          {tile.kind === "project" && (
-                            <ProjectTile
-                              tile={tile}
-                              onClick={() => setSelectedProject(tile.project)}
-                            />
-                          )}
-                          {tile.kind === "quote" && <QuoteTile tile={tile} />}
-                          {tile.kind === "stat" && <StatTile tile={tile} />}
-                        </div>
-                      );
-                    })}
-                  </motion.div>
-                );
-              })}
+            <div className="flex gap-3 h-full min-w-max pr-10 items-start">
+              {columns.map((col, ci) => (
+                <motion.div
+                  key={ci}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ ...smooth, delay: ci * 0.06 }}
+                  className="flex-shrink-0 flex flex-col gap-3"
+                  style={{
+                    width: col.widthPx,
+                    height: `calc(100% - ${col.offsetY || 0}px)`,
+                    marginTop: col.offsetY || 0,
+                  }}
+                >
+                  {col.tiles.map((tile, ti) => (
+                    <div
+                      key={ti}
+                      className="min-h-0 overflow-hidden rounded-xl"
+                      style={{ flex: `${tile.h} 0 0%` }}
+                    >
+                      {tile.kind === "project" && (
+                        <ProjectTile
+                          tile={tile}
+                          onClick={() => setSelectedProject(tile.project)}
+                        />
+                      )}
+                      {tile.kind === "quote" && <QuoteTile tile={tile as TileType & { kind: "quote" }} />}
+                      {tile.kind === "stat" && <StatTile tile={tile as TileType & { kind: "stat" }} />}
+                    </div>
+                  ))}
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
