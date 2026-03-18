@@ -175,7 +175,7 @@ export function Services() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="mt-16 flex items-center gap-4 max-w-[1400px] mx-auto w-full"
+        className="mt-20 flex items-center gap-4 max-w-[1400px] mx-auto w-full"
       >
         <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
         <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase">

@@ -45,7 +45,7 @@ export function Contact() {
           06 — Contact
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           {/* Left */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

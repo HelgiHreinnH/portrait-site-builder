@@ -186,7 +186,7 @@ export function Projects() {
       <section id="projects" className="min-h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden py-24 md:py-32">
         <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1">
           {/* Header */}
-          <div className="flex items-end justify-between mb-5">
+          <div className="flex items-end justify-between mb-8">
             <div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
