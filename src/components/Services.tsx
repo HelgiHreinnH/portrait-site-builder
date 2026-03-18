@@ -79,7 +79,7 @@ export function Services() {
 
       {/* 5 Column Card Grid */}
       <div className="max-w-[1400px] mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {services.map((service, i) => (
             <motion.div
               key={service.number}
