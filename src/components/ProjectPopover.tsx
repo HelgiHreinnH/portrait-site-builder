@@ -344,7 +344,11 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.15}
+                  onDragEnd={handleDragEnd}
+                  className="absolute inset-0 cursor-grab active:cursor-grabbing"
                 >
                   {activeTab === "overview" && <OverviewSlide project={project} />}
                   {activeTab === "process" && <ProcessSlide project={project} />}
