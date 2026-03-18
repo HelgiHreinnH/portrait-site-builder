@@ -425,6 +425,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
     ],
     relatedProjects: ["aec-hackathon", "felles"],
+    tier: 1,
   },
   "htas": {
     id: "htas",
