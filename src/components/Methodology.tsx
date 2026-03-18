@@ -49,7 +49,7 @@ const phases = [
 export function Methodology() {
   const [activePhase, setActivePhase] = useState<number | null>(null);
 
-  const radius = 220;
+  const radius = 180;
 
   const getPosition = (index: number) => {
     const angle = (245 + index * 90) * (Math.PI / 180);
@@ -62,30 +62,30 @@ export function Methodology() {
   return (
     <section
       id="methodology"
-      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 px-6 md:px-14 overflow-hidden"
+      className="relative h-full flex flex-col justify-center py-10 md:py-14 px-6 md:px-14 overflow-hidden"
     >
       <div className="relative z-10 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="mb-10 md:mb-14 text-center">
+        <div className="mb-6 md:mb-8 text-center shrink-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-display text-foreground leading-tight tracking-tight mb-3 text-4xl md:text-5xl lg:text-6xl font-bold" style={{ lineHeight: 0.95 }}>
+            <h2 className="font-display text-foreground leading-tight tracking-tight mb-2 text-3xl md:text-4xl lg:text-5xl font-bold" style={{ lineHeight: 0.95 }}>
               How I Work
             </h2>
-            <p className="max-w-2xl mx-auto leading-relaxed text-muted-foreground text-base">
+            <p className="max-w-2xl mx-auto leading-relaxed text-muted-foreground text-sm">
               The same four steps apply to every project — whether the problem is spatial, organisational, or digital.
             </p>
           </motion.div>
         </div>
 
         {/* Circular Process Diagram */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 mb-12">
+        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
           {/* Circle Container - Desktop */}
-          <div className="hidden lg:block relative" style={{ width: "640px", height: "640px" }}>
+          <div className="hidden lg:block relative" style={{ width: "500px", height: "500px" }}>
             {/* Center label */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -102,14 +102,14 @@ export function Methodology() {
             {/* Connecting circle path */}
             <svg
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-              width="540"
-              height="540"
-              viewBox="0 0 540 540"
+              width="440"
+              height="440"
+              viewBox="0 0 440 440"
             >
               <motion.circle
-                cx="270"
-                cy="270"
-                r="220"
+                cx="220"
+                cy="220"
+                r="180"
                 fill="none"
                 stroke="hsl(var(--border))"
                 strokeWidth="2"
@@ -155,9 +155,7 @@ export function Methodology() {
                     animate={{ scale: isActive ? 1.08 : 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span
-                      className="font-mono text-xs tracking-[0.2em] uppercase text-foreground font-bold"
-                    >
+                    <span className="font-mono text-xs tracking-[0.2em] uppercase text-foreground font-bold">
                       {phase.label}
                     </span>
                   </motion.div>
@@ -167,7 +165,7 @@ export function Methodology() {
           </div>
 
           {/* Mobile stacked view */}
-          <div className="flex flex-col gap-6 lg:hidden w-full max-w-md">
+          <div className="flex flex-col gap-4 lg:hidden w-full max-w-md">
             {phases.map((phase, i) => (
               <motion.div
                 key={phase.num}
@@ -175,34 +173,24 @@ export function Methodology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className="rounded-2xl p-6 border-2 border-border bg-background"
+                className="rounded-2xl p-4 border-2 border-border bg-background"
                 onClick={() => setActivePhase(activePhase === i ? null : i)}
               >
-                <div className="flex items-center gap-4 mb-3">
-                  <span className="font-display text-foreground text-3xl font-bold opacity-20">
+                <div className="flex items-center gap-3">
+                  <span className="font-display text-foreground text-2xl font-bold opacity-20">
                     {phase.num}
                   </span>
-                  <span className="font-mono text-[11px] tracking-[0.3em] uppercase bg-background rounded-full px-3 py-1.5 text-foreground">
+                  <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-foreground font-bold">
                     {phase.label}
                   </span>
                 </div>
-                <h3 className="font-display text-foreground text-xl font-bold mb-2">
-                  {phase.title}
-                </h3>
                 {activePhase === i && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
-                    className="overflow-hidden"
+                    className="overflow-hidden mt-2"
                   >
-                    <p className="text-muted-foreground text-sm leading-relaxed mt-2">{phase.description}</p>
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {phase.methods.map((m) => (
-                        <span key={m} className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2.5 py-1 bg-background/80 text-foreground">
-                          {m}
-                        </span>
-                      ))}
-                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{phase.description}</p>
                   </motion.div>
                 )}
               </motion.div>
@@ -225,23 +213,21 @@ export function Methodology() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
               >
-                <div
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 border border-border bg-background"
-                >
+                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-3 border border-border bg-background">
                   <span className="font-display text-foreground text-sm font-bold">
                     Phase {phases[activePhase].num}
                   </span>
                 </div>
 
-                <h3 className="font-display text-foreground leading-tight mb-2 tracking-tight text-3xl md:text-4xl font-bold">
+                <h3 className="font-display text-foreground leading-tight mb-2 tracking-tight text-2xl md:text-3xl font-bold">
                   {phases[activePhase].title}
                 </h3>
 
-                <p className="text-xs text-muted-foreground mb-4">
+                <p className="text-xs text-muted-foreground mb-3">
                   {phases[activePhase].subtitle}
                 </p>
 
-                <p className="leading-relaxed mb-6 text-muted-foreground text-base">
+                <p className="leading-relaxed mb-4 text-muted-foreground text-sm">
                   {phases[activePhase].description}
                 </p>
 
@@ -249,7 +235,7 @@ export function Methodology() {
                   {phases[activePhase].methods.map((m) => (
                     <span
                       key={m}
-                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-3 py-1.5 text-foreground border border-border bg-background"
+                      className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
                     >
                       {m}
                     </span>
@@ -257,7 +243,7 @@ export function Methodology() {
                 </div>
               </motion.div>
             ) : (
-              <div className="text-center py-20">
+              <div className="text-center py-12">
                 <p className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground/40 uppercase">
                   Hover over a phase to explore
                 </p>

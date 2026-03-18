@@ -12,7 +12,6 @@ type TileType =
   | { kind: "quote"; text: string; author?: string; h: number }
   | { kind: "stat"; value: string; label: string; sublabel?: string; h: number };
 
-/* Quote / stat filler content */
 type FillerBase =
   | { kind: "quote"; text: string; author?: string }
   | { kind: "stat"; value: string; label: string; sublabel?: string };
@@ -25,11 +24,6 @@ const fillerContent: FillerBase[] = [
   { kind: "quote", text: "The building should be the best workplace in the world.", author: "— Jørgen Vig Knudstorp" },
   { kind: "stat", value: "10k+", label: "People impacted", sublabel: "Across three continents" },
 ];
-
-/*
- * Organic bento: each tile has explicit w (px) and h (fraction of container).
- * Tiles are arranged in columns manually for a curated, non-uniform feel.
- */
 
 type Column = { widthPx: number; tiles: TileType[]; offsetY?: number };
 
@@ -49,41 +43,35 @@ function buildLayout(allProjects: ProjectData[]): Column[] {
 
   const columns: Column[] = [];
 
-  // Col 1: narrow — two tier-3 compacts + filler
   columns.push({ widthPx: 220, offsetY: 24, tiles: [
     { kind: "project", project: t3[0], w: 220, h: 0.32 },
     { kind: "project", project: t3[1], w: 220, h: 0.32 },
     filler(0.28),
   ]});
 
-  // Col 2: wide — tier-1 hero (tall) + tier-3 small
   columns.push({ widthPx: 380, offsetY: 0, tiles: [
     { kind: "project", project: t1[0], w: 380, h: 0.62 },
     { kind: "project", project: t3[2], w: 380, h: 0.3 },
   ]});
 
-  // Col 3: medium — filler + tier-2 standard + tier-2 standard
   columns.push({ widthPx: 290, offsetY: 40, tiles: [
     filler(0.22),
     { kind: "project", project: t2[0], w: 290, h: 0.36 },
     { kind: "project", project: t2[1], w: 290, h: 0.34 },
   ]});
 
-  // Col 4: wide — tier-1 hero (tall)
   columns.push({ widthPx: 400, offsetY: 8, tiles: [
     { kind: "project", project: t1[1], w: 400, h: 0.58 },
     filler(0.16),
     { kind: "project", project: t2[2], w: 400, h: 0.2 },
   ]});
 
-  // Col 5: narrow — tier-3 compact + stat
   columns.push({ widthPx: 240, offsetY: 56, tiles: [
     { kind: "project", project: t3[3] || t3[0], w: 240, h: 0.38 },
     filler(0.26),
     { kind: "project", project: t2[3] || t2[0], w: 240, h: 0.28 },
   ]});
 
-  // Col 6: wide — tier-1 large + filler
   columns.push({ widthPx: 360, offsetY: 12, tiles: [
     filler(0.2),
     { kind: "project", project: t1[2], w: 360, h: 0.54 },
@@ -183,17 +171,17 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="min-h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden py-24 md:py-32">
-        <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1">
+      <section id="projects" className="h-full flex flex-col justify-center px-6 md:px-10 overflow-hidden py-12 md:py-16">
+        <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1 min-h-0">
           {/* Header */}
-          <div className="flex items-end justify-between mb-8">
+          <div className="flex items-end justify-between mb-4 shrink-0">
             <div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={smooth}
-                className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground"
               >
                 Examples
               </motion.h2>
@@ -202,7 +190,7 @@ export function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: 0.1 }}
-                className="mt-2 text-sm md:text-base leading-relaxed text-muted-foreground max-w-lg"
+                className="mt-1 text-sm leading-relaxed text-muted-foreground max-w-lg"
               >
                 {allProjects.length} projects across workplace strategy, digital product, and making.
               </motion.p>
@@ -213,13 +201,13 @@ export function Projects() {
                 onClick={() => scroll("left")}
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={18} />
               </button>
               <button
                 onClick={() => scroll("right")}
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={18} />
               </button>
             </div>
           </div>
@@ -227,8 +215,8 @@ export function Projects() {
           {/* Horizontal scroll — organic bento */}
           <div
             ref={scrollRef}
-            className="overflow-x-auto overflow-y-hidden scrollbar-hide"
-            style={{ scrollbarWidth: "none", height: "65vh" }}
+            className="overflow-x-auto overflow-y-hidden scrollbar-hide flex-1 min-h-0"
+            style={{ scrollbarWidth: "none" }}
           >
             <div className="flex gap-4 h-full min-w-max pr-10 items-start">
               {columns.map((col, ci) => (

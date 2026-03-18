@@ -66,11 +66,10 @@ export function QuoteBreak() {
   const [topTyping, setTopTyping] = useState(false);
   const [bottomTyping, setBottomTyping] = useState(false);
 
-  // Start first cycle after entrance animation
   useEffect(() => {
     if (!isInView) return;
     const t = setTimeout(() => {
-      setTopIndex(1); // move to second word to trigger first typewriter
+      setTopIndex(1);
       setTopTyping(true);
     }, 3000);
     return () => clearTimeout(t);
@@ -78,7 +77,6 @@ export function QuoteBreak() {
 
   const onTopComplete = useCallback(() => {
     setTopTyping(false);
-    // After top finishes, pause then type bottom
     setTimeout(() => {
       setBottomIndex((p) => (p + 1) % BOTTOM_WORDS.length);
       setBottomTyping(true);
@@ -87,7 +85,6 @@ export function QuoteBreak() {
 
   const onBottomComplete = useCallback(() => {
     setBottomTyping(false);
-    // Long reading pause, then cycle top again
     setTimeout(() => {
       setTopIndex((p) => (p + 1) % TOP_WORDS.length);
       setTopTyping(true);
@@ -95,7 +92,7 @@ export function QuoteBreak() {
   }, []);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden">
+    <section ref={ref} className="relative h-full flex flex-col justify-center items-start overflow-hidden">
       <div className="absolute inset-0 bg-background" />
 
       <motion.div
@@ -103,7 +100,7 @@ export function QuoteBreak() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ ...smooth, delay: 0.4 }}
-        className="absolute bottom-36 md:bottom-40 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
+        className="absolute bottom-[20vh] right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
       >
         <span>Analyse the real problem.</span>
         <span>Build a strategy.</span>
@@ -119,7 +116,7 @@ export function QuoteBreak() {
           transition={{ duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
           className="ml-0 md:ml-4"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
             turn
           </span>
         </motion.div>
@@ -131,7 +128,7 @@ export function QuoteBreak() {
           transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="ml-6 md:ml-16"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.15em' }}>
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
             <AnimatePresence mode="wait">
               <TypewriterWord
                 key={`top-${topIndex}`}
@@ -150,7 +147,7 @@ export function QuoteBreak() {
           transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
           className="ml-10 md:ml-28"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
             into
           </span>
         </motion.div>
@@ -162,7 +159,7 @@ export function QuoteBreak() {
           transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
           className="ml-3 md:ml-10"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.15em' }}>
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
             <AnimatePresence mode="wait">
               <TypewriterWord
                 key={`bottom-${bottomIndex}`}
