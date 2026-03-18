@@ -148,44 +148,21 @@ export function Methodology() {
                   onMouseLeave={() => setActivePhase(null)}
                 >
                   <motion.div
-                    className="relative rounded-full flex items-center justify-center"
+                    className="relative rounded-full px-5 py-2.5 bg-background border-2 border-border"
                     style={{
-                      width: "120px",
-                      height: "120px",
-                      background: "hsl(var(--background))",
-                      border: `3px solid ${isActive ? "hsl(var(--foreground))" : "hsl(var(--border))"}`,
                       boxShadow: isActive
                         ? "0 12px 40px hsl(var(--foreground) / 0.1)"
                         : "0 4px 20px hsl(var(--foreground) / 0.04)",
+                      borderColor: isActive ? "hsl(var(--foreground))" : undefined,
                     }}
                     animate={{ scale: isActive ? 1.08 : 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {/* Phase number */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span
-                        className="font-display text-foreground"
-                        style={{
-                          fontWeight: 700,
-                          fontSize: "48px",
-                          opacity: isActive ? 0.15 : 0.08,
-                          transition: "opacity 0.3s",
-                        }}
-                      >
-                        {phase.num}
-                      </span>
-                    </div>
-
-                    {/* Label badge */}
-                    <div
-                      className="relative z-10 rounded-full px-4 py-2 bg-background border border-border"
+                    <span
+                      className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground"
                     >
-                      <span
-                        className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground"
-                      >
-                        {phase.label}
-                      </span>
-                    </div>
+                      {phase.label}
+                    </span>
                   </motion.div>
                 </motion.div>
               );
