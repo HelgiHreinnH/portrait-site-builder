@@ -34,6 +34,7 @@ export interface ProjectData {
   gallery: string[];
   quote?: { text: string; author: string; role: string };
   relatedProjects?: string[];
+  tier: 1 | 2 | 3;
 }
 
 const IMG_LEGO =
