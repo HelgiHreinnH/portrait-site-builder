@@ -12,6 +12,9 @@ type TileType =
   | { kind: "quote"; text: string; author?: string }
   | { kind: "stat"; value: string; label: string; sublabel?: string };
 
+type ColWidth = "narrow" | "medium" | "wide";
+type ColumnDef = { tiles: TileType[]; width: ColWidth };
+
 /* Quote / stat filler content */
 const fillerTiles: Exclude<TileType, { kind: "project" }>[] = [
   { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
@@ -31,64 +34,62 @@ const fillerTiles: Exclude<TileType, { kind: "project" }>[] = [
  * Each column entry says what goes in rows 0, 1, 2 of that column.
  */
 
-function buildTiles(allProjects: ProjectData[]): TileType[][] {
-  let pi = 0; // project index
-  let fi = 0; // filler index
+function buildTiles(allProjects: ProjectData[]): ColumnDef[] {
+  let pi = 0;
+  let fi = 0;
 
   const next = (): ProjectData => allProjects[pi++ % allProjects.length];
   const nextFiller = () => fillerTiles[fi++ % fillerTiles.length];
 
-  // Each entry is an array of tiles for a visual "column group"
-  // We'll render them as CSS grid items with explicit row placement
-  const columns: TileType[][] = [];
+  const columns: ColumnDef[] = [];
 
-  // Column 1: 3 stacked single tiles
-  columns.push([
+  // Col 1: narrow, 3 stacked
+  columns.push({ width: "narrow", tiles: [
     { kind: "project", project: next(), span: "1x1" },
     { kind: "project", project: next(), span: "1x1" },
     { kind: "project", project: next(), span: "1x1" },
-  ]);
+  ]});
 
-  // Column 2: 1 tall (2 rows) + 1 single below... but we want 3 rows max, tall = 2 rows
-  columns.push([
-    { kind: "project", project: next(), span: "1x2" }, // rows 1-2
-    nextFiller(), // row 3
-  ]);
+  // Col 2: wide, tall project + filler
+  columns.push({ width: "wide", tiles: [
+    { kind: "project", project: next(), span: "1x2" },
+    nextFiller(),
+  ]});
 
-  // Column 3: quote on top, 2 projects below
-  columns.push([
+  // Col 3: medium, quote + 2 projects
+  columns.push({ width: "medium", tiles: [
     nextFiller(),
     { kind: "project", project: next(), span: "1x1" },
     { kind: "project", project: next(), span: "1x1" },
-  ]);
+  ]});
 
-  // Column 4: 3 stacked
-  columns.push([
+  // Col 4: wide, 3 stacked
+  columns.push({ width: "wide", tiles: [
     { kind: "project", project: next(), span: "1x1" },
     nextFiller(),
     { kind: "project", project: next(), span: "1x1" },
-  ]);
+  ]});
 
-  // Column 5: tall + filler
-  columns.push([
+  // Col 5: narrow, filler + tall
+  columns.push({ width: "narrow", tiles: [
     nextFiller(),
-    { kind: "project", project: next(), span: "1x2" }, // rows 2-3
-  ]);
+    { kind: "project", project: next(), span: "1x2" },
+  ]});
 
-  // Column 6: 3 stacked
-  columns.push([
+  // Col 6: medium, 3 stacked
+  columns.push({ width: "medium", tiles: [
     { kind: "project", project: next(), span: "1x1" },
     { kind: "project", project: next(), span: "1x1" },
     nextFiller(),
-  ]);
+  ]});
 
-  // Column 7: remaining projects
+  // Col 7: wide, remaining
   if (pi < allProjects.length) {
-    columns.push([
+    columns.push({ width: "wide", tiles: [
       { kind: "project", project: next(), span: "1x1" },
       nextFiller(),
       pi < allProjects.length ? { kind: "project", project: next(), span: "1x1" } : nextFiller(),
-    ]);
+    ]});
   }
 
   return columns;
@@ -176,6 +177,12 @@ export function Projects() {
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
   const columns = buildTiles(allProjects);
 
+  const widthClasses: Record<ColWidth, string> = {
+    narrow: "w-[200px] md:w-[240px]",
+    medium: "w-[260px] md:w-[300px]",
+    wide: "w-[320px] md:w-[380px]",
+  };
+
   const scroll = (dir: "left" | "right") => {
     scrollRef.current?.scrollBy({
       left: dir === "left" ? -400 : 400,
@@ -232,13 +239,8 @@ export function Projects() {
             className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide"
             style={{ scrollbarWidth: "none" }}
           >
-            <div className="flex gap-2.5 h-full min-w-max pr-10">
-              {columns.map((col, ci) => {
-                // Determine if this column has a tall tile
-                const hasTall = col.some(
-                  (t) => t.kind === "project" && t.span === "1x2"
-                );
-
+            <div className="flex gap-3 h-full min-w-max pr-10">
+              {columns.map((colDef, ci) => {
                 return (
                   <motion.div
                     key={ci}
@@ -246,16 +248,14 @@ export function Projects() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-30px" }}
                     transition={{ ...smooth, delay: ci * 0.05 }}
-                    className={`flex-shrink-0 flex flex-col gap-2.5 h-full ${
-                      hasTall ? "w-[220px] md:w-[260px]" : "w-[240px] md:w-[280px]"
-                    }`}
+                    className={`flex-shrink-0 flex flex-col gap-3 h-full ${widthClasses[colDef.width]}`}
                   >
-                    {col.map((tile, ti) => {
+                    {colDef.tiles.map((tile, ti) => {
                       const isTallProject = tile.kind === "project" && tile.span === "1x2";
                       return (
                         <div
                           key={ti}
-                          className={isTallProject ? "flex-[2]" : "flex-1"}
+                          className={`min-h-0 overflow-hidden ${isTallProject ? "flex-[2]" : "flex-1"}`}
                         >
                           {tile.kind === "project" && (
                             <ProjectTile
