@@ -1,209 +1,277 @@
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { projects, projectOrder, type ProjectData } from "@/data/projects";
+import { ProjectPopover } from "./ProjectPopover";
 
-const IMG_LEGO =
-  "https://images.unsplash.com/photo-1771908997889-6d043c4a9ef7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHN0dWRpbyUyMHdvcmtzcGFjZSUyMGRyYW1hdGljJTIwbGlnaHRpbmd8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_NOVO =
-  "https://images.unsplash.com/photo-1573306366674-5d42fa734860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZGl0b3JpYWwlMjBvZmZpY2UlMjBpbnRlcmlvciUyMHBlb3BsZSUyMHdvcmtpbmclMjBDb3BlbmhhZ2VuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzMxNDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_MAERSK =
-  "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_AEC =
-  "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_WORKSPACE =
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080";
-const IMG_RESEARCH =
-  "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1080";
+const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-interface BentoCardProps {
-  number: string;
-  client: string;
-  title: string;
-  outcome: string;
-  tags: string[];
-  image: string;
-  delay?: number;
-  projectId: string;
-  className?: string;
+/* ── Tile types ── */
+type TileType =
+  | { kind: "project"; project: ProjectData; w: number; h: number }
+  | { kind: "quote"; text: string; author?: string; h: number }
+  | { kind: "stat"; value: string; label: string; sublabel?: string; h: number };
+
+/* Quote / stat filler content */
+type FillerBase =
+  | { kind: "quote"; text: string; author?: string }
+  | { kind: "stat"; value: string; label: string; sublabel?: string };
+
+const fillerContent: FillerBase[] = [
+  { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
+  { kind: "stat", value: "12", label: "Projects", sublabel: "People · Buildings · Tech" },
+  { kind: "quote", text: "Strategy without making is just commentary. Making without strategy is just decoration.", author: "— Method" },
+  { kind: "stat", value: "4", label: "Phases", sublabel: "Analyse · Strategise · Design · Deliver" },
+  { kind: "quote", text: "The building should be the best workplace in the world.", author: "— Jørgen Vig Knudstorp" },
+  { kind: "stat", value: "10k+", label: "People impacted", sublabel: "Across three continents" },
+];
+
+/*
+ * Organic bento: each tile has explicit w (px) and h (fraction of container).
+ * Tiles are arranged in columns manually for a curated, non-uniform feel.
+ */
+
+type Column = { widthPx: number; tiles: TileType[]; offsetY?: number };
+
+function buildLayout(allProjects: ProjectData[]): Column[] {
+  const byTier: Record<number, ProjectData[]> = { 1: [], 2: [], 3: [] };
+  allProjects.forEach((p) => byTier[p.tier]?.push(p));
+
+  let fi = 0;
+  const filler = (h: number): TileType => {
+    const f = fillerContent[fi++ % fillerContent.length];
+    return { ...f, h } as TileType;
+  };
+
+  const t1 = byTier[1];
+  const t2 = byTier[2];
+  const t3 = byTier[3];
+
+  const columns: Column[] = [];
+
+  // Col 1: narrow — two tier-3 compacts + filler
+  columns.push({ widthPx: 220, offsetY: 24, tiles: [
+    { kind: "project", project: t3[0], w: 220, h: 0.32 },
+    { kind: "project", project: t3[1], w: 220, h: 0.32 },
+    filler(0.28),
+  ]});
+
+  // Col 2: wide — tier-1 hero (tall) + tier-3 small
+  columns.push({ widthPx: 380, offsetY: 0, tiles: [
+    { kind: "project", project: t1[0], w: 380, h: 0.62 },
+    { kind: "project", project: t3[2], w: 380, h: 0.3 },
+  ]});
+
+  // Col 3: medium — filler + tier-2 standard + tier-2 standard
+  columns.push({ widthPx: 290, offsetY: 40, tiles: [
+    filler(0.22),
+    { kind: "project", project: t2[0], w: 290, h: 0.36 },
+    { kind: "project", project: t2[1], w: 290, h: 0.34 },
+  ]});
+
+  // Col 4: wide — tier-1 hero (tall)
+  columns.push({ widthPx: 400, offsetY: 8, tiles: [
+    { kind: "project", project: t1[1], w: 400, h: 0.58 },
+    filler(0.16),
+    { kind: "project", project: t2[2], w: 400, h: 0.2 },
+  ]});
+
+  // Col 5: narrow — tier-3 compact + stat
+  columns.push({ widthPx: 240, offsetY: 56, tiles: [
+    { kind: "project", project: t3[3] || t3[0], w: 240, h: 0.38 },
+    filler(0.26),
+    { kind: "project", project: t2[3] || t2[0], w: 240, h: 0.28 },
+  ]});
+
+  // Col 6: wide — tier-1 large + filler
+  columns.push({ widthPx: 360, offsetY: 12, tiles: [
+    filler(0.2),
+    { kind: "project", project: t1[2], w: 360, h: 0.54 },
+    filler(0.18),
+  ]});
+
+  return columns;
 }
 
-function BentoCard({ number, client, title, outcome, tags, image, delay = 0, projectId, className = "" }: BentoCardProps) {
+/* ── Sub-components ── */
+
+function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; onClick: () => void }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
+    <button
+      onClick={onClick}
+      className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
     >
-      <Link
-        to={`/projects/${projectId}`}
-        className={`group relative block overflow-hidden rounded-2xl ${className}`}
-      >
-        {/* Image */}
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 ease-editorial group-hover:scale-[1.02]"
-        />
+      <img
+        src={tile.project.heroImage}
+        alt={tile.project.title}
+        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-2xl" />
+      <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
+          {tile.project.number}
+        </span>
+        <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+          {tile.project.outcome}
+        </span>
+      </div>
 
-        {/* Top meta */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
-            {number}
-          </span>
-          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-1 rounded-full">
-            {outcome}
-          </span>
-        </div>
+      <div className="absolute bottom-2.5 left-3 right-3 transition-transform duration-500 group-hover:translate-y-[-2px]">
+        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-0.5">
+          {tile.project.client}
+        </p>
+        <h3 className="font-display text-sm md:text-base font-semibold text-primary-foreground leading-tight">
+          {tile.project.title}
+        </h3>
+      </div>
 
-        {/* Bottom content */}
-        <div className="absolute bottom-4 left-4 right-4">
-          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
-            {client}
-          </p>
-          <h3 className="font-display text-lg md:text-xl font-semibold text-primary-foreground mb-2">
-            {title}
-          </h3>
-          <div className="flex flex-wrap gap-1.5">
-            {tags.map((tag) => (
-              <span key={tag} className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/50 border border-primary-foreground/20 px-2 py-0.5 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Hover arrow */}
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <ArrowUpRight size={20} className="text-primary-foreground" />
-        </div>
-      </Link>
-    </motion.div>
+      <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <ArrowUpRight size={14} className="text-primary-foreground" />
+      </div>
+    </button>
   );
 }
 
-export function Projects() {
+function QuoteTile({ tile }: { tile: TileType & { kind: "quote" } }) {
   return (
-    <section id="projects" className="py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="mb-12">
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-foreground">
-            Examples
-          </h2>
+    <div className="flex flex-col justify-center items-start rounded-xl bg-muted/60 border border-border px-5 py-4 h-full">
+      <p className="font-display text-sm md:text-[15px] leading-relaxed text-foreground/80 italic">
+        "{tile.text}"
+      </p>
+      {tile.author && (
+        <span className="mt-2 font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground">
+          {tile.author}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
+  return (
+    <div className="flex flex-col justify-center items-center text-center rounded-xl bg-foreground px-5 py-4 h-full">
+      <span className="font-display text-3xl md:text-4xl font-bold text-primary-foreground">
+        {tile.value}
+      </span>
+      <span className="mt-1 font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
+        {tile.label}
+      </span>
+      {tile.sublabel && (
+        <span className="mt-0.5 font-mono text-[8px] tracking-[0.1em] uppercase text-primary-foreground/40">
+          {tile.sublabel}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/* ── Main section ── */
+
+export function Projects() {
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
+  const columns = buildLayout(allProjects);
+
+  const scroll = (dir: "left" | "right") => {
+    scrollRef.current?.scrollBy({
+      left: dir === "left" ? -400 : 400,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <>
+      <section id="projects" className="min-h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden py-24 md:py-32">
+        <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1">
+          {/* Header */}
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={smooth}
+                className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground"
+              >
+                Examples
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ ...smooth, delay: 0.1 }}
+                className="mt-2 text-sm md:text-base leading-relaxed text-muted-foreground max-w-lg"
+              >
+                {allProjects.length} projects across workplace strategy, digital product, and making.
+              </motion.p>
+            </div>
+
+            <div className="hidden md:flex gap-2">
+              <button
+                onClick={() => scroll("left")}
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={() => scroll("right")}
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* Horizontal scroll — organic bento */}
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto overflow-y-hidden scrollbar-hide"
+            style={{ scrollbarWidth: "none", height: "65vh" }}
+          >
+            <div className="flex gap-4 h-full min-w-max pr-10 items-start">
+              {columns.map((col, ci) => (
+                <motion.div
+                  key={ci}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ ...smooth, delay: ci * 0.06 }}
+                  className="flex-shrink-0 flex flex-col gap-3"
+                  style={{
+                    width: col.widthPx,
+                    height: `calc(100% - ${col.offsetY || 0}px)`,
+                    marginTop: col.offsetY || 0,
+                  }}
+                >
+                  {col.tiles.map((tile, ti) => (
+                    <div
+                      key={ti}
+                      className="min-h-0 overflow-hidden rounded-xl"
+                      style={{ flex: `${tile.h} 0 0%` }}
+                    >
+                      {tile.kind === "project" && (
+                        <ProjectTile
+                          tile={tile}
+                          onClick={() => setSelectedProject(tile.project)}
+                        />
+                      )}
+                      {tile.kind === "quote" && <QuoteTile tile={tile as TileType & { kind: "quote" }} />}
+                      {tile.kind === "stat" && <StatTile tile={tile as TileType & { kind: "stat" }} />}
+                    </div>
+                  ))}
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Desktop bento grid — 3 columns, 3 rows */}
-        <div className="hidden md:grid grid-cols-3 gap-4">
-          {/* Row 1 */}
-          <div className="col-span-2 aspect-[16/9]">
-            <BentoCard
-              number="01"
-              client="LEGO"
-              title="Billund Headquarters"
-              outcome="+40% Collab"
-              tags={["Workplace Strategy", "Behavioral Mapping"]}
-              image={IMG_LEGO}
-              projectId="lego-billund"
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-1 aspect-[3/4]">
-            <BentoCard
-              number="02"
-              client="Novo Nordisk"
-              title="Innovation Campus"
-              outcome="Evidence-Based"
-              tags={["Research Spaces"]}
-              image={IMG_NOVO}
-              delay={0.05}
-              projectId="novo-nordisk"
-              className="h-full"
-            />
-          </div>
-
-          {/* Row 2 */}
-          <div className="col-span-1 aspect-[3/4]">
-            <BentoCard
-              number="03"
-              client="MAERSK"
-              title="Global Workplace"
-              outcome="Cross-Cultural"
-              tags={["Global Strategy"]}
-              image={IMG_MAERSK}
-              delay={0.1}
-              projectId="maersk"
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-2 aspect-[16/9]">
-            <BentoCard
-              number="04"
-              client="AEC Hackathon"
-              title="Behavioral Prediction Tool"
-              outcome="🏆 Best Overall"
-              tags={["PropTech", "Machine Learning"]}
-              image={IMG_AEC}
-              delay={0.15}
-              projectId="aec-hackathon"
-              className="h-full"
-            />
-          </div>
-
-          {/* Row 3 */}
-          <div className="col-span-1 aspect-square">
-            <BentoCard
-              number="05"
-              client="LEGO"
-              title="Workspace Analytics"
-              outcome="Data-Driven"
-              tags={["Space Analytics"]}
-              image={IMG_WORKSPACE}
-              delay={0.2}
-              projectId="lego-billund"
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-1 aspect-square">
-            <BentoCard
-              number="06"
-              client="Novo Nordisk"
-              title="Research Environments"
-              outcome="Innovation"
-              tags={["Innovation Design"]}
-              image={IMG_RESEARCH}
-              delay={0.25}
-              projectId="novo-nordisk"
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-1 aspect-square">
-            <BentoCard
-              number="03"
-              client="MAERSK"
-              title="Cultural Adaptation"
-              outcome="Global"
-              tags={["Change Management"]}
-              image={IMG_MAERSK}
-              delay={0.3}
-              projectId="maersk"
-              className="h-full"
-            />
-          </div>
-        </div>
-
-        {/* Mobile stack — 2 columns */}
-        <div className="md:hidden grid grid-cols-2 gap-3">
-          <BentoCard number="01" client="LEGO" title="Billund HQ" outcome="+40% Collab" tags={["Workplace"]} image={IMG_LEGO} projectId="lego-billund" className="aspect-[3/4]" />
-          <BentoCard number="02" client="Novo Nordisk" title="Innovation Campus" outcome="Evidence-Based" tags={["Research"]} image={IMG_NOVO} delay={0.05} projectId="novo-nordisk" className="aspect-[3/4]" />
-          <BentoCard number="03" client="MAERSK" title="Global Workplace" outcome="Cross-Cultural" tags={["Strategy"]} image={IMG_MAERSK} delay={0.1} projectId="maersk" className="aspect-[3/4]" />
-          <BentoCard number="04" client="AEC Hackathon" title="Prediction Tool" outcome="🏆 Best Overall" tags={["PropTech"]} image={IMG_AEC} delay={0.15} projectId="aec-hackathon" className="aspect-[3/4]" />
-          <BentoCard number="05" client="LEGO" title="Workspace Analytics" outcome="Data-Driven" tags={["Analytics"]} image={IMG_WORKSPACE} delay={0.2} projectId="lego-billund" className="aspect-[3/4]" />
-          <BentoCard number="06" client="Novo Nordisk" title="Research Environments" outcome="Innovation" tags={["Design"]} image={IMG_RESEARCH} delay={0.25} projectId="novo-nordisk" className="aspect-[3/4]" />
-        </div>
-      </div>
-    </section>
+      <ProjectPopover
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+    </>
   );
 }

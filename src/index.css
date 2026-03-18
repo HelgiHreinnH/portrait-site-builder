@@ -81,6 +81,7 @@
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .snap-section {
@@ -93,7 +94,11 @@
 }
 
 .snap-section-auto {
-  min-height: auto;
+  scroll-snap-align: start;
+  height: auto;
+  min-height: 100vh;
+  max-height: none;
+  overflow: visible;
   justify-content: flex-start;
 }
 
@@ -107,4 +112,13 @@
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--muted-foreground) / 0.3);
   border-radius: 2px;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

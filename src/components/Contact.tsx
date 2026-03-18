@@ -1,63 +1,65 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 
+const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
+
 const engagementTypes = [
   {
-    type: "Product Development",
+    type: "Full-Scope Project",
     duration: "3 – 12 months",
-    description: "Full-stack digital tool development from concept to market-ready product.",
+    description: "End-to-end from analysis to delivery — workplace strategy, digital product, or both.",
     color: "#D5DEF4",
   },
   {
-    type: "Innovation Sprint",
+    type: "Strategic Brief",
     duration: "4 – 8 weeks",
-    description: "Rapid prototyping and validation through real design projects.",
+    description: "Analytical, strategic, or design brief — clarity before commitment.",
     color: "#B8C9EE",
   },
   {
-    type: "Integration Services",
+    type: "Product Sprint",
     duration: "2 – 6 weeks",
-    description: "Adding behavioral intelligence to existing tools and workflows.",
+    description: "Rapid prototyping and validation for digital tools and platforms.",
     color: "#DCE8E6",
   },
   {
-    type: "Retainer Partnership",
+    type: "Advisory & Workshops",
     duration: "Ongoing",
-    description: "Continuous product evolution, feature development, and strategic advisory.",
+    description: "Workshops, frameworks, and strategic advice for teams navigating complex problems.",
     color: "#C5D5EC",
   },
 ];
 
 export function Contact() {
   return (
-    <section id="contact" className="min-h-screen flex flex-col justify-center py-16 md:py-24 bg-muted/50">
+    <section id="contact" className="min-h-screen flex flex-col justify-center py-24 md:py-32 bg-muted/50">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header label */}
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-12"
+          transition={{ ...smooth }}
+          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-16"
         >
           06 — Contact
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           {/* Left */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth }}
           >
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
-              Let's Build<br />Something Better
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-foreground mb-6">
+              Have a Project<br />in Mind?
             </h2>
-            <p className="text-[15px] leading-relaxed text-muted-foreground mb-8">
-              Ready to transform your environment through evidence-based behavioral design?
-              Whether you're building a PropTech tool, optimizing a workspace, or seeking an
-              innovation partner — let's talk.
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-8">
+              Whether it's a workplace strategy, a digital product, or something
+              that spans all three fields — get in touch and let's talk about
+              what you're working on.
             </p>
 
             {/* Contact details */}
@@ -70,11 +72,11 @@ export function Contact() {
                 <div key={label} className="flex items-center gap-3">
                   <Icon size={16} className="text-muted-foreground" />
                   {href ? (
-                    <a href={href} className="text-[14px] text-foreground hover:text-user-blue transition-colors">
+                    <a href={href} className="text-base text-foreground hover:text-user-blue transition-colors duration-300">
                       {label}
                     </a>
                   ) : (
-                    <span className="text-[14px] text-foreground">{label}</span>
+                    <span className="text-base text-foreground">{label}</span>
                   )}
                 </div>
               ))}
@@ -85,38 +87,44 @@ export function Contact() {
               {[
                 { Icon: Github, label: "GitHub", href: "https://github.com/HelgiHreinnH" },
                 { Icon: Linkedin, label: "LinkedIn", href: "#" },
-                { Icon: ArrowUpRight, label: "Live Site", href: "#" },
               ].map(({ Icon, label, href }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 border border-border px-3 py-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border px-3 py-2"
                 >
                   <Icon size={12} />
                   {label}
-                </a>
+                </motion.a>
               ))}
             </div>
           </motion.div>
 
           {/* Right: Engagement types */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ ...smooth, delay: 0.15 }}
           >
             <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
-              Engagement Types
+              Ways to Work Together
             </p>
 
             <div className="space-y-4">
-              {engagementTypes.map((eng) => (
-                <div
+              {engagementTypes.map((eng, i) => (
+                <motion.div
                   key={eng.type}
-                  className="border border-border p-5 transition-all duration-300 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: i * 0.06 }}
+                  whileHover={{ y: -3, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                  className="border border-border p-5 transition-shadow duration-500 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)]"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-display text-base font-semibold text-foreground">{eng.type}</h3>
@@ -127,23 +135,29 @@ export function Contact() {
                       {eng.duration}
                     </span>
                   </div>
-                  <p className="text-[13px] leading-relaxed text-muted-foreground">{eng.description}</p>
-                </div>
+                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground">{eng.description}</p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
 
         {/* Footer */}
-        <div className="mt-24 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ ...smooth, delay: 0.2 }}
+          className="mt-24 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"
+        >
           <div className="flex items-center gap-3">
-            <span className="font-display text-2xl font-bold text-foreground">U</span>
-            <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">USER_</span>
+            <span className="font-display text-2xl font-bold text-foreground">H</span>
+            <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">Helgi Hreinn Hjálmarsson</span>
           </div>
           <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/50">
-            © 2025 USER. All rights reserved. — Copenhagen, Denmark
+            © 2025 All rights reserved. — Copenhagen, Denmark
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
