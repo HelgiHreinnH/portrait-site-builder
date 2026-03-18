@@ -21,7 +21,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-8 min-h-screen flex flex-col">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-32 md:pt-40 pb-12 min-h-screen flex flex-col">
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* Left side - Typography */}
           <div className="flex flex-col justify-center">
