@@ -40,7 +40,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ ...smooth }}
-          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-12"
+          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-16"
         >
           06 — Contact
         </motion.p>
