@@ -372,6 +372,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
     ],
     relatedProjects: ["felles", "a-place-to-work"],
+    tier: 1,
   },
   "ubiqisense": {
     id: "ubiqisense",
