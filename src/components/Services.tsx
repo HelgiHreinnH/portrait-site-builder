@@ -52,6 +52,76 @@ const services = [
   },
 ];
 
+function ServiceCard({ service, index: i, active, setActive }: {
+  service: typeof services[number]; index: number; active: number | null; setActive: (v: number | null) => void;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ ...smooth, delay: i * 0.08 }}
+      onHoverStart={() => setActive(i)}
+      onHoverEnd={() => setActive(null)}
+      className="relative group cursor-default"
+    >
+      <div className="relative h-full rounded-2xl overflow-hidden border border-border bg-background">
+        <div className="p-6 flex flex-col h-full min-h-[380px]">
+          <motion.div
+            className="font-display text-foreground leading-none mb-4"
+            style={{ fontWeight: 700, fontSize: "clamp(40px, 5vw, 56px)" }}
+            animate={{ opacity: active === i ? 0.2 : 0.08 }}
+            transition={{ duration: 0.3 }}
+          >
+            {service.number}
+          </motion.div>
+          <div className="mb-4">
+            <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
+              {service.discipline}
+            </span>
+          </div>
+          <motion.h3
+            className="font-display text-foreground tracking-tight leading-tight mb-4 text-lg md:text-xl font-bold"
+            animate={{ y: active === i ? -4 : 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {service.title}
+          </motion.h3>
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: active === i ? 1 : 0, height: active === i ? "auto" : 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="text-muted-foreground leading-relaxed text-sm mb-4">{service.description}</p>
+          </motion.div>
+          <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+            {service.tags.map((tag) => (
+              <motion.span
+                key={tag}
+                animate={{ opacity: active === i ? 1 : 0.4 }}
+                transition={{ duration: 0.3 }}
+                className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2.5 py-1 bg-foreground/[0.08] text-foreground"
+              >
+                {tag}
+              </motion.span>
+            ))}
+          </div>
+          <div className="flex justify-end">
+            <motion.div
+              animate={{ rotate: active === i ? 0 : 45, opacity: active === i ? 1 : 0.15 }}
+              transition={{ duration: 0.3 }}
+              className="text-foreground"
+            >
+              <ArrowUpRight size={20} />
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export function Services() {
   const [active, setActive] = useState<number | null>(null);
 
