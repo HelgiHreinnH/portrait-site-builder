@@ -262,7 +262,7 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-foreground/50 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-foreground/20 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -272,7 +272,7 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-3 md:inset-5 z-50 bg-background border border-border flex flex-col overflow-hidden"
+            className="fixed inset-8 md:inset-16 lg:inset-20 z-50 bg-background border border-border flex flex-col overflow-hidden rounded-sm shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top bar: tabs + close */}
