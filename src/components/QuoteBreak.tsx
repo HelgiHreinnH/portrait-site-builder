@@ -98,15 +98,18 @@ export function QuoteBreak() {
     <section ref={ref} className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden">
       <div className="absolute inset-0 bg-background" />
 
-      <motion.p
+      <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ ...smooth, delay: 0.4 }}
-        className="absolute top-52 md:top-60 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base leading-relaxed text-muted-foreground text-right"
+        className="absolute bottom-16 md:bottom-20 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
       >
-        Analyse the real problem. Build a strategy. Design something communicable. Follow through to delivery.
-      </motion.p>
+        <span>Analyse the real problem.</span>
+        <span>Build a strategy.</span>
+        <span>Design something communicable.</span>
+        <span>Follow through to delivery.</span>
+      </motion.div>
 
       <div className="relative z-10 max-w-7xl px-6 md:px-10">
         <motion.div
