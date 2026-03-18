@@ -52,7 +52,7 @@ export function Methodology() {
   const radius = 220;
 
   const getPosition = (index: number) => {
-    const angle = (270 + index * 90) * (Math.PI / 180);
+    const angle = (245 + index * 90) * (Math.PI / 180);
     return {
       x: radius * Math.cos(angle),
       y: radius * Math.sin(angle),
