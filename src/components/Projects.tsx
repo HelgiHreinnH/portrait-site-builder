@@ -6,92 +6,175 @@ import { ProjectPopover } from "./ProjectPopover";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-/* Each card gets a size class for the bento feel */
-type CardSize = "tall" | "wide" | "large" | "standard";
+/* ── Bento tile types ── */
+type TileType =
+  | { kind: "project"; project: ProjectData; span: "1x1" | "2x1" | "1x2" }
+  | { kind: "quote"; text: string; author?: string }
+  | { kind: "stat"; value: string; label: string; sublabel?: string };
 
-const sizePattern: CardSize[] = [
-  "large", "standard", "tall", "wide",
-  "standard", "tall", "large", "standard",
-  "wide", "standard", "tall",
+/* Quote / stat filler content */
+const fillerTiles: Exclude<TileType, { kind: "project" }>[] = [
+  { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
+  { kind: "stat", value: "12", label: "Projects", sublabel: "People · Buildings · Tech" },
+  { kind: "quote", text: "Strategy without making is just commentary. Making without strategy is just decoration.", author: "— Method" },
+  { kind: "stat", value: "4", label: "Phases", sublabel: "Analyse · Strategise · Design · Deliver" },
+  { kind: "quote", text: "The building should be the best workplace in the world.", author: "— Jørgen Vig Knudstorp" },
+  { kind: "stat", value: "10k+", label: "People impacted", sublabel: "Across three continents" },
 ];
 
-const sizeClasses: Record<CardSize, string> = {
-  tall: "w-[280px] md:w-[320px] h-full",        // full height, narrow
-  wide: "w-[420px] md:w-[480px] h-[48%]",        // half height, wide
-  large: "w-[380px] md:w-[440px] h-full",        // full height, wide
-  standard: "w-[260px] md:w-[300px] h-[48%]",    // half height, narrow
-};
+/*
+ * Layout: 3 rows, horizontal scroll.
+ * Each column is one of: single-span (1 col × 1 row), double-wide (2 cols × 1 row), or tall (1 col × 2 rows).
+ * No tile ever fills all 3 rows.
+ *
+ * We define the layout as an explicit sequence of "columns".
+ * Each column entry says what goes in rows 0, 1, 2 of that column.
+ */
 
-interface BentoCardProps {
-  project: ProjectData;
-  size: CardSize;
-  delay?: number;
-  onClick: () => void;
+function buildTiles(allProjects: ProjectData[]): TileType[][] {
+  let pi = 0; // project index
+  let fi = 0; // filler index
+
+  const next = (): ProjectData => allProjects[pi++ % allProjects.length];
+  const nextFiller = () => fillerTiles[fi++ % fillerTiles.length];
+
+  // Each entry is an array of tiles for a visual "column group"
+  // We'll render them as CSS grid items with explicit row placement
+  const columns: TileType[][] = [];
+
+  // Column 1: 3 stacked single tiles
+  columns.push([
+    { kind: "project", project: next(), span: "1x1" },
+    { kind: "project", project: next(), span: "1x1" },
+    { kind: "project", project: next(), span: "1x1" },
+  ]);
+
+  // Column 2: 1 tall (2 rows) + 1 single below... but we want 3 rows max, tall = 2 rows
+  columns.push([
+    { kind: "project", project: next(), span: "1x2" }, // rows 1-2
+    nextFiller(), // row 3
+  ]);
+
+  // Column 3: quote on top, 2 projects below
+  columns.push([
+    nextFiller(),
+    { kind: "project", project: next(), span: "1x1" },
+    { kind: "project", project: next(), span: "1x1" },
+  ]);
+
+  // Column 4: 3 stacked
+  columns.push([
+    { kind: "project", project: next(), span: "1x1" },
+    nextFiller(),
+    { kind: "project", project: next(), span: "1x1" },
+  ]);
+
+  // Column 5: tall + filler
+  columns.push([
+    nextFiller(),
+    { kind: "project", project: next(), span: "1x2" }, // rows 2-3
+  ]);
+
+  // Column 6: 3 stacked
+  columns.push([
+    { kind: "project", project: next(), span: "1x1" },
+    { kind: "project", project: next(), span: "1x1" },
+    nextFiller(),
+  ]);
+
+  // Column 7: remaining projects
+  if (pi < allProjects.length) {
+    columns.push([
+      { kind: "project", project: next(), span: "1x1" },
+      nextFiller(),
+      pi < allProjects.length ? { kind: "project", project: next(), span: "1x1" } : nextFiller(),
+    ]);
+  }
+
+  return columns;
 }
 
-function BentoCard({ project, size, delay = 0, onClick }: BentoCardProps) {
+/* ── Sub-components ── */
+
+function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; onClick: () => void }) {
+  const isTall = tile.span === "1x2";
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ ...smooth, delay }}
-      className={`flex-shrink-0 ${sizeClasses[size]}`}
+    <button
+      onClick={onClick}
+      className={`group relative block overflow-hidden rounded-xl w-full h-full text-left ${isTall ? "row-span-2" : ""}`}
     >
-      <button
-        onClick={onClick}
-        className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
-      >
-        <img
-          src={project.heroImage}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
+      <img
+        src={tile.project.heroImage}
+        alt={tile.project.title}
+        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
 
-        {/* Top meta */}
-        <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
-            {project.number}
-          </span>
-          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-0.5 rounded-full">
-            {project.outcome}
-          </span>
-        </div>
+      <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
+          {tile.project.number}
+        </span>
+        <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+          {tile.project.outcome}
+        </span>
+      </div>
 
-        {/* Bottom content */}
-        <div className="absolute bottom-3 left-4 right-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[-3px]">
-          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
-            {project.client}
-          </p>
-          <h3 className="font-display text-base md:text-lg font-semibold text-primary-foreground mb-1.5 leading-tight">
-            {project.title}
-          </h3>
-          <div className="flex flex-wrap gap-1">
-            {project.tags.map((tag) => (
-              <span key={tag} className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/50 border border-primary-foreground/20 px-1.5 py-0.5 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
+      <div className="absolute bottom-2.5 left-3 right-3 transition-transform duration-500 group-hover:translate-y-[-2px]">
+        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-0.5">
+          {tile.project.client}
+        </p>
+        <h3 className="font-display text-sm md:text-base font-semibold text-primary-foreground leading-tight">
+          {tile.project.title}
+        </h3>
+      </div>
 
-        <motion.div
-          className="absolute top-3 right-3 opacity-0 group-hover:opacity-100"
-          initial={false}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        >
-          <ArrowUpRight size={18} className="text-primary-foreground" />
-        </motion.div>
-      </button>
-    </motion.div>
+      <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <ArrowUpRight size={14} className="text-primary-foreground" />
+      </div>
+    </button>
   );
 }
+
+function QuoteTile({ tile }: { tile: TileType & { kind: "quote" } }) {
+  return (
+    <div className="flex flex-col justify-center items-start rounded-xl bg-muted/60 border border-border px-5 py-4 h-full">
+      <p className="font-display text-sm md:text-[15px] leading-relaxed text-foreground/80 italic">
+        "{tile.text}"
+      </p>
+      {tile.author && (
+        <span className="mt-2 font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground">
+          {tile.author}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
+  return (
+    <div className="flex flex-col justify-center items-center text-center rounded-xl bg-foreground px-5 py-4 h-full">
+      <span className="font-display text-3xl md:text-4xl font-bold text-primary-foreground">
+        {tile.value}
+      </span>
+      <span className="mt-1 font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
+        {tile.label}
+      </span>
+      {tile.sublabel && (
+        <span className="mt-0.5 font-mono text-[8px] tracking-[0.1em] uppercase text-primary-foreground/40">
+          {tile.sublabel}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/* ── Main section ── */
 
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
+  const columns = buildTiles(allProjects);
 
   const scroll = (dir: "left" | "right") => {
     scrollRef.current?.scrollBy({
@@ -100,30 +183,12 @@ export function Projects() {
     });
   };
 
-  /* Arrange cards into two rows for the bento mosaic */
-  const topRow: { project: ProjectData; size: CardSize; index: number }[] = [];
-  const bottomRow: { project: ProjectData; size: CardSize; index: number }[] = [];
-
-  allProjects.forEach((project, i) => {
-    const size = sizePattern[i % sizePattern.length];
-    const entry = { project, size, index: i };
-    // tall and large cards span full height → top row only
-    // wide and standard cards are half height → alternate between rows
-    if (size === "tall" || size === "large") {
-      topRow.push(entry);
-    } else if (i % 2 === 0) {
-      topRow.push(entry);
-    } else {
-      bottomRow.push(entry);
-    }
-  });
-
   return (
     <>
       <section id="projects" className="h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden">
         <div className="max-w-[1800px] mx-auto w-full flex flex-col h-full py-8 md:py-12">
           {/* Header */}
-          <div className="flex items-end justify-between mb-6">
+          <div className="flex items-end justify-between mb-5">
             <div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -145,7 +210,6 @@ export function Projects() {
               </motion.p>
             </div>
 
-            {/* Scroll arrows — desktop */}
             <div className="hidden md:flex gap-2">
               <button
                 onClick={() => scroll("left")}
@@ -162,96 +226,49 @@ export function Projects() {
             </div>
           </div>
 
-          {/* Horizontal scroll bento */}
+          {/* Horizontal scroll — 3-row grid */}
           <div
             ref={scrollRef}
             className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide"
             style={{ scrollbarWidth: "none" }}
           >
-            <div className="flex gap-3 h-full min-w-max pr-10">
-              {allProjects.map((project, i) => {
-                const size = sizePattern[i % sizePattern.length];
-                const isFull = size === "tall" || size === "large";
-
-                if (isFull) {
-                  return (
-                    <BentoCard
-                      key={project.id}
-                      project={project}
-                      size={size}
-                      delay={i * 0.04}
-                      onClick={() => setSelectedProject(project)}
-                    />
-                  );
-                }
-
-                /* For half-height cards, pair them in a column */
-                /* Find next half-height card */
-                const nextIdx = allProjects.findIndex(
-                  (_, j) => j > i && (sizePattern[j % sizePattern.length] === "wide" || sizePattern[j % sizePattern.length] === "standard")
+            <div className="flex gap-2.5 h-full min-w-max pr-10">
+              {columns.map((col, ci) => {
+                // Determine if this column has a tall tile
+                const hasTall = col.some(
+                  (t) => t.kind === "project" && t.span === "1x2"
                 );
 
-                // Only render column from the first of the pair
-                const isFirstOfPair = (() => {
-                  let halfCount = 0;
-                  for (let j = 0; j <= i; j++) {
-                    const s = sizePattern[j % sizePattern.length];
-                    if (s === "wide" || s === "standard") halfCount++;
-                  }
-                  return halfCount % 2 === 1;
-                })();
-
-                if (!isFirstOfPair) return null;
-
-                const pairProject = nextIdx >= 0 ? allProjects[nextIdx] : null;
-                const pairSize = pairProject ? sizePattern[nextIdx % sizePattern.length] : null;
-                const colWidth = size === "wide" || pairSize === "wide" ? "w-[420px] md:w-[480px]" : "w-[260px] md:w-[300px]";
-
                 return (
-                  <div key={project.id} className={`flex-shrink-0 flex flex-col gap-3 h-full ${colWidth}`}>
-                    <div className="flex-1">
-                      <button
-                        onClick={() => setSelectedProject(project)}
-                        className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
-                      >
-                        <img src={project.heroImage} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
-                        <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
-                          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">{project.number}</span>
-                          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-0.5 rounded-full">{project.outcome}</span>
-                        </div>
-                        <div className="absolute bottom-3 left-4 right-4 transition-transform duration-500 group-hover:translate-y-[-3px]">
-                          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">{project.client}</p>
-                          <h3 className="font-display text-base font-semibold text-primary-foreground leading-tight">{project.title}</h3>
-                        </div>
-                        <motion.div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100" initial={false} transition={{ duration: 0.4 }}>
-                          <ArrowUpRight size={18} className="text-primary-foreground" />
-                        </motion.div>
-                      </button>
-                    </div>
-                    {pairProject && (
-                      <div className="flex-1">
-                        <button
-                          onClick={() => setSelectedProject(pairProject)}
-                          className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
+                  <motion.div
+                    key={ci}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ ...smooth, delay: ci * 0.05 }}
+                    className={`flex-shrink-0 flex flex-col gap-2.5 h-full ${
+                      hasTall ? "w-[220px] md:w-[260px]" : "w-[240px] md:w-[280px]"
+                    }`}
+                  >
+                    {col.map((tile, ti) => {
+                      const isTallProject = tile.kind === "project" && tile.span === "1x2";
+                      return (
+                        <div
+                          key={ti}
+                          className={isTallProject ? "flex-[2]" : "flex-1"}
                         >
-                          <img src={pairProject.heroImage} alt={pairProject.title} className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
-                          <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
-                            <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">{pairProject.number}</span>
-                            <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-2 py-0.5 rounded-full">{pairProject.outcome}</span>
-                          </div>
-                          <div className="absolute bottom-3 left-4 right-4 transition-transform duration-500 group-hover:translate-y-[-3px]">
-                            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">{pairProject.client}</p>
-                            <h3 className="font-display text-base font-semibold text-primary-foreground leading-tight">{pairProject.title}</h3>
-                          </div>
-                          <motion.div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100" initial={false} transition={{ duration: 0.4 }}>
-                            <ArrowUpRight size={18} className="text-primary-foreground" />
-                          </motion.div>
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                          {tile.kind === "project" && (
+                            <ProjectTile
+                              tile={tile}
+                              onClick={() => setSelectedProject(tile.project)}
+                            />
+                          )}
+                          {tile.kind === "quote" && <QuoteTile tile={tile} />}
+                          {tile.kind === "stat" && <StatTile tile={tile} />}
+                        </div>
+                      );
+                    })}
+                  </motion.div>
                 );
               })}
             </div>
