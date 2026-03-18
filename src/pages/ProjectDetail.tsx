@@ -100,6 +100,28 @@ export function ProjectDetail() {
       <section className="py-20 md:py-28 bg-muted/30">
         <div className="max-w-5xl mx-auto px-6 md:px-10">
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8">Our Approach</p>
+
+          {/* Process Arc */}
+          {'phasesLed' in project && (
+            <div className="flex gap-1 mb-10 max-w-md">
+              {(["Analyse", "Strategise", "Design", "Deliver"] as const).map((phase) => {
+                const isLed = (project as any).phasesLed?.includes(phase);
+                return (
+                  <div
+                    key={phase}
+                    className={`flex-1 text-center py-3 font-mono text-[10px] tracking-[0.1em] uppercase transition-colors ${
+                      isLed
+                        ? "bg-user-blue text-primary-foreground"
+                        : "bg-muted text-muted-foreground/40"
+                    }`}
+                  >
+                    {phase}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">{project.approach.title}</h2>
           <p className="text-[15px] leading-relaxed text-muted-foreground mb-12 max-w-2xl">{project.approach.description}</p>
 
