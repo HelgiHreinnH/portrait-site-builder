@@ -227,10 +227,10 @@ export function Projects() {
           {/* Horizontal scroll — organic bento */}
           <div
             ref={scrollRef}
-            className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide"
-            style={{ scrollbarWidth: "none" }}
+            className="overflow-x-auto overflow-y-hidden scrollbar-hide"
+            style={{ scrollbarWidth: "none", height: "65vh" }}
           >
-            <div className="flex gap-3 h-full min-w-max pr-10 items-start">
+            <div className="flex gap-4 h-full min-w-max pr-10 items-start">
               {columns.map((col, ci) => (
                 <motion.div
                   key={ci}
