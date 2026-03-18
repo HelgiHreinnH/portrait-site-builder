@@ -13,7 +13,11 @@ type TileType =
   | { kind: "stat"; value: string; label: string; sublabel?: string; h: number };
 
 /* Quote / stat filler content */
-const fillerContent: Omit<Exclude<TileType, { kind: "project" }>, "h">[] = [
+type FillerBase =
+  | { kind: "quote"; text: string; author?: string }
+  | { kind: "stat"; value: string; label: string; sublabel?: string };
+
+const fillerContent: FillerBase[] = [
   { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
   { kind: "stat", value: "12", label: "Projects", sublabel: "People · Buildings · Tech" },
   { kind: "quote", text: "Strategy without making is just commentary. Making without strategy is just decoration.", author: "— Method" },
