@@ -266,6 +266,7 @@ export const projects: Record<string, ProjectData> = {
       role: "Executive Chairman, LEGO Brand Group",
     },
     relatedProjects: ["barclays", "beumer"],
+    tier: 2,
   },
   "a-place-to-work": {
     id: "a-place-to-work",
