@@ -103,7 +103,7 @@ export function QuoteBreak() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ ...smooth, delay: 0.4 }}
-        className="absolute bottom-28 md:bottom-32 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
+        className="absolute bottom-36 md:bottom-40 right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
       >
         <span>Analyse the real problem.</span>
         <span>Build a strategy.</span>
