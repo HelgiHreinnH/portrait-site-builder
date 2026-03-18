@@ -62,11 +62,11 @@ export function Methodology() {
   return (
     <section
       id="methodology"
-      className="relative h-screen flex flex-col justify-center py-8 md:py-12 px-6 md:px-14 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 px-6 md:px-14 overflow-hidden"
     >
       <div className="relative z-10 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="mb-6 md:mb-8 text-center">
+        <div className="mb-10 md:mb-14 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ export function Methodology() {
         </div>
 
         {/* Circular Process Diagram */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 mb-8">
+        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 mb-12">
           {/* Circle Container - Desktop */}
           <div className="hidden lg:block relative" style={{ width: "640px", height: "640px" }}>
             {/* Center label */}

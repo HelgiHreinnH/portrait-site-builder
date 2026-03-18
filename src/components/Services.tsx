@@ -134,10 +134,10 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-14 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 px-6 md:px-14 overflow-hidden"
     >
       {/* Section header */}
-      <div className="mb-16 max-w-[1400px] mx-auto w-full">
+      <div className="mb-20 max-w-[1400px] mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -154,15 +154,15 @@ export function Services() {
       </div>
 
       {/* 5 Column Card Grid */}
-      <div className="max-w-[1400px] mx-auto w-full space-y-4 lg:space-y-5">
+      <div className="max-w-[1400px] mx-auto w-full space-y-6 lg:space-y-8">
         {/* Row 1: 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
           {services.slice(0, 3).map((service, i) => (
             <ServiceCard key={service.number} service={service} index={i} active={active} setActive={setActive} />
           ))}
         </div>
         {/* Row 2: 2 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
           {services.slice(3).map((service, i) => (
             <ServiceCard key={service.number} service={service} index={i + 3} active={active} setActive={setActive} compact />
           ))}
@@ -175,7 +175,7 @@ export function Services() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="mt-16 flex items-center gap-4 max-w-[1400px] mx-auto w-full"
+        className="mt-20 flex items-center gap-4 max-w-[1400px] mx-auto w-full"
       >
         <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
         <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase">

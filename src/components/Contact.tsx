@@ -32,7 +32,7 @@ const engagementTypes = [
 
 export function Contact() {
   return (
-    <section id="contact" className="min-h-screen flex flex-col justify-center py-16 md:py-24 bg-muted/50">
+    <section id="contact" className="min-h-screen flex flex-col justify-center py-24 md:py-32 bg-muted/50">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header label */}
         <motion.p
@@ -40,12 +40,12 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ ...smooth }}
-          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-12"
+          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-16"
         >
           06 — Contact
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           {/* Left */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

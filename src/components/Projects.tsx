@@ -183,10 +183,10 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden">
-        <div className="max-w-[1800px] mx-auto w-full flex flex-col h-full py-8 md:py-12">
+      <section id="projects" className="min-h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden py-24 md:py-32">
+        <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1">
           {/* Header */}
-          <div className="flex items-end justify-between mb-5">
+          <div className="flex items-end justify-between mb-8">
             <div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -227,10 +227,10 @@ export function Projects() {
           {/* Horizontal scroll — organic bento */}
           <div
             ref={scrollRef}
-            className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide"
-            style={{ scrollbarWidth: "none" }}
+            className="overflow-x-auto overflow-y-hidden scrollbar-hide"
+            style={{ scrollbarWidth: "none", height: "65vh" }}
           >
-            <div className="flex gap-3 h-full min-w-max pr-10 items-start">
+            <div className="flex gap-4 h-full min-w-max pr-10 items-start">
               {columns.map((col, ci) => (
                 <motion.div
                   key={ci}
