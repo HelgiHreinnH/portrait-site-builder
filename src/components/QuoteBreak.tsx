@@ -155,7 +155,7 @@ export function QuoteBreak() {
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue min-h-[1em]">
+          <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.15em' }}>
             <AnimatePresence mode="wait">
               <TypewriterWord
                 key={`bottom-${bottomIndex}`}
