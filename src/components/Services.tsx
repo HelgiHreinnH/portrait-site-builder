@@ -156,7 +156,7 @@ export function Services() {
       {/* 5 Column Card Grid */}
       <div className="max-w-[1400px] mx-auto w-full space-y-6 lg:space-y-8">
         {/* Row 1: 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
           {services.slice(0, 3).map((service, i) => (
             <ServiceCard key={service.number} service={service} index={i} active={active} setActive={setActive} />
           ))}
