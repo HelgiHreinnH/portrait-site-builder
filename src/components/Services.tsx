@@ -63,27 +63,31 @@ function ServiceCard({ service, index: i, active, setActive, compact = false }: 
       transition={{ ...smooth, delay: i * 0.08 }}
       onHoverStart={() => setActive(i)}
       onHoverEnd={() => setActive(null)}
-      className="relative group cursor-default"
+      className="relative group cursor-default flex flex-col"
     >
-      {/* Number outside the frame */}
-      <motion.div
-        className="font-display text-foreground leading-none mb-2"
-        style={{ fontWeight: 700, fontSize: "clamp(32px, 4vw, 44px)" }}
-        animate={{ opacity: active === i ? 0.25 : 0.1 }}
-        transition={{ duration: 0.3 }}
-      >
-        {service.number}
-      </motion.div>
+      {/* Number outside the frame — with a horizontal rule */}
+      <div className="flex items-end gap-3 mb-3">
+        <motion.span
+          className="font-display text-foreground leading-none"
+          style={{ fontWeight: 700, fontSize: "clamp(36px, 4vw, 48px)" }}
+          animate={{ opacity: active === i ? 0.3 : 0.1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {service.number}
+        </motion.span>
+        <div className="flex-1 h-px bg-border mb-2" />
+      </div>
 
-      <div className="relative h-full rounded-2xl overflow-hidden border border-border bg-background">
-        <div className={`p-6 flex flex-col h-full ${compact ? 'min-h-[240px]' : 'min-h-[320px]'}`}>
-          <div className="mb-3">
+      {/* Card */}
+      <div className="relative rounded-2xl overflow-hidden border border-border bg-background flex-1">
+        <div className={`p-5 md:p-6 flex flex-col h-full ${compact ? 'min-h-[200px]' : 'min-h-[280px]'}`}>
+          <div className="mb-2">
             <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
               {service.discipline}
             </span>
           </div>
           <motion.h3
-            className="font-display text-foreground tracking-tight leading-tight mb-4 text-lg md:text-xl font-bold"
+            className="font-display text-foreground tracking-tight leading-tight mb-3 text-lg md:text-xl font-bold"
             animate={{ y: active === i ? -4 : 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
@@ -95,9 +99,9 @@ function ServiceCard({ service, index: i, active, setActive, compact = false }: 
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-muted-foreground leading-relaxed text-sm mb-4">{service.description}</p>
+            <p className="text-muted-foreground leading-relaxed text-sm mb-3">{service.description}</p>
           </motion.div>
-          <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+          <div className="flex flex-wrap gap-2 mt-auto">
             {service.tags.map((tag) => (
               <motion.span
                 key={tag}
@@ -109,13 +113,13 @@ function ServiceCard({ service, index: i, active, setActive, compact = false }: 
               </motion.span>
             ))}
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-3">
             <motion.div
               animate={{ rotate: active === i ? 0 : 45, opacity: active === i ? 1 : 0.15 }}
               transition={{ duration: 0.3 }}
               className="text-foreground"
             >
-              <ArrowUpRight size={20} />
+              <ArrowUpRight size={18} />
             </motion.div>
           </div>
         </div>
