@@ -114,6 +114,7 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+          className="ml-0 md:ml-4"
         >
           <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
             turn
@@ -125,6 +126,7 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className="ml-6 md:ml-16"
         >
           <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.15em' }}>
             <AnimatePresence mode="wait">
@@ -143,6 +145,7 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          className="ml-10 md:ml-28"
         >
           <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
             into
@@ -154,6 +157,7 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+          className="ml-3 md:ml-10"
         >
           <span className="block font-display text-5xl md:text-7xl lg:text-9xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.15em' }}>
             <AnimatePresence mode="wait">
