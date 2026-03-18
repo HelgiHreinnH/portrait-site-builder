@@ -134,10 +134,10 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-14 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 px-6 md:px-14 overflow-hidden"
     >
       {/* Section header */}
-      <div className="mb-16 max-w-[1400px] mx-auto w-full">
+      <div className="mb-20 max-w-[1400px] mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
