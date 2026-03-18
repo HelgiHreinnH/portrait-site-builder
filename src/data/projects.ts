@@ -1,3 +1,10 @@
+import archiArImg from "@/assets/project-archi-ar.jpg";
+import aPlaceToWorkImg from "@/assets/project-a-place-to-work.jpg";
+import kvittImg from "@/assets/project-kvitt.jpg";
+import htasImg from "@/assets/project-htas.jpg";
+import formImg from "@/assets/project-form.jpg";
+import clnImg from "@/assets/project-cln.jpg";
+
 export interface ProjectData {
   id: string;
   number: string;
@@ -7,8 +14,11 @@ export interface ProjectData {
   year: string;
   outcome: string;
   tags: string[];
+  category: "A" | "B" | "C";
+  categoryLabel: string;
   accentColor: string;
   heroImage: string;
+  phasesLed: ("Analyse" | "Strategise" | "Design" | "Deliver")[];
   brief: { challenge: string; context: string };
   approach: {
     title: string;
@@ -26,29 +36,201 @@ export interface ProjectData {
   relatedProjects?: string[];
 }
 
+const IMG_LEGO =
+  "https://images.unsplash.com/photo-1771908997889-6d043c4a9ef7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHN0dWRpbyUyMHdvcmtzcGFjZSUyMGRyYW1hdGljJTIwbGlnaHRpbmd8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
+const IMG_BARCLAYS =
+  "https://images.unsplash.com/photo-1573306366674-5d42fa734860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZGl0b3JpYWwlMjBvZmZpY2UlMjBpbnRlcmlvciUyMHBlb3BsZSUyMHdvcmtpbmclMjBDb3BlbmhhZ2VuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzMxNDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080";
+const IMG_BEUMER =
+  "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
+const IMG_AEC =
+  "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
+const IMG_UBIQISENSE =
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080";
+const IMG_FELLES =
+  "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1080";
+
 export const projects: Record<string, ProjectData> = {
+  "felles": {
+    id: "felles",
+    number: "01",
+    client: "Felles",
+    title: "Property Platform",
+    subtitle: "Digital product for property and facilities management — from vision to working app",
+    year: "2025–",
+    outcome: "Product",
+    tags: ["People", "Technology"],
+    category: "B",
+    categoryLabel: "Digital Product",
+    accentColor: "#DCE8E6",
+    heroImage: IMG_FELLES,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
+    brief: {
+      challenge: "Build a digital platform for property and facilities management — serving building managers and residents with tasks, maintenance, shared spaces, and communication in one place.",
+      context: "An independent product development project applying the full method to digital product building. Built with Lovable and Supabase.",
+    },
+    approach: {
+      title: "Full Product Development",
+      description: "Product vision, roadmap, feature strategy, and development — the four-step method applied to software.",
+      methods: [
+        { name: "Product Strategy", description: "Vision, roadmap, and feature prioritisation based on real user needs." },
+        { name: "UX Design", description: "User flows, wireframes, and interface design across multiple phases." },
+        { name: "Development", description: "Building the working application — iterating through real use." },
+      ],
+    },
+    insights: [
+      { title: "Same Method, Different Medium", description: "The four steps work for digital products exactly as they do for physical spaces." },
+      { title: "Brief-Making Transfers", description: "The discipline of making clear briefs is as valuable in software as in architecture." },
+      { title: "Independent Product", description: "Building without a client forces clarity about what actually matters." },
+    ],
+    solution: {
+      description: "A property platform built from scratch — product strategy through to working application.",
+      interventions: [
+        { title: "Product Vision", description: "Clear positioning and value proposition for the platform." },
+        { title: "Feature Strategy", description: "Prioritised roadmap based on user needs." },
+        { title: "Working Application", description: "Built and launched digital product." },
+      ],
+    },
+    impact: [
+      { metric: "Status", value: "Active", description: "Ongoing product development" },
+      { metric: "Phases", value: "All 4", description: "Full method applied to digital product" },
+      { metric: "Type", value: "Own Product", description: "Independent product development" },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1600",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
+    ],
+    relatedProjects: ["kvitt", "a-place-to-work"],
+  },
+  "aec-hackathon": {
+    id: "aec-hackathon",
+    number: "02",
+    client: "AEC Hackathon",
+    title: "Projector — AI File Management",
+    subtitle: "AI-powered file management tool for the AEC industry, built at hackathon",
+    year: "2025",
+    outcome: "Buildings + Tech",
+    tags: ["Buildings", "Technology"],
+    category: "B",
+    categoryLabel: "Digital Product / Tool",
+    accentColor: "#C5D5EC",
+    heroImage: IMG_AEC,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
+    brief: {
+      challenge: "Build a tool that solves a real problem in the architecture, engineering, and construction industry — within a hackathon timeframe.",
+      context: "The AEC industry struggles with file management across complex, multi-stakeholder projects. Projector uses AI to bring order to that chaos. Built with team (Helgi, Ash, Nits).",
+    },
+    approach: {
+      title: "Rapid Problem-Solving",
+      description: "Applied the same method at speed: identified the real problem, built a strategy, designed the interface, and delivered a working prototype.",
+      methods: [
+        { name: "Problem Identification", description: "Focused on file management — a universal pain point in AEC workflows." },
+        { name: "AI Integration", description: "Files indexed into a JSON 'Librarian'; an LLM returns exact file paths from natural language queries." },
+        { name: "Rapid Prototyping", description: "Built a working proof of concept within the hackathon timeframe." },
+      ],
+    },
+    insights: [
+      { title: "Real Problem, Simple Solution", description: "File management is unglamorous but costs the industry enormous time and money." },
+      { title: "Method Scales Down", description: "The four-step method works at hackathon speed — the phases compress but the logic holds." },
+      { title: "AI as Tool, Not Product", description: "AI works best when it solves a specific, well-understood problem." },
+    ],
+    solution: {
+      description: "Projector — an AI-powered file management tool that helps AEC teams find, organise, and manage project files intelligently.",
+      interventions: [
+        { title: "AI File Categorisation", description: "Automatic classification of project files by type, discipline, and phase." },
+        { title: "Natural Language Search", description: "Plain language queries return exact file paths from complex project structures." },
+        { title: "Working Prototype", description: "Functional tool demonstrated at the hackathon." },
+      ],
+    },
+    impact: [
+      { metric: "Outcome", value: "Prototype", description: "Working tool built and demonstrated" },
+      { metric: "Industry", value: "AEC", description: "Architecture, Engineering, Construction" },
+      { metric: "Technology", value: "AI + LLM", description: "AI-powered file management and search" },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
+    ],
+    relatedProjects: ["ubiqisense", "archi-ar"],
+  },
+  "archi-ar": {
+    id: "archi-ar",
+    number: "03",
+    client: "Archi AR",
+    title: "AR Placement Tool for Architects",
+    subtitle: "Augmented reality tool for placing architectural models in physical space",
+    year: "2024–",
+    outcome: "Concept",
+    tags: ["Buildings", "Technology"],
+    category: "B",
+    categoryLabel: "Digital Tool",
+    accentColor: "#D5DEF4",
+    heroImage: archiArImg,
+    phasesLed: ["Analyse", "Strategise", "Design"],
+    brief: {
+      challenge: "Create a tool that lets architects place and view 3D models in real physical space via mobile AR — removing the need for physical models or renders.",
+      context: "QR markers placed in a room trigger the corresponding 3D model to appear at scale via AR on a mobile device. Concept stage — framed honestly as early development.",
+    },
+    approach: {
+      title: "Concept to Prototype",
+      description: "Identified the gap between architectural intention and spatial communication. Designed a tool that bridges the two using accessible AR technology.",
+      methods: [
+        { name: "Use Case Definition", description: "Architect on site needs to communicate spatial proposals without physical models." },
+        { name: "AR Technology Research", description: "Evaluated WebAR and native approaches for accessibility and quality." },
+        { name: "Concept Design", description: "Interface and interaction design for the QR-to-model workflow." },
+      ],
+    },
+    insights: [
+      { title: "Communication Gap", description: "Architects struggle to communicate spatial ideas in the spaces they're designing for." },
+      { title: "Accessible AR", description: "The value is in making AR simple enough that any architect can use it on-site." },
+      { title: "Honest Framing", description: "A clean concept is stronger than a vague prototype. Frame it as what it is." },
+    ],
+    solution: {
+      description: "An AR placement tool that lets architects scan a QR marker and see their 3D model at scale in the actual space.",
+      interventions: [
+        { title: "QR Marker System", description: "Physical markers that trigger specific 3D models in the AR view." },
+        { title: "Mobile AR Interface", description: "Simple, intuitive interface for viewing models in space." },
+        { title: "Concept Documentation", description: "Clear concept documentation for development and communication." },
+      ],
+    },
+    impact: [
+      { metric: "Stage", value: "Concept", description: "Early prototype and concept stage" },
+      { metric: "Problem", value: "Spatial Communication", description: "Bridging the gap between plan and space" },
+      { metric: "Technology", value: "AR", description: "Augmented reality for architectural visualisation" },
+    ],
+    gallery: [
+      archiArImg,
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
+    ],
+    relatedProjects: ["aec-hackathon", "felles"],
+  },
   "lego-billund": {
     id: "lego-billund",
-    number: "01",
+    number: "04",
     client: "LEGO",
     title: "Billund HQ — Atrium Experience",
-    subtitle: "Full-scope project from user analytics to design manual",
-    year: "2018–2020",
+    subtitle: "Full-scope project from user analytics to design manual — CEO level delivery",
+    year: "2016–2020",
     outcome: "Full Scope",
     tags: ["People", "Buildings", "Technology"],
+    category: "A",
+    categoryLabel: "Physical + Strategy",
     accentColor: "#D5DEF4",
-    heroImage: "https://images.unsplash.com/photo-1771908997889-6d043c4a9ef7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHN0dWRpbyUyMHdvcmtzcGFjZSUyMGRyYW1hdGljJTIwbGlnaHRpbmd8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    heroImage: IMG_LEGO,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
-      challenge: "LEGO's Billund headquarters needed a cohesive atrium experience that served employees, visitors, and the brand simultaneously.",
-      context: "Lead project developer with full scope — from user analytics insights through usability framework to final design manual delivered to design team.",
+      challenge: "Develop the Atrium Experience at LEGO's new headquarters in Billund — a complete programme spanning floor plans across 3 floors, zone strategy, and user experience.",
+      context: "Freelance via LAIKA rumdesign. Full scope: from user analytics insights through usability framework to final design manual. Workshop process from 2016 scoping sessions through early 2019 detailed design. Delivery at CEO level.",
     },
     approach: {
       title: "Analyse → Strategise → Design → Deliver",
-      description: "Applied the full four-step method. Started with user analytics, built a usability framework, designed the experience concept, and delivered a complete design manual.",
+      description: "Applied the full four-step method. Zone strategy ('We – Us – Me') across 3 floors, cube programme, the LEGO Centerpiece concept, and a full User Experience Walk Through.",
       methods: [
         { name: "User Analytics", description: "Gathered and analysed usage patterns and behavioural data across the atrium space." },
-        { name: "Usability Framework", description: "Developed a framework for evaluating and improving the atrium experience." },
-        { name: "Design Manual", description: "Produced a comprehensive design manual for the design team to implement." },
+        { name: "Zone Strategy", description: "'We – Us – Me' framework dividing space by social mode across 3 floors." },
+        { name: "Design Manual", description: "Comprehensive design manual for the design team to implement." },
       ],
     },
     insights: [
@@ -74,26 +256,242 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
       "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600",
     ],
+    quote: {
+      text: "The building should be the best workplace in the world for the people who work here.",
+      author: "Jørgen Vig Knudstorp",
+      role: "Executive Chairman, LEGO Brand Group",
+    },
+    relatedProjects: ["barclays", "beumer"],
+  },
+  "a-place-to-work": {
+    id: "a-place-to-work",
+    number: "05",
+    client: "A Place to Work",
+    title: "Facilities Discovery App",
+    subtitle: "Mobile-first workspace discovery for remote and hybrid workers",
+    year: "2024–",
+    outcome: "Product",
+    tags: ["People", "Technology"],
+    category: "B",
+    categoryLabel: "Digital Product",
+    accentColor: "#DCE8E6",
+    heroImage: aPlaceToWorkImg,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
+    brief: {
+      challenge: "Build a facilities discovery app for remote and hybrid workers — find, favourite, and manage workspaces based on individual needs.",
+      context: "Users can discover cafes, coworking spaces, libraries, and other workspaces. Features include facility search, favourites, user settings, facility detail view, and a feedback mechanism. Built on Supabase.",
+    },
+    approach: {
+      title: "Need → Concept → Features → Build",
+      description: "Identified the user need (remote workers without a fixed office), designed features around real behaviour, and built a working mobile-first app.",
+      methods: [
+        { name: "User Need Analysis", description: "Understanding how remote workers actually find and choose workspaces." },
+        { name: "Feature Design", description: "Search, favourites, detailed facility views, and feedback loops." },
+        { name: "Mobile-First Build", description: "Designed and built for mobile use — on the move, in the moment." },
+      ],
+    },
+    insights: [
+      { title: "Behaviour-Led Design", description: "Remote workers don't plan workspaces in advance — they decide in the moment." },
+      { title: "Simple > Feature-Rich", description: "The core value is quick discovery, not exhaustive information." },
+      { title: "Product Thinking", description: "Applying the same rigour to a personal product as to a client brief." },
+    ],
+    solution: {
+      description: "A mobile-first workspace discovery app — search, filter, favourite, and manage workspaces wherever you are.",
+      interventions: [
+        { title: "Facility Search", description: "Location-based discovery of nearby workspaces." },
+        { title: "Favourites & History", description: "Save and revisit places that work for you." },
+        { title: "Feedback System", description: "User-generated insights about workspace quality." },
+      ],
+    },
+    impact: [
+      { metric: "Type", value: "App", description: "Mobile-first web application" },
+      { metric: "Phases", value: "All 4", description: "Full product development cycle" },
+      { metric: "Status", value: "In Dev", description: "Active development" },
+    ],
+    gallery: [
+      aPlaceToWorkImg,
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
+    ],
+    relatedProjects: ["felles", "kvitt"],
+  },
+  "kvitt": {
+    id: "kvitt",
+    number: "06",
+    client: "Kvitt",
+    title: "Receipt Management App",
+    subtitle: "OCR-powered personal receipt scanner protecting consumer rights",
+    year: "2024–",
+    outcome: "Product",
+    tags: ["People", "Technology"],
+    category: "B",
+    categoryLabel: "Digital Product",
+    accentColor: "#D5DEF4",
+    heroImage: kvittImg,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
+    brief: {
+      challenge: "Build a personal receipt management app — scan physical receipts, extract structured data automatically, and archive them for warranty tracking, resale documentation, and purchase history.",
+      context: "Uses Google Vision API for OCR. Extracts store, date, total, items, and warranty info. Mobile-first, built with React + TypeScript + Supabase + Capacitor. The most technically complete personal project.",
+    },
+    approach: {
+      title: "Problem → Technology → Product",
+      description: "Identified a real consumer problem (lost receipts = lost rights), matched it to available technology (OCR), and built a complete product around the core flow.",
+      methods: [
+        { name: "Consumer Rights Research", description: "Understanding what rights people lose when receipts are lost." },
+        { name: "OCR Integration", description: "Google Vision API for accurate receipt data extraction." },
+        { name: "Full Product Build", description: "Dashboard, scan, archive, search, stats, and gamification." },
+      ],
+    },
+    insights: [
+      { title: "Rights, Not Receipts", description: "The product protects consumer rights — receipts are just the mechanism." },
+      { title: "Technology Serves Purpose", description: "OCR is only valuable because it solves a specific, real problem." },
+      { title: "Complete Product Thinking", description: "Stats, badges, and gamification turn a utility into something people return to." },
+    ],
+    solution: {
+      description: "Kvitt — scan, extract, archive, and search your receipts. Protect your consumer rights without thinking about it.",
+      interventions: [
+        { title: "Receipt Scanner", description: "Snap a photo → OCR extracts structured data automatically." },
+        { title: "Smart Archive", description: "Searchable receipt archive with warranty tracking." },
+        { title: "Stats & Engagement", description: "Purchase history stats and badges to encourage continued use." },
+      ],
+    },
+    impact: [
+      { metric: "Tech Stack", value: "Full", description: "React, Supabase, Google Vision API, Capacitor" },
+      { metric: "Phases", value: "All 4", description: "Complete product development" },
+      { metric: "Status", value: "Built", description: "Fully functional application" },
+    ],
+    gallery: [
+      kvittImg,
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
+    ],
+    relatedProjects: ["felles", "a-place-to-work"],
+  },
+  "ubiqisense": {
+    id: "ubiqisense",
+    number: "07",
+    client: "Ubiqisense",
+    title: "Occupancy Platform UI/UX",
+    subtitle: "Interface design for an occupancy sensor data platform",
+    year: "2020–2021",
+    outcome: "Data",
+    tags: ["People", "Technology"],
+    category: "B",
+    categoryLabel: "Digital Product",
+    accentColor: "#D5DEF4",
+    heroImage: IMG_UBIQISENSE,
+    phasesLed: ["Analyse", "Design"],
+    brief: {
+      challenge: "Design the user interface for a platform that visualises occupancy sensor data — making complex spatial data accessible and actionable.",
+      context: "Employed at Ubiqisense, 2020–2021. The platform collects real-time data from sensors throughout office buildings and presents it as actionable dashboards for space planners and facility managers.",
+    },
+    approach: {
+      title: "User Research to Interface Design",
+      description: "Gathered and evaluated user requirements. Designed UI elements, mockups, and prototypes for the data visualisation platform.",
+      methods: [
+        { name: "User Requirements", description: "Interviews and observation to understand what workplace managers actually need from the data." },
+        { name: "Information Architecture", description: "Structured complex sensor data into navigable, meaningful views." },
+        { name: "Prototyping", description: "Iterative mockups and prototypes tested with real users." },
+      ],
+    },
+    insights: [
+      { title: "Data Needs Context", description: "Raw occupancy numbers are meaningless without spatial and temporal context." },
+      { title: "Different Users, Different Views", description: "Facility managers, workplace strategists, and executives need different representations of the same data." },
+      { title: "Actionable Over Beautiful", description: "The interface needed to drive decisions, not just display information." },
+    ],
+    solution: {
+      description: "A user-centred interface for occupancy data — making sensor information accessible to the people who make workplace decisions.",
+      interventions: [
+        { title: "Dashboard Design", description: "Overview dashboards for different user roles." },
+        { title: "Data Visualisation", description: "Spatial and temporal views of occupancy patterns." },
+        { title: "Actionable Insights", description: "Interface elements that connect data to decisions." },
+      ],
+    },
+    impact: [
+      { metric: "Role", value: "UI/UX", description: "Lead interface designer" },
+      { metric: "Phases Led", value: "Analyse + Design", description: "User research and interface design" },
+      { metric: "Output", value: "Platform UI", description: "Complete interface for occupancy data platform" },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
+    ],
+    relatedProjects: ["aec-hackathon", "felles"],
+  },
+  "htas": {
+    id: "htas",
+    number: "08",
+    client: "Topsoe (HTAS)",
+    title: "Strategic Workplace Report",
+    subtitle: "Strategic analysis and recommendation for a global Danish energy company",
+    year: "2016–2018",
+    outcome: "Strategy",
+    tags: ["People", "Buildings"],
+    category: "C",
+    categoryLabel: "Strategy & Process",
+    accentColor: "#B8C9EE",
+    heroImage: htasImg,
+    phasesLed: ["Analyse", "Strategise"],
+    brief: {
+      challenge: "Take a complex, high-stakes workplace brief for Haldor Topsoe (now Topsoe) — a global Danish catalysis and energy company — and deliver a structured strategic recommendation.",
+      context: "The report format itself is the deliverable — not a space or a product. Demonstrates the ability to analyse systematically and present a clear, actionable strategy.",
+    },
+    approach: {
+      title: "Analyse → Strategise → Report → Recommend",
+      description: "Systematic analysis of a complex organisational situation, translated into a structured strategic report with clear recommendations.",
+      methods: [
+        { name: "Organisational Analysis", description: "Understanding the company's structure, culture, and spatial needs." },
+        { name: "Strategic Framework", description: "Building a recommendation framework from analytical findings." },
+        { name: "Report Delivery", description: "Structured document communicating findings and recommendations." },
+      ],
+    },
+    insights: [
+      { title: "Report as Deliverable", description: "Sometimes the strategy document is the product — not a space, not a building." },
+      { title: "Complexity Management", description: "A global company requires frameworks that simplify without losing nuance." },
+      { title: "Analytical Rigour", description: "The value is in the quality of analysis, not in the number of pages." },
+    ],
+    solution: {
+      description: "A strategic workplace report that translated complex organisational analysis into clear, actionable recommendations.",
+      interventions: [
+        { title: "Situation Analysis", description: "Comprehensive analysis of current state and future needs." },
+        { title: "Strategic Framework", description: "Structured approach to workplace strategy recommendations." },
+        { title: "Executive Report", description: "Clear, communicable document for decision-makers." },
+      ],
+    },
+    impact: [
+      { metric: "Type", value: "Report", description: "Strategic recommendation document" },
+      { metric: "Client Scale", value: "Global", description: "Global Danish energy and catalysis company" },
+      { metric: "Phases Led", value: "Analyse + Strategise", description: "Analysis and strategic recommendation" },
+    ],
+    gallery: [
+      htasImg,
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
+    ],
     relatedProjects: ["barclays", "beumer"],
   },
   "barclays": {
     id: "barclays",
-    number: "02",
+    number: "09",
     client: "Barclays Bank",
     title: "Employee Experience Strategy",
-    subtitle: "International design strategy across three continents",
+    subtitle: "International design strategy across three continents — 10,000+ employees",
     year: "2016–2018",
-    outcome: "10,000+ employees",
+    outcome: "10,000+",
     tags: ["People", "Buildings"],
+    category: "C",
+    categoryLabel: "Strategy & Process",
     accentColor: "#B8C9EE",
-    heroImage: "https://images.unsplash.com/photo-1573306366674-5d42fa734860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZGl0b3JpYWwlMjBvZmZpY2UlMjBpbnRlcmlvciUyMHBlb3BsZSUyMHdvcmtpbmclMjBDb3BlbmhhZ2VuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzMxNDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    heroImage: IMG_BARCLAYS,
+    phasesLed: ["Analyse", "Design"],
     brief: {
-      challenge: "Create a design strategy for employee experience across Barclays' London, New York, and Mumbai locations — 10,000+ employees.",
-      context: "Working at Signal Architects. Role: analysing high-value strategic briefs and translating them into design briefs. The bank was pivoting into a more modern, future-proof organisation.",
+      challenge: "Develop an employee experience strategy across Barclays' London, New York, and Mumbai locations — 10,000+ employees. Part of SIGNAL/ISS's largest global key account.",
+      context: "Working at Signal Architects as part of the first team to develop the workplace and service design blueprint. Barclays was pivoting from traditional banking toward a more modern, data-driven organisation.",
     },
     approach: {
       title: "Analysis to Design Brief",
-      description: "Worked with internal project teams who delivered strategic briefs and internal analysis. Translated these into concrete design briefs.",
+      description: "Worked with internal project teams delivering strategic briefs and internal analysis. Translated these into concrete design briefs for three global locations.",
       methods: [
         { name: "Strategic Brief Analysis", description: "Interpreted complex organisational strategy documents." },
         { name: "Cross-Location Coordination", description: "Managed design consistency across three continents." },
@@ -114,7 +512,7 @@ export const projects: Record<string, ProjectData> = {
       ],
     },
     impact: [
-      { metric: "Employees Impacted", value: "10,000+", description: "Across three global locations" },
+      { metric: "Employees", value: "10,000+", description: "Across three global locations" },
       { metric: "Locations", value: "3", description: "London, New York, Mumbai" },
       { metric: "Phases Led", value: "Analyse + Design", description: "Brief analysis and design brief creation" },
     ],
@@ -123,19 +521,126 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600",
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
     ],
-    relatedProjects: ["lego-billund", "beumer"],
+    relatedProjects: ["lego-billund", "htas"],
+  },
+  "form": {
+    id: "form",
+    number: "10",
+    client: "FORM",
+    title: "Sustainable Workplace Furniture",
+    subtitle: "A series of workplace furniture designed for maximum sustainability",
+    year: "2023–2025",
+    outcome: "Product",
+    tags: ["Buildings", "Technology"],
+    category: "A",
+    categoryLabel: "Physical Design",
+    accentColor: "#DCE8E6",
+    heroImage: formImg,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
+    brief: {
+      challenge: "Design a series of workplace-specific furniture — desks, acoustic screens, and phone booths — that is as sustainable as possible without sacrificing functionality or aesthetic quality.",
+      context: "Personal / independent project. The FORM series includes office desks, acoustic screens (desk and floor-standing), and phone booths. A live Webflow site exists at form-shop.webflow.io.",
+    },
+    approach: {
+      title: "Gap → Brief → Design → Product",
+      description: "Identified a gap in sustainable workplace furniture, created a design brief around material honesty and functionality, and developed a complete product series.",
+      methods: [
+        { name: "Sustainability Research", description: "Material analysis and sustainable manufacturing approaches." },
+        { name: "Product Design", description: "Full product series: desk, acoustic screen, phone booth." },
+        { name: "Publication", description: "Professional renders and a live Webflow store." },
+      ],
+    },
+    insights: [
+      { title: "Design for Access", description: "Sustainability is meaningless if the product isn't functional and desirable." },
+      { title: "Series Thinking", description: "A product series creates a coherent design language that individual products cannot." },
+      { title: "End-to-End Ownership", description: "From identifying the gap to publishing a product store — complete product lifecycle." },
+    ],
+    solution: {
+      description: "FORM — a series of sustainable workplace furniture designed with material honesty, functional precision, and aesthetic quality.",
+      interventions: [
+        { title: "Office Desk", description: "Sustainable standing desk with clean material choices." },
+        { title: "Acoustic Screens", description: "Desk-mounted and floor-standing options for open offices." },
+        { title: "Phone Booth", description: "Private workspace unit designed for sustainability." },
+      ],
+    },
+    impact: [
+      { metric: "Products", value: "3", description: "Desk, acoustic screen, phone booth" },
+      { metric: "Status", value: "Published", description: "Live Webflow store and professional renders" },
+      { metric: "Approach", value: "Sustainable", description: "Sustainability-first design philosophy" },
+    ],
+    gallery: [
+      formImg,
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
+    ],
+    relatedProjects: ["cln", "lego-billund"],
+  },
+  "cln": {
+    id: "cln",
+    number: "11",
+    client: "Circular Library Network",
+    title: "Open-Source Sharing Unit",
+    subtitle: "Modular, open-source sharing library unit — designed to be built by anyone",
+    year: "2023–",
+    outcome: "Open Source",
+    tags: ["Buildings", "Technology"],
+    category: "A",
+    categoryLabel: "Physical Design / Open Source",
+    accentColor: "#D5DEF4",
+    heroImage: clnImg,
+    phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
+    brief: {
+      challenge: "Design a modular, open-source sharing library unit for Circular Library Network — a platform for community sharing infrastructure using smart locker-based systems.",
+      context: "The physical design is delivered as open-source CNC files that any building owner or manufacturer can download and build. Live on circularlibrary.network.",
+    },
+    approach: {
+      title: "Brief → Design → Open Source → Build",
+      description: "Designed for openness: the CNC files are published so anyone can manufacture the unit. Design is the product, but access is the mission.",
+      methods: [
+        { name: "Modular Design", description: "Unit designed for flexible configuration and easy manufacturing." },
+        { name: "CNC File Production", description: "Manufacturing-ready files published as open source." },
+        { name: "Client Collaboration", description: "Ongoing collaboration with CLN for use case development." },
+      ],
+    },
+    insights: [
+      { title: "Design for Access", description: "This isn't just product design — it's design for open access. Anyone can build it." },
+      { title: "Open Source Architecture", description: "Applying open-source principles to physical product design." },
+      { title: "Community Infrastructure", description: "The unit serves a social purpose: enabling sharing at the building level." },
+    ],
+    solution: {
+      description: "A modular sharing library unit — designed for CNC manufacturing and published as open-source files for community use.",
+      interventions: [
+        { title: "Physical Design", description: "Modular unit designed for smart locker-based sharing." },
+        { title: "Open-Source CNC Files", description: "Manufacturing files available for free download." },
+        { title: "Live Implementation", description: "Design visible as a live use case on the CLN website." },
+      ],
+    },
+    impact: [
+      { metric: "Type", value: "Open Source", description: "CNC files freely available" },
+      { metric: "Status", value: "Live", description: "Design live, files published, client active" },
+      { metric: "Philosophy", value: "Access", description: "Designed to be built by anyone, anywhere" },
+    ],
+    gallery: [
+      clnImg,
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600",
+      "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600",
+    ],
+    relatedProjects: ["form", "lego-billund"],
   },
   "beumer": {
     id: "beumer",
-    number: "03",
+    number: "12",
     client: "Beumer Group",
     title: "Activity-Based Workplace",
     subtitle: "Strategy, analysis, and design for a 580-person domicile",
     year: "2017–2018",
-    outcome: "580 employees",
+    outcome: "580",
     tags: ["People", "Buildings"],
+    category: "A",
+    categoryLabel: "Physical + Strategy",
     accentColor: "#DCE8E6",
-    heroImage: "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    heroImage: IMG_BEUMER,
+    phasesLed: ["Analyse", "Strategise", "Design"],
     brief: {
       challenge: "Design an activity-based workplace for Beumer Group's Aarhus domicile — 580 employees transitioning from traditional office layout.",
       context: "Working at Signal Architects. Full scope: overall strategy, capacity and needs analysis, and design concept.",
@@ -174,200 +679,11 @@ export const projects: Record<string, ProjectData> = {
     ],
     relatedProjects: ["lego-billund", "barclays"],
   },
-  "aec-hackathon": {
-    id: "aec-hackathon",
-    number: "04",
-    client: "AEC Hackathon",
-    title: "Projector — AI File Management",
-    subtitle: "AI-powered file management tool for the AEC industry",
-    year: "2025",
-    outcome: "Buildings + Tech",
-    tags: ["Buildings", "Technology"],
-    accentColor: "#C5D5EC",
-    heroImage: "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    brief: {
-      challenge: "Build a tool that solves a real problem in the architecture, engineering, and construction industry — within a hackathon timeframe.",
-      context: "The AEC industry struggles with file management across complex, multi-stakeholder projects. Projector uses AI to bring order to that chaos.",
-    },
-    approach: {
-      title: "Rapid Problem-Solving",
-      description: "Applied the same method at speed: identified the real problem, built a strategy, designed the interface, and delivered a working prototype.",
-      methods: [
-        { name: "Problem Identification", description: "Focused on file management — a universal pain point in AEC workflows." },
-        { name: "AI Integration", description: "Used AI to automate file categorisation and retrieval." },
-        { name: "Rapid Prototyping", description: "Built a working prototype within the hackathon timeframe." },
-      ],
-    },
-    insights: [
-      { title: "Real Problem, Simple Solution", description: "File management is unglamorous but costs the industry enormous time and money." },
-      { title: "Method Scales Down", description: "The four-step method works at hackathon speed — the phases compress but the logic holds." },
-      { title: "AI as Tool, Not Product", description: "AI works best when it solves a specific, well-understood problem." },
-    ],
-    solution: {
-      description: "Projector — an AI-powered file management tool that helps AEC teams find, organise, and manage project files intelligently.",
-      interventions: [
-        { title: "AI File Categorisation", description: "Automatic classification of project files by type, discipline, and phase." },
-        { title: "Intelligent Search", description: "Natural language search across project documentation." },
-        { title: "Working Prototype", description: "Functional tool demonstrated at the hackathon." },
-      ],
-    },
-    impact: [
-      { metric: "Outcome", value: "Prototype", description: "Working tool built and demonstrated" },
-      { metric: "Industry", value: "AEC", description: "Architecture, Engineering, Construction" },
-      { metric: "Technology", value: "AI", description: "AI-powered file management and search" },
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
-    ],
-    relatedProjects: ["ubiqisense", "felles"],
-  },
-  "ubiqisense": {
-    id: "ubiqisense",
-    number: "05",
-    client: "Ubiqisense",
-    title: "Occupancy Platform UI/UX",
-    subtitle: "Interface design for an occupancy sensor data platform",
-    year: "2020–2021",
-    outcome: "People + Tech",
-    tags: ["People", "Technology"],
-    accentColor: "#D5DEF4",
-    heroImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080",
-    brief: {
-      challenge: "Design the user interface for a platform that visualises occupancy sensor data — making complex spatial data accessible and actionable.",
-      context: "Ubiqisense builds occupancy sensors. The platform needed a UI that translated raw sensor data into insights that workplace managers could act on.",
-    },
-    approach: {
-      title: "User Research to Interface Design",
-      description: "Gathered and evaluated user requirements. Designed UI elements, mockups, and prototypes for the data visualisation platform.",
-      methods: [
-        { name: "User Requirements", description: "Interviews and observation to understand what workplace managers actually need from the data." },
-        { name: "Information Architecture", description: "Structured complex sensor data into navigable, meaningful views." },
-        { name: "Prototyping", description: "Iterative mockups and prototypes tested with real users." },
-      ],
-    },
-    insights: [
-      { title: "Data Needs Context", description: "Raw occupancy numbers are meaningless without spatial and temporal context." },
-      { title: "Different Users, Different Views", description: "Facility managers, workplace strategists, and executives need different representations of the same data." },
-      { title: "Actionable Over Beautiful", description: "The interface needed to drive decisions, not just display information." },
-    ],
-    solution: {
-      description: "A user-centred interface for occupancy data — making sensor information accessible to the people who make workplace decisions.",
-      interventions: [
-        { title: "Dashboard Design", description: "Overview dashboards for different user roles." },
-        { title: "Data Visualisation", description: "Spatial and temporal views of occupancy patterns." },
-        { title: "Actionable Insights", description: "Interface elements that connect data to decisions." },
-      ],
-    },
-    impact: [
-      { metric: "Role", value: "UI/UX", description: "Lead interface designer" },
-      { metric: "Phases Led", value: "Analyse + Design", description: "User research and interface design" },
-      { metric: "Output", value: "Platform UI", description: "Complete interface for occupancy data platform" },
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
-    ],
-    relatedProjects: ["aec-hackathon", "felles"],
-  },
-  "felles": {
-    id: "felles",
-    number: "06",
-    client: "Felles",
-    title: "Property Platform",
-    subtitle: "Digital product for the property and real estate market",
-    year: "2025–",
-    outcome: "People + Tech",
-    tags: ["People", "Technology"],
-    accentColor: "#DCE8E6",
-    heroImage: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1080",
-    brief: {
-      challenge: "Build a digital platform for the property and real estate market — from product vision to working application.",
-      context: "An independent product development project applying the full method to digital product building.",
-    },
-    approach: {
-      title: "Full Product Development",
-      description: "Product vision, roadmap, feature strategy, and development — the four-step method applied to software.",
-      methods: [
-        { name: "Product Strategy", description: "Vision, roadmap, and feature prioritisation." },
-        { name: "UX Design", description: "User flows, wireframes, and interface design." },
-        { name: "Development", description: "Building the working application." },
-      ],
-    },
-    insights: [
-      { title: "Same Method, Different Medium", description: "The four steps work for digital products exactly as they do for physical spaces." },
-      { title: "Brief-Making Transfers", description: "The discipline of making clear briefs is as valuable in software as in architecture." },
-      { title: "Independent Product", description: "Building without a client forces clarity about what actually matters." },
-    ],
-    solution: {
-      description: "A property platform built from scratch — product strategy through to working application.",
-      interventions: [
-        { title: "Product Vision", description: "Clear positioning and value proposition for the platform." },
-        { title: "Feature Strategy", description: "Prioritised roadmap based on user needs." },
-        { title: "Working Application", description: "Built and launched digital product." },
-      ],
-    },
-    impact: [
-      { metric: "Status", value: "Active", description: "Ongoing product development" },
-      { metric: "Phases", value: "All 4", description: "Full method applied to digital product" },
-      { metric: "Type", value: "Own Product", description: "Independent product development" },
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1600",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600",
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
-    ],
-    relatedProjects: ["ubiqisense", "aec-hackathon"],
-  },
-  "bygningsstyrelsen": {
-    id: "bygningsstyrelsen",
-    number: "07",
-    client: "Bygningsstyrelsen",
-    title: "Government Outplacement",
-    subtitle: "Workplace strategy for a politically driven relocation programme",
-    year: "2016–2018",
-    outcome: "300+ employees",
-    tags: ["People", "Buildings"],
-    accentColor: "#B8C9EE",
-    heroImage: "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    brief: {
-      challenge: "Create workable environments for government employees being relocated from Copenhagen to regional offices across Denmark — a politically driven decision.",
-      context: "Working at Signal Architects. Two phases: satellite location and main office. The role required stakeholder management in a sensitive political context.",
-    },
-    approach: {
-      title: "Strategy Under Constraint",
-      description: "The political decision was fixed. The task was to make the best workplace possible for those who would work in the new environments and structures.",
-      methods: [
-        { name: "Stakeholder Management", description: "Navigating a politically sensitive context with multiple stakeholder groups." },
-        { name: "Capacity Analysis", description: "Understanding space needs for restructured teams across new locations." },
-        { name: "Activity-Based Design", description: "Designing for teams distributed across satellite and main locations." },
-      ],
-    },
-    insights: [
-      { title: "Context Awareness", description: "Understanding the political and organisational context was as important as the spatial analysis." },
-      { title: "Communication is Design", description: "In a sensitive project, how you communicate the strategy matters as much as the strategy itself." },
-      { title: "Pragmatic Focus", description: "When you can't change the decision, focus on making the best outcome within the constraints." },
-    ],
-    solution: {
-      description: "Workplace strategies for satellite and main office locations — pragmatic, people-centred solutions within a politically fixed framework.",
-      interventions: [
-        { title: "Satellite Location", description: "First phase: workplace strategy for the regional satellite office." },
-        { title: "Main Office", description: "Second phase: strategy and design for the primary Copenhagen location." },
-        { title: "Communication Strategy", description: "Clear, sensitive communication of changes to affected employees." },
-      ],
-    },
-    impact: [
-      { metric: "Employees", value: "300+", description: "Government employees across multiple locations" },
-      { metric: "Phases", value: "2", description: "Satellite location and main office" },
-      { metric: "Key Learning", value: "Stakeholders", description: "Complex stakeholder management in political context" },
-    ],
-    gallery: [
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600",
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
-    ],
-    relatedProjects: ["beumer", "barclays"],
-  },
 };
+
+// Ordered list for display in bento grid
+export const projectOrder = [
+  "felles", "aec-hackathon", "archi-ar", "lego-billund",
+  "a-place-to-work", "kvitt", "ubiqisense", "htas",
+  "barclays", "form", "cln",
+];
