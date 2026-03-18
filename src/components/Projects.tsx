@@ -239,13 +239,8 @@ export function Projects() {
             className="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide"
             style={{ scrollbarWidth: "none" }}
           >
-            <div className="flex gap-2.5 h-full min-w-max pr-10">
-              {columns.map((col, ci) => {
-                // Determine if this column has a tall tile
-                const hasTall = col.some(
-                  (t) => t.kind === "project" && t.span === "1x2"
-                );
-
+            <div className="flex gap-3 h-full min-w-max pr-10">
+              {columns.map((colDef, ci) => {
                 return (
                   <motion.div
                     key={ci}
@@ -253,16 +248,14 @@ export function Projects() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-30px" }}
                     transition={{ ...smooth, delay: ci * 0.05 }}
-                    className={`flex-shrink-0 flex flex-col gap-2.5 h-full ${
-                      hasTall ? "w-[220px] md:w-[260px]" : "w-[240px] md:w-[280px]"
-                    }`}
+                    className={`flex-shrink-0 flex flex-col gap-3 h-full ${widthClasses[colDef.width]}`}
                   >
-                    {col.map((tile, ti) => {
+                    {colDef.tiles.map((tile, ti) => {
                       const isTallProject = tile.kind === "project" && tile.span === "1x2";
                       return (
                         <div
                           key={ti}
-                          className={isTallProject ? "flex-[2]" : "flex-1"}
+                          className={`min-h-0 overflow-hidden ${isTallProject ? "flex-[2]" : "flex-1"}`}
                         >
                           {tile.kind === "project" && (
                             <ProjectTile
