@@ -94,11 +94,8 @@ export function Methodology() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10"
             >
-              <div className="font-display text-foreground mb-1 text-lg font-bold">
-                Continuous
-              </div>
-              <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
-                Process
+              <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/40 uppercase">
+                Continuous Process
               </div>
             </motion.div>
 
