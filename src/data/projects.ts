@@ -531,6 +531,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600",
     ],
     relatedProjects: ["lego-billund", "htas"],
+    tier: 3,
   },
   "form": {
     id: "form",
