@@ -175,19 +175,10 @@ export function QuoteBreak() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-6 left-0 right-0 z-10 px-6 md:px-10 flex justify-between items-center">
+      <div className="absolute bottom-6 left-0 right-0 z-10 flex justify-center">
         <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
-          Helgi Hreinn Hjálmarsson · People, Buildings, Technology
+          People, Buildings, Technology
         </span>
-        <motion.button
-          onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="hidden md:flex font-mono text-[11px] tracking-widest uppercase rounded-full px-5 py-2 transition-colors duration-500 bg-foreground/5 text-foreground/65 border border-foreground/10 hover:bg-foreground/10"
-        >
-          Get in touch →
-        </motion.button>
       </div>
     </section>
   );
