@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate, PanInfo } from "framer-motion";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import { useState, useRef, useCallback } from "react";
 import type { ProjectData } from "@/data/projects";
@@ -246,6 +246,12 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
     if (currentIndex > 0) goTo(TABS[currentIndex - 1].key);
   };
 
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x < -swipeThreshold) goNext();
+    else if (info.offset.x > swipeThreshold) goPrev();
+  };
+
   const slideVariants = {
     enter: (dir: number) => ({ x: dir > 0 ? "60%" : "-60%", opacity: 0 }),
     center: { x: 0, opacity: 1 },
@@ -262,7 +268,7 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-foreground/50 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-foreground/20 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -272,7 +278,7 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-3 md:inset-5 z-50 bg-background border border-border flex flex-col overflow-hidden"
+            className="fixed inset-8 md:inset-16 lg:inset-20 z-50 bg-background border border-border flex flex-col overflow-hidden rounded-sm shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top bar: tabs + close */}
@@ -338,7 +344,11 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.15}
+                  onDragEnd={handleDragEnd}
+                  className="absolute inset-0 cursor-grab active:cursor-grabbing"
                 >
                   {activeTab === "overview" && <OverviewSlide project={project} />}
                   {activeTab === "process" && <ProcessSlide project={project} />}
