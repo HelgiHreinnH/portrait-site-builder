@@ -183,8 +183,8 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden">
-        <div className="max-w-[1800px] mx-auto w-full flex flex-col h-full py-8 md:py-12">
+      <section id="projects" className="min-h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden py-24 md:py-32">
+        <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1">
           {/* Header */}
           <div className="flex items-end justify-between mb-5">
             <div>
