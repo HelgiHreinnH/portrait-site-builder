@@ -156,7 +156,7 @@ export function Methodology() {
                     transition={{ duration: 0.3 }}
                   >
                     <span
-                      className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground"
+                      className="font-mono text-xs tracking-[0.2em] uppercase text-foreground font-bold"
                     >
                       {phase.label}
                     </span>
