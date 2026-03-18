@@ -246,6 +246,12 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
     if (currentIndex > 0) goTo(TABS[currentIndex - 1].key);
   };
 
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x < -swipeThreshold) goNext();
+    else if (info.offset.x > swipeThreshold) goPrev();
+  };
+
   const slideVariants = {
     enter: (dir: number) => ({ x: dir > 0 ? "60%" : "-60%", opacity: 0 }),
     center: { x: 0, opacity: 1 },
