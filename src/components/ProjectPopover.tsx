@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate, PanInfo } from "framer-motion";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import { useState, useRef, useCallback } from "react";
 import type { ProjectData } from "@/data/projects";
