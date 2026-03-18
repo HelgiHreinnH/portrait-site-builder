@@ -177,6 +177,12 @@ export function Projects() {
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
   const columns = buildTiles(allProjects);
 
+  const widthClasses: Record<ColWidth, string> = {
+    narrow: "w-[200px] md:w-[240px]",
+    medium: "w-[260px] md:w-[300px]",
+    wide: "w-[320px] md:w-[380px]",
+  };
+
   const scroll = (dir: "left" | "right") => {
     scrollRef.current?.scrollBy({
       left: dir === "left" ? -400 : 400,
