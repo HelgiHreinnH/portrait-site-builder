@@ -47,13 +47,13 @@ const services = [
     discipline: "Knowledge Transfer",
     tags: ["Workshops", "Briefs", "Frameworks"],
     description:
-      "Analytical, strategic, and design briefs for teams who need clarity before committing to a direction. The first three phases are where the most expensive mistakes get prevented.",
+      "Analytical, strategic, and design briefs for teams who need clarity before committing to a direction.",
     accent: "#D5DEF4",
   },
 ];
 
-function ServiceCard({ service, index: i, active, setActive, compact = false }: {
-  service: typeof services[number]; index: number; active: number | null; setActive: (v: number | null) => void; compact?: boolean;
+function ServiceCard({ service, index: i, active, setActive }: {
+  service: typeof services[number]; index: number; active: number | null; setActive: (v: number | null) => void;
 }) {
   return (
     <motion.div
@@ -65,30 +65,28 @@ function ServiceCard({ service, index: i, active, setActive, compact = false }: 
       onHoverEnd={() => setActive(null)}
       className="relative group cursor-default flex flex-col"
     >
-      {/* Number outside the frame — with a horizontal rule */}
-      <div className="flex items-end gap-3 mb-3">
+      {/* Number + rule */}
+      <div className="flex items-end gap-2 mb-2">
         <motion.span
           className="font-display text-foreground leading-none"
-          style={{ fontWeight: 700, fontSize: "clamp(36px, 4vw, 48px)" }}
+          style={{ fontWeight: 700, fontSize: "clamp(28px, 3vw, 36px)" }}
           animate={{ opacity: active === i ? 0.3 : 0.1 }}
           transition={{ duration: 0.3 }}
         >
           {service.number}
         </motion.span>
-        <div className="flex-1 h-px bg-border mb-2" />
+        <div className="flex-1 h-px bg-border mb-1.5" />
       </div>
 
       {/* Card */}
-      <div className="relative rounded-2xl overflow-hidden border border-border bg-background flex-1">
-        <div className={`p-5 md:p-6 flex flex-col h-full ${compact ? 'min-h-[200px]' : 'min-h-[280px]'}`}>
-          <div className="mb-2">
-            <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
-              {service.discipline}
-            </span>
-          </div>
+      <div className="relative rounded-xl overflow-hidden border border-border bg-background flex-1">
+        <div className="p-4 flex flex-col h-full min-h-[140px]">
+          <span className="font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase mb-1">
+            {service.discipline}
+          </span>
           <motion.h3
-            className="font-display text-foreground tracking-tight leading-tight mb-3 text-lg md:text-xl font-bold"
-            animate={{ y: active === i ? -4 : 0 }}
+            className="font-display text-foreground tracking-tight leading-tight mb-2 text-base md:text-lg font-bold"
+            animate={{ y: active === i ? -2 : 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             {service.title}
@@ -99,27 +97,27 @@ function ServiceCard({ service, index: i, active, setActive, compact = false }: 
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-muted-foreground leading-relaxed text-sm mb-3">{service.description}</p>
+            <p className="text-muted-foreground leading-relaxed text-xs mb-2">{service.description}</p>
           </motion.div>
-          <div className="flex flex-wrap gap-2 mt-auto">
+          <div className="flex flex-wrap gap-1.5 mt-auto">
             {service.tags.map((tag) => (
               <motion.span
                 key={tag}
                 animate={{ opacity: active === i ? 1 : 0.4 }}
                 transition={{ duration: 0.3 }}
-                className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2.5 py-1 bg-foreground/[0.08] text-foreground"
+                className="font-mono text-[8px] tracking-wider uppercase rounded-full px-2 py-0.5 bg-foreground/[0.08] text-foreground"
               >
                 {tag}
               </motion.span>
             ))}
           </div>
-          <div className="flex justify-end mt-3">
+          <div className="flex justify-end mt-2">
             <motion.div
               animate={{ rotate: active === i ? 0 : 45, opacity: active === i ? 1 : 0.15 }}
               transition={{ duration: 0.3 }}
               className="text-foreground"
             >
-              <ArrowUpRight size={18} />
+              <ArrowUpRight size={14} />
             </motion.div>
           </div>
         </div>
@@ -134,37 +132,35 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 px-6 md:px-14 overflow-hidden"
+      className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-14 overflow-hidden"
     >
       {/* Section header */}
-      <div className="mb-20 max-w-[1400px] mx-auto w-full">
+      <div className="mb-8 max-w-[1400px] mx-auto w-full shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display tracking-tight text-foreground mb-6 text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95]">
+          <h2 className="font-display tracking-tight text-foreground mb-3 text-4xl md:text-5xl lg:text-6xl font-bold leading-[0.95]">
             What I Do
           </h2>
-          <p className="max-w-xl leading-relaxed text-muted-foreground text-lg">
-            Working at the intersection of people, buildings, and technology. The same method applies regardless of the medium.
+          <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
+            Working at the intersection of people, buildings, and technology.
           </p>
         </motion.div>
       </div>
 
-      {/* 5 Column Card Grid */}
-      <div className="max-w-[1400px] mx-auto w-full space-y-6 lg:space-y-8">
-        {/* Row 1: 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+      {/* Card Grid */}
+      <div className="max-w-[1400px] mx-auto w-full space-y-4 flex-1 min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {services.slice(0, 3).map((service, i) => (
             <ServiceCard key={service.number} service={service} index={i} active={active} setActive={setActive} />
           ))}
         </div>
-        {/* Row 2: 2 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {services.slice(3).map((service, i) => (
-            <ServiceCard key={service.number} service={service} index={i + 3} active={active} setActive={setActive} compact />
+            <ServiceCard key={service.number} service={service} index={i + 3} active={active} setActive={setActive} />
           ))}
         </div>
       </div>
@@ -175,7 +171,7 @@ export function Services() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="mt-20 flex items-center gap-4 max-w-[1400px] mx-auto w-full"
+        className="mt-6 flex items-center gap-4 max-w-[1400px] mx-auto w-full shrink-0"
       >
         <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
         <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase">
