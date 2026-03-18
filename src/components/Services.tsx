@@ -154,7 +154,7 @@ export function Services() {
       </div>
 
       {/* 5 Column Card Grid */}
-      <div className="max-w-[1400px] mx-auto w-full space-y-4 lg:space-y-5">
+      <div className="max-w-[1400px] mx-auto w-full space-y-6 lg:space-y-8">
         {/* Row 1: 3 columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5">
           {services.slice(0, 3).map((service, i) => (
