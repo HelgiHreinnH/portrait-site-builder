@@ -102,10 +102,8 @@ export function QuoteBreak() {
         transition={{ ...smooth, delay: 0.4 }}
         className="absolute bottom-[20vh] right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
       >
-        <span>Analyse the real problem.</span>
-        <span>Build a strategy.</span>
-        <span>Design something communicable.</span>
-        <span>Follow through to delivery.</span>
+        <span>I analyse. I strategise.</span>
+        <span>I design. I deliver.</span>
       </motion.div>
 
       <div className="relative z-10 max-w-7xl px-6 md:px-10">

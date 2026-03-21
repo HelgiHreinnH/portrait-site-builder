@@ -7,38 +7,38 @@ const smooth = { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const };
 const services = [
   {
     number: "01",
-    title: "Workplace Strategy",
-    discipline: "People + Buildings",
-    tags: ["Analysis", "Strategy", "Design Brief"],
+    title: "People",
+    discipline: "Strategy & User Experience",
+    tags: ["User Research", "Workshops", "Change Management", "Stakeholder Management"],
     description:
-      "From analysis to design brief. Activity-based environments, employee experience, and spatial strategy grounded in how people actually use space.",
+      "Analysis of human behaviour, workshop facilitation, organisational understanding, change management, and user involvement as a methodological foundation.",
     accent: "#D5DEF4",
   },
   {
     number: "02",
-    title: "Digital Product Development",
-    discipline: "People + Technology",
-    tags: ["UX Research", "Product Strategy", "UI/UX"],
+    title: "Buildings",
+    discipline: "Architecture & Workplace",
+    tags: ["Space Planning", "Zone Strategy", "Workplace Design", "Design Briefs"],
     description:
-      "User research, product strategy, and interface design. From user insight to working prototype — applying the same analytical method to digital tools.",
+      "Space planning, workplace strategy, zone design, user experience in physical environments, and architectural advisory from brief to delivery.",
     accent: "#B8C9EE",
   },
   {
     number: "03",
+    title: "Technology",
+    discipline: "Digital Product & UI/UX",
+    tags: ["UI/UX", "Data Visualisation", "Product Development", "PropTech"],
+    description:
+      "UI/UX design, data visualisation, digital product development, and PropTech. From concept sketch to fully built product.",
+    accent: "#DCE8E6",
+  },
+  {
+    number: "04",
     title: "Full-Scope Projects",
     discipline: "All Three Fields",
     tags: ["End-to-End", "Brief to Delivery", "Cross-discipline"],
     description:
       "End-to-end from brief to delivery. For teams that need someone who understands the whole picture — people, buildings, and technology together.",
-    accent: "#DCE8E6",
-  },
-  {
-    number: "04",
-    title: "Innovation & PropTech",
-    discipline: "Buildings + Technology",
-    tags: ["PropTech", "Data Tools", "AI"],
-    description:
-      "Building tools that connect spatial design with data. Occupancy analytics, AR tools, and platforms that make better design decisions possible.",
     accent: "#C5D5EC",
   },
   {
@@ -143,10 +143,10 @@ export function Services() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display tracking-tight text-foreground mb-3 text-4xl md:text-5xl lg:text-6xl font-bold leading-[0.95]">
-            What I Do
+            Three Fields. One Approach.
           </h2>
           <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
-            Working at the intersection of people, buildings, and technology.
+            I've worked across three disciplines for over 10 years. Not as a generalist without depth — but because the best solutions emerge where people, physical space, and digital systems meet.
           </p>
         </motion.div>
       </div>

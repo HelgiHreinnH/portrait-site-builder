@@ -8,19 +8,19 @@ const phases = [
     num: "01",
     title: "Analyse",
     label: "Analyse",
-    subtitle: "Understand the real problem before solving it",
+    subtitle: "Understand the real problem before anyone starts solving it",
     description:
-      "Workshops, user research, stakeholder mapping, data, and observation. The goal is clarity — not a finished product.",
-    methods: ["User Research", "Stakeholder Mapping", "Data Collection", "Workshops"],
+      "I start by understanding the situation properly. User interviews, data analysis, observations, workshops. Insight before solution.",
+    methods: ["User Research", "Stakeholder Mapping", "Data Analysis", "Behavioural Observation"],
     bg: "#D5DEF4",
   },
   {
     num: "02",
     title: "Strategise",
     label: "Strategise",
-    subtitle: "Turn findings into a clear direction",
+    subtitle: "Turn analysis into direction",
     description:
-      "Translate findings into priorities, a framework, or a shared understanding of what to build and why.",
+      "Insight is translated into a clear strategic foundation. What is the right thing to do, and why? This step prevents the most expensive mistakes.",
     methods: ["Strategic Brief", "Framework Design", "Alignment", "Prioritisation"],
     bg: "#B8C9EE",
   },
@@ -30,7 +30,7 @@ const phases = [
     label: "Design",
     subtitle: "Give the strategy a communicable form",
     description:
-      "Produce something concrete — a spatial concept, a product interface, a design brief, a wireframe, a prototype.",
+      "Design is communication. I design solutions that are clear, usable, and meaningful — for spaces, systems, and interfaces.",
     methods: ["Design Brief", "Wireframing", "Prototyping", "Spatial Concept"],
     bg: "#DCE8E6",
   },
@@ -38,9 +38,9 @@ const phases = [
     num: "04",
     title: "Deliver",
     label: "Deliver",
-    subtitle: "Follow through until it exists in reality",
+    subtitle: "Follow through to reality",
     description:
-      "Ensure what was designed actually comes to life as intended. From prototypes to launched products.",
+      "Output can be a brief, a product, a space, or a strategy. It depends on the project — not on a fixed template.",
     methods: ["Project Management", "Quality Assurance", "Handover", "Implementation"],
     bg: "#C5D5EC",
   },
@@ -77,7 +77,7 @@ export function Methodology() {
               How I Work
             </h2>
             <p className="max-w-2xl mx-auto leading-relaxed text-muted-foreground text-sm">
-              The same four steps apply to every project — whether the problem is spatial, organisational, or digital.
+              Every project — whether it's about a workplace, an app, or a strategy — goes through the same four phases. It's not a model. It's a way of thinking.
             </p>
           </motion.div>
         </div>
