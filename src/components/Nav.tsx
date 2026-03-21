@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
+  { label: "Work", href: "#services" },
   { label: "Method", href: "#methodology" },
   { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
@@ -58,7 +58,7 @@ export function Nav() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 h-16">
         {/* Logo */}
         <button onClick={goHome} className="font-mono text-xs tracking-[0.3em] uppercase text-foreground">
-          USER_
+          Helgi Hreinn
         </button>
 
         {/* Desktop links */}

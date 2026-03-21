@@ -59,8 +59,7 @@ export function Hero() {
               className="mt-6"
             >
               <p className="text-sm md:text-base leading-relaxed text-muted-foreground max-w-md">
-                I analyse the real problem, build a strategy around the findings,
-                design something communicable, and follow through to delivery.
+                Architect with 10+ years across workplace strategy, digital product, and hands-on design.
               </p>
 
               <div className="flex gap-8 mt-6">

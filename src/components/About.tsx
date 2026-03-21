@@ -10,7 +10,7 @@ const table = [
   ["Design for average user", "Design for real behavioural patterns"],
   ["One-time delivery", "Continuous learning and optimisation"],
   ["Satisfaction surveys", "Outcome-based measurement"],
-  ["Space-centered thinking", "People-centered thinking"],
+  ["Space-centred thinking", "People-centred thinking"],
 ];
 
 export function About() {
@@ -53,13 +53,13 @@ export function About() {
             </h2>
 
             <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-3">
-              Copenhagen-based architect with 10+ years across workplace strategy,
-              digital product development, and hands-on making. My background is
-              architectural, but my practice is wider.
+              Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy, digital product development, and hands-on design.
+            </p>
+            <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-3">
+              I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a fundamental sense that the same challenges look very different depending on perspective — and that this understanding is one of the most useful tools you can bring to a project.
             </p>
             <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-4">
-              I've worked with LEGO, Barclays, Beumer Group, Bygningsstyrelsen,
-              Colliers, and Ubiqisense — always applying the same method.
+              I work with my hands as well as with data and strategy. Carpentry, joinery, surface treatment. The same analytical approach, a different material.
             </p>
 
             <div className="space-y-2">

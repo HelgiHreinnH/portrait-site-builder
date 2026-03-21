@@ -55,11 +55,10 @@ export function Contact() {
             className="flex flex-col justify-center"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-4">
-              Have a Project<br />in Mind?
+              Let's Talk
             </h2>
             <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-6">
-              Whether it's a workplace strategy, a digital product, or something
-              that spans all three fields — get in touch.
+              I'm available for advisory work, project collaborations, and strategic partnerships within workplace design, digital product development, and user experience. Based in Copenhagen. Working across Denmark, Iceland, and the Nordics.
             </p>
 
             <div className="space-y-3 mb-6">
@@ -84,7 +83,7 @@ export function Contact() {
             <div className="flex gap-3">
               {[
                 { Icon: Github, label: "GitHub", href: "https://github.com/HelgiHreinnH" },
-                { Icon: Linkedin, label: "LinkedIn", href: "#" },
+                { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/helgihreinn" },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
@@ -152,7 +151,7 @@ export function Contact() {
             <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">Helgi Hreinn Hjálmarsson</span>
           </div>
           <p className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground/50">
-            © 2025 All rights reserved. — Copenhagen, Denmark
+            © 2026 Helgi Hreinn Hjálmarsson — Architect. Strategist. Builder.
           </p>
         </motion.div>
       </div>
