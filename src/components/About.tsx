@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-const ABOUT_IMG =
-  "https://images.unsplash.com/photo-1634651754953-1565eca58d5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWhhdmlvcmFsJTIwcmVzZWFyY2glMjBvYnNlcnZhdGlvbiUyMHVzZXIlMjBzdHVkeSUyMGRhcmslMjBjaW5lbWF0aWN8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
+
+
 
 const table = [
   ["Assume how spaces should be used", "Observe how spaces are actually used"],
