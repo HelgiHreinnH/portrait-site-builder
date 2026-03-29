@@ -132,7 +132,7 @@ export function Hero() {
 
             <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer" style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}>
               <img
-                src={PORTRAIT}
+                src={portraitImage}
                 alt="Helgi Hreinn Hjálmarsson"
                 className="w-full h-full object-cover"
                 style={{ maxHeight: "calc(100vh - 280px)" }}
