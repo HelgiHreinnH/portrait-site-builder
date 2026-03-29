@@ -68,6 +68,10 @@ export function Hero() {
                         </div>
                       ))}
                     </div>
+
+                    <p className="font-mono text-[10px] leading-relaxed text-muted-foreground max-w-md mt-6">
+                      Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
+                    </p>
                   </div>
                 </motion.div>
               ) : (
@@ -126,9 +130,6 @@ export function Hero() {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <p className="font-mono text-[10px] leading-relaxed text-muted-foreground max-w-xs mb-3 text-right ml-auto">
-              Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
-            </p>
 
             <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer">
               <img
