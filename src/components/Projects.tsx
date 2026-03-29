@@ -21,7 +21,7 @@ const fillerContent: FillerBase[] = [
   { kind: "stat", value: "12", label: "Projects", sublabel: "People · Buildings · Tech" },
   { kind: "quote", text: "Strategy without making is just commentary. Making without strategy is just decoration.", author: "— Method" },
   { kind: "stat", value: "4", label: "Phases", sublabel: "Analyse · Strategise · Design · Deliver" },
-  { kind: "quote", text: "The building should be the best workplace in the world.", author: "— Jørgen Vig Knudstorp" },
+  { kind: "quote", text: "The building should be the best workplace in the world for the people who use it." },
   { kind: "stat", value: "10k+", label: "People impacted", sublabel: "Across three continents" },
 ];
 
