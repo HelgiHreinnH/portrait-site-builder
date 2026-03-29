@@ -155,7 +155,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
     ],
     relatedProjects: ["ubiqisense", "archi-ar"],
-    tier: 2,
+    tier: 1,
   },
   "archi-ar": {
     id: "archi-ar",
@@ -208,7 +208,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
     ],
     relatedProjects: ["aec-hackathon", "felles"],
-    tier: 2,
+    tier: 1,
   },
   "lego-billund": {
     id: "lego-billund",
@@ -261,7 +261,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600",
     ],
     relatedProjects: ["barclays", "beumer"],
-    tier: 2,
+    tier: 3,
   },
   "a-place-to-work": {
     id: "a-place-to-work",
@@ -420,7 +420,7 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
     ],
     relatedProjects: ["aec-hackathon", "felles"],
-    tier: 1,
+    tier: 2,
   },
   "htas": {
     id: "htas",
@@ -691,7 +691,7 @@ export const projects: Record<string, ProjectData> = {
 
 // Ordered list for display in bento grid
 export const projectOrder = [
-  "felles", "aec-hackathon", "archi-ar", "lego-billund",
-  "a-place-to-work", "kvitt", "ubiqisense", "htas",
-  "barclays", "form", "cln",
+  "felles", "kvitt", "aec-hackathon", "archi-ar",
+  "ubiqisense", "a-place-to-work", "beumer", "form",
+  "lego-billund", "barclays", "htas", "cln",
 ];
