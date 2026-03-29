@@ -213,9 +213,9 @@ export const projects: Record<string, ProjectData> = {
   "lego-billund": {
     id: "lego-billund",
     number: "04",
-    client: "LEGO",
-    title: "Billund HQ — Atrium Experience",
-    subtitle: "User experience brief for LEGO's new headquarters in Billund. Zone strategy across three floors — from collective commons to individual workplaces.",
+    client: "Global Brand",
+    title: "Employee Experience Strategy & Design Manual",
+    subtitle: "Employee experience strategy and design manual for a new global headquarters. Zone strategy across three floors — from collective commons to individual workplaces.",
     year: "2016–2020",
     outcome: "Full Scope",
     tags: ["People", "Buildings", "Technology"],
@@ -225,12 +225,12 @@ export const projects: Record<string, ProjectData> = {
     heroImage: IMG_LEGO,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
-      challenge: "Develop the Atrium Experience at LEGO's new headquarters in Billund — a complete programme spanning floor plans across 3 floors, zone strategy, and user experience.",
-      context: "Freelance via LAIKA rumdesign. Full scope: from user analytics insights through usability framework to final design manual. Workshop process from 2016 scoping sessions through early 2019 detailed design. Delivery at CEO level.",
+      challenge: "Develop the atrium experience at a new global headquarters — a complete programme spanning floor plans across 3 floors, zone strategy, and user experience.",
+      context: "Freelance via LAIKA rumdesign. Full scope: from user analytics insights through usability framework to final design manual. Workshop process from scoping sessions through detailed design. Delivery at CEO level.",
     },
     approach: {
       title: "Analyse → Strategise → Design → Deliver",
-      description: "Applied the full four-step method. Zone strategy ('We – Us – Me') across 3 floors, cube programme, the LEGO Centerpiece concept, and a full User Experience Walk Through.",
+      description: "Applied the full four-step method. Zone strategy ('We – Us – Me') across 3 floors, cube programme, and a full User Experience Walk Through.",
       methods: [
         { name: "User Analytics", description: "Gathered and analysed usage patterns and behavioural data across the atrium space." },
         { name: "Zone Strategy", description: "'We – Us – Me' framework dividing space by social mode across 3 floors." },
@@ -260,11 +260,6 @@ export const projects: Record<string, ProjectData> = {
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
       "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600",
     ],
-    quote: {
-      text: "The building should be the best workplace in the world for the people who work here.",
-      author: "Jørgen Vig Knudstorp",
-      role: "Executive Chairman, LEGO Brand Group",
-    },
     relatedProjects: ["barclays", "beumer"],
     tier: 2,
   },
@@ -430,9 +425,9 @@ export const projects: Record<string, ProjectData> = {
   "htas": {
     id: "htas",
     number: "08",
-    client: "Topsoe (HTAS)",
+    client: "Global Enterprise",
     title: "Future Workplace for 300 Employees",
-    subtitle: "Workplace analysis and strategic report for a Danish state institution. Quantitative and qualitative method. From data to recommendation.",
+    subtitle: "Workplace analysis and strategy for a large Danish organisation. Quantitative and qualitative method. From data to recommendation.",
     year: "2016–2018",
     outcome: "Strategy",
     tags: ["People", "Buildings"],
@@ -442,7 +437,7 @@ export const projects: Record<string, ProjectData> = {
     heroImage: htasImg,
     phasesLed: ["Analyse", "Strategise"],
     brief: {
-      challenge: "Take a complex, high-stakes workplace brief for Haldor Topsoe (now Topsoe) — a global Danish catalysis and energy company — and deliver a structured strategic recommendation.",
+      challenge: "Take a complex, high-stakes workplace brief for a large Danish industrial organisation and deliver a structured strategic recommendation.",
       context: "The report format itself is the deliverable — not a space or a product. Demonstrates the ability to analyse systematically and present a clear, actionable strategy.",
     },
     approach: {
@@ -469,7 +464,7 @@ export const projects: Record<string, ProjectData> = {
     },
     impact: [
       { metric: "Type", value: "Report", description: "Strategic recommendation document" },
-      { metric: "Client Scale", value: "Global", description: "Global Danish energy and catalysis company" },
+      { metric: "Client Scale", value: "Global", description: "Large Danish industrial organisation" },
       { metric: "Phases Led", value: "Analyse + Strategise", description: "Analysis and strategic recommendation" },
     ],
     gallery: [
@@ -483,9 +478,9 @@ export const projects: Record<string, ProjectData> = {
   "barclays": {
     id: "barclays",
     number: "09",
-    client: "Barclays Bank",
+    client: "International Finance",
     title: "One Strategy. Three Cities. 10,000 People.",
-    subtitle: "International Employee Experience strategy for Barclays Bank. London, New York, Mumbai. From internal analysis to global design brief.",
+    subtitle: "Employee experience strategy for an international financial organisation. Three global locations. From internal analysis to global design brief.",
     year: "2016–2018",
     outcome: "10,000+",
     tags: ["People", "Buildings"],
@@ -495,8 +490,8 @@ export const projects: Record<string, ProjectData> = {
     heroImage: IMG_BARCLAYS,
     phasesLed: ["Analyse", "Design"],
     brief: {
-      challenge: "Develop an employee experience strategy across Barclays' London, New York, and Mumbai locations — 10,000+ employees. Part of SIGNAL/ISS's largest global key account.",
-      context: "Working at Signal Architects as part of the first team to develop the workplace and service design blueprint. Barclays was pivoting from traditional banking toward a more modern, data-driven organisation.",
+      challenge: "Develop an employee experience strategy across three global locations — 10,000+ employees. Part of a major global key account.",
+      context: "Working at Signal Architects as part of the first team to develop the workplace and service design blueprint. The organisation was pivoting toward a more modern, data-driven culture.",
     },
     approach: {
       title: "Analysis to Design Brief",
@@ -510,19 +505,19 @@ export const projects: Record<string, ProjectData> = {
     insights: [
       { title: "Scale and Complexity", description: "10,000+ employees across three continents required a framework, not a single solution." },
       { title: "Strategic Translation", description: "The value was in translating high-level strategy into something a design team could act on." },
-      { title: "Organisational Pivot", description: "The project supported Barclays' broader transformation from traditional to modern banking." },
+      { title: "Organisational Pivot", description: "The project supported a broader transformation from traditional to modern working culture." },
     ],
     solution: {
       description: "Design briefs that translated organisational strategy into spatial and experience design across three global locations.",
       interventions: [
-        { title: "London Strategy", description: "Employee experience framework for the UK headquarters." },
-        { title: "New York Adaptation", description: "Localised design strategy for the US operations." },
-        { title: "Mumbai Framework", description: "Culturally adapted employee experience design." },
+        { title: "HQ Strategy", description: "Employee experience framework for the main headquarters." },
+        { title: "Regional Adaptation", description: "Localised design strategy for regional operations." },
+        { title: "Global Framework", description: "Culturally adapted employee experience design." },
       ],
     },
     impact: [
       { metric: "Employees", value: "10,000+", description: "Across three global locations" },
-      { metric: "Locations", value: "3", description: "London, New York, Mumbai" },
+      { metric: "Locations", value: "3", description: "Three major international offices" },
       { metric: "Phases Led", value: "Analyse + Design", description: "Brief analysis and design brief creation" },
     ],
     gallery: [

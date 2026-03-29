@@ -7,8 +7,8 @@ const PORTRAIT =
   "https://images.unsplash.com/photo-1571059314690-91e84c43dc0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhcmNoaXRlY3QlMjBtYW4lMjBwb3J0cmFpdCUyMG1pbmltYWx8ZW58MXx8fHwxNzczMTQxNjYwfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
 const CLIENTS = [
-  "LEGO", "Barclays", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
-  "LEGO", "Barclays", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
+  "Global Brand HQ", "International Finance", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
+  "Global Brand HQ", "International Finance", "Beumer Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
 ];
 
 export function Hero() {
