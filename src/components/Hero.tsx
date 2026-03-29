@@ -130,20 +130,16 @@ export function Hero() {
               Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
             </p>
 
-            <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer" style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}>
+            <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer">
               <img
                 src={portraitImage}
                 alt="Helgi Hreinn Hjálmarsson"
                 className="w-full h-full object-cover"
                 style={{ maxHeight: "calc(100vh - 280px)" }}
               />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-foreground/60 to-transparent">
-                <p className="font-display text-primary-foreground text-base font-medium">Helgi Hreinn Hjálmarsson</p>
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">Architect · Copenhagen</p>
-              </div>
-              <div className="absolute top-3 right-3 bg-background/90 backdrop-blur-sm px-2.5 py-1.5 text-center">
-                <div className="font-display text-lg font-bold text-foreground">580</div>
-                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">Largest project</div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
               </div>
             </div>
           </motion.div>
