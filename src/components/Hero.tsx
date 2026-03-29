@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import portraitImage from "@/assets/portrait_image.png";
 
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
-
-const PORTRAIT =
-  "https://images.unsplash.com/photo-1571059314690-91e84c43dc0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhcmNoaXRlY3QlMjBtYW4lMjBwb3J0cmFpdCUyMG1pbmltYWx8ZW58MXx8fHwxNzczMTQxNjYwfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
 const CLIENTS = [
   "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
