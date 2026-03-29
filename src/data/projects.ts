@@ -637,9 +637,9 @@ export const projects: Record<string, ProjectData> = {
   "beumer": {
     id: "beumer",
     number: "12",
-    client: "Beumer Group",
+    client: "Industrial Group",
     title: "Activity-Based Workplace",
-    subtitle: "Strategy, analysis, and design for a 580-person domicile",
+    subtitle: "Strategy, analysis, and design for a 580-person domicile for a large industrial organisation",
     year: "2017–2018",
     outcome: "580",
     tags: ["People", "Buildings"],
@@ -649,7 +649,7 @@ export const projects: Record<string, ProjectData> = {
     heroImage: IMG_BEUMER,
     phasesLed: ["Analyse", "Strategise", "Design"],
     brief: {
-      challenge: "Design an activity-based workplace for Beumer Group's Aarhus domicile — 580 employees transitioning from traditional office layout.",
+      challenge: "Design an activity-based workplace for a large industrial organisation's Aarhus domicile — 580 employees transitioning from traditional office layout.",
       context: "Working at Signal Architects. Full scope: overall strategy, capacity and needs analysis, and design concept.",
     },
     approach: {
