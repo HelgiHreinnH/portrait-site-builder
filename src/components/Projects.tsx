@@ -43,39 +43,48 @@ function buildLayout(allProjects: ProjectData[]): Column[] {
 
   const columns: Column[] = [];
 
-  columns.push({ widthPx: 220, offsetY: 24, tiles: [
-    { kind: "project", project: t3[0], w: 220, h: 0.32 },
-    { kind: "project", project: t3[1], w: 220, h: 0.32 },
-    filler(0.28),
+  // — Before the fold: 4 Tier-1 projects prominent —
+
+  columns.push({ widthPx: 360, offsetY: 0, tiles: [
+    { kind: "project", project: t1[0], w: 360, h: 0.6 },
+    filler(0.32),
   ]});
 
-  columns.push({ widthPx: 380, offsetY: 0, tiles: [
-    { kind: "project", project: t1[0], w: 380, h: 0.62 },
-    { kind: "project", project: t3[2], w: 380, h: 0.3 },
-  ]});
-
-  columns.push({ widthPx: 290, offsetY: 40, tiles: [
-    filler(0.22),
-    { kind: "project", project: t2[0], w: 290, h: 0.36 },
-    { kind: "project", project: t2[1], w: 290, h: 0.34 },
+  columns.push({ widthPx: 280, offsetY: 32, tiles: [
+    filler(0.2),
+    { kind: "project", project: t1[1], w: 280, h: 0.52 },
+    { kind: "project", project: t2[0], w: 280, h: 0.22 },
   ]});
 
   columns.push({ widthPx: 400, offsetY: 8, tiles: [
-    { kind: "project", project: t1[1], w: 400, h: 0.58 },
-    filler(0.16),
-    { kind: "project", project: t2[2], w: 400, h: 0.2 },
+    { kind: "project", project: t1[2], w: 400, h: 0.58 },
+    { kind: "project", project: t2[1], w: 400, h: 0.34 },
   ]});
 
-  columns.push({ widthPx: 240, offsetY: 56, tiles: [
-    { kind: "project", project: t3[3] || t3[0], w: 240, h: 0.38 },
-    filler(0.26),
-    { kind: "project", project: t2[3] || t2[0], w: 240, h: 0.28 },
-  ]});
-
-  columns.push({ widthPx: 360, offsetY: 12, tiles: [
+  columns.push({ widthPx: 300, offsetY: 44, tiles: [
+    { kind: "project", project: t1[3], w: 300, h: 0.5 },
     filler(0.2),
-    { kind: "project", project: t1[2], w: 360, h: 0.54 },
+    { kind: "project", project: t2[2], w: 300, h: 0.22 },
+  ]});
+
+  // — Behind the fold: Tier 2 + 3 projects —
+
+  columns.push({ widthPx: 340, offsetY: 16, tiles: [
     filler(0.18),
+    { kind: "project", project: t2[3] || t2[0], w: 340, h: 0.44 },
+    { kind: "project", project: t3[0], w: 340, h: 0.3 },
+  ]});
+
+  columns.push({ widthPx: 240, offsetY: 28, tiles: [
+    { kind: "project", project: t3[1], w: 240, h: 0.34 },
+    filler(0.26),
+    { kind: "project", project: t3[2], w: 240, h: 0.32 },
+  ]});
+
+  columns.push({ widthPx: 320, offsetY: 4, tiles: [
+    { kind: "project", project: t3[3] || t3[0], w: 320, h: 0.42 },
+    filler(0.22),
+    { kind: "project", project: t2[2] || t2[0], w: 320, h: 0.28 },
   ]});
 
   return columns;
