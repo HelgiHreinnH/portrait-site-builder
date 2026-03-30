@@ -37,6 +37,16 @@ export interface ProjectData {
   tier: 1 | 2 | 3;
 }
 
+export type GalleryItem = { src: string; caption: string };
+
+export function getGallerySrc(item: string | GalleryItem): string {
+  return typeof item === "string" ? item : item.src;
+}
+
+export function getGalleryCaption(item: string | GalleryItem): string | undefined {
+  return typeof item === "string" ? undefined : item.caption;
+}
+
 const IMG_LEGO =
   "https://images.unsplash.com/photo-1771908997889-6d043c4a9ef7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHN0dWRpbyUyMHdvcmtzcGFjZSUyMGRyYW1hdGljJTIwbGlnaHRpbmd8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const IMG_BARCLAYS =
