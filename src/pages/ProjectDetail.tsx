@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { projects } from "@/data/projects";
+import { projects, getGallerySrc } from "@/data/projects";
 import { useEffect } from "react";
 
 export function ProjectDetail() {
@@ -164,7 +164,7 @@ export function ProjectDetail() {
           {project.gallery.map((image, index) => (
             <img
               key={index}
-              src={image}
+              src={getGallerySrc(image)}
               alt={`${project.title} gallery ${index + 1}`}
               className="w-full aspect-[4/3] object-cover"
               style={{ outline: "1px solid rgba(0,0,0,0.08)", outlineOffset: "-1px" }}
