@@ -97,9 +97,9 @@ export const projects: Record<string, ProjectData> = {
       { metric: "Type", value: "Own Product", description: "Independent product development" },
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1600",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600",
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600",
+      `${FELLES_BUCKET}/felles%20landing%20carousel.png`,
+      `${FELLES_BUCKET}/Felle%20dashboard%20Fase%20tavle.png`,
+      `${FELLES_BUCKET}/Felles%20timeline%20dashboard.png`,
     ],
     relatedProjects: ["kvitt", "a-place-to-work"],
     tier: 1,
