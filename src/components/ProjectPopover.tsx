@@ -144,7 +144,7 @@ function ProcessSlide({ project }: { project: ProjectData }) {
                 }`}
               >
                 <img
-                  src={img}
+                  src={getGallerySrc(img)}
                   alt={`${project.title} — ${i + 1}`}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
