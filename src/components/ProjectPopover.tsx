@@ -226,6 +226,86 @@ function OutcomesSlide({ project }: { project: ProjectData }) {
   );
 }
 
+/* ─── Gallery Slide ─── */
+function GallerySlide({ project }: { project: ProjectData }) {
+  const [currentImage, setCurrentImage] = useState(0);
+  const galleryLength = project.gallery.length;
+
+  const nextImage = () => setCurrentImage((prev) => (prev + 1) % galleryLength);
+  const prevImage = () => setCurrentImage((prev) => (prev - 1 + galleryLength) % galleryLength);
+
+  const currentItem = project.gallery[currentImage];
+  const src = getGallerySrc(currentItem);
+  const caption = getGalleryCaption(currentItem);
+
+  return (
+    <div className="h-full flex flex-col">
+      {/* Main image area */}
+      <div className="flex-1 relative overflow-hidden bg-muted/20">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentImage}
+            src={src}
+            alt={`${project.title} — ${currentImage + 1}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 w-full h-full object-contain p-4"
+          />
+        </AnimatePresence>
+
+        {/* Nav arrows */}
+        {galleryLength > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-foreground transition-colors rounded-sm"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-foreground transition-colors rounded-sm"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </>
+        )}
+
+        {/* Dot indicators */}
+        {galleryLength > 1 && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            {project.gallery.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentImage(i)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  i === currentImage ? "bg-user-blue" : "bg-muted-foreground/30"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Caption bar */}
+      <div className="border-t border-border px-6 md:px-10 py-4 flex items-center justify-between flex-shrink-0">
+        <div className="flex-1">
+          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+            {currentImage + 1} / {galleryLength}
+          </p>
+          {caption && (
+            <p className="text-[13px] leading-relaxed text-muted-foreground max-w-2xl">
+              {caption}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main Popover ─── */
 export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
   const [activeTab, setActiveTab] = useState<TabKey>("overview");
