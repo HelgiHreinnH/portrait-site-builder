@@ -31,7 +31,7 @@ export interface ProjectData {
     interventions: Array<{ title: string; description: string }>;
   };
   impact: Array<{ metric: string; value: string; description: string }>;
-  gallery: string[];
+  gallery: Array<string | { src: string; caption: string }>;
   quote?: { text: string; author: string; role: string };
   relatedProjects?: string[];
   tier: 1 | 2 | 3;
