@@ -435,6 +435,7 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
                   {activeTab === "overview" && <OverviewSlide project={project} />}
                   {activeTab === "process" && <ProcessSlide project={project} />}
                   {activeTab === "outcomes" && <OutcomesSlide project={project} />}
+                  {activeTab === "gallery" && <GallerySlide project={project} />}
                 </motion.div>
               </AnimatePresence>
             </div>
