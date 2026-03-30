@@ -1,7 +1,8 @@
 import { motion, AnimatePresence, useMotionValue, useTransform, animate, PanInfo } from "framer-motion";
-import { X, ArrowLeft, ArrowRight } from "lucide-react";
+import { X, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useCallback } from "react";
 import type { ProjectData } from "@/data/projects";
+import { getGallerySrc, getGalleryCaption } from "@/data/projects";
 
 const PHASES = ["Analyse", "Strategise", "Design", "Deliver"] as const;
 
