@@ -97,9 +97,9 @@ export const projects: Record<string, ProjectData> = {
       { metric: "Type", value: "Own Product", description: "Independent product development" },
     ],
     gallery: [
-      `${FELLES_BUCKET}/felles%20landing%20carousel.png`,
-      `${FELLES_BUCKET}/Felle%20dashboard%20Fase%20tavle.png`,
-      `${FELLES_BUCKET}/Felles%20timeline%20dashboard.png`,
+      { src: `${FELLES_BUCKET}/felles%20landing%20carousel.png`, caption: "Landing page — carousel section showcasing key platform features and community highlights" },
+      { src: `${FELLES_BUCKET}/Felle%20dashboard%20Fase%20tavle.png`, caption: "Dashboard — phase board view for tracking project milestones and task progression" },
+      { src: `${FELLES_BUCKET}/Felles%20timeline%20dashboard.png`, caption: "Timeline dashboard — chronological overview of activities, events, and maintenance schedules" },
     ],
     relatedProjects: ["kvitt", "a-place-to-work"],
     tier: 1,
