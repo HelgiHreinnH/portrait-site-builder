@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { projects } from "@/data/projects";
+import { projects, getGallerySrc } from "@/data/projects";
 import { useEffect } from "react";
 
 export function ProjectDetail() {
