@@ -30,17 +30,16 @@ const services = [
   },
 ];
 
+const BLOCK_W = 200;
+const BLOCK_H = 130;
+
 const blockPositions = [
   { x: 0, y: 0 },
-  { x: 100, y: 75 },
-  { x: 200, y: 25 },
+  { x: 80, y: 100 },
+  { x: 220, y: 50 },
 ];
 
-const BLOCK_W = 130;
-const BLOCK_H = 85;
-const BLOCK_D = 55;
-
-function IsometricBlock({
+function WireframeBlock({
   service,
   position,
   index,
@@ -57,83 +56,53 @@ function IsometricBlock({
 }) {
   const isActive = active === index;
   const isDimmed = active !== null && !isActive;
-  const strokeColor = "hsl(var(--foreground))";
-  const dashArray = index === 1 ? "none" : "4 3";
+  const dashArray = index === 0 ? "6 4" : index === 2 ? "3 3" : "none";
 
   return (
     <motion.div
       className="absolute cursor-pointer"
-      style={{
-        left: position.x,
-        top: position.y,
-        width: BLOCK_W + BLOCK_D * 0.58,
-        height: BLOCK_H + BLOCK_D * 0.58,
-        transformStyle: "preserve-3d",
-      }}
+      style={{ left: position.x, top: position.y, width: BLOCK_W, height: BLOCK_H }}
       animate={{
-        y: isActive ? -10 : 0,
-        opacity: isDimmed ? 0.25 : 1,
+        y: isActive ? -6 : 0,
+        opacity: isDimmed ? 0.2 : 1,
       }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
-      <svg
-        width={BLOCK_W + BLOCK_D * 0.58 + 2}
-        height={BLOCK_H + BLOCK_D * 0.58 + 2}
-        viewBox={`-1 -1 ${BLOCK_W + BLOCK_D * 0.58 + 2} ${BLOCK_H + BLOCK_D * 0.58 + 2}`}
-        fill="none"
-        className="overflow-visible"
-      >
-        {/* Top face */}
-        <polygon
-          points={`0,${BLOCK_D * 0.58} ${BLOCK_D * 0.58},0 ${BLOCK_W + BLOCK_D * 0.58},0 ${BLOCK_W},${BLOCK_D * 0.58}`}
-          fill={isActive ? "hsl(var(--foreground) / 0.04)" : "transparent"}
-          stroke={strokeColor}
+      <svg width={BLOCK_W} height={BLOCK_H} viewBox={`0 0 ${BLOCK_W} ${BLOCK_H}`} fill="none">
+        <rect
+          x={0.5}
+          y={0.5}
+          width={BLOCK_W - 1}
+          height={BLOCK_H - 1}
+          stroke="hsl(var(--foreground))"
           strokeWidth={isActive ? 1.5 : 0.8}
           strokeDasharray={dashArray}
-          strokeLinejoin="round"
-        />
-        {/* Front face */}
-        <polygon
-          points={`0,${BLOCK_D * 0.58} ${BLOCK_W},${BLOCK_D * 0.58} ${BLOCK_W},${BLOCK_D * 0.58 + BLOCK_H} 0,${BLOCK_D * 0.58 + BLOCK_H}`}
           fill={isActive ? "hsl(var(--foreground) / 0.03)" : "transparent"}
-          stroke={strokeColor}
-          strokeWidth={isActive ? 1.5 : 0.8}
-          strokeDasharray={dashArray}
-          strokeLinejoin="round"
         />
-        {/* Right face */}
-        <polygon
-          points={`${BLOCK_W},${BLOCK_D * 0.58} ${BLOCK_W + BLOCK_D * 0.58},0 ${BLOCK_W + BLOCK_D * 0.58},${BLOCK_H} ${BLOCK_W},${BLOCK_D * 0.58 + BLOCK_H}`}
-          fill={isActive ? "hsl(var(--foreground) / 0.06)" : "hsl(var(--foreground) / 0.02)"}
-          stroke={strokeColor}
-          strokeWidth={isActive ? 1.5 : 0.8}
-          strokeDasharray={dashArray}
-          strokeLinejoin="round"
-        />
-        {/* Label on front face */}
+        {/* Number */}
         <text
-          x={BLOCK_W / 2}
-          y={BLOCK_D * 0.58 + BLOCK_H / 2 + 4}
-          textAnchor="middle"
-          className="font-display"
-          style={{ fontSize: 13, fontWeight: 600, userSelect: "none" }}
-          fill="hsl(var(--foreground))"
-          opacity={isActive ? 1 : 0.6}
-        >
-          {service.title}
-        </text>
-        {/* Number label — small, top-left of front face */}
-        <text
-          x={8}
-          y={BLOCK_D * 0.58 + 16}
+          x={10}
+          y={18}
           className="font-mono"
-          style={{ fontSize: 9, userSelect: "none" }}
+          style={{ fontSize: 10, userSelect: "none" }}
           fill="hsl(var(--foreground))"
-          opacity={0.35}
+          opacity={0.3}
         >
           {service.number}
+        </text>
+        {/* Title */}
+        <text
+          x={BLOCK_W / 2}
+          y={BLOCK_H / 2 + 5}
+          textAnchor="middle"
+          className="font-display"
+          style={{ fontSize: 16, fontWeight: 600, userSelect: "none" }}
+          fill="hsl(var(--foreground))"
+          opacity={isActive ? 1 : 0.55}
+        >
+          {service.title}
         </text>
       </svg>
     </motion.div>
@@ -149,7 +118,6 @@ export function Services() {
       id="services"
       className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-14 overflow-hidden"
     >
-      {/* Section header */}
       <div className="mb-6 max-w-[1400px] mx-auto w-full shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -166,7 +134,6 @@ export function Services() {
         </motion.div>
       </div>
 
-      {/* Isometric blocks + detail panel */}
       <div className="max-w-[1400px] mx-auto w-full flex-1 min-h-0 flex flex-col md:flex-row items-center gap-6 md:gap-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -175,9 +142,9 @@ export function Services() {
           transition={{ ...smooth, delay: 0.1 }}
           className="w-full md:w-1/2 flex justify-center items-center"
         >
-          <div className="relative" style={{ width: 380, height: 230 }}>
+          <div className="relative" style={{ width: 440, height: 260 }}>
             {services.map((service, i) => (
-              <IsometricBlock
+              <WireframeBlock
                 key={i}
                 service={service}
                 position={blockPositions[i]}
@@ -190,7 +157,6 @@ export function Services() {
           </div>
         </motion.div>
 
-        {/* Detail panel */}
         <div className="w-full md:w-1/2 min-h-[180px] flex items-center">
           <AnimatePresence mode="wait">
             {activeService ? (
@@ -240,7 +206,6 @@ export function Services() {
         </div>
       </div>
 
-      {/* Bottom note */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
