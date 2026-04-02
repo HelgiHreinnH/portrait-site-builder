@@ -12,6 +12,8 @@ const services = [
     description:
       "Analysis of human behaviour, workshop facilitation, organisational understanding, change management, and user involvement as a methodological foundation.",
     accent: "#D5DEF4",
+    accentDark: "#B0BFE0",
+    accentDarker: "#8DA3CC",
   },
   {
     number: "02",
@@ -21,6 +23,8 @@ const services = [
     description:
       "Space planning, workplace strategy, zone design, user experience in physical environments, and architectural advisory from brief to delivery.",
     accent: "#B8C9EE",
+    accentDark: "#95ADD8",
+    accentDarker: "#7491C2",
   },
   {
     number: "03",
@@ -30,33 +34,114 @@ const services = [
     description:
       "UI/UX design, data visualisation, digital product development, and PropTech. From concept sketch to fully built product.",
     accent: "#DCE8E6",
+    accentDark: "#B8CFC9",
+    accentDarker: "#96B6AE",
   },
 ];
 
-const intersections = [
-  { id: "01-02", label: "Workplace Strategy", x: 250, y: 295 },
-  { id: "02-03", label: "Smart Environments", x: 350, y: 295 },
-  { id: "01-03", label: "Digital Experience", x: 300, y: 210 },
-  { id: "center", label: "Where the best\nsolutions emerge", x: 300, y: 258 },
+// Isometric block positions — staggered interlocking arrangement
+const blockPositions = [
+  { x: 0, y: 0 },       // People — top-left
+  { x: 90, y: 70 },     // Buildings — center
+  { x: 180, y: 20 },    // Technology — top-right
 ];
 
-// Circle positions — equilateral triangle arrangement
-const circles = [
-  { cx: 300, cy: 200, service: services[0] }, // People — top
-  { cx: 240, cy: 310, service: services[1] }, // Buildings — bottom-left
-  { cx: 360, cy: 310, service: services[2] }, // Technology — bottom-right
-];
+const BLOCK_W = 120;
+const BLOCK_H = 80;
+const BLOCK_D = 60;
 
-const RADIUS = 110;
+function IsometricBlock({
+  service,
+  position,
+  index,
+  active,
+  onHover,
+  onLeave,
+}: {
+  service: typeof services[0];
+  position: { x: number; y: number };
+  index: number;
+  active: number | null;
+  onHover: () => void;
+  onLeave: () => void;
+}) {
+  const isActive = active === index;
+  const isDimmed = active !== null && !isActive;
+
+  return (
+    <motion.div
+      className="absolute cursor-pointer"
+      style={{
+        left: position.x,
+        top: position.y,
+        width: BLOCK_W,
+        height: BLOCK_H + BLOCK_D,
+        transformStyle: "preserve-3d",
+      }}
+      animate={{
+        y: isActive ? -12 : 0,
+        opacity: isDimmed ? 0.4 : 1,
+        scale: isActive ? 1.05 : 1,
+      }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+    >
+      {/* Top face */}
+      <div
+        className="absolute w-full"
+        style={{
+          height: BLOCK_D,
+          background: service.accent,
+          transform: "skewX(-30deg)",
+          transformOrigin: "bottom left",
+          top: 0,
+          left: BLOCK_D * 0.5,
+          borderTop: `1px solid ${service.accentDark}`,
+          borderRight: `1px solid ${service.accentDark}`,
+        }}
+      />
+      {/* Front face */}
+      <div
+        className="absolute flex items-center justify-center"
+        style={{
+          width: BLOCK_W,
+          height: BLOCK_H,
+          background: service.accentDark,
+          top: BLOCK_D * 0.58,
+          left: 0,
+          borderBottom: `1px solid ${service.accentDarker}`,
+          borderLeft: `1px solid ${service.accentDarker}`,
+        }}
+      >
+        <span
+          className="font-display text-sm font-bold tracking-tight select-none"
+          style={{ color: "hsl(220, 40%, 13%)" }}
+        >
+          {service.title}
+        </span>
+      </div>
+      {/* Right face */}
+      <div
+        className="absolute"
+        style={{
+          width: BLOCK_D * 0.58,
+          height: BLOCK_H,
+          background: service.accentDarker,
+          transform: "skewY(-30deg)",
+          transformOrigin: "top left",
+          top: BLOCK_D * 0.58 - 1,
+          left: BLOCK_W,
+          borderRight: `1px solid ${service.accentDarker}`,
+        }}
+      />
+    </motion.div>
+  );
+}
 
 export function Services() {
   const [active, setActive] = useState<number | null>(null);
-  const [hoveredIntersection, setHoveredIntersection] = useState<string | null>(null);
-
   const activeService = active !== null ? services[active] : null;
-  const activeIntersection = hoveredIntersection
-    ? intersections.find((i) => i.id === hoveredIntersection)
-    : null;
 
   return (
     <section
@@ -80,95 +165,29 @@ export function Services() {
         </motion.div>
       </div>
 
-      {/* Venn diagram + detail panel */}
+      {/* Isometric blocks + detail panel */}
       <div className="max-w-[1400px] mx-auto w-full flex-1 min-h-0 flex flex-col md:flex-row items-center gap-6 md:gap-10">
-        {/* SVG Venn diagram */}
+        {/* Isometric blocks */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ ...smooth, delay: 0.1 }}
-          className="w-full md:w-1/2 flex justify-center"
+          className="w-full md:w-1/2 flex justify-center items-center"
         >
-          <svg
-            viewBox="120 100 360 300"
-            className="w-full max-w-[420px]"
-            style={{ mixBlendMode: "multiply" }}
-          >
-            {/* Circles */}
-            {circles.map((c, i) => (
-              <motion.circle
+          <div className="relative" style={{ width: 340, height: 220 }}>
+            {services.map((service, i) => (
+              <IsometricBlock
                 key={i}
-                cx={c.cx}
-                cy={c.cy}
-                r={RADIUS}
-                fill={c.service.accent}
-                fillOpacity={active === null ? 0.55 : active === i ? 0.75 : 0.2}
-                stroke={active === i ? c.service.accent : "transparent"}
-                strokeWidth={active === i ? 2 : 0}
-                style={{ cursor: "pointer", mixBlendMode: "multiply" }}
-                animate={{
-                  fillOpacity: active === null ? 0.55 : active === i ? 0.75 : 0.2,
-                  r: active === i ? RADIUS + 4 : RADIUS,
-                }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                onMouseEnter={() => { setActive(i); setHoveredIntersection(null); }}
-                onMouseLeave={() => setActive(null)}
+                service={service}
+                position={blockPositions[i]}
+                index={i}
+                active={active}
+                onHover={() => setActive(i)}
+                onLeave={() => setActive(null)}
               />
             ))}
-
-            {/* Circle labels — inside circles */}
-            {circles.map((c, i) => {
-              // Position labels at the outer edge of each circle, away from center
-              const labelY = i === 0 ? c.cy - 50 : c.cy + 40;
-              const labelX = i === 1 ? c.cx - 30 : i === 2 ? c.cx + 30 : c.cx;
-              return (
-                <motion.text
-                  key={`label-${i}`}
-                  x={labelX}
-                  y={labelY}
-                  textAnchor="middle"
-                  className="font-display"
-                  style={{ fontSize: 14, fontWeight: 700, pointerEvents: "none", userSelect: "none" }}
-                  fill="hsl(var(--foreground))"
-                  animate={{ opacity: active === null ? 0.8 : active === i ? 1 : 0.25 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {c.service.title}
-                </motion.text>
-              );
-            })}
-
-            {/* Intersection labels */}
-            {intersections.map((inter) => (
-              <motion.text
-                key={inter.id}
-                x={inter.x}
-                y={inter.y}
-                textAnchor="middle"
-                style={{
-                  fontSize: inter.id === "center" ? 9 : 8,
-                  fontWeight: inter.id === "center" ? 600 : 400,
-                  pointerEvents: "none",
-                  userSelect: "none",
-                }}
-                fill="hsl(var(--foreground))"
-                animate={{
-                  opacity: active === null ? (inter.id === "center" ? 0.5 : 0.3) : 0.1,
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {inter.id === "center" ? (
-                  <>
-                    <tspan x={inter.x} dy="0">Where the best</tspan>
-                    <tspan x={inter.x} dy="12">solutions emerge</tspan>
-                  </>
-                ) : (
-                  inter.label
-                )}
-              </motion.text>
-            ))}
-          </svg>
+          </div>
         </motion.div>
 
         {/* Detail panel */}
@@ -213,7 +232,7 @@ export function Services() {
                 className="w-full"
               >
                 <p className="text-muted-foreground/50 text-sm font-mono tracking-wide">
-                  Hover a field to explore
+                  Hover a block to explore
                 </p>
               </motion.div>
             )}
