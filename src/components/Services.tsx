@@ -32,24 +32,6 @@ const services = [
       "UI/UX design, data visualisation, digital product development, and PropTech. From concept sketch to fully built product.",
     accent: "#DCE8E6",
   },
-  {
-    number: "04",
-    title: "Full-Scope Projects",
-    discipline: "All Three Fields",
-    tags: ["End-to-End", "Brief to Delivery", "Cross-discipline"],
-    description:
-      "End-to-end from brief to delivery. For teams that need someone who understands the whole picture — people, buildings, and technology together.",
-    accent: "#C5D5EC",
-  },
-  {
-    number: "05",
-    title: "Strategic Advisory",
-    discipline: "Knowledge Transfer",
-    tags: ["Workshops", "Briefs", "Frameworks"],
-    description:
-      "Analytical, strategic, and design briefs for teams who need clarity before committing to a direction.",
-    accent: "#D5DEF4",
-  },
 ];
 
 function ServiceCard({ service, index: i, active, setActive }: {
@@ -154,13 +136,8 @@ export function Services() {
       {/* Card Grid */}
       <div className="max-w-[1400px] mx-auto w-full space-y-4 flex-1 min-h-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {services.slice(0, 3).map((service, i) => (
+          {services.map((service, i) => (
             <ServiceCard key={service.number} service={service} index={i} active={active} setActive={setActive} />
-          ))}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {services.slice(3).map((service, i) => (
-            <ServiceCard key={service.number} service={service} index={i + 3} active={active} setActive={setActive} />
           ))}
         </div>
       </div>
