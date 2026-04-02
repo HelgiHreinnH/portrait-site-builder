@@ -117,17 +117,19 @@ export function Services() {
               />
             ))}
 
-            {/* Circle labels */}
+            {/* Circle labels — inside circles */}
             {circles.map((c, i) => {
-              const labelOffset = i === 0 ? { dx: 0, dy: -RADIUS - 14 } : i === 1 ? { dx: -RADIUS - 8, dy: 20 } : { dx: RADIUS + 8, dy: 20 };
+              // Position labels at the outer edge of each circle, away from center
+              const labelY = i === 0 ? c.cy - 50 : c.cy + 40;
+              const labelX = i === 1 ? c.cx - 30 : i === 2 ? c.cx + 30 : c.cx;
               return (
                 <motion.text
                   key={`label-${i}`}
-                  x={c.cx + labelOffset.dx}
-                  y={c.cy + labelOffset.dy}
-                  textAnchor={i === 0 ? "middle" : i === 1 ? "end" : "start"}
+                  x={labelX}
+                  y={labelY}
+                  textAnchor="middle"
                   className="font-display"
-                  style={{ fontSize: 13, fontWeight: 700, pointerEvents: "none", userSelect: "none" }}
+                  style={{ fontSize: 14, fontWeight: 700, pointerEvents: "none", userSelect: "none" }}
                   fill="hsl(var(--foreground))"
                   animate={{ opacity: active === null ? 0.8 : active === i ? 1 : 0.25 }}
                   transition={{ duration: 0.3 }}
