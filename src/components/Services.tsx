@@ -11,9 +11,6 @@ const services = [
     tags: ["User Research", "Workshops", "Change Management", "Stakeholder Management"],
     description:
       "Analysis of human behaviour, workshop facilitation, organisational understanding, change management, and user involvement as a methodological foundation.",
-    accent: "#D5DEF4",
-    accentDark: "#B0BFE0",
-    accentDarker: "#8DA3CC",
   },
   {
     number: "02",
@@ -22,9 +19,6 @@ const services = [
     tags: ["Space Planning", "Zone Strategy", "Workplace Design", "Design Briefs"],
     description:
       "Space planning, workplace strategy, zone design, user experience in physical environments, and architectural advisory from brief to delivery.",
-    accent: "#B8C9EE",
-    accentDark: "#95ADD8",
-    accentDarker: "#7491C2",
   },
   {
     number: "03",
@@ -33,22 +27,18 @@ const services = [
     tags: ["UI/UX", "Data Visualisation", "Product Development", "PropTech"],
     description:
       "UI/UX design, data visualisation, digital product development, and PropTech. From concept sketch to fully built product.",
-    accent: "#DCE8E6",
-    accentDark: "#B8CFC9",
-    accentDarker: "#96B6AE",
   },
 ];
 
-// Isometric block positions — staggered interlocking arrangement
 const blockPositions = [
-  { x: 0, y: 0 },       // People — top-left
-  { x: 90, y: 70 },     // Buildings — center
-  { x: 180, y: 20 },    // Technology — top-right
+  { x: 0, y: 0 },
+  { x: 100, y: 75 },
+  { x: 200, y: 25 },
 ];
 
-const BLOCK_W = 120;
-const BLOCK_H = 80;
-const BLOCK_D = 60;
+const BLOCK_W = 130;
+const BLOCK_H = 85;
+const BLOCK_D = 55;
 
 function IsometricBlock({
   service,
@@ -67,6 +57,8 @@ function IsometricBlock({
 }) {
   const isActive = active === index;
   const isDimmed = active !== null && !isActive;
+  const strokeColor = "hsl(var(--foreground))";
+  const dashArray = index === 1 ? "none" : "4 3";
 
   return (
     <motion.div
@@ -74,67 +66,76 @@ function IsometricBlock({
       style={{
         left: position.x,
         top: position.y,
-        width: BLOCK_W,
-        height: BLOCK_H + BLOCK_D,
+        width: BLOCK_W + BLOCK_D * 0.58,
+        height: BLOCK_H + BLOCK_D * 0.58,
         transformStyle: "preserve-3d",
       }}
       animate={{
-        y: isActive ? -12 : 0,
-        opacity: isDimmed ? 0.4 : 1,
-        scale: isActive ? 1.05 : 1,
+        y: isActive ? -10 : 0,
+        opacity: isDimmed ? 0.25 : 1,
       }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
-      {/* Top face */}
-      <div
-        className="absolute w-full"
-        style={{
-          height: BLOCK_D,
-          background: service.accent,
-          transform: "skewX(-30deg)",
-          transformOrigin: "bottom left",
-          top: 0,
-          left: BLOCK_D * 0.5,
-          borderTop: `1px solid ${service.accentDark}`,
-          borderRight: `1px solid ${service.accentDark}`,
-        }}
-      />
-      {/* Front face */}
-      <div
-        className="absolute flex items-center justify-center"
-        style={{
-          width: BLOCK_W,
-          height: BLOCK_H,
-          background: service.accentDark,
-          top: BLOCK_D * 0.58,
-          left: 0,
-          borderBottom: `1px solid ${service.accentDarker}`,
-          borderLeft: `1px solid ${service.accentDarker}`,
-        }}
+      <svg
+        width={BLOCK_W + BLOCK_D * 0.58 + 2}
+        height={BLOCK_H + BLOCK_D * 0.58 + 2}
+        viewBox={`-1 -1 ${BLOCK_W + BLOCK_D * 0.58 + 2} ${BLOCK_H + BLOCK_D * 0.58 + 2}`}
+        fill="none"
+        className="overflow-visible"
       >
-        <span
-          className="font-display text-sm font-bold tracking-tight select-none"
-          style={{ color: "hsl(220, 40%, 13%)" }}
+        {/* Top face */}
+        <polygon
+          points={`0,${BLOCK_D * 0.58} ${BLOCK_D * 0.58},0 ${BLOCK_W + BLOCK_D * 0.58},0 ${BLOCK_W},${BLOCK_D * 0.58}`}
+          fill={isActive ? "hsl(var(--foreground) / 0.04)" : "transparent"}
+          stroke={strokeColor}
+          strokeWidth={isActive ? 1.5 : 0.8}
+          strokeDasharray={dashArray}
+          strokeLinejoin="round"
+        />
+        {/* Front face */}
+        <polygon
+          points={`0,${BLOCK_D * 0.58} ${BLOCK_W},${BLOCK_D * 0.58} ${BLOCK_W},${BLOCK_D * 0.58 + BLOCK_H} 0,${BLOCK_D * 0.58 + BLOCK_H}`}
+          fill={isActive ? "hsl(var(--foreground) / 0.03)" : "transparent"}
+          stroke={strokeColor}
+          strokeWidth={isActive ? 1.5 : 0.8}
+          strokeDasharray={dashArray}
+          strokeLinejoin="round"
+        />
+        {/* Right face */}
+        <polygon
+          points={`${BLOCK_W},${BLOCK_D * 0.58} ${BLOCK_W + BLOCK_D * 0.58},0 ${BLOCK_W + BLOCK_D * 0.58},${BLOCK_H} ${BLOCK_W},${BLOCK_D * 0.58 + BLOCK_H}`}
+          fill={isActive ? "hsl(var(--foreground) / 0.06)" : "hsl(var(--foreground) / 0.02)"}
+          stroke={strokeColor}
+          strokeWidth={isActive ? 1.5 : 0.8}
+          strokeDasharray={dashArray}
+          strokeLinejoin="round"
+        />
+        {/* Label on front face */}
+        <text
+          x={BLOCK_W / 2}
+          y={BLOCK_D * 0.58 + BLOCK_H / 2 + 4}
+          textAnchor="middle"
+          className="font-display"
+          style={{ fontSize: 13, fontWeight: 600, userSelect: "none" }}
+          fill="hsl(var(--foreground))"
+          opacity={isActive ? 1 : 0.6}
         >
           {service.title}
-        </span>
-      </div>
-      {/* Right face */}
-      <div
-        className="absolute"
-        style={{
-          width: BLOCK_D * 0.58,
-          height: BLOCK_H,
-          background: service.accentDarker,
-          transform: "skewY(-30deg)",
-          transformOrigin: "top left",
-          top: BLOCK_D * 0.58 - 1,
-          left: BLOCK_W,
-          borderRight: `1px solid ${service.accentDarker}`,
-        }}
-      />
+        </text>
+        {/* Number label — small, top-left of front face */}
+        <text
+          x={8}
+          y={BLOCK_D * 0.58 + 16}
+          className="font-mono"
+          style={{ fontSize: 9, userSelect: "none" }}
+          fill="hsl(var(--foreground))"
+          opacity={0.35}
+        >
+          {service.number}
+        </text>
+      </svg>
     </motion.div>
   );
 }
@@ -167,7 +168,6 @@ export function Services() {
 
       {/* Isometric blocks + detail panel */}
       <div className="max-w-[1400px] mx-auto w-full flex-1 min-h-0 flex flex-col md:flex-row items-center gap-6 md:gap-10">
-        {/* Isometric blocks */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -175,7 +175,7 @@ export function Services() {
           transition={{ ...smooth, delay: 0.1 }}
           className="w-full md:w-1/2 flex justify-center items-center"
         >
-          <div className="relative" style={{ width: 340, height: 220 }}>
+          <div className="relative" style={{ width: 380, height: 230 }}>
             {services.map((service, i) => (
               <IsometricBlock
                 key={i}
