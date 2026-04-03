@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-const table = [
+const shifts = [
   ["Assume how spaces should be used", "Observe how spaces are actually used"],
   ["Design for average user", "Design for real behavioural patterns"],
   ["One-time delivery", "Continuous learning and optimisation"],
@@ -11,89 +12,122 @@ const table = [
 ];
 
 const engagements = [
-  { title: "Full-Scope Project", duration: "3 – 12 months", description: "End-to-end from analysis to delivery — workplace strategy, digital product, or both." },
-  { title: "Strategic Brief", duration: "4 – 8 weeks", description: "Analytical, strategic, or design brief — clarity before commitment." },
+  { title: "Advisory", duration: "Ongoing", description: "Workshops, frameworks, and strategic advice for teams navigating complex problems." },
   { title: "Product Sprint", duration: "2 – 6 weeks", description: "Rapid prototyping and validation for digital tools and platforms." },
-  { title: "Advisory & Workshops", duration: "Ongoing", description: "Workshops, frameworks, and strategic advice for teams navigating complex problems." },
+  { title: "Strategic Brief", duration: "4 – 8 weeks", description: "Analytical, strategic, or design brief — clarity before commitment." },
+  { title: "Full-Scope Project", duration: "3 – 12 months", description: "End-to-end from analysis to delivery — workplace strategy, digital product, or both." },
 ];
 
 export function About() {
+  const [activeNode, setActiveNode] = useState<number | null>(null);
+
   return (
-    <section id="about" className="h-full flex flex-col justify-center py-10 md:py-14">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {/* Left: Ways of Working */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ ...smooth }}
-          >
-            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-3">
-              05 — My Approach
-            </p>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
-              Ways of Working
-            </h2>
+    <section id="about" className="h-full flex flex-col justify-center py-8 md:py-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 justify-center gap-8 md:gap-10">
+        
+        {/* Top: Shift Diagram */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={smooth}
+        >
+          <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+            05 — A Different Lens
+          </p>
+          <h2 className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-foreground mb-5">
+            From Convention to Insight
+          </h2>
 
-            <div className="border border-border overflow-hidden">
-              <div className="grid grid-cols-2 bg-muted">
-                <div className="px-4 py-2 font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Traditional
-                </div>
-                <div className="px-4 py-2 font-mono text-[10px] tracking-[0.2em] uppercase text-foreground border-l border-border">
-                  My Approach
-                </div>
-              </div>
-              {table.map(([trad, user], i) => (
-                <div key={i} className="grid grid-cols-2 border-t border-border">
-                  <div className="px-4 py-2 text-sm text-muted-foreground line-through decoration-muted-foreground/30">
-                    {trad}
-                  </div>
-                  <div className="px-4 py-2 text-sm text-foreground font-medium border-l border-border">
-                    {user}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          <div className="flex flex-col gap-2">
+            {shifts.map(([from, to], i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ ...smooth, delay: 0.08 * i }}
+                className="flex items-center gap-3 md:gap-4"
+              >
+                {/* Traditional (fades out) */}
+                <span className="flex-1 text-sm text-muted-foreground/50 text-right font-mono leading-tight hidden md:block">
+                  {from}
+                </span>
 
-          {/* Right: Ways to Work Together */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ ...smooth, delay: 0.15 }}
-          >
-            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-3">
-              &nbsp;
-            </p>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-[-0.02em] text-foreground mb-6">
-              Ways to Work Together
-            </h2>
+                {/* Arrow */}
+                <svg width="32" height="12" viewBox="0 0 32 12" className="shrink-0 text-muted-foreground/30">
+                  <line x1="0" y1="6" x2="26" y2="6" stroke="currentColor" strokeWidth="1" />
+                  <polygon points="26,3 32,6 26,9" fill="currentColor" />
+                </svg>
 
-            <div className="flex flex-col gap-3">
+                {/* My Approach (bold) */}
+                <span className="flex-1 text-sm font-medium text-foreground leading-tight">
+                  {to}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Bottom: Horizontal Timeline */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ ...smooth, delay: 0.2 }}
+        >
+          <h3 className="font-display text-lg md:text-xl font-bold tracking-[-0.01em] text-foreground mb-6">
+            Ways to Work Together
+          </h3>
+
+          {/* Timeline SVG + Labels */}
+          <div className="relative">
+            {/* The line */}
+            <div className="hidden md:block absolute top-[6px] left-0 right-0 h-px bg-border" />
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-0">
               {engagements.map((item, i) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ ...smooth, delay: 0.1 + i * 0.06 }}
-                  className="border border-border rounded-lg p-4"
+                  transition={{ ...smooth, delay: 0.1 + i * 0.08 }}
+                  className="relative cursor-pointer group md:pr-4"
+                  onMouseEnter={() => setActiveNode(i)}
+                  onMouseLeave={() => setActiveNode(null)}
                 >
-                  <div className="flex items-start justify-between gap-4 mb-1.5">
-                    <h3 className="font-display text-base font-bold text-foreground">{item.title}</h3>
-                    <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground bg-muted px-2.5 py-1 rounded-full whitespace-nowrap shrink-0">
-                      {item.duration}
-                    </span>
+                  {/* Node dot */}
+                  <div className="hidden md:block absolute top-0 left-0">
+                    <motion.div
+                      animate={{
+                        scale: activeNode === i ? 1.6 : 1,
+                        backgroundColor: activeNode === i ? "hsl(var(--foreground))" : "hsl(var(--border))",
+                      }}
+                      transition={{ duration: 0.25 }}
+                      className="w-3 h-3 rounded-full border border-foreground/20"
+                    />
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+
+                  <div className="md:pt-5 md:pl-0">
+                    <p className="font-display text-sm font-bold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors">
+                      {item.title}
+                    </p>
+                    <p className="font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground mb-1.5">
+                      {item.duration}
+                    </p>
+                    <motion.p
+                      animate={{ opacity: activeNode === i ? 1 : 0.6, height: activeNode === i ? "auto" : "auto" }}
+                      className="text-xs text-muted-foreground leading-relaxed"
+                    >
+                      {item.description}
+                    </motion.p>
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
