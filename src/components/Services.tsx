@@ -125,10 +125,13 @@ export function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display tracking-tight text-foreground mb-3 text-4xl md:text-5xl lg:text-6xl font-bold leading-[0.95]">
+          <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+            02 — Three Fields
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
             Three Fields. One Approach.
           </h2>
-          <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
+          <p className="max-w-xl leading-relaxed text-muted-foreground text-sm">
             I've worked across three disciplines for over 10 years. Not as a generalist without depth — but because the best solutions emerge where people, physical space, and digital systems meet.
           </p>
         </motion.div>

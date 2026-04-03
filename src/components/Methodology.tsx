@@ -66,17 +66,20 @@ export function Methodology() {
     >
       <div className="relative z-10 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="mb-6 md:mb-8 text-center shrink-0">
+        <div className="mb-6 md:mb-8 shrink-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-display text-foreground leading-tight tracking-tight mb-2 text-3xl md:text-4xl lg:text-5xl font-bold" style={{ lineHeight: 0.95 }}>
+            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+              03 — Methodology
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
               How I Work
             </h2>
-            <p className="max-w-2xl mx-auto leading-relaxed text-muted-foreground text-sm">
+            <p className="max-w-xl leading-relaxed text-muted-foreground text-sm">
               Every project — whether it's about a workplace, an app, or a strategy — goes through the same four phases. It's not a model. It's a way of thinking.
             </p>
           </motion.div>
