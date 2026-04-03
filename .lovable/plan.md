@@ -1,84 +1,49 @@
 
 
-## Brainstorm: Redesigning the "My Approach" Section
+## Redesign: Projects Section — Featured Trio + Bento Grid
 
-### Heuristic Analysis of Current Design
+### What changes
 
-Looking at the screenshot and code, the current section has two issues:
+Replace the current single bento grid with two distinct zones inside the same horizontal scroll container:
 
-1. **"Ways of Working" (left)** — The comparison table is functional but visually static. The strikethrough text feels negative rather than showing progression. It reads like a spreadsheet, not a design portfolio.
+**Zone 1 — Featured Trio** (fills the initial viewport width)
+- Three equal-width portrait cards for **Felles**, **Archi AR**, and **A Place to Work**
+- Each card: full-height hero image, gradient overlay, client/title/outcome at bottom
+- Equal visual hierarchy — same width (~340px each), same height (full container)
+- Subtle 1px border, rounded corners, hover scale + arrow icon
+- Gap of ~16px between cards
 
-2. **"Ways to Work Together" (right)** — Four stacked cards with duration badges. It works but feels like a list — no visual hierarchy or flow between the engagement types.
+**Zone 2 — Bento Grid** (scrolls in from the right)
+- Remaining 9 projects in the existing bento column layout
+- Slightly larger column widths than current (~20% increase)
+- Keeps quote/stat filler tiles
 
-3. **Overall** — Both halves use different visual languages (table vs cards) but neither connects to the architectural/wireframe aesthetic established in the "Three Fields" and "Methodology" sections. There is also a lot of empty space in the bottom half of the viewport.
+**Scroll Indicator** — Right-edge fade gradient with mono text
+- A 120px-wide gradient fade (background → transparent, reversed) on the right edge of the viewport
+- Small mono text: "More projects →" overlaid on the gradient
+- Disappears once user scrolls past the featured section (track scroll position)
 
----
-
-### Proposal A: "Ways to Work Together" as a Horizontal Timeline
-
-Replace the stacked cards with a horizontal timeline that shows engagement types ordered by duration — from shortest (Advisory) to longest (Full-Scope). This communicates progression and scale.
-
-```text
-Advisory        Product Sprint     Strategic Brief     Full-Scope Project
-  Ongoing         2–6 weeks          4–8 weeks          3–12 months
-    ●────────────────●────────────────●────────────────────●
-    |                |                |                    |
-  Workshops &     Rapid proto-     Clarity before      End-to-end
-  frameworks      typing           commitment          delivery
-```
-
-- Thin connecting line with dot nodes — matches the wireframe language
-- Hover a node to expand its description
-- Mono labels for durations, display font for titles
-
----
-
-### Proposal B: "Ways of Working" as a Before/After Shift Diagram
-
-Replace the comparison table with an animated "shift" visualization — each row is a horizontal bar that slides from the traditional position (left, muted) to the new approach (right, bold). This communicates transformation rather than a static comparison.
+### Layout diagram
 
 ```text
-  TRADITIONAL                          MY APPROACH
-  ░░░░░░░░░░░░░░░░  ──────────►  ████████████████████
-  Assume how spaces               Observe how spaces
-  should be used                  are actually used
+│◄─────── viewport width ────────►│
+│                                  │ gradient
+│  ┌──────┐  ┌──────┐  ┌──────┐   │ fade ──► bento columns continue...
+│  │Felles│  │Archi │  │A Place│   │  ░░░
+│  │      │  │  AR  │  │to Work│   │  ░ "More projects →"
+│  │      │  │      │  │      │   │  ░░░
+│  └──────┘  └──────┘  └──────┘   │
+│         FEATURED TRIO            │
 ```
-
-- Each pair is a single row with an arrow or animated slide on scroll
-- The "old" text fades/dims while the "new" text becomes prominent
-- Feels more like a design process diagram than a data table
-
----
-
-### Proposal C: Combined — Full-Width Stacked Layout
-
-Instead of side-by-side, stack the two sections vertically within the viewport:
-
-**Top half:** "My Approach" as shift arrows (Proposal B)
-**Bottom half:** "Ways to Work Together" as timeline (Proposal A)
-
-This uses the full viewport width for both elements and gives each more breathing room.
-
----
-
-### Proposal D: New Title
-
-The section title "Ways of Working" is generic. Alternatives that better communicate the philosophy:
-
-- "A Different Lens" — positions the approach as perspective shift
-- "From Convention to Insight" — directly states the transformation
-- "How I Think Differently" — personal and direct
-- "Rethinking the Standard" — implies challenging norms
-
----
-
-### Recommendation
-
-Combine **Proposal A** (timeline for engagements) + **Proposal B** (shift diagram for approach comparison) + a stronger title. This creates two distinct visual elements that both use the architectural/wireframe design language already established on the page, while making the content feel dynamic rather than static.
 
 ### Technical scope
-- Single file edit: `src/components/About.tsx`
-- Framer Motion scroll-triggered animations (already in use)
-- SVG for timeline line and nodes
-- No new dependencies
+
+- **Single file edit**: `src/components/Projects.tsx`
+- Define `featuredIds = ["felles", "archi-ar", "a-place-to-work"]`
+- Split `allProjects` into `featured` and `rest` arrays
+- Render featured as 3 equal flex children before the bento columns
+- Add a fixed-position gradient overlay div on the right edge of the scroll container
+- Use `scrollRef` scroll event listener to fade out the indicator after ~200px of scroll
+- Reuse existing `ProjectTile` component for featured cards (already has hover effects)
+- `buildLayout` only receives the non-featured projects
 
