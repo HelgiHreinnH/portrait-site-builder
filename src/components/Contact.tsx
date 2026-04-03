@@ -25,7 +25,7 @@ export function Contact() {
           transition={{ ...smooth }}
           className="flex flex-col justify-center max-w-xl"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-4">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
             Let's Talk
           </h2>
           <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-6">

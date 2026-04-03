@@ -35,7 +35,7 @@ export function About() {
             <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
               05 — A Different Lens
             </p>
-            <h2 className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-foreground mb-6">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-6">
               From Convention to Insight
             </h2>
 

@@ -185,11 +185,20 @@ export function Projects() {
           {/* Header */}
           <div className="flex items-end justify-between mb-4 shrink-0">
             <div>
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={smooth}
+                className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2"
+              >
+                04 — Projects
+              </motion.p>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={smooth}
+                transition={{ ...smooth, delay: 0.05 }}
                 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground"
               >
                 Examples
