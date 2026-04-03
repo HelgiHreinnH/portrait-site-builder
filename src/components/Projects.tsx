@@ -78,35 +78,49 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
   return (
     <button
       onClick={onClick}
-      className="group relative block overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
+      className="group relative flex flex-col overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
     >
-      <img
-        src={project.heroImage}
-        alt={project.title}
-        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
-
-      <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
-        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
-          {project.number}
-        </span>
-        <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
-          {project.outcome}
-        </span>
+      {/* Image area — 2/3 height */}
+      <div className="relative w-full flex-[2] min-h-0 overflow-hidden">
+        <img
+          src={project.heroImage}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+        />
+        <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
+          <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
+            {project.number}
+          </span>
+          <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+            {project.outcome}
+          </span>
+        </div>
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <ArrowUpRight size={16} className="text-primary-foreground" />
+        </div>
       </div>
 
-      <div className="absolute bottom-4 left-4 right-4 transition-transform duration-500 group-hover:translate-y-[-2px]">
-        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
+      {/* Info area — 1/3 height, white background */}
+      <div className="flex-[1] bg-background px-5 py-4 flex flex-col justify-center gap-1.5">
+        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
           {project.client}
         </p>
-        <h3 className="font-display text-base md:text-lg font-semibold text-primary-foreground leading-tight">
+        <h3 className="font-display text-base md:text-lg font-semibold text-foreground leading-tight">
           {project.title}
         </h3>
-      </div>
-
-      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <ArrowUpRight size={16} className="text-primary-foreground" />
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+          {project.subtitle}
+        </p>
+        <div className="flex flex-wrap gap-1.5 mt-1">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </button>
   );
@@ -286,7 +300,7 @@ export function Projects() {
                     viewport={{ once: true, margin: "-30px" }}
                     transition={{ ...smooth, delay: i * 0.08 }}
                     className="flex-shrink-0 h-full"
-                    style={{ width: 340 }}
+                    style={{ width: 380 }}
                   >
                     <FeaturedCard
                       project={project}
