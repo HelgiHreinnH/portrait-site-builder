@@ -1,67 +1,84 @@
 
 
-## Redesign: Three Fields — Isometric 3D Blocks
+## Brainstorm: Redesigning the "My Approach" Section
 
-### Concept
+### Heuristic Analysis of Current Design
 
-Replace the current Venn diagram with three interlocking isometric blocks rendered using CSS transforms (no WebGL needed). Each block represents People, Buildings, and Technology, arranged so they visually interlock — communicating that the three disciplines fit together spatially.
+Looking at the screenshot and code, the current section has two issues:
 
-### Layout
+1. **"Ways of Working" (left)** — The comparison table is functional but visually static. The strikethrough text feels negative rather than showing progression. It reads like a spreadsheet, not a design portfolio.
+
+2. **"Ways to Work Together" (right)** — Four stacked cards with duration badges. It works but feels like a list — no visual hierarchy or flow between the engagement types.
+
+3. **Overall** — Both halves use different visual languages (table vs cards) but neither connects to the architectural/wireframe aesthetic established in the "Three Fields" and "Methodology" sections. There is also a lot of empty space in the bottom half of the viewport.
+
+---
+
+### Proposal A: "Ways to Work Together" as a Horizontal Timeline
+
+Replace the stacked cards with a horizontal timeline that shows engagement types ordered by duration — from shortest (Advisory) to longest (Full-Scope). This communicates progression and scale.
 
 ```text
-┌──────────────────────────────────────────────────────────┐
-│  Three Fields. One Approach.                             │
-│  Subtitle text...                                        │
-│                                                          │
-│         ┌──────┐                                         │
-│        /      /│  ← People (blue-light)                  │
-│       /──────/ │                                         │
-│       │      │/┌──────┐                                  │
-│       └──────┘/      /│  ← Technology (sage)             │
-│         ┌────/──────/ │                                  │
-│        /    │      │/                                    │
-│       /─────└──────┘   Detail panel:                     │
-│       │     │          Title, description, tags           │
-│       │     │/                                           │
-│       └─────┘  ← Buildings (steel)                       │
-│                                                          │
-│  ─── People · Buildings · Technology                     │
-└──────────────────────────────────────────────────────────┘
+Advisory        Product Sprint     Strategic Brief     Full-Scope Project
+  Ongoing         2–6 weeks          4–8 weeks          3–12 months
+    ●────────────────●────────────────●────────────────────●
+    |                |                |                    |
+  Workshops &     Rapid proto-     Clarity before      End-to-end
+  frameworks      typing           commitment          delivery
 ```
 
-### Implementation
+- Thin connecting line with dot nodes — matches the wireframe language
+- Hover a node to expand its description
+- Mono labels for durations, display font for titles
 
-**File: `src/components/Services.tsx`** — full rewrite
+---
 
-1. **CSS-only isometric blocks** — no 3D library needed
-   - Use CSS `transform: rotateX(…) rotateY(…) rotateZ(…)` with `transform-style: preserve-3d` to create three cube-like blocks
-   - Each block is a div with three visible faces (top, left, right) using the existing accent colors
-   - Blocks are staggered and slightly overlapping to create a physical interlocking feeling
+### Proposal B: "Ways of Working" as a Before/After Shift Diagram
 
-2. **Three blocks arrangement**
-   - Stacked/offset in an isometric grid pattern — like architectural building blocks
-   - People block (top-left), Buildings block (bottom-center), Technology block (top-right)
-   - Positioned so edges touch or overlap, showing they connect
+Replace the comparison table with an animated "shift" visualization — each row is a horizontal bar that slides from the traditional position (left, muted) to the new approach (right, bold). This communicates transformation rather than a static comparison.
 
-3. **Hover interaction with Framer Motion**
-   - Hovering a block lifts it slightly (translateY) and brightens it
-   - Non-hovered blocks dim and shift down subtly
-   - Detail panel on the right updates with the hovered field's discipline, description, and tags (same AnimatePresence pattern as current)
+```text
+  TRADITIONAL                          MY APPROACH
+  ░░░░░░░░░░░░░░░░  ──────────►  ████████████████████
+  Assume how spaces               Observe how spaces
+  should be used                  are actually used
+```
 
-4. **Colors** — map existing accents to block faces:
-   - People: `#D5DEF4` (light blue) with darker variants for side faces
-   - Buildings: `#B8C9EE` (steel blue) with darker variants
-   - Technology: `#DCE8E6` (sage) with darker variants
+- Each pair is a single row with an arrow or animated slide on scroll
+- The "old" text fades/dims while the "new" text becomes prominent
+- Feels more like a design process diagram than a data table
 
-5. **Responsive behavior**
-   - Desktop: blocks on the left, detail panel on the right (same 50/50 split)
-   - Mobile: blocks scale down and stack above the detail panel
+---
 
-6. **Keep existing data** — reuse `services` array, section header, and bottom footer
+### Proposal C: Combined — Full-Width Stacked Layout
 
-### Technical details
-- Pure CSS transforms for isometric effect — no `@react-three/fiber` or WebGL
-- Framer Motion `motion.div` for hover lift/dim animations
-- Each block face is an absolutely positioned div with skew/rotate transforms
-- No new dependencies required
+Instead of side-by-side, stack the two sections vertically within the viewport:
+
+**Top half:** "My Approach" as shift arrows (Proposal B)
+**Bottom half:** "Ways to Work Together" as timeline (Proposal A)
+
+This uses the full viewport width for both elements and gives each more breathing room.
+
+---
+
+### Proposal D: New Title
+
+The section title "Ways of Working" is generic. Alternatives that better communicate the philosophy:
+
+- "A Different Lens" — positions the approach as perspective shift
+- "From Convention to Insight" — directly states the transformation
+- "How I Think Differently" — personal and direct
+- "Rethinking the Standard" — implies challenging norms
+
+---
+
+### Recommendation
+
+Combine **Proposal A** (timeline for engagements) + **Proposal B** (shift diagram for approach comparison) + a stronger title. This creates two distinct visual elements that both use the architectural/wireframe design language already established on the page, while making the content feel dynamic rather than static.
+
+### Technical scope
+- Single file edit: `src/components/About.tsx`
+- Framer Motion scroll-triggered animations (already in use)
+- SVG for timeline line and nodes
+- No new dependencies
 
