@@ -9,6 +9,7 @@ export interface ProjectData {
   id: string;
   number: string;
   client: string;
+  clientLogo?: string;
   title: string;
   subtitle: string;
   year: string;
