@@ -5,8 +5,8 @@ const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
 export function Contact() {
   return (
-    <section id="contact" className="h-full flex flex-col justify-center py-10 md:py-14 bg-muted/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 justify-center">
+    <section id="contact" className="h-full flex flex-col py-12 md:py-16 bg-muted/50">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-14 flex flex-col flex-1 min-h-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
