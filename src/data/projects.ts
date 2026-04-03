@@ -9,6 +9,7 @@ export interface ProjectData {
   id: string;
   number: string;
   client: string;
+  clientLogo?: string;
   title: string;
   subtitle: string;
   year: string;
@@ -55,8 +56,10 @@ const IMG_BEUMER =
   "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const IMG_AEC =
   "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
+const UBI_BUCKET = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/projects/Ubiqisense";
+const IMG_UBIQISENSE_LOGO = `${UBI_BUCKET}/logo.png`;
 const IMG_UBIQISENSE =
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080";
+  `${UBI_BUCKET}/Figma%20design%20-%20Ubi%20NEW%20Landing.pngDashboard.png`;
 const FELLES_BUCKET = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/projects/Felles";
 const IMG_FELLES = `${FELLES_BUCKET}/felles%20landing%20page.png`;
 
@@ -384,6 +387,7 @@ export const projects: Record<string, ProjectData> = {
     id: "ubiqisense",
     number: "07",
     client: "Ubiqisense",
+    clientLogo: IMG_UBIQISENSE_LOGO,
     title: "Data From Sensor to Decision",
     subtitle: "UI design for an occupancy sensor platform. Complex spatial data systems translated into clear, actionable interfaces.",
     year: "2020–2021",
@@ -426,9 +430,12 @@ export const projects: Record<string, ProjectData> = {
       { metric: "Output", value: "Platform UI", description: "Complete interface for occupancy data platform" },
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600",
+      { src: `${UBI_BUCKET}/Figma%20design%20-%20Ubi%20NEW%20Landing.pngDashboard.png`, caption: "Landing page and dashboard — main platform overview" },
+      { src: `${UBI_BUCKET}/Figma%20design%20-%20Ubi%20NEW%20Landing.pngDashboard-1.png`, caption: "Dashboard variant — detailed occupancy data views" },
+      { src: `${UBI_BUCKET}/Figma%20design%20-%20Ubi%20NEW%20Landing.pngDashboard-2.png`, caption: "Dashboard variant — alternative data layout" },
+      { src: `${UBI_BUCKET}/01.1%20-%20Dashboard_%20History%20Log%20view.png`, caption: "History log view — temporal occupancy data exploration" },
+      { src: `${UBI_BUCKET}/01.1%20-%20Dashboard_%20History%20Log%20view%202.png`, caption: "History log view — extended timeline analysis" },
+      { src: `${UBI_BUCKET}/Screenshot%202024-10-11%20at%2013.58.24.jpeg.png`, caption: "Platform screenshot — real-world usage context" },
     ],
     relatedProjects: ["aec-hackathon", "felles"],
     tier: 2,

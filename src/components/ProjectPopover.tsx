@@ -36,6 +36,13 @@ function OverviewSlide({ project }: { project: ProjectData }) {
 
       {/* Right — info */}
       <div className="p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+        {project.clientLogo && (
+          <img
+            src={project.clientLogo}
+            alt={`${project.client} logo`}
+            className="h-8 w-auto object-contain mb-4 opacity-70"
+          />
+        )}
         <div className="flex items-center gap-3 mb-3">
           <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
             {project.number} — {project.client}
