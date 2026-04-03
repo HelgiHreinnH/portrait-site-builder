@@ -7,17 +7,6 @@ export function Contact() {
   return (
     <section id="contact" className="h-full flex flex-col justify-center py-10 md:py-14 bg-muted/50">
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 justify-center">
-        {/* Header label */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ ...smooth }}
-          className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-8 shrink-0"
-        >
-          06 — Contact
-        </motion.p>
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,6 +14,9 @@ export function Contact() {
           transition={{ ...smooth }}
           className="flex flex-col justify-center max-w-xl"
         >
+          <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+            06 — Contact
+          </p>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
             Let's Talk
           </h2>
