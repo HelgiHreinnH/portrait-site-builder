@@ -55,8 +55,10 @@ const IMG_BEUMER =
   "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
 const IMG_AEC =
   "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
+const UBI_BUCKET = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/projects/Ubiqisense";
+const IMG_UBIQISENSE_LOGO = `${UBI_BUCKET}/logo.png`;
 const IMG_UBIQISENSE =
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080";
+  `${UBI_BUCKET}/Figma%20design%20-%20Ubi%20NEW%20Landing.pngDashboard.png`;
 const FELLES_BUCKET = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/projects/Felles";
 const IMG_FELLES = `${FELLES_BUCKET}/felles%20landing%20page.png`;
 
