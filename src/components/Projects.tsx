@@ -300,7 +300,7 @@ export function Projects() {
                     viewport={{ once: true, margin: "-30px" }}
                     transition={{ ...smooth, delay: i * 0.08 }}
                     className="flex-shrink-0 h-full"
-                    style={{ width: 340 }}
+                    style={{ width: 380 }}
                   >
                     <FeaturedCard
                       project={project}
