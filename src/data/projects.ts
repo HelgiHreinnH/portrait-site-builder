@@ -387,6 +387,7 @@ export const projects: Record<string, ProjectData> = {
     id: "ubiqisense",
     number: "07",
     client: "Ubiqisense",
+    clientLogo: IMG_UBIQISENSE_LOGO,
     title: "Data From Sensor to Decision",
     subtitle: "UI design for an occupancy sensor platform. Complex spatial data systems translated into clear, actionable interfaces.",
     year: "2020–2021",
