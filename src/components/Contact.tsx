@@ -12,7 +12,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ ...smooth }}
-          className="flex flex-col justify-center max-w-xl"
+          className="flex flex-col max-w-xl"
         >
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
             06 — Contact
