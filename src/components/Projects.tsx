@@ -1,10 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { projects, projectOrder, type ProjectData } from "@/data/projects";
 import { ProjectPopover } from "./ProjectPopover";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
+
+/* ── Featured project IDs ── */
+const featuredIds = ["felles", "archi-ar", "a-place-to-work"];
 
 /* ── Tile types ── */
 type TileType =
@@ -27,70 +30,87 @@ const fillerContent: FillerBase[] = [
 
 type Column = { widthPx: number; tiles: TileType[]; offsetY?: number };
 
-function buildLayout(allProjects: ProjectData[]): Column[] {
-  const byTier: Record<number, ProjectData[]> = { 1: [], 2: [], 3: [] };
-  allProjects.forEach((p) => byTier[p.tier]?.push(p));
-
+function buildBentoLayout(restProjects: ProjectData[]): Column[] {
   let fi = 0;
   const filler = (h: number): TileType => {
     const f = fillerContent[fi++ % fillerContent.length];
     return { ...f, h } as TileType;
   };
 
-  const t1 = byTier[1];
-  const t2 = byTier[2];
-  const t3 = byTier[3];
-
   const columns: Column[] = [];
 
-  // — Before the fold: 4 Tier-1 projects prominent —
+  // Distribute remaining projects across columns with organic sizing
+  const chunks: ProjectData[][] = [];
+  for (let i = 0; i < restProjects.length; i += 2) {
+    chunks.push(restProjects.slice(i, i + 2));
+  }
 
-  columns.push({ widthPx: 360, offsetY: 0, tiles: [
-    { kind: "project", project: t1[0], w: 360, h: 0.6 },
-    filler(0.32),
-  ]});
+  const widths = [400, 320, 360, 280, 340];
+  const offsets = [0, 24, 8, 36, 16];
 
-  columns.push({ widthPx: 280, offsetY: 32, tiles: [
-    filler(0.2),
-    { kind: "project", project: t1[1], w: 280, h: 0.52 },
-    { kind: "project", project: t2[0], w: 280, h: 0.22 },
-  ]});
+  chunks.forEach((chunk, ci) => {
+    const w = widths[ci % widths.length];
+    const offset = offsets[ci % offsets.length];
+    const tiles: TileType[] = [];
 
-  columns.push({ widthPx: 400, offsetY: 8, tiles: [
-    { kind: "project", project: t1[2], w: 400, h: 0.58 },
-    { kind: "project", project: t2[1], w: 400, h: 0.34 },
-  ]});
+    if (ci % 3 === 0) tiles.push(filler(0.18));
 
-  columns.push({ widthPx: 300, offsetY: 44, tiles: [
-    { kind: "project", project: t1[3], w: 300, h: 0.5 },
-    filler(0.2),
-    { kind: "project", project: t2[2], w: 300, h: 0.22 },
-  ]});
+    chunk.forEach((p, pi) => {
+      tiles.push({
+        kind: "project",
+        project: p,
+        w,
+        h: pi === 0 ? 0.5 : 0.34,
+      });
+    });
 
-  // — Behind the fold: Tier 2 + 3 projects —
+    if (ci % 2 === 1) tiles.push(filler(0.22));
 
-  columns.push({ widthPx: 340, offsetY: 16, tiles: [
-    filler(0.18),
-    { kind: "project", project: t2[3] || t2[0], w: 340, h: 0.44 },
-    { kind: "project", project: t3[0], w: 340, h: 0.3 },
-  ]});
-
-  columns.push({ widthPx: 240, offsetY: 28, tiles: [
-    { kind: "project", project: t3[1], w: 240, h: 0.34 },
-    filler(0.26),
-    { kind: "project", project: t3[2], w: 240, h: 0.32 },
-  ]});
-
-  columns.push({ widthPx: 320, offsetY: 4, tiles: [
-    { kind: "project", project: t3[3] || t3[0], w: 320, h: 0.42 },
-    filler(0.22),
-    { kind: "project", project: t2[2] || t2[0], w: 320, h: 0.28 },
-  ]});
+    columns.push({ widthPx: w, offsetY: offset, tiles });
+  });
 
   return columns;
 }
 
 /* ── Sub-components ── */
+
+function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative block overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
+    >
+      <img
+        src={project.heroImage}
+        alt={project.title}
+        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
+
+      <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
+          {project.number}
+        </span>
+        <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+          {project.outcome}
+        </span>
+      </div>
+
+      <div className="absolute bottom-4 left-4 right-4 transition-transform duration-500 group-hover:translate-y-[-2px]">
+        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-1">
+          {project.client}
+        </p>
+        <h3 className="font-display text-base md:text-lg font-semibold text-primary-foreground leading-tight">
+          {project.title}
+        </h3>
+      </div>
+
+      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <ArrowUpRight size={16} className="text-primary-foreground" />
+      </div>
+    </button>
+  );
+}
 
 function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; onClick: () => void }) {
   return (
@@ -167,9 +187,28 @@ function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
 
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const [showIndicator, setShowIndicator] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
+
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
-  const columns = buildLayout(allProjects);
+  const featured = allProjects.filter((p) => featuredIds.includes(p.id));
+  const rest = allProjects.filter((p) => !featuredIds.includes(p.id));
+  const bentoColumns = buildBentoLayout(rest);
+
+  const handleScroll = useCallback(() => {
+    if (scrollRef.current && scrollRef.current.scrollLeft > 200) {
+      setShowIndicator(false);
+    } else {
+      setShowIndicator(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const scroll = (dir: "left" | "right") => {
     scrollRef.current?.scrollBy({
@@ -180,8 +219,8 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="h-full flex flex-col justify-center px-6 md:px-14 overflow-hidden py-12 md:py-16">
-        <div className="max-w-[1800px] mx-auto w-full flex flex-col flex-1 min-h-0">
+      <section id="projects" className="h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-14 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto w-full flex flex-col flex-1 min-h-0">
           {/* Header */}
           <div className="flex items-end justify-between mb-4 shrink-0">
             <div>
@@ -230,45 +269,82 @@ export function Projects() {
             </div>
           </div>
 
-          {/* Horizontal scroll — organic bento */}
-          <div
-            ref={scrollRef}
-            className="overflow-x-auto overflow-y-hidden scrollbar-hide flex-1 min-h-0"
-            style={{ scrollbarWidth: "none" }}
-          >
-            <div className="flex gap-4 h-full min-w-max pr-10 items-start">
-              {columns.map((col, ci) => (
-                <motion.div
-                  key={ci}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ ...smooth, delay: ci * 0.06 }}
-                  className="flex-shrink-0 flex flex-col gap-3"
-                  style={{
-                    width: col.widthPx,
-                    height: `calc(100% - ${col.offsetY || 0}px)`,
-                    marginTop: col.offsetY || 0,
-                  }}
-                >
-                  {col.tiles.map((tile, ti) => (
-                    <div
-                      key={ti}
-                      className="min-h-0 overflow-hidden rounded-xl"
-                      style={{ flex: `${tile.h} 0 0%` }}
-                    >
-                      {tile.kind === "project" && (
-                        <ProjectTile
-                          tile={tile}
-                          onClick={() => setSelectedProject(tile.project)}
-                        />
-                      )}
-                      {tile.kind === "quote" && <QuoteTile tile={tile as TileType & { kind: "quote" }} />}
-                      {tile.kind === "stat" && <StatTile tile={tile as TileType & { kind: "stat" }} />}
-                    </div>
-                  ))}
-                </motion.div>
-              ))}
+          {/* Horizontal scroll container */}
+          <div className="relative flex-1 min-h-0">
+            <div
+              ref={scrollRef}
+              className="overflow-x-auto overflow-y-hidden scrollbar-hide h-full"
+              style={{ scrollbarWidth: "none" }}
+            >
+              <div className="flex gap-4 h-full min-w-max pr-10 items-start">
+                {/* Zone 1: Featured Trio */}
+                {featured.map((project, i) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ ...smooth, delay: i * 0.08 }}
+                    className="flex-shrink-0 h-full"
+                    style={{ width: 340 }}
+                  >
+                    <FeaturedCard
+                      project={project}
+                      onClick={() => setSelectedProject(project)}
+                    />
+                  </motion.div>
+                ))}
+
+                {/* Spacer between zones */}
+                <div className="flex-shrink-0 w-8" />
+
+                {/* Zone 2: Bento Grid */}
+                {bentoColumns.map((col, ci) => (
+                  <motion.div
+                    key={`bento-${ci}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ ...smooth, delay: (featured.length + ci) * 0.06 }}
+                    className="flex-shrink-0 flex flex-col gap-3"
+                    style={{
+                      width: col.widthPx,
+                      height: `calc(100% - ${col.offsetY || 0}px)`,
+                      marginTop: col.offsetY || 0,
+                    }}
+                  >
+                    {col.tiles.map((tile, ti) => (
+                      <div
+                        key={ti}
+                        className="min-h-0 overflow-hidden rounded-xl"
+                        style={{ flex: `${tile.h} 0 0%` }}
+                      >
+                        {tile.kind === "project" && (
+                          <ProjectTile
+                            tile={tile}
+                            onClick={() => setSelectedProject(tile.project)}
+                          />
+                        )}
+                        {tile.kind === "quote" && <QuoteTile tile={tile as TileType & { kind: "quote" }} />}
+                        {tile.kind === "stat" && <StatTile tile={tile as TileType & { kind: "stat" }} />}
+                      </div>
+                    ))}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Scroll indicator — right-edge gradient */}
+            <div
+              className="absolute top-0 right-0 bottom-0 w-[120px] pointer-events-none flex items-center justify-end pr-4 transition-opacity duration-500"
+              style={{
+                background: "linear-gradient(to left, hsl(var(--background)) 0%, transparent 100%)",
+                opacity: showIndicator ? 1 : 0,
+              }}
+            >
+              <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground whitespace-nowrap">
+                More projects →
+              </span>
             </div>
           </div>
         </div>
