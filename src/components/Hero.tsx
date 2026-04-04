@@ -52,7 +52,7 @@ export function Hero() {
                   </div>
 
                   <div className="mt-6">
-                    <p className="text-sm md:text-base leading-relaxed text-muted-foreground max-w-md">
+                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
                       Architect with 10+ years across workplace strategy, digital product, and hands-on design.
                     </p>
 
