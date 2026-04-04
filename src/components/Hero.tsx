@@ -33,9 +33,9 @@ export function Hero() {
           </h2>
         </div>
 
-        <div className="flex-1 grid grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] gap-8 md:gap-12 items-start min-h-0">
+        <div className="flex-1 grid grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] gap-8 md:gap-12 items-center min-h-0">
           {/* Left column - buttons */}
-          <div className="flex flex-col gap-3 pt-4">
+          <div className="flex flex-col gap-3">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
@@ -67,9 +67,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...smooth, delay: 0.3 }}
-            className="relative flex flex-col min-h-0"
+            className="relative h-[calc(100vh-380px)] min-h-[300px]"
           >
-            <div className="relative overflow-hidden flex-1 min-h-0 -mt-8" style={{ maxHeight: "calc(100vh - 320px)" }}>
+            <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">
                 {activeView === "image" && (
                   <motion.div
@@ -78,13 +78,18 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={fade}
-                    className="w-full h-full"
+                    className="w-full h-full relative"
                   >
                     <img
                       src={portraitImage}
                       alt="Helgi Hreinn Hjálmarsson"
                       className="w-full h-full object-cover object-top"
                     />
+                    {/* Name overlay at bottom of image */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/80 to-transparent px-4 py-3">
+                      <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
+                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
+                    </div>
                   </motion.div>
                 )}
 
@@ -186,17 +191,11 @@ export function Hero() {
                 )}
               </AnimatePresence>
             </div>
-
-            {/* Name below image */}
-            <div className="mt-3 px-1">
-              <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
-              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
-            </div>
           </motion.div>
         </div>
 
         {/* Client marquee */}
-        <div className="pt-4 overflow-hidden shrink-0">
+        <div className="pt-2 overflow-hidden shrink-0 mt-auto">
           <div className="flex animate-marquee whitespace-nowrap">
             {[...CLIENTS, ...CLIENTS].map((client, i) => (
               <span key={i} className="font-mono text-[11px] tracking-[0.3em] uppercase text-foreground/20 mx-4">
