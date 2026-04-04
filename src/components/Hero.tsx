@@ -131,7 +131,7 @@ export function Hero() {
             onMouseLeave={() => setHovered(false)}
           >
 
-            <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer">
+            <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer -mt-4">
               <img
                 src={portraitImage}
                 alt="Helgi Hreinn Hjálmarsson"
