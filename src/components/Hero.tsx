@@ -19,21 +19,20 @@ export function Hero() {
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-24 pb-6 h-full flex flex-col">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-12 md:pt-16 pb-6 h-full flex flex-col">
+        {/* Standardized header */}
+        <div className="my-[48px]">
+          <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
+            Short introduction
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
+            I turn knowledge<br />into design
+          </h2>
+        </div>
+
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center min-h-0">
           {/* Left side - swaps between "What I do" and "About me" on image hover */}
           <div className="flex flex-col justify-center min-h-[300px]">
-            {/* Standardized header */}
-            <div className="mb-8">
-              <div className="my-[48px]">
-                <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
-                  Short introduction
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
-                  I turn knowledge<br />into design
-                </h2>
-              </div>
-            </div>
 
             <AnimatePresence mode="wait">
               {!hovered ? (
