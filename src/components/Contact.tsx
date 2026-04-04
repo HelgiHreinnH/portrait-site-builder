@@ -198,6 +198,7 @@ export function Contact() {
             </form>
           </motion.div>
         </div>
+        </div>
 
         {/* Footer */}
         <motion.div
