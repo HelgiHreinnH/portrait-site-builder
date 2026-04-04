@@ -3,16 +3,19 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import portraitImage from "@/assets/portrait_image.png";
 
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
+const fade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
 
 const CLIENTS = [
   "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
   "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
 ];
 
+type ActiveView = "image" | "what" | "who";
+
 export function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [hovered, setHovered] = useState(false);
+  const [activeView, setActiveView] = useState<ActiveView>("image");
 
   return (
     <section className="relative h-full overflow-hidden" ref={ref}>
@@ -30,129 +33,164 @@ export function Hero() {
           </h2>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center min-h-0">
-          {/* Left side - swaps between "What I do" and "About me" on image hover */}
-          <div className="flex flex-col justify-center min-h-[300px]">
-
-            <AnimatePresence mode="wait">
-              {!hovered ? (
-                <motion.div
-                  key="what-i-do"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex flex-col"
-                >
-                  <div className="mb-6">
-                    <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                      What do I do
-                    </span>
-                    <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
-                  </div>
-
-                  <div className="flex flex-col gap-0">
-                    <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
-                      <span className="text-muted-foreground font-light">I turn </span>
-                      <span>knowledge</span>
-                    </div>
-                    <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
-                      <span className="text-muted-foreground font-light">into </span>
-                      <span>design</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-6">
-                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
-                      Architect with 10+ years across workplace strategy, digital product, and hands-on design.
-                    </p>
-
-                    <div className="flex gap-8 mt-6">
-                      {[
-                        { v: "10+", l: "Years" },
-                        { v: "10K+", l: "People impacted" },
-                        { v: "3", l: "Countries" },
-                      ].map(({ v, l }) => (
-                        <div key={l} className="text-center">
-                          <div className="font-display text-3xl font-bold text-foreground">{v}</div>
-                          <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">{l}</div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <p className="font-mono text-[10px] leading-relaxed text-muted-foreground max-w-md mt-6">
-                      Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
-                    </p>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="about-me"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex flex-col"
-                >
-                  <div className="mb-6">
-                    <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                      Who am I
-                    </span>
-                    <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
-                  </div>
-
-                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
-                    Helgi Hreinn<br />Hjálmarsson
-                  </h2>
-
-                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
-                    Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy, digital product development, and hands-on design.
-                  </p>
-                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
-                    I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a fundamental sense that the same challenges look very different depending on perspective — and that this understanding is one of the most useful tools you can bring to a project.
-                  </p>
-                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-5 max-w-md">
-                    I work with my hands as well as with data and strategy. Carpentry, joinery, surface treatment. The same analytical approach, a different material.
-                  </p>
-
-                  <div className="space-y-2">
-                    {[
-                      { l: "Email", v: "helgihreinn@me.com" },
-                      { l: "Phone", v: "+45 4083 1842" },
-                      { l: "Base", v: "Copenhagen, Denmark" },
-                    ].map(({ l, v }) => (
-                      <div key={l} className="flex items-center gap-4 border-b border-border pb-2">
-                        <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-14">{l}</span>
-                        <span className="text-sm text-foreground">{v}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+        <div className="flex-1 grid grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] gap-8 md:gap-12 items-start min-h-0">
+          {/* Left column - buttons */}
+          <div className="flex flex-col gap-3 pt-4">
+            <button
+              onMouseEnter={() => setActiveView("what")}
+              onMouseLeave={() => setActiveView("image")}
+              onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
+              className={`text-left font-display text-lg md:text-xl tracking-tight transition-colors duration-300 px-[4px] py-2 border-l-2 ${
+                activeView === "what"
+                  ? "border-foreground text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              What do I do<span className="text-user-blue">?</span>
+            </button>
+            <button
+              onMouseEnter={() => setActiveView("who")}
+              onMouseLeave={() => setActiveView("image")}
+              onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
+              className={`text-left font-display text-lg md:text-xl tracking-tight transition-colors duration-300 px-[4px] py-2 border-l-2 ${
+                activeView === "who"
+                  ? "border-foreground text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Who am I<span className="text-user-blue">?</span>
+            </button>
           </div>
 
-          {/* Right side - Portrait (static, triggers left-side swap on hover) */}
+          {/* Right column - image or content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...smooth, delay: 0.3 }}
             className="relative flex flex-col min-h-0"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
           >
+            <div className="relative overflow-hidden flex-1 min-h-0 -mt-8" style={{ maxHeight: "calc(100vh - 320px)" }}>
+              <AnimatePresence mode="wait">
+                {activeView === "image" && (
+                  <motion.div
+                    key="image"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={fade}
+                    className="w-full h-full"
+                  >
+                    <img
+                      src={portraitImage}
+                      alt="Helgi Hreinn Hjálmarsson"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </motion.div>
+                )}
 
-            <div className="relative overflow-hidden flex-1 min-h-0 cursor-pointer -mt-4">
-              <img
-                src={portraitImage}
-                alt="Helgi Hreinn Hjálmarsson"
-                className="w-full h-full object-cover object-top"
-                style={{ maxHeight: "calc(100vh - 280px)" }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
-              </div>
+                {activeView === "what" && (
+                  <motion.div
+                    key="what"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={fade}
+                    className="flex flex-col justify-center p-8 md:p-12 h-full"
+                  >
+                    <div className="mb-6">
+                      <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
+                        What do I do
+                      </span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
+                    </div>
+
+                    <div className="flex flex-col gap-0">
+                      <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
+                        <span className="text-muted-foreground font-light">I turn </span>
+                        <span>knowledge</span>
+                      </div>
+                      <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
+                        <span className="text-muted-foreground font-light">into </span>
+                        <span>design</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6">
+                      <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
+                        Architect with 10+ years across workplace strategy, digital product, and hands-on design.
+                      </p>
+
+                      <div className="flex gap-8 mt-6">
+                        {[
+                          { v: "10+", l: "Years" },
+                          { v: "10K+", l: "People impacted" },
+                          { v: "3", l: "Countries" },
+                        ].map(({ v, l }) => (
+                          <div key={l} className="text-center">
+                            <div className="font-display text-3xl font-bold text-foreground">{v}</div>
+                            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">{l}</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <p className="font-mono text-[10px] leading-relaxed text-muted-foreground max-w-md mt-6">
+                        Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {activeView === "who" && (
+                  <motion.div
+                    key="who"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={fade}
+                    className="flex flex-col justify-center p-8 md:p-12 h-full"
+                  >
+                    <div className="mb-6">
+                      <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
+                        Who am I
+                      </span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
+                    </div>
+
+                    <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
+                      Helgi Hreinn<br />Hjálmarsson
+                    </h2>
+
+                    <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
+                      Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy, digital product development, and hands-on design.
+                    </p>
+                    <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
+                      I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a fundamental sense that the same challenges look very different depending on perspective.
+                    </p>
+                    <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-5 max-w-md">
+                      I work with my hands as well as with data and strategy. Carpentry, joinery, surface treatment. The same analytical approach, a different material.
+                    </p>
+
+                    <div className="space-y-2">
+                      {[
+                        { l: "Email", v: "helgihreinn@me.com" },
+                        { l: "Phone", v: "+45 4083 1842" },
+                        { l: "Base", v: "Copenhagen, Denmark" },
+                      ].map(({ l, v }) => (
+                        <div key={l} className="flex items-center gap-4 border-b border-border pb-2">
+                          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-14">{l}</span>
+                          <span className="text-sm text-foreground">{v}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Name below image */}
+            <div className="mt-3 px-1">
+              <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
+              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
             </div>
           </motion.div>
         </div>
