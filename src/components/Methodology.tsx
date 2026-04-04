@@ -62,9 +62,9 @@ export function Methodology() {
   return (
     <section
       id="methodology"
-      className="relative h-full flex flex-col justify-center py-10 md:py-14 px-6 md:px-14 overflow-hidden"
+      className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 overflow-hidden"
     >
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full">
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="mb-6 md:mb-8 shrink-0">
           <motion.div
@@ -72,14 +72,15 @@ export function Methodology() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="my-[48px]"
           >
-            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
               03 — Methodology
             </p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
               How I Work
             </h2>
-            <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
+            <p className="max-w-xl leading-relaxed text-muted-foreground text-base px-[4px]">
               Every project — whether it's about a workplace, an app, or a strategy — goes through the same four phases. It's not a model. It's a way of thinking.
             </p>
           </motion.div>

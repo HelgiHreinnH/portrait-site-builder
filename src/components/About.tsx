@@ -79,8 +79,8 @@ export function About() {
       </div>
 
       {/* Bottom container — 1/3 height, subtle background */}
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-14 bg-muted/40">
-        <div className="max-w-[1400px] mx-auto w-full">
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-10 bg-muted/40">
+        <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
