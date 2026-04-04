@@ -47,7 +47,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ ...smooth, delay: 0.1 }}
-              className="w-full max-w-2xl border border-border rounded-xl px-8 py-6 bg-background"
+              className="w-full max-w-3xl border border-border rounded-xl px-8 py-6 bg-background"
             >
               <div className="flex flex-col gap-3">
                 {shifts.map(([from, to], i) => (
