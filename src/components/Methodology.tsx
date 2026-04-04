@@ -79,7 +79,7 @@ export function Methodology() {
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
               How I Work
             </h2>
-            <p className="max-w-xl leading-relaxed text-muted-foreground text-sm">
+            <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
               Every project — whether it's about a workplace, an app, or a strategy — goes through the same four phases. It's not a model. It's a way of thinking.
             </p>
           </motion.div>
