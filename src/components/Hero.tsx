@@ -5,10 +5,6 @@ import portraitImage from "@/assets/portrait_image.png";
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
 const fade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
 
-const CLIENTS = [
-  "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
-  "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
-];
 
 type ActiveView = "image" | "what" | "who";
 
