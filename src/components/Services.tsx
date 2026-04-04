@@ -35,8 +35,8 @@ const BLOCK_H = 170;
 
 const blockPositions = [
   { x: 0, y: 0 },
-  { x: 80, y: 100 },
-  { x: 220, y: 50 },
+  { x: 100, y: 130 },
+  { x: 280, y: 60 },
 ];
 
 function WireframeBlock({
