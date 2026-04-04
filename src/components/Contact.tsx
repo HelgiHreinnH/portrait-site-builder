@@ -54,7 +54,7 @@ export function Contact() {
         </motion.div>
 
         {/* Two-column layout */}
-        <div className="flex-1 flex items-center min-h-0">
+        <div className="flex-1 flex items-center min-h-0 -mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full">
           {/* Left — Info + portrait */}
           <motion.div
