@@ -95,72 +95,75 @@ export function QuoteBreak() {
     <section ref={ref} className="relative h-full flex flex-col justify-center items-center overflow-hidden">
       <div className="absolute inset-0 bg-background" />
 
-      <div className="relative z-10 w-full max-w-7xl px-6 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
-            turn
-          </span>
-        </motion.div>
+      <div className="relative z-10 w-full max-w-7xl px-6 md:px-10 flex items-end justify-between">
+        {/* Left — animated headline */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+              turn
+            </span>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
-            <AnimatePresence mode="wait">
-              <TypewriterWord
-                key={`top-${topIndex}`}
-                text={TOP_WORDS[topIndex]}
-                typing={topTyping}
-                onComplete={onTopComplete}
-              />
-            </AnimatePresence>
-          </span>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
+              <AnimatePresence mode="wait">
+                <TypewriterWord
+                  key={`top-${topIndex}`}
+                  text={TOP_WORDS[topIndex]}
+                  typing={topTyping}
+                  onComplete={onTopComplete}
+                />
+              </AnimatePresence>
+            </span>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
-            into
-          </span>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+              into
+            </span>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
-            <AnimatePresence mode="wait">
-              <TypewriterWord
-                key={`bottom-${bottomIndex}`}
-                text={BOTTOM_WORDS[bottomIndex]}
-                typing={bottomTyping}
-                onComplete={onBottomComplete}
-              />
-            </AnimatePresence>
-          </span>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
+              <AnimatePresence mode="wait">
+                <TypewriterWord
+                  key={`bottom-${bottomIndex}`}
+                  text={BOTTOM_WORDS[bottomIndex]}
+                  typing={bottomTyping}
+                  onComplete={onBottomComplete}
+                />
+              </AnimatePresence>
+            </span>
+          </motion.div>
+        </div>
 
-        {/* Subtitle — directly below the headline */}
+        {/* Right — subtitle */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ ...smooth, delay: 0.5 }}
-          className="mt-8 font-mono text-base md:text-lg font-medium leading-relaxed text-muted-foreground flex flex-col gap-1"
+          className="hidden md:flex flex-col gap-1 font-mono text-base md:text-lg font-medium leading-relaxed text-muted-foreground text-right pb-2"
         >
           <span>I analyse. I strategise.</span>
           <span>I design. I deliver.</span>
