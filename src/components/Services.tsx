@@ -177,7 +177,7 @@ export function Services() {
                 <h3 className="font-display text-foreground text-2xl md:text-3xl font-bold tracking-tight mt-1 mb-3">
                   {activeService.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm mb-4 max-w-md">
+                <p className="text-muted-foreground leading-relaxed text-base mb-4 max-w-md">
                   {activeService.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
