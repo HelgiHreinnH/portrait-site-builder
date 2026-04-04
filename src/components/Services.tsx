@@ -145,7 +145,7 @@ export function Services() {
           transition={{ ...smooth, delay: 0.1 }}
           className="w-full md:w-1/2 flex justify-center items-center"
         >
-          <div className="relative" style={{ width: 440, height: 260 }}>
+          <div className="relative" style={{ width: 560, height: 340 }}>
             {services.map((service, i) => (
               <WireframeBlock
                 key={i}
