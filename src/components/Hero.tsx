@@ -31,12 +31,12 @@ export function Hero() {
 
         <div className="flex-1 grid grid-cols-2 gap-8 md:gap-12 items-center min-h-0">
           {/* Left column - buttons */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-8 items-center justify-center">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
-              className={`text-left font-display text-lg md:text-xl tracking-tight transition-colors duration-300 px-[4px] py-2 border-l-2 ${
+              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 px-6 py-3 border-b-2 ${
                 activeView === "what"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
@@ -48,7 +48,7 @@ export function Hero() {
               onMouseEnter={() => setActiveView("who")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
-              className={`text-left font-display text-lg md:text-xl tracking-tight transition-colors duration-300 px-[4px] py-2 border-l-2 ${
+              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 px-6 py-3 border-b-2 ${
                 activeView === "who"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
