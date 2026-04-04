@@ -135,7 +135,7 @@ export function Hero() {
               <img
                 src={portraitImage}
                 alt="Helgi Hreinn Hjálmarsson"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
                 style={{ maxHeight: "calc(100vh - 280px)" }}
               />
               <div className="absolute bottom-0 left-0 right-0 p-4">
