@@ -5,10 +5,6 @@ import portraitImage from "@/assets/portrait_image.png";
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
 const fade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
 
-const CLIENTS = [
-  "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
-  "Global Brand HQ", "International Finance", "Industrial Group", "Colliers", "Ubiqisense", "Bygningsstyrelsen",
-];
 
 type ActiveView = "image" | "what" | "who";
 
@@ -194,17 +190,6 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Client marquee */}
-        <div className="pt-2 overflow-hidden shrink-0 mt-auto">
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...CLIENTS, ...CLIENTS].map((client, i) => (
-              <span key={i} className="font-mono text-[11px] tracking-[0.3em] uppercase text-foreground/20 mx-4">
-                {client}
-                <span className="ml-4">·</span>
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
