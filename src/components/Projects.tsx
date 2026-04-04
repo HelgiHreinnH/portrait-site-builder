@@ -261,7 +261,7 @@ export function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: 0.1 }}
-                className="mt-1 text-sm leading-relaxed text-muted-foreground max-w-lg"
+                className="mt-1 text-base leading-relaxed text-muted-foreground max-w-lg"
               >
                 {allProjects.length} projects across workplace strategy, digital product, and making.
               </motion.p>

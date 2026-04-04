@@ -47,7 +47,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ ...smooth, delay: 0.1 }}
-              className="w-full max-w-2xl border border-border rounded-xl px-8 py-6 bg-background"
+              className="w-full max-w-3xl border border-border rounded-xl px-8 py-6 bg-background"
             >
               <div className="flex flex-col gap-3">
                 {shifts.map(([from, to], i) => (
@@ -59,14 +59,14 @@ export function About() {
                     transition={{ ...smooth, delay: 0.08 * i }}
                     className="flex items-center gap-3 md:gap-4"
                   >
-                    <span className="flex-1 text-sm text-muted-foreground/50 text-right font-mono leading-tight hidden md:block">
+                    <span className="flex-1 text-base text-muted-foreground/50 text-right font-mono leading-tight hidden md:block">
                       {from}
                     </span>
                     <svg width="32" height="12" viewBox="0 0 32 12" className="shrink-0 text-muted-foreground/30">
                       <line x1="0" y1="6" x2="26" y2="6" stroke="currentColor" strokeWidth="1" />
                       <polygon points="26,3 32,6 26,9" fill="currentColor" />
                     </svg>
-                    <span className="flex-1 text-sm font-medium text-foreground leading-tight">
+                    <span className="flex-1 text-base font-medium text-foreground leading-tight">
                       {to}
                     </span>
                   </motion.div>

@@ -79,7 +79,7 @@ export function Methodology() {
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
               How I Work
             </h2>
-            <p className="max-w-xl leading-relaxed text-muted-foreground text-sm">
+            <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
               Every project — whether it's about a workplace, an app, or a strategy — goes through the same four phases. It's not a model. It's a way of thinking.
             </p>
           </motion.div>
@@ -230,7 +230,7 @@ export function Methodology() {
                   {phases[activePhase].subtitle}
                 </p>
 
-                <p className="leading-relaxed mb-4 text-muted-foreground text-sm">
+                <p className="leading-relaxed mb-4 text-muted-foreground text-base">
                   {phases[activePhase].description}
                 </p>
 
@@ -238,7 +238,7 @@ export function Methodology() {
                   {phases[activePhase].methods.map((m) => (
                     <span
                       key={m}
-                      className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
+                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
                     >
                       {m}
                     </span>

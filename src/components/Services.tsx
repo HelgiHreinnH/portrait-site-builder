@@ -30,13 +30,13 @@ const services = [
   },
 ];
 
-const BLOCK_W = 200;
-const BLOCK_H = 130;
+const BLOCK_W = 260;
+const BLOCK_H = 170;
 
 const blockPositions = [
   { x: 0, y: 0 },
-  { x: 80, y: 100 },
-  { x: 220, y: 50 },
+  { x: 100, y: 130 },
+  { x: 280, y: 60 },
 ];
 
 function WireframeBlock({
@@ -131,7 +131,7 @@ export function Services() {
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
             Three Fields. One Approach.
           </h2>
-          <p className="max-w-xl leading-relaxed text-muted-foreground text-sm">
+          <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
             I've worked across three disciplines for over 10 years. Not as a generalist without depth — but because the best solutions emerge where people, physical space, and digital systems meet.
           </p>
         </motion.div>
@@ -145,7 +145,7 @@ export function Services() {
           transition={{ ...smooth, delay: 0.1 }}
           className="w-full md:w-1/2 flex justify-center items-center"
         >
-          <div className="relative" style={{ width: 440, height: 260 }}>
+          <div className="relative" style={{ width: 560, height: 340 }}>
             {services.map((service, i) => (
               <WireframeBlock
                 key={i}
@@ -177,14 +177,14 @@ export function Services() {
                 <h3 className="font-display text-foreground text-2xl md:text-3xl font-bold tracking-tight mt-1 mb-3">
                   {activeService.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm mb-4 max-w-md">
+                <p className="text-muted-foreground leading-relaxed text-base mb-4 max-w-md">
                   {activeService.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {activeService.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[9px] tracking-wider uppercase rounded-full px-3 py-1 bg-foreground/[0.06] text-foreground/70"
+                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-3 py-1 bg-foreground/[0.06] text-foreground/70"
                     >
                       {tag}
                     </span>
@@ -200,7 +200,7 @@ export function Services() {
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
-                <p className="text-muted-foreground/50 text-sm font-mono tracking-wide">
+                <p className="text-muted-foreground/50 text-base font-mono tracking-wide">
                   Hover a block to explore
                 </p>
               </motion.div>

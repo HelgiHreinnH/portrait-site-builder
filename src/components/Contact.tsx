@@ -20,24 +20,24 @@ export function Contact() {
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
             Let's Talk
           </h2>
-          <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-6">
+          <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-8">
             I'm available for advisory work, project collaborations, and strategic partnerships within workplace design, digital product development, and user experience. Based in Copenhagen. Working across Denmark, Iceland, and the Nordics.
           </p>
 
-          <div className="space-y-3 mb-6">
+          <div className="space-y-4 mb-8">
             {[
               { Icon: Mail, label: "helgihreinn@me.com", href: "mailto:helgihreinn@me.com" },
               { Icon: Phone, label: "+45 4083 1842", href: "tel:+4540831842" },
               { Icon: MapPin, label: "Copenhagen, Denmark", href: null },
             ].map(({ Icon, label, href }) => (
               <div key={label} className="flex items-center gap-3">
-                <Icon size={14} className="text-muted-foreground" />
+                <Icon size={16} className="text-muted-foreground" />
                 {href ? (
-                  <a href={href} className="text-sm text-foreground hover:text-user-blue transition-colors duration-300">
+                  <a href={href} className="text-base text-foreground hover:text-user-blue transition-colors duration-300">
                     {label}
                   </a>
                 ) : (
-                  <span className="text-sm text-foreground">{label}</span>
+                  <span className="text-base text-foreground">{label}</span>
                 )}
               </div>
             ))}
@@ -53,9 +53,9 @@ export function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border px-3 py-1.5"
+                className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border px-3 py-1.5"
               >
-                <Icon size={12} />
+                <Icon size={13} />
                 {label}
               </a>
             ))}
