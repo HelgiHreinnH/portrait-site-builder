@@ -184,7 +184,7 @@ export function Services() {
                   {activeService.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[9px] tracking-wider uppercase rounded-full px-3 py-1 bg-foreground/[0.06] text-foreground/70"
+                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-3 py-1 bg-foreground/[0.06] text-foreground/70"
                     >
                       {tag}
                     </span>
