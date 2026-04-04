@@ -96,7 +96,7 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={fade}
-                    className="flex flex-col justify-center p-8 md:p-12 h-full"
+                    className="flex flex-col justify-center p-4 md:p-6 h-full"
                   >
                     <div className="mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
@@ -148,7 +148,7 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={fade}
-                    className="flex flex-col justify-center p-8 md:p-12 h-full"
+                    className="flex flex-col justify-center p-4 md:p-6 h-full"
                   >
                     <div className="mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
