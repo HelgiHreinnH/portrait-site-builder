@@ -54,7 +54,8 @@ export function Contact() {
         </motion.div>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 shrink-0">
+        <div className="flex-1 flex items-center min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full">
           {/* Left — Info + portrait */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -193,6 +194,7 @@ export function Contact() {
               </button>
             </form>
           </motion.div>
+        </div>
         </div>
 
         {/* Footer */}
