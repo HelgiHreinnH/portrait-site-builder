@@ -95,7 +95,7 @@ export function QuoteBreak() {
     <section ref={ref} className="relative h-full flex flex-col justify-center items-center overflow-hidden">
       <div className="absolute inset-0 bg-background" />
 
-      <div className="relative z-10 w-full max-w-5xl px-6 md:px-10">
+      <div className="relative z-10 w-full max-w-7xl px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
