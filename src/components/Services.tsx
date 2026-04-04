@@ -124,7 +124,7 @@ export function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="my-[24px]"
+          className="my-[48px]"
         >
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
             02 — Three Fields
