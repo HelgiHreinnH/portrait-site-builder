@@ -62,7 +62,7 @@ export function Methodology() {
   return (
     <section
       id="methodology"
-      className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 overflow-hidden"
+      className="relative h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10 overflow-hidden"
     >
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         {/* Header */}

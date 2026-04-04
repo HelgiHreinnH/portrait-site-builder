@@ -233,39 +233,27 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-14 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto w-full flex flex-col flex-1 min-h-0">
+      <section id="projects" className="h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto w-full flex flex-col flex-1 min-h-0">
           {/* Header */}
           <div className="flex items-end justify-between mb-4 shrink-0">
-            <div>
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={smooth}
-                className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2"
-              >
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={smooth}
+              className="my-[48px]"
+            >
+              <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
                 04 — Projects
-              </motion.p>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...smooth, delay: 0.05 }}
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground"
-              >
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
                 Examples
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...smooth, delay: 0.1 }}
-                className="mt-1 text-base leading-relaxed text-muted-foreground max-w-lg"
-              >
+              </h2>
+              <p className="text-base leading-relaxed text-muted-foreground max-w-lg px-[4px]">
                 {allProjects.length} projects across workplace strategy, digital product, and making.
-              </motion.p>
-            </div>
+              </p>
+            </motion.div>
 
             <div className="hidden md:flex gap-2">
               <button
