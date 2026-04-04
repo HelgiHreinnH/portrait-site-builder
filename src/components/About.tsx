@@ -24,18 +24,19 @@ export function About() {
   return (
     <section id="about" className="h-full flex flex-col">
       {/* Top container — 2/3 height */}
-      <div className="flex-[2] flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-14">
-        <div className="max-w-[1400px] mx-auto w-full h-full flex flex-col">
+      <div className="flex-[2] flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10">
+        <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={smooth}
+            className="my-[48px]"
           >
-            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+            <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
               05 — A Different Lens
             </p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0 px-[4px]">
               From Convention to Insight
             </h2>
           </motion.div>
