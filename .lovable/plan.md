@@ -1,59 +1,30 @@
 
 
-## Hero Section Restructure — Buttons Left, Content/Image Right
+## Layout Analysis
 
-### Current State
-The Hero section has a two-column grid: left column shows "What I do" or "Who am I" text content (toggled by hovering the right-side image), right column shows the portrait. The toggle is driven by mouse enter/leave on the image container.
+Looking at the three screenshots, here are the core problems:
 
-### What Changes
+1. **Massive vertical gap** between the buttons and the image — the buttons sit at the top of the grid while the image floats in the lower half, creating a disconnected feel
+2. **Image container is too tall and unanchored** — it uses `flex-1` with `maxHeight: calc(100vh - 320px)` which makes the image drift downward in the available space
+3. **Buttons feel orphaned** — they're tiny text elements in a huge empty left column with no visual relationship to the right content
+4. **Name + marquee collision** — "Helgi Hreinn Hjálmarsson" and the client marquee crowd together at the bottom
+5. **Text content views lack vertical grounding** — when "What I do" or "Who am I" content shows, it floats in a tall container with uneven whitespace
 
-**New layout: Left column = header + two buttons, Right column = image OR text content**
+## Proposed Fix
 
-```text
-┌──────────────────────────────────────────────────────┐
-│  LEFT COLUMN (narrow)     │  RIGHT COLUMN (wide)      │
-│                           │                           │
-│  [What do I do?]          │  Default: Portrait image  │
-│  [Who am I?]              │  Hover btn 1: "What I do" │
-│                           │    text replaces image    │
-│                           │  Hover btn 2: "Who am I"  │
-│                           │    text replaces image    │
-│                           │                           │
-│                           │  Name below image area    │
-└──────────────────────────────────────────────────────┘
-```
+Restructure the grid area so buttons and content are vertically centered together, with a controlled-height right column.
 
-### Interaction Logic
+### Changes to `src/components/Hero.tsx`:
 
-- State: `activeView: "image" | "what" | "who"` (default: `"image"`)
-- **Button "What do I do?"**: `onMouseEnter` and `onClick` set `activeView = "what"`; `onMouseLeave` sets `activeView = "image"`
-- **Button "Who am I?"**: `onMouseEnter` and `onClick` set `activeView = "who"`; `onMouseLeave` sets `activeView = "image"`
-- Clicking outside the buttons or moving mouse away returns to image view
+1. **Vertically center the grid content** — change `items-start` to `items-center` so buttons align with the middle of the right column
+2. **Give the right column a fixed height** instead of `flex-1` — use something like `h-[calc(100vh-380px)]` so the image/content area has a predictable, proportional size
+3. **Remove `-mt-8`** from the image container — no longer needed once the layout is properly centered
+4. **Move the name inside the image container** as an overlay at the bottom, so it doesn't add extra height below
+5. **Add subtle vertical centering padding to the button column** so buttons feel anchored to the content area
+6. **Tighten the marquee spacing** — reduce `pt-4` to `pt-2` and pin it to the bottom with `mt-auto`
 
-### Right Column Content
+The result: buttons and image/content share a visual center line, the image fills a well-proportioned rectangle, and the name overlays the image bottom rather than pushing everything down.
 
-Three states with AnimatePresence transitions:
-
-1. **`"image"` (default)**: Portrait image visible, name overlay at bottom
-2. **`"what"`**: Image hidden. Show the "What do I do?" content — the italic question header, "I turn knowledge into design" large text, description, stats (10+, 10K+, 3), and the mono architect tagline
-3. **`"who"`**: Image hidden. Show the "Who am I?" content — "Helgi Hreinn Hjálmarsson" heading, three bio paragraphs, and the email/phone/base contact rows
-
-### Left Column Content
-
-- Keep the standardized header (already there, above the grid)
-- Two styled buttons stacked vertically, matching the site's mono/architectural aesthetic
-- Active button gets a highlighted state (filled background or underline)
-
-### Files to Edit
-
-- `src/components/Hero.tsx` — single file, full restructure of the grid content
-
-### Technical Details
-
-- Replace `hovered` boolean with `activeView` state
-- Move all "What I do" and "Who am I" content from the left column into the right column
-- Left column becomes just the two buttons
-- Right column uses `AnimatePresence mode="wait"` to swap between image and text
-- Buttons use `onMouseEnter`/`onMouseLeave` plus `onClick` for both hover and click interaction
-- Grid proportions change from `grid-cols-2` to something like `grid-cols-[auto_1fr]` or `grid-cols-[200px_1fr]` to give more space to the right content area
+### File to edit
+- `src/components/Hero.tsx`
 
