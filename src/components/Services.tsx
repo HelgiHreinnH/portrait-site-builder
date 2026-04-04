@@ -30,8 +30,8 @@ const services = [
   },
 ];
 
-const BLOCK_W = 200;
-const BLOCK_H = 130;
+const BLOCK_W = 260;
+const BLOCK_H = 170;
 
 const blockPositions = [
   { x: 0, y: 0 },
