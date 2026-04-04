@@ -230,7 +230,7 @@ export function Methodology() {
                   {phases[activePhase].subtitle}
                 </p>
 
-                <p className="leading-relaxed mb-4 text-muted-foreground text-sm">
+                <p className="leading-relaxed mb-4 text-muted-foreground text-base">
                   {phases[activePhase].description}
                 </p>
 
