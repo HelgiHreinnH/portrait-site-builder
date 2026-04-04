@@ -36,14 +36,14 @@ export function Contact() {
 
   return (
     <section id="contact" className="h-full flex flex-col pt-12 md:pt-16 bg-muted/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 w-full justify-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 w-full">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ ...smooth }}
-          className="mb-8 shrink-0"
+          className="my-[48px] shrink-0"
         >
           <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
             06 — Contact
