@@ -116,9 +116,9 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-14 overflow-hidden"
+      className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 overflow-hidden"
     >
-      <div className="mb-6 max-w-[1400px] mx-auto w-full shrink-0">
+      <div className="mb-6 max-w-7xl mx-auto w-full shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ export function Services() {
         </motion.div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full flex-1 min-h-0 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+      <div className="max-w-7xl mx-auto w-full flex-1 min-h-0 flex flex-col md:flex-row items-center gap-6 md:gap-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
