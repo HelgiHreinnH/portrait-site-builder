@@ -25,7 +25,7 @@ export function About() {
     <section id="about" className="h-full flex flex-col">
       {/* Top container — 2/3 height */}
       <div className="flex-[2] flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-14">
-        <div className="max-w-[1400px] mx-auto w-full">
+        <div className="max-w-[1400px] mx-auto w-full h-full flex flex-col">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -35,34 +35,45 @@ export function About() {
             <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
               05 — A Different Lens
             </p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0">
               From Convention to Insight
             </h2>
-
-            <div className="flex flex-col gap-2.5">
-              {shifts.map(([from, to], i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ ...smooth, delay: 0.08 * i }}
-                  className="flex items-center gap-3 md:gap-4"
-                >
-                  <span className="flex-1 text-sm text-muted-foreground/50 text-right font-mono leading-tight hidden md:block">
-                    {from}
-                  </span>
-                  <svg width="32" height="12" viewBox="0 0 32 12" className="shrink-0 text-muted-foreground/30">
-                    <line x1="0" y1="6" x2="26" y2="6" stroke="currentColor" strokeWidth="1" />
-                    <polygon points="26,3 32,6 26,9" fill="currentColor" />
-                  </svg>
-                  <span className="flex-1 text-sm font-medium text-foreground leading-tight">
-                    {to}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
+
+          {/* Centered card */}
+          <div className="flex-1 flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ ...smooth, delay: 0.1 }}
+              className="w-full max-w-2xl border border-border rounded-xl px-8 py-6 bg-background"
+            >
+              <div className="flex flex-col gap-3">
+                {shifts.map(([from, to], i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ ...smooth, delay: 0.08 * i }}
+                    className="flex items-center gap-3 md:gap-4"
+                  >
+                    <span className="flex-1 text-sm text-muted-foreground/50 text-right font-mono leading-tight hidden md:block">
+                      {from}
+                    </span>
+                    <svg width="32" height="12" viewBox="0 0 32 12" className="shrink-0 text-muted-foreground/30">
+                      <line x1="0" y1="6" x2="26" y2="6" stroke="currentColor" strokeWidth="1" />
+                      <polygon points="26,3 32,6 26,9" fill="currentColor" />
+                    </svg>
+                    <span className="flex-1 text-sm font-medium text-foreground leading-tight">
+                      {to}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
