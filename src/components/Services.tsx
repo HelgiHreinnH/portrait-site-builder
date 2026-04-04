@@ -36,7 +36,7 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative h-full flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 overflow-hidden"
+      className="relative h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10 overflow-hidden"
     >
       <div className="mb-6 max-w-7xl mx-auto w-full shrink-0">
         <motion.div
