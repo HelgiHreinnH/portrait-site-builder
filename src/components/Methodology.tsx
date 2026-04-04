@@ -238,7 +238,7 @@ export function Methodology() {
                   {phases[activePhase].methods.map((m) => (
                     <span
                       key={m}
-                      className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
+                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
                     >
                       {m}
                     </span>

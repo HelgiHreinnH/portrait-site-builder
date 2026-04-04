@@ -92,29 +92,17 @@ export function QuoteBreak() {
   }, []);
 
   return (
-    <section ref={ref} className="relative h-full flex flex-col justify-center items-start overflow-hidden">
+    <section ref={ref} className="relative h-full flex flex-col justify-center items-center overflow-hidden">
       <div className="absolute inset-0 bg-background" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ ...smooth, delay: 0.4 }}
-        className="absolute bottom-[20vh] right-8 md:right-16 max-w-sm font-mono text-sm md:text-base font-medium leading-relaxed text-muted-foreground text-right flex flex-col gap-1"
-      >
-        <span>I analyse. I strategise.</span>
-        <span>I design. I deliver.</span>
-      </motion.div>
-
-      <div className="relative z-10 max-w-7xl px-6 md:px-10">
+      <div className="relative z-10 w-full max-w-5xl px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
-          className="ml-0 md:ml-4"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
             turn
           </span>
         </motion.div>
@@ -124,9 +112,8 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="ml-6 md:ml-16"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
             <AnimatePresence mode="wait">
               <TypewriterWord
                 key={`top-${topIndex}`}
@@ -143,9 +130,8 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          className="ml-10 md:ml-28"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
             into
           </span>
         </motion.div>
@@ -155,9 +141,8 @@ export function QuoteBreak() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
-          className="ml-3 md:ml-10"
         >
-          <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
+          <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
             <AnimatePresence mode="wait">
               <TypewriterWord
                 key={`bottom-${bottomIndex}`}
@@ -167,6 +152,18 @@ export function QuoteBreak() {
               />
             </AnimatePresence>
           </span>
+        </motion.div>
+
+        {/* Subtitle — directly below the headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ ...smooth, delay: 0.5 }}
+          className="mt-8 font-mono text-base md:text-lg font-medium leading-relaxed text-muted-foreground flex flex-col gap-1"
+        >
+          <span>I analyse. I strategise.</span>
+          <span>I design. I deliver.</span>
         </motion.div>
       </div>
 

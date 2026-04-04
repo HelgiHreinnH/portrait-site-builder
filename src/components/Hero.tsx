@@ -94,13 +94,13 @@ export function Hero() {
                     Helgi Hreinn<br />Hjálmarsson
                   </h2>
 
-                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-3 max-w-md">
+                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
                     Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy, digital product development, and hands-on design.
                   </p>
-                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-3 max-w-md">
+                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
                     I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a fundamental sense that the same challenges look very different depending on perspective — and that this understanding is one of the most useful tools you can bring to a project.
                   </p>
-                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground mb-5 max-w-md">
+                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-5 max-w-md">
                     I work with my hands as well as with data and strategy. Carpentry, joinery, surface treatment. The same analytical approach, a different material.
                   </p>
 

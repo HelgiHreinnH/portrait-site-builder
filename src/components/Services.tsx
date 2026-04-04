@@ -200,7 +200,7 @@ export function Services() {
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
-                <p className="text-muted-foreground/50 text-sm font-mono tracking-wide">
+                <p className="text-muted-foreground/50 text-base font-mono tracking-wide">
                   Hover a block to explore
                 </p>
               </motion.div>
