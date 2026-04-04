@@ -1,138 +1,59 @@
 
 
-## Visual Layout and Communication Review
+## Hero Section Restructure — Buttons Left, Content/Image Right
 
-### Section-by-Section Analysis
+### Current State
+The Hero section has a two-column grid: left column shows "What I do" or "Who am I" text content (toggled by hovering the right-side image), right column shows the portrait. The toggle is driven by mouse enter/leave on the image container.
 
-Based on full-width 1920x1080 screenshots of all 7 sections, here are the issues and proposed fixes:
+### What Changes
 
----
+**New layout: Left column = header + two buttons, Right column = image OR text content**
 
-### 1. QuoteBreak (Hero Animation) — "TURN COMPLEXITY INTO STRATEGY"
+```text
+┌──────────────────────────────────────────────────────┐
+│  LEFT COLUMN (narrow)     │  RIGHT COLUMN (wide)      │
+│                           │                           │
+│  [What do I do?]          │  Default: Portrait image  │
+│  [Who am I?]              │  Hover btn 1: "What I do" │
+│                           │    text replaces image    │
+│                           │  Hover btn 2: "Who am I"  │
+│                           │    text replaces image    │
+│                           │                           │
+│                           │  Name below image area    │
+└──────────────────────────────────────────────────────┘
+```
 
-**Issues identified:**
-- The animated text block sits flush-left with small padding (`px-6 md:px-10`), leaving the entire right 60% of the screen empty on wide displays
-- "I analyse. I strategise." text is pushed to the far bottom-right corner — visually disconnected from the main headline
-- The staggered left-margin on each line (`ml-0`, `ml-6`, `ml-10`, `ml-3`) creates a diagonal drift that looks accidental at 1920px rather than intentional
-- Text size at `lg:text-8xl` (~96px) is fine but could benefit from being larger given how much empty space surrounds it
+### Interaction Logic
 
-**Proposed changes:**
-- Center the entire text block horizontally on the page (use `mx-auto text-center` or `flex items-center justify-center`)
-- Move "I analyse. I strategise." closer to the main headline — position it directly below or as a subtitle, left-aligned under the centered block
-- Increase text to `text-[7rem]` or `text-[8rem]` on xl screens for more visual weight
-- Remove the staggered margins — align all lines to the same left edge for a cleaner, more architectural feel
+- State: `activeView: "image" | "what" | "who"` (default: `"image"`)
+- **Button "What do I do?"**: `onMouseEnter` and `onClick` set `activeView = "what"`; `onMouseLeave` sets `activeView = "image"`
+- **Button "Who am I?"**: `onMouseEnter` and `onClick` set `activeView = "who"`; `onMouseLeave` sets `activeView = "image"`
+- Clicking outside the buttons or moving mouse away returns to image view
 
----
+### Right Column Content
 
-### 2. Hero (Portrait + "What I do") 
+Three states with AnimatePresence transitions:
 
-**Issues identified:**
-- Content sits vertically centered but feels cramped in the left column
-- The "What do I do?" question and body text are adequate size but the stats row (10+, 10K+, 3) feels small
-- Layout balance is reasonable — no major changes needed
+1. **`"image"` (default)**: Portrait image visible, name overlay at bottom
+2. **`"what"`**: Image hidden. Show the "What do I do?" content — the italic question header, "I turn knowledge into design" large text, description, stats (10+, 10K+, 3), and the mono architect tagline
+3. **`"who"`**: Image hidden. Show the "Who am I?" content — "Helgi Hreinn Hjálmarsson" heading, three bio paragraphs, and the email/phone/base contact rows
 
-**Proposed changes:**
-- Slight increase in body text from `text-sm md:text-base` to `text-base md:text-lg` for better readability
-- Stats numbers could go from `text-2xl` to `text-3xl`
+### Left Column Content
 
----
+- Keep the standardized header (already there, above the grid)
+- Two styled buttons stacked vertically, matching the site's mono/architectural aesthetic
+- Active button gets a highlighted state (filled background or underline)
 
-### 3. Services ("Three Fields. One Approach.")
+### Files to Edit
 
-**Issues identified:**
-- Header position is correct (top-left, consistent padding)
-- The wireframe blocks are quite small and sit in the vertical center of a huge empty space
-- Description text `text-sm` is small for the available space
-- "Hover a block to explore" instruction is easily missed
+- `src/components/Hero.tsx` — single file, full restructure of the grid content
 
-**Proposed changes:**
-- Increase wireframe block size (currently 200x130px) to ~260x170px for better presence
-- Bump body text to `text-base` and tags from `text-[9px]` to `text-[10px]`
+### Technical Details
 
----
-
-### 4. Methodology ("How I Work")
-
-**Issues identified:**
-- Header position matches Services — good consistency
-- The circular diagram is vertically centered but the whole composition feels pushed slightly left
-- Body text is small (`text-sm`)
-- "Hover over a phase to explore" text is centered but feels lost in the right half
-
-**Proposed changes:**
-- Increase description text to `text-base`
-- Increase phase node label size slightly
-- Center the circle + detail panel composition better within the full width
-
----
-
-### 5. Projects ("Examples")
-
-**Issues identified:**
-- Header position is consistent with other sections — good
-- Featured cards look good at full width
-- The white info panel text is appropriately sized
-- Overall this section works well
-
-**Proposed changes:**
-- Minor: bump subtitle text from `text-sm` to `text-base`
-
----
-
-### 6. About ("From Convention to Insight")
-
-**Issues identified:**
-- Header is correctly positioned
-- The comparison card is nicely centered in the top 2/3
-- "Ways to Work Together" bottom section has good layout
-- The "from" text in the card wraps on the first item ("Assume how spaces should be used") — could use slightly wider card
-
-**Proposed changes:**
-- Widen card from `max-w-2xl` to `max-w-3xl` to prevent text wrapping
-- Bump text sizes in the card from `text-sm` to `text-base`
-
----
-
-### 7. Contact ("Let's Talk")
-
-**Issues identified:**
-- Header position is consistent
-- Content is all left-aligned in a narrow column with the right 60% completely empty
-- Text is small (`text-sm`)
-- Feels sparse and unfinished for a full-screen section
-
-**Proposed changes:**
-- Increase body text to `text-base md:text-lg`
-- Consider a two-column layout or centering the content to reduce the empty right side
-- Make contact info text slightly larger
-
----
-
-### Global Changes (All Sections)
-
-| Change | From | To |
-|--------|------|----|
-| Section body text | `text-sm` | `text-base` |
-| Section subtitle/description | `text-sm` | `text-base md:text-lg` |
-| Mono labels | `text-[9px]`-`text-[10px]` | `text-[10px]`-`text-[11px]` |
-| Header padding | `pt-12 md:pt-16 px-6 md:px-14` | Standardize across all sections |
-| Section title | `text-3xl md:text-4xl lg:text-5xl` | Keep (already strong) |
-
-### Priority Summary
-
-1. **QuoteBreak**: Center the animated headline, reposition "I analyse" text, increase font size — highest visual impact
-2. **Global text sizing**: Bump all body text from `text-sm` to `text-base` across all sections
-3. **Services**: Enlarge wireframe blocks
-4. **Contact**: Better use of full-width space
-5. **About**: Widen comparison card
-6. **Standardize padding**: Ensure identical top/left padding on every section header
-
-### Files to edit
-- `src/components/QuoteBreak.tsx` — center layout, reposition subtitle, larger text
-- `src/components/Hero.tsx` — bump text sizes
-- `src/components/Services.tsx` — larger blocks, larger text
-- `src/components/Methodology.tsx` — larger text, better centering
-- `src/components/Projects.tsx` — minor text bump
-- `src/components/About.tsx` — wider card, larger text
-- `src/components/Contact.tsx` — larger text, better layout
+- Replace `hovered` boolean with `activeView` state
+- Move all "What I do" and "Who am I" content from the left column into the right column
+- Left column becomes just the two buttons
+- Right column uses `AnimatePresence mode="wait"` to swap between image and text
+- Buttons use `onMouseEnter`/`onMouseLeave` plus `onClick` for both hover and click interaction
+- Grid proportions change from `grid-cols-2` to something like `grid-cols-[auto_1fr]` or `grid-cols-[200px_1fr]` to give more space to the right content area
 
