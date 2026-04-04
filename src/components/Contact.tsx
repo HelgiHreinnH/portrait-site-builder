@@ -55,35 +55,33 @@ export function Contact() {
 
         {/* Two-column layout */}
         <div className="flex-1 flex items-center min-h-0 -mt-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full">
-          {/* Left — Info + portrait */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full items-stretch">
+          {/* Left — Portrait + Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ ...smooth, delay: 0.1 }}
-            className="flex flex-col"
+            className="flex flex-col justify-between"
           >
-            <p className="text-base leading-relaxed text-muted-foreground mb-6 max-w-md px-[4px]">
-              I'm available for advisory work, project collaborations, and strategic partnerships within workplace design, digital product development, and user experience.
-            </p>
-
-            <div className="flex items-start gap-5 mb-6">
-              <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border border-border">
-                <img
-                  src={portraitImage}
-                  alt="Helgi Hreinn Hjálmarsson"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="flex flex-col justify-center">
-                <span className="font-display text-lg font-bold text-foreground">Helgi Hreinn Hjálmarsson</span>
-                <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Architect · Copenhagen
-                </span>
-              </div>
+            {/* Portrait */}
+            <div className="w-24 h-24 rounded-full overflow-hidden border border-border mb-4">
+              <img
+                src={portraitImage}
+                alt="Helgi Hreinn Hjálmarsson"
+                className="w-full h-full object-cover"
+              />
             </div>
 
+            {/* Name */}
+            <div className="mb-5">
+              <span className="font-display text-xl font-bold text-foreground block">Helgi Hreinn Hjálmarsson</span>
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                Architect · Copenhagen
+              </span>
+            </div>
+
+            {/* Contact details */}
             <div className="space-y-3 mb-6">
               {[
                 { Icon: Mail, label: "helgihreinn@me.com", href: "mailto:helgihreinn@me.com" },
@@ -103,7 +101,8 @@ export function Contact() {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            {/* Action buttons */}
+            <div className="flex flex-wrap gap-2 mt-auto">
               {[
                 { Icon: Github, label: "GitHub", href: "https://github.com/HelgiHreinnH" },
                 { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/helgihreinn" },
@@ -113,37 +112,41 @@ export function Contact() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border rounded px-3 py-1.5"
+                  className="group font-mono text-[10px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
                 >
-                  <Icon size={12} />
+                  <Icon size={14} className="group-hover:scale-110 transition-transform" />
                   {label}
                 </a>
               ))}
               <button
                 onClick={() => window.open("/cv.pdf", "_blank")}
-                className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border rounded px-3 py-1.5"
+                className="group font-mono text-[10px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
               >
-                <Download size={12} />
+                <Download size={14} className="group-hover:translate-y-0.5 transition-transform" />
                 Download CV
               </button>
               <button
                 onClick={handleShare}
-                className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 flex items-center gap-1.5 border border-border rounded px-3 py-1.5"
+                className="group font-mono text-[10px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
               >
-                <Share2 size={12} />
+                <Share2 size={14} className="group-hover:rotate-12 transition-transform" />
                 Share Profile
               </button>
             </div>
           </motion.div>
 
-          {/* Right — Contact form */}
+          {/* Right — Description + Contact form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ ...smooth, delay: 0.2 }}
-            className="flex flex-col"
+            className="flex flex-col justify-between"
           >
+            <p className="text-base leading-relaxed text-muted-foreground mb-6 max-w-md">
+              I'm available for advisory work, project collaborations, and strategic partnerships within workplace design, digital product development, and user experience.
+            </p>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
               <div>
                 <label className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
@@ -154,7 +157,7 @@ export function Contact() {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full border border-border rounded bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors"
+                  className="w-full border border-border rounded-lg bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors"
                   placeholder="Your name"
                 />
               </div>
@@ -167,7 +170,7 @@ export function Contact() {
                   required
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full border border-border rounded bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors"
+                  className="w-full border border-border rounded-lg bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
@@ -180,21 +183,20 @@ export function Contact() {
                   rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full border border-border rounded bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors resize-none"
+                  className="w-full border border-border rounded-lg bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors resize-none"
                   placeholder="Tell me about your project or idea..."
                 />
               </div>
               <button
                 type="submit"
                 disabled={sending}
-                className="flex items-center justify-center gap-2 bg-foreground text-background font-mono text-[11px] tracking-[0.2em] uppercase px-6 py-3 rounded hover:bg-foreground/90 transition-colors disabled:opacity-50"
+                className="group flex items-center justify-center gap-2 bg-foreground text-background font-mono text-[11px] tracking-[0.2em] uppercase px-6 py-3.5 rounded-lg hover:bg-foreground/90 transition-all duration-300 disabled:opacity-50 hover:shadow-md"
               >
-                <Send size={14} />
+                <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 {sending ? "Sending..." : "Send Message"}
               </button>
             </form>
           </motion.div>
-        </div>
         </div>
 
         {/* Footer */}
