@@ -172,7 +172,7 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
+                <label className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
                   Message
                 </label>
                 <textarea

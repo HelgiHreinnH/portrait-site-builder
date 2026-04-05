@@ -152,6 +152,7 @@ export function Methodology() {
                   }}
                   onMouseEnter={() => setActivePhase(i)}
                   onMouseLeave={() => setActivePhase(null)}
+                  onClick={() => setActivePhase(activePhase === i ? null : i)}
                 >
                   <motion.div
                     className="relative rounded-full px-5 py-2.5 bg-background border-2 border-border"

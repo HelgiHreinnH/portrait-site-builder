@@ -105,10 +105,10 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
         <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
           {project.client}
         </p>
-        <h3 className="font-display text-base md:text-lg font-semibold text-foreground leading-tight">
+        <h3 className="font-display text-sm sm:text-base md:text-lg font-semibold text-foreground leading-tight">
           {project.title}
         </h3>
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 sm:line-clamp-2">
           {project.subtitle}
         </p>
         <div className="flex flex-wrap gap-1.5 mt-1">
