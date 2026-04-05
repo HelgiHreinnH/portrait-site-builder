@@ -62,7 +62,7 @@ export function Contact() {
             className="flex flex-col justify-between"
           >
             {/* Portrait */}
-            <div className="w-24 h-24 rounded-full overflow-hidden border border-border mb-4">
+            <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-4">
               <img
                 src={portraitImage}
                 alt="Helgi Hreinn Hjálmarsson"
