@@ -33,25 +33,25 @@ export function Hero() {
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
-              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "what"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              What do I do<span className="text-user-blue">?</span>
+              What I do<span className="text-user-blue">.</span>
             </button>
             <button
               onMouseEnter={() => setActiveView("who")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
-              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "who"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              Who am I<span className="text-user-blue">?</span>
+              Who I am<span className="text-user-blue">.</span>
             </button>
           </div>
 
