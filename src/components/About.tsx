@@ -57,7 +57,7 @@ export function About() {
                     transition={{ ...smooth, delay: 0.08 * i }}
                     className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-4"
                   >
-                    <span className="flex-1 text-sm md:text-base text-muted-foreground/50 md:text-right font-mono leading-tight line-through decoration-muted-foreground/20">
+                    <span className="flex-1 text-sm md:text-base text-muted-foreground/60 md:text-right font-mono leading-tight line-through decoration-muted-foreground/30">
                       {from}
                     </span>
                     <svg width="32" height="12" viewBox="0 0 32 12" className="shrink-0 text-muted-foreground/30 hidden md:block">
