@@ -88,12 +88,12 @@ export function Services() {
 
 
                 {/* Title */}
-                <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-2 mb-1">
+                <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1 mb-0.5">
                   {service.title}
                 </h3>
 
                 {/* Discipline */}
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-4">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-2">
                   {service.discipline}
                 </span>
 
@@ -107,7 +107,7 @@ export function Services() {
                 </motion.p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-5">
+                <div className="flex flex-wrap gap-1.5 mt-3">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
