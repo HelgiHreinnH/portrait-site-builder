@@ -26,7 +26,7 @@ export function Hero() {
           </h2>
         </div>
 
-        <div className="flex-1 grid grid-cols-2 gap-8 md:gap-12 items-center min-h-0">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center min-h-0">
           {/* Left column - buttons */}
           <div className="flex flex-col gap-8 items-center justify-center">
             <button

@@ -59,7 +59,7 @@ export function Nav() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 h-16">
         {/* Logo */}
-        <button onClick={goHome} className="font-mono text-xs tracking-[0.3em] uppercase text-foreground">
+        <button onClick={goHome} className="font-mono text-xs tracking-[0.3em] uppercase text-foreground whitespace-nowrap">
           Helgi Hreinn
         </button>
 
