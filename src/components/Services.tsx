@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import servicePeople from "@/assets/service-people.jpg";
-import serviceBuildings from "@/assets/service-buildings.jpg";
-import serviceTechnology from "@/assets/service-technology.jpg";
+
+const STORAGE_BASE = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/site-images";
 
 const smooth = { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const };
 
@@ -14,6 +13,7 @@ const services = [
     tags: ["User Research", "Workshops", "Change Management", "Stakeholder Management"],
     description:
       "Analysis of human behaviour, workshop facilitation, organisational understanding, change management, and user involvement as a methodological foundation.",
+    image: `${STORAGE_BASE}/People.png`,
   },
   {
     number: "02",
@@ -22,6 +22,7 @@ const services = [
     tags: ["Space Planning", "Zone Strategy", "Workplace Design", "Design Briefs"],
     description:
       "Space planning, workplace strategy, zone design, user experience in physical environments, and architectural advisory from brief to delivery.",
+    image: `${STORAGE_BASE}/Buildings.png`,
   },
   {
     number: "03",
@@ -30,6 +31,7 @@ const services = [
     tags: ["UI/UX", "Data Visualisation", "Product Development", "PropTech"],
     description:
       "UI/UX design, data visualisation, digital product development, and PropTech. From concept sketch to fully built product.",
+    image: `${STORAGE_BASE}/Technology.png`,
   },
 ];
 
@@ -77,6 +79,16 @@ export function Services() {
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
               >
+                {/* Image */}
+                <div className="w-full aspect-[4/3] rounded-lg overflow-hidden mb-4">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
                 {/* Number */}
                 <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/40 uppercase">
                   {service.number}
