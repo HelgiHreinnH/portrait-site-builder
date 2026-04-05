@@ -118,7 +118,7 @@ export function About() {
                       <p className="font-display text-sm font-bold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors">
                         {item.title}
                       </p>
-                      <p className="font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground mb-1.5">
+                      <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-1.5">
                         {item.duration}
                       </p>
                       <motion.p

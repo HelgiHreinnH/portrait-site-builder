@@ -192,7 +192,7 @@ function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
         {tile.label}
       </span>
       {tile.sublabel && (
-        <span className="mt-0.5 font-mono text-[8px] tracking-[0.1em] uppercase text-primary-foreground/40">
+        <span className="mt-0.5 font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/40">
           {tile.sublabel}
         </span>
       )}
