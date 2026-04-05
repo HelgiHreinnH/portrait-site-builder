@@ -175,7 +175,7 @@ export function Methodology() {
           </div>
 
           {/* Mobile stacked view */}
-          <div className="flex flex-col gap-4 lg:hidden w-full max-w-md">
+          <div className="flex flex-col gap-4 md:hidden w-full max-w-md">
             {phases.map((phase, i) => (
               <motion.div
                 key={phase.num}
