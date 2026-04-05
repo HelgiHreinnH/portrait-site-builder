@@ -48,7 +48,15 @@ const phases = [
 
 export function Methodology() {
   const [activePhase, setActivePhase] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
 
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none)');
+    setIsTouch(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
   const radius = 180;
 
   const getPosition = (index: number) => {
