@@ -97,9 +97,9 @@ export function Hero() {
                   >
                     <div className="mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                        What do I do
+                        What I do
                       </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">.</span>
                     </div>
 
                     <div className="flex flex-col gap-0">
