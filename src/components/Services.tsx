@@ -86,10 +86,6 @@ export function Services() {
                   />
                 </div>
 
-                {/* Number */}
-                <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/40 uppercase">
-                  {service.number}
-                </span>
 
                 {/* Title */}
                 <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-2 mb-1">
