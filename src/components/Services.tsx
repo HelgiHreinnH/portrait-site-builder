@@ -79,6 +79,16 @@ export function Services() {
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
               >
+                {/* Image */}
+                <div className="w-full aspect-[4/3] rounded-lg overflow-hidden mb-4">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
                 {/* Number */}
                 <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/40 uppercase">
                   {service.number}
