@@ -117,7 +117,7 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5"
+              className="font-mono text-[10px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5"
             >
               {tag}
             </span>
