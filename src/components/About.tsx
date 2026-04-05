@@ -84,7 +84,7 @@ export function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ ...smooth, delay: 0.2 }}
           >
-            <h3 className="font-display text-lg md:text-xl font-bold tracking-[-0.01em] text-foreground mb-5">
+            <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.02em] text-foreground mb-5">
               Ways to Work Together
             </h3>
 
