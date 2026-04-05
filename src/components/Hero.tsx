@@ -11,6 +11,7 @@ type ActiveView = "image" | "what" | "who";
 export function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const shouldReduceMotion = useReducedMotion();
   const [activeView, setActiveView] = useState<ActiveView>("image");
 
   return (
