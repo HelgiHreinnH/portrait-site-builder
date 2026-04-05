@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Github, Linkedin, Download, Share2, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Download, Send } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import portraitImage from "@/assets/portrait_image.png";
 
