@@ -82,11 +82,13 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
     >
       {/* Image area — 2/3 height */}
       <div className="relative w-full flex-[2] min-h-0 overflow-hidden">
-        <img
+      <img
           src={project.heroImage}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+          style={{ filter: 'grayscale(10%) contrast(1.02)' }}
         />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'hsla(var(--foreground) / 0.05)' }} />
         <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
           <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
             {project.number}
