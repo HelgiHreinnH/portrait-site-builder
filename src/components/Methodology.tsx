@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const smooth = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
 
@@ -48,7 +48,15 @@ const phases = [
 
 export function Methodology() {
   const [activePhase, setActivePhase] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
 
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none)');
+    setIsTouch(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
   const radius = 180;
 
   const getPosition = (index: number) => {
@@ -144,6 +152,7 @@ export function Methodology() {
                   }}
                   onMouseEnter={() => setActivePhase(i)}
                   onMouseLeave={() => setActivePhase(null)}
+                  onClick={() => setActivePhase(activePhase === i ? null : i)}
                 >
                   <motion.div
                     className="relative rounded-full px-5 py-2.5 bg-background border-2 border-border"
@@ -246,7 +255,7 @@ export function Methodology() {
             ) : (
               <div className="text-center py-12">
                 <p className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground/40 uppercase">
-                  Hover over a phase to explore
+                  {isTouch ? 'Tap a phase to explore' : 'Hover over a phase to explore'}
                 </p>
               </div>
             )}

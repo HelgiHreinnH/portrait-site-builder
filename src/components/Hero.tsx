@@ -26,32 +26,32 @@ export function Hero() {
           </h2>
         </div>
 
-        <div className="flex-1 grid grid-cols-2 gap-8 md:gap-12 items-center min-h-0">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center min-h-0">
           {/* Left column - buttons */}
           <div className="flex flex-col gap-8 items-center justify-center">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
-              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "what"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              What do I do<span className="text-user-blue">?</span>
+              What I do<span className="text-user-blue">.</span>
             </button>
             <button
               onMouseEnter={() => setActiveView("who")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
-              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "who"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              Who am I<span className="text-user-blue">?</span>
+              Who I am<span className="text-user-blue">.</span>
             </button>
           </div>
 
@@ -97,9 +97,9 @@ export function Hero() {
                   >
                     <div className="mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                        What do I do
+                        What I do
                       </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">.</span>
                     </div>
 
                     <div className="flex flex-col gap-0">
@@ -149,9 +149,9 @@ export function Hero() {
                   >
                     <div className="mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                        Who am I
+                        Who I am
                       </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">.</span>
                     </div>
 
                     <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
