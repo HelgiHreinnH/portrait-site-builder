@@ -146,7 +146,7 @@ export function Contact() {
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
               <div>
-                <label className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
+                <label className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
                   Name
                 </label>
                 <input
