@@ -77,12 +77,12 @@ export function Services() {
                 onMouseLeave={() => setActive(null)}
               >
                 {/* Image */}
-                <div className="w-full aspect-[4/3] rounded-lg overflow-hidden mb-4">
+                <div className="w-full rounded-lg overflow-hidden mb-4">
                   <img
                     src={service.image}
                     alt={service.title}
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
 
