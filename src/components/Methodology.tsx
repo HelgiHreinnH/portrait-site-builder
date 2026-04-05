@@ -254,7 +254,7 @@ export function Methodology() {
             ) : (
               <div className="text-center py-12">
                 <p className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground/40 uppercase">
-                  Hover over a phase to explore
+                  {isTouch ? 'Tap a phase to explore' : 'Hover over a phase to explore'}
                 </p>
               </div>
             )}

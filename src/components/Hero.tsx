@@ -149,9 +149,9 @@ export function Hero() {
                   >
                     <div className="mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                        Who am I
+                        Who I am
                       </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">?</span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">.</span>
                     </div>
 
                     <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
