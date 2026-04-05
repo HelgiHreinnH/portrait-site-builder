@@ -76,13 +76,13 @@ export function Services() {
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
               >
-                {/* Image */}
-                <div className="w-full rounded-lg overflow-hidden mb-4">
+                {/* Image — fixed height, centered */}
+                <div className="w-full h-[180px] md:h-[200px] flex items-center justify-center rounded-lg overflow-hidden mb-4">
                   <img
                     src={service.image}
                     alt={service.title}
                     loading="lazy"
-                    className="w-full h-auto object-contain"
+                    className="max-w-full max-h-full object-contain"
                   />
                 </div>
 
