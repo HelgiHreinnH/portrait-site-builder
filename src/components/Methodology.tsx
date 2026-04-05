@@ -93,8 +93,8 @@ export function Methodology() {
 
         {/* Circular Process Diagram */}
         <div className="relative flex flex-col lg:flex-row items-center justify-start gap-8 lg:gap-16">
-          {/* Circle Container - Desktop */}
-          <div className="hidden lg:block relative" style={{ width: "500px", height: "500px" }}>
+          {/* Circle Container - Desktop & Tablet */}
+          <div className="hidden md:block relative" style={{ width: "500px", height: "500px" }}>
             {/* Center label */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -175,7 +175,7 @@ export function Methodology() {
           </div>
 
           {/* Mobile stacked view */}
-          <div className="flex flex-col gap-4 lg:hidden w-full max-w-md">
+          <div className="flex flex-col gap-4 md:hidden w-full max-w-md">
             {phases.map((phase, i) => (
               <motion.div
                 key={phase.num}
@@ -207,9 +207,9 @@ export function Methodology() {
             ))}
           </div>
 
-          {/* Detail Panel - Desktop */}
+          {/* Detail Panel - Desktop & Tablet */}
           <motion.div
-            className="hidden lg:block flex-1 max-w-lg"
+            className="hidden md:block flex-1 max-w-lg"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

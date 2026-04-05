@@ -82,11 +82,13 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
     >
       {/* Image area — 2/3 height */}
       <div className="relative w-full flex-[2] min-h-0 overflow-hidden">
-        <img
+      <img
           src={project.heroImage}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+          style={{ filter: 'grayscale(10%) contrast(1.02)' }}
         />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'hsla(var(--foreground) / 0.05)' }} />
         <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
           <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
             {project.number}
@@ -115,7 +117,7 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5"
+              className="font-mono text-[10px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5"
             >
               {tag}
             </span>
@@ -136,6 +138,7 @@ function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; 
         src={tile.project.heroImage}
         alt={tile.project.title}
         className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+        style={{ filter: 'grayscale(10%) contrast(1.02)' }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
 
@@ -189,7 +192,7 @@ function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
         {tile.label}
       </span>
       {tile.sublabel && (
-        <span className="mt-0.5 font-mono text-[8px] tracking-[0.1em] uppercase text-primary-foreground/40">
+        <span className="mt-0.5 font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/40">
           {tile.sublabel}
         </span>
       )}
@@ -202,6 +205,7 @@ function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [showIndicator, setShowIndicator] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
@@ -210,11 +214,15 @@ export function Projects() {
   const bentoColumns = buildBentoLayout(rest);
 
   const handleScroll = useCallback(() => {
-    if (scrollRef.current && scrollRef.current.scrollLeft > 200) {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (el.scrollLeft > 200) {
       setShowIndicator(false);
     } else {
       setShowIndicator(true);
     }
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    setScrollProgress(maxScroll > 0 ? el.scrollLeft / maxScroll : 0);
   }, []);
 
   useEffect(() => {
@@ -252,7 +260,15 @@ export function Projects() {
               </p>
             </motion.div>
 
-            <div className="hidden md:flex gap-2">
+            <div className="hidden md:flex items-center gap-3">
+              {/* Progress bar */}
+              <div className="w-24 h-0.5 bg-border rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-foreground/50 rounded-full"
+                  style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
+                  transition={{ duration: 0.1 }}
+                />
+              </div>
               <button
                 onClick={() => scroll("left")}
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"

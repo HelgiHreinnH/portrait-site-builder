@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
@@ -61,6 +61,7 @@ function TypewriterWord({ text, typing, onComplete }: { text: string; typing: bo
 export function QuoteBreak() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const shouldReduceMotion = useReducedMotion();
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
   const [topTyping, setTopTyping] = useState(false);
@@ -99,10 +100,10 @@ export function QuoteBreak() {
         {/* Left — animated headline */}
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+            transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
               turn
