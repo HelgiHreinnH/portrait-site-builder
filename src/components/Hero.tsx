@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence, useReducedMotion } from "framer-motion";
 import portraitImage from "@/assets/portrait_image.png";
 
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
