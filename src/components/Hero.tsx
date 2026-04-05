@@ -60,7 +60,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...smooth, delay: 0.3 }}
-            className="relative h-[calc(100vh-280px)] min-h-[300px] -mt-8"
+            className="relative h-[calc(100vh-220px)] min-h-[300px] -mt-16"
           >
             <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">
