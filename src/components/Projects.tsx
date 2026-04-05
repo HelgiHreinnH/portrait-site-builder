@@ -202,6 +202,7 @@ function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [showIndicator, setShowIndicator] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
@@ -210,11 +211,15 @@ export function Projects() {
   const bentoColumns = buildBentoLayout(rest);
 
   const handleScroll = useCallback(() => {
-    if (scrollRef.current && scrollRef.current.scrollLeft > 200) {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (el.scrollLeft > 200) {
       setShowIndicator(false);
     } else {
       setShowIndicator(true);
     }
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    setScrollProgress(maxScroll > 0 ? el.scrollLeft / maxScroll : 0);
   }, []);
 
   useEffect(() => {
