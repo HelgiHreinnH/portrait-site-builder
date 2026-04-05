@@ -257,7 +257,15 @@ export function Projects() {
               </p>
             </motion.div>
 
-            <div className="hidden md:flex gap-2">
+            <div className="hidden md:flex items-center gap-3">
+              {/* Progress bar */}
+              <div className="w-24 h-0.5 bg-border rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-foreground/50 rounded-full"
+                  style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
+                  transition={{ duration: 0.1 }}
+                />
+              </div>
               <button
                 onClick={() => scroll("left")}
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
