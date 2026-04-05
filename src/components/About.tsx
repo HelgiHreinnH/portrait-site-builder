@@ -57,7 +57,7 @@ export function About() {
                     transition={{ ...smooth, delay: 0.08 * i }}
                     className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-4"
                   >
-                    <span className="flex-1 text-sm md:text-base text-muted-foreground/50 md:text-right font-mono leading-tight line-through decoration-muted-foreground/20">
+                    <span className="flex-1 text-sm md:text-base text-muted-foreground/60 md:text-right font-mono leading-tight line-through decoration-muted-foreground/30">
                       {from}
                     </span>
                     <svg width="32" height="12" viewBox="0 0 32 12" className="shrink-0 text-muted-foreground/30 hidden md:block">
@@ -84,7 +84,7 @@ export function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ ...smooth, delay: 0.2 }}
           >
-            <h3 className="font-display text-lg md:text-xl font-bold tracking-[-0.01em] text-foreground mb-5">
+            <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.02em] text-foreground mb-5">
               Ways to Work Together
             </h3>
 
@@ -99,7 +99,7 @@ export function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ ...smooth, delay: 0.1 + i * 0.08 }}
-                    className="relative cursor-pointer group md:pr-4"
+                    className="relative cursor-pointer group md:pr-4 md:border-r md:last:border-r-0 border-border"
                     onMouseEnter={() => setActiveNode(i)}
                     onMouseLeave={() => setActiveNode(null)}
                   >

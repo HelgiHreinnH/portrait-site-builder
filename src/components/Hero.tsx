@@ -20,12 +20,8 @@ export function Hero() {
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-12 md:pt-16 pb-6 h-full flex flex-col">
-        {/* Standardized header */}
-        <div className="my-[48px]">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
-            Introduction
-          </h2>
-        </div>
+        {/* Breathing room where heading used to be */}
+        <div className="my-[48px]" />
 
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center min-h-0">
           {/* Left column - buttons */}
