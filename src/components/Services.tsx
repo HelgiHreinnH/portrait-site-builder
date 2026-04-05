@@ -13,6 +13,7 @@ const services = [
     tags: ["User Research", "Workshops", "Change Management", "Stakeholder Management"],
     description:
       "Analysis of human behaviour, workshop facilitation, organisational understanding, change management, and user involvement as a methodological foundation.",
+    image: `${STORAGE_BASE}/People.png`,
   },
   {
     number: "02",
@@ -21,6 +22,7 @@ const services = [
     tags: ["Space Planning", "Zone Strategy", "Workplace Design", "Design Briefs"],
     description:
       "Space planning, workplace strategy, zone design, user experience in physical environments, and architectural advisory from brief to delivery.",
+    image: `${STORAGE_BASE}/Buildings.png`,
   },
   {
     number: "03",
@@ -29,6 +31,7 @@ const services = [
     tags: ["UI/UX", "Data Visualisation", "Product Development", "PropTech"],
     description:
       "UI/UX design, data visualisation, digital product development, and PropTech. From concept sketch to fully built product.",
+    image: `${STORAGE_BASE}/Technology.png`,
   },
 ];
 
