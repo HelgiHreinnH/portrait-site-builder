@@ -60,7 +60,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ ...smooth, delay: 0.3 }}
-            className="relative h-[calc(100vh-380px)] min-h-[300px]"
+            className="relative h-[calc(100vh-280px)] min-h-[300px] -mt-8"
           >
             <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">
@@ -71,15 +71,15 @@ export function Hero() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={fade}
-                    className="w-full h-full relative"
+                    className="w-full h-full relative flex flex-col items-center"
                   >
                     <img
                       src={portraitImage}
                       alt="Helgi Hreinn Hjálmarsson"
-                      className="w-full h-full object-cover object-top"
+                      className="w-full flex-1 min-h-0 object-cover object-top"
                     />
                     {/* Name overlay at bottom of image */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/80 to-transparent px-4 py-3">
+                    <div className="w-full bg-gradient-to-t from-background/80 to-transparent px-4 py-3 -mt-16 relative z-10">
                       <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
                       <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
                     </div>
