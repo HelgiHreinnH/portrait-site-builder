@@ -61,6 +61,7 @@ function TypewriterWord({ text, typing, onComplete }: { text: string; typing: bo
 export function QuoteBreak() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const shouldReduceMotion = useReducedMotion();
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
   const [topTyping, setTopTyping] = useState(false);
