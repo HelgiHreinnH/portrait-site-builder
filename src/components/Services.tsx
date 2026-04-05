@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import servicePeople from "@/assets/service-people.jpg";
+import serviceBuildings from "@/assets/service-buildings.jpg";
+import serviceTechnology from "@/assets/service-technology.jpg";
 
 const smooth = { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const };
 
