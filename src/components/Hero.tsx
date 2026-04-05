@@ -58,9 +58,9 @@ export function Hero() {
 
           {/* Right column - image or content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ ...smooth, delay: 0.3 }}
+            transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
             className="relative h-[calc(100vh-200px)] min-h-[300px] -mt-24"
           >
             <div className="relative overflow-hidden h-full">

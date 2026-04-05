@@ -138,6 +138,7 @@ function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; 
         src={tile.project.heroImage}
         alt={tile.project.title}
         className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+        style={{ filter: 'grayscale(10%) contrast(1.02)' }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
 
