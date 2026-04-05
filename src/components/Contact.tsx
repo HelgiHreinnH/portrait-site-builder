@@ -98,10 +98,9 @@ export function Contact() {
               ))}
             </div>
 
-            {/* Action buttons */}
+            {/* Action buttons — grouped: primary then secondary */}
             <div className="flex flex-wrap gap-2 mt-auto">
               {[
-                { Icon: Github, label: "GitHub", href: "https://github.com/HelgiHreinnH" },
                 { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/helgihreinn" },
               ].map(({ Icon, label, href }) => (
                 <a
@@ -109,7 +108,7 @@ export function Contact() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group font-mono text-[10px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
+                  className="group font-mono text-[11px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
                 >
                   <Icon size={14} className="group-hover:scale-110 transition-transform" />
                   {label}
@@ -117,18 +116,20 @@ export function Contact() {
               ))}
               <button
                 onClick={() => window.open("/cv.pdf", "_blank")}
-                className="group font-mono text-[10px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
+                className="group font-mono text-[11px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
               >
                 <Download size={14} className="group-hover:translate-y-0.5 transition-transform" />
                 Download CV
               </button>
-              <button
-                onClick={handleShare}
-                className="group font-mono text-[10px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
+              <a
+                href="https://github.com/HelgiHreinnH"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground flex items-center gap-2 border border-border/60 rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:text-foreground hover:shadow-sm transition-all duration-300"
               >
-                <Share2 size={14} className="group-hover:rotate-12 transition-transform" />
-                Share Profile
-              </button>
+                <Github size={14} className="group-hover:scale-110 transition-transform" />
+                GitHub
+              </a>
             </div>
           </motion.div>
 
