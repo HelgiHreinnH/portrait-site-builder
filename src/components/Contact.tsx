@@ -191,7 +191,7 @@ export function Contact() {
                 className="group flex items-center justify-center gap-2 bg-foreground text-background font-mono text-[11px] tracking-[0.2em] uppercase px-6 py-3.5 rounded-lg hover:bg-foreground/90 transition-all duration-300 disabled:opacity-50 hover:shadow-md"
               >
                 <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                {sending ? "Sending..." : "Send Message"}
+                {sending ? "Sending..." : "Start a Conversation"}
               </button>
             </form>
           </motion.div>
