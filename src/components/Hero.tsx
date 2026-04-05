@@ -21,9 +21,6 @@ export function Hero() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-12 md:pt-16 pb-6 h-full flex flex-col">
         {/* Standardized header */}
         <div className="my-[48px]">
-          <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
-            About
-          </p>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
             Introduction
           </h2>
