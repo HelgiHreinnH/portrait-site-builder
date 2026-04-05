@@ -45,9 +45,6 @@ export function Contact() {
           transition={{ ...smooth }}
           className="my-[48px] shrink-0"
         >
-          <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-2 px-[4px]">
-            06 — Contact
-          </p>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0 px-[4px]">
             Let's Talk
           </h2>
