@@ -80,8 +80,8 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
       onClick={onClick}
       className="group relative flex flex-col overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
     >
-      {/* Image area — 2/3 height */}
-      <div className="relative w-full flex-[2] min-h-0 overflow-hidden">
+      {/* Image area */}
+      <div className="relative w-full flex-[1.2] min-h-0 overflow-hidden">
       <img
           src={project.heroImage}
           alt={project.title}
