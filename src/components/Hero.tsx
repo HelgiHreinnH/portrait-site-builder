@@ -58,7 +58,7 @@ function TypewriterWord({ text, typing, onComplete }: { text: string; typing: bo
   );
 }
 
-export function QuoteBreak() {
+export function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const shouldReduceMotion = useReducedMotion();

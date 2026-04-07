@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Intro } from "@/components/Intro";
-import { QuoteBreak } from "@/components/QuoteBreak";
-import { Services } from "@/components/Services";
-import { Methodology } from "@/components/Methodology";
+import { Hero } from "@/components/Hero";
+import { Fields } from "@/components/Fields";
+import { Method } from "@/components/Method";
 import { Projects } from "@/components/Projects";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
@@ -26,16 +26,16 @@ const Index = () => {
       {/* <GlobalAmbientLayer /> */}
       <div className="relative z-10 snap-container">
         <div className="snap-section">
-          <QuoteBreak />
+          <Hero />
         </div>
         <div className="snap-section" id="intro">
           <Intro />
         </div>
-        <div className="snap-section">
-          <Services />
+        <div className="snap-section" id="fields">
+          <Fields />
         </div>
-        <div className="snap-section">
-          <Methodology />
+        <div className="snap-section" id="method">
+          <Method />
         </div>
         <div className="snap-section-hscroll">
           <Projects />
