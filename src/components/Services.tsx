@@ -101,13 +101,13 @@ export function Services() {
                 <motion.p
                   animate={{ opacity: isActive ? 1 : 0.6 }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm text-muted-foreground leading-relaxed mb-auto"
+                  className="text-sm text-muted-foreground leading-relaxed"
                 >
                   {service.description}
                 </motion.p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-3">
+                <div className="flex flex-wrap gap-1.5 mt-auto pt-1.5">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
