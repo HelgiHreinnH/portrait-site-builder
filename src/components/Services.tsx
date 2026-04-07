@@ -61,8 +61,8 @@ export function Services() {
       </div>
 
       {/* Three vertical cards */}
-      <div className="max-w-7xl mx-auto w-full flex-1 min-h-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, i) => {
             const isActive = active === i;
             return (
@@ -86,14 +86,13 @@ export function Services() {
                   />
                 </div>
 
-
                 {/* Title */}
                 <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1 mb-0.5">
                   {service.title}
                 </h3>
 
                 {/* Discipline */}
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-2">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-3">
                   {service.discipline}
                 </span>
 
@@ -101,13 +100,13 @@ export function Services() {
                 <motion.p
                   animate={{ opacity: isActive ? 1 : 0.6 }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm text-muted-foreground leading-relaxed"
+                  className="text-sm text-muted-foreground leading-relaxed mb-2"
                 >
                   {service.description}
                 </motion.p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-auto pt-1.5">
+                <div className="flex flex-wrap gap-1.5">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
