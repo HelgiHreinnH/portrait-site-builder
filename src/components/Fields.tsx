@@ -72,7 +72,7 @@ export function Fields() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className="relative flex flex-col border border-border rounded-xl p-5 md:p-6 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30 max-h-full overflow-hidden"
+                className="relative border border-border rounded-xl p-5 md:p-6 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30 max-h-full overflow-hidden flex-col flex items-center justify-start"
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
               >
@@ -106,7 +106,7 @@ export function Fields() {
                 </motion.p>
 
                 {/* Tags — bottom aligned with space */}
-                <div className="flex flex-wrap gap-1.5 mt-auto pt-3">
+                <div className="flex flex-wrap gap-1.5 mt-auto pt-3 py-[2px]">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
