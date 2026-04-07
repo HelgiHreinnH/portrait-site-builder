@@ -43,15 +43,15 @@ export function Fields() {
       id="fields"
       className="relative h-full flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10 overflow-hidden"
     >
-      <div className="mb-4 max-w-7xl mx-auto w-full shrink-0">
+      <div className="max-w-7xl mx-auto w-full shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-[24px] mb-[16px]"
+          className="mt-[12px] mb-[12px]"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-2 px-[4px]">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-1 px-[4px]">
             Three Fields. One Approach.
           </h2>
           <p className="max-w-xl leading-relaxed text-muted-foreground text-base px-[4px]">
@@ -60,9 +60,9 @@ export function Fields() {
         </motion.div>
       </div>
 
-      {/* Three vertical cards */}
-      <div className="max-w-7xl mx-auto w-full flex-1 min-h-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
+      {/* Three vertical cards — no flex-1/h-full so cards size to content */}
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, i) => {
             const isActive = active === i;
             return (
