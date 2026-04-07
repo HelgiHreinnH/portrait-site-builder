@@ -26,16 +26,16 @@ const Index = () => {
       {/* <GlobalAmbientLayer /> */}
       <div className="relative z-10 snap-container">
         <div className="snap-section">
-          <QuoteBreak />
+          <Hero />
         </div>
         <div className="snap-section" id="intro">
           <Intro />
         </div>
-        <div className="snap-section">
-          <Services />
+        <div className="snap-section" id="fields">
+          <Fields />
         </div>
-        <div className="snap-section">
-          <Methodology />
+        <div className="snap-section" id="method">
+          <Method />
         </div>
         <div className="snap-section-hscroll">
           <Projects />
