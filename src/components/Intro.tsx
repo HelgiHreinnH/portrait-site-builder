@@ -173,8 +173,6 @@ export function Intro() {
                       I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a
                       fundamental sense that the same challenges look very different depending on perspective.
                     </p>
-                      ))}
-                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
