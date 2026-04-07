@@ -100,17 +100,17 @@ export function Services() {
                 <motion.p
                   animate={{ opacity: isActive ? 1 : 0.6 }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm text-muted-foreground leading-relaxed mb-2"
+                  className="text-sm text-muted-foreground leading-relaxed"
                 >
                   {service.description}
                 </motion.p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[10px] md:text-[11px] tracking-wider uppercase rounded-full px-2.5 py-1 border border-border text-foreground/60"
+                      className="font-mono text-[10px] md:text-[11px] tracking-wider uppercase rounded-full px-2.5 py-1 border border-border bg-muted/50 text-foreground/60"
                     >
                       {tag}
                     </span>
