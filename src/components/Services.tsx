@@ -100,7 +100,7 @@ export function Services() {
                 <motion.p
                   animate={{ opacity: isActive ? 1 : 0.6 }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm text-muted-foreground leading-relaxed mb-2"
+                  className="text-sm text-muted-foreground leading-relaxed"
                 >
                   {service.description}
                 </motion.p>
