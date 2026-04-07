@@ -18,15 +18,18 @@ export function Intro() {
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
-      <div className="section-inner relative z-10">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-12 md:pt-16 pb-6 h-full flex flex-col">
+        {/* Breathing room where heading used to be */}
+        <div className="my-[48px]" />
+
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center min-h-0">
-          {/* Left column — toggle buttons */}
+          {/* Left column - buttons */}
           <div className="flex flex-col gap-8 items-center justify-center">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
-              className={`whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "what"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
@@ -38,7 +41,7 @@ export function Intro() {
               onMouseEnter={() => setActiveView("who")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
-              className={`whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "who"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
@@ -48,12 +51,12 @@ export function Intro() {
             </button>
           </div>
 
-          {/* Right column — content area */}
+          {/* Right column - image or content */}
           <motion.div
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
-            className="relative h-full min-h-[300px]"
+            className="relative h-[calc(100vh-200px)] min-h-[300px] -mt-24"
           >
             <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">
@@ -71,9 +74,12 @@ export function Intro() {
                       alt="Helgi Hreinn Hjálmarsson"
                       className="w-full flex-1 min-h-0 object-cover object-top"
                     />
+                    {/* Name overlay at bottom of image */}
                     <div className="w-full bg-gradient-to-t from-background/80 to-transparent px-4 py-3 -mt-16 relative z-10">
-                      <p className="font-display text-foreground text-base font-medium">Helgi Hreinn Hjálmarsson</p>
-                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-foreground/70">Architect · Copenhagen</p>
+                      <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
+                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">
+                        Architect · Copenhagen
+                      </p>
                     </div>
                   </motion.div>
                 )}
@@ -91,7 +97,9 @@ export function Intro() {
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
                         What I do
                       </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">.</span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">
+                        .
+                      </span>
                     </div>
 
                     <div className="flex flex-col gap-0">
@@ -118,13 +126,16 @@ export function Intro() {
                         ].map(({ v, l }) => (
                           <div key={l} className="text-center">
                             <div className="font-display text-3xl font-bold text-foreground">{v}</div>
-                            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">{l}</div>
+                            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                              {l}
+                            </div>
                           </div>
                         ))}
                       </div>
 
                       <p className="font-mono text-[10px] leading-relaxed text-muted-foreground max-w-md mt-6">
-                        Architect by training. Working across the boundary between physical space, organisational thinking, and digital product.
+                        Architect by training. Working across the boundary between physical space, organisational
+                        thinking, and digital product.
                       </p>
                     </div>
                   </motion.div>
@@ -143,21 +154,24 @@ export function Intro() {
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
                         Who I am
                       </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">.</span>
+                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">
+                        .
+                      </span>
                     </div>
 
                     <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
-                      Helgi Hreinn<br />Hjálmarsson
+                      Helgi Hreinn
+                      <br />
+                      Hjálmarsson
                     </h2>
 
                     <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
-                      Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy, digital product development, and hands-on design.
+                      Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy,
+                      digital product development, and hands-on design.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
-                      I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a fundamental sense that the same challenges look very different depending on perspective.
-                    </p>
-                    <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-5 max-w-md">
-                      I work with my hands as well as with data and strategy. Carpentry, joinery, surface treatment. The same analytical approach, a different material.
+                      I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a
+                      fundamental sense that the same challenges look very different depending on perspective.
                     </p>
 
                     <div className="space-y-2">
@@ -167,7 +181,9 @@ export function Intro() {
                         { l: "Base", v: "Copenhagen, Denmark" },
                       ].map(({ l, v }) => (
                         <div key={l} className="flex items-center gap-4 border-b border-border pb-2">
-                          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-14">{l}</span>
+                          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-14">
+                            {l}
+                          </span>
                           <span className="text-sm text-foreground">{v}</span>
                         </div>
                       ))}
