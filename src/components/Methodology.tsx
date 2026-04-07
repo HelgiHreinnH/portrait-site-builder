@@ -209,7 +209,7 @@ export function Methodology() {
 
           {/* Detail Panel - Desktop & Tablet */}
           <motion.div
-            className="hidden md:block flex-1 max-w-lg"
+            className="hidden md:flex md:items-center flex-1 max-w-sm pl-12 lg:pl-20"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
