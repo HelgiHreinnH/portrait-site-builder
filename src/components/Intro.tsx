@@ -18,12 +18,9 @@ export function Intro() {
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-8 md:pt-10 pb-6 h-full flex flex-col">
-        {/* Reduced breathing room */}
-        <div className="my-[20px]" />
-
+      <div className="section-inner relative z-10">
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center min-h-0">
-          {/* Left column - buttons — bigger text */}
+          {/* Left column — toggle buttons */}
           <div className="flex flex-col gap-8 items-center justify-center">
             <button
               onMouseEnter={() => setActiveView("what")}
@@ -51,12 +48,12 @@ export function Intro() {
             </button>
           </div>
 
-          {/* Right column - image or content — moved up more */}
+          {/* Right column — content area */}
           <motion.div
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
-            className="relative h-[calc(100vh-160px)] min-h-[300px] -mt-32"
+            className="relative h-full min-h-[300px]"
           >
             <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">
@@ -74,7 +71,6 @@ export function Intro() {
                       alt="Helgi Hreinn Hjálmarsson"
                       className="w-full flex-1 min-h-0 object-cover object-top"
                     />
-                    {/* Name overlay at bottom — black text */}
                     <div className="w-full bg-gradient-to-t from-background/80 to-transparent px-4 py-3 -mt-16 relative z-10">
                       <p className="font-display text-foreground text-base font-medium">Helgi Hreinn Hjálmarsson</p>
                       <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-foreground/70">Architect · Copenhagen</p>

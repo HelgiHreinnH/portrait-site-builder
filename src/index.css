@@ -75,7 +75,16 @@
   animation: marquee 30s linear infinite;
 }
 
-/* Scroll snap container */
+/* ─── Section layout framework ─── */
+:root {
+  --section-px: 1.5rem;
+  --section-px-md: 2.5rem;
+  --section-pt: 6rem;
+  --section-pb: 1.5rem;
+  --section-max-w: 80rem;
+  --section-gap: 1rem;
+}
+
 .snap-container {
   height: 100vh;
   overflow-y: scroll;
@@ -91,12 +100,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   position: relative;
-  scroll-margin-top: 64px;
 }
 
-/* Allow horizontal scroll within a snap section */
 .snap-section-hscroll {
   scroll-snap-align: start;
   height: 100vh;
@@ -104,9 +110,29 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   position: relative;
-  scroll-margin-top: 64px;
+}
+
+.section-inner {
+  width: 100%;
+  max-width: var(--section-max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--section-px);
+  padding-right: var(--section-px);
+  padding-top: var(--section-pt);
+  padding-bottom: var(--section-pb);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .section-inner {
+    padding-left: var(--section-px-md);
+    padding-right: var(--section-px-md);
+  }
 }
 
 /* Custom scrollbar */
@@ -121,7 +147,6 @@
   border-radius: 2px;
 }
 
-/* Hide scrollbar for horizontal scroll */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

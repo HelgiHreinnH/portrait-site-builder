@@ -231,21 +231,20 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="h-full flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10 overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full flex flex-col flex-1 min-h-0">
-          {/* Header — moved up */}
+      <section id="projects" className="h-full flex flex-col overflow-hidden">
+        <div className="section-inner">
+          {/* Row 1: Header */}
           <div className="flex items-end justify-between mb-3 shrink-0">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={smooth}
-              className="mt-[24px] mb-[8px]"
             >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-2 px-[4px]">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-1">
                 Examples
               </h2>
-              <p className="text-base leading-relaxed text-muted-foreground max-w-lg px-[4px]">
+              <p className="text-base leading-relaxed text-muted-foreground max-w-lg">
                 {allProjects.length} projects across workplace strategy, digital product, and making.
               </p>
             </motion.div>
@@ -273,7 +272,7 @@ export function Projects() {
             </div>
           </div>
 
-          {/* Horizontal scroll container */}
+          {/* Row 2: Horizontal scroll */}
           <div className="relative flex-1 min-h-0">
             <div
               ref={scrollRef}
@@ -289,7 +288,7 @@ export function Projects() {
                     viewport={{ once: true, margin: "-30px" }}
                     transition={{ ...smooth, delay: i * 0.08 }}
                     className="flex-shrink-0 h-full"
-                    style={{ width: "calc((min(100vw - 112px, 1400px) - 32px) / 3)" }}
+                    style={{ width: "calc((min(100vw - 112px, 1280px) - 32px) / 3)" }}
                   >
                     <FeaturedCard
                       project={project}
@@ -335,7 +334,6 @@ export function Projects() {
               </div>
             </div>
 
-            {/* Right-edge gradient */}
             <div
               className="absolute top-0 right-0 bottom-0 w-[120px] pointer-events-none flex items-center justify-end pr-4 transition-opacity duration-500"
               style={{

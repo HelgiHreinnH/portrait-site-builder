@@ -21,25 +21,25 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="h-full flex flex-col pt-8 md:pt-10 bg-muted/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col flex-1 min-h-0 w-full">
-        {/* Header — same location as other sections */}
+    <section id="contact" className="h-full flex flex-col bg-muted/50">
+      <div className="section-inner">
+        {/* Row 1: Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ ...smooth }}
-          className="mt-[24px] mb-[8px] shrink-0"
+          className="shrink-0 mb-4"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0 px-[4px]">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0">
             Let's Talk
           </h2>
         </motion.div>
 
-        {/* Two-column layout */}
-        <div className="flex-1 flex items-start min-h-0 pt-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full">
-            {/* Left — Portrait on top, name underneath, buttons at bottom */}
+        {/* Row 2: Two-column layout */}
+        <div className="flex-1 min-h-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 h-full">
+            {/* Left — Portrait + info + buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,6 @@ export function Contact() {
               transition={{ ...smooth, delay: 0.1 }}
               className="flex flex-col"
             >
-              {/* Portrait */}
               <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-4">
                 <img
                   src={portraitImage}
@@ -56,7 +55,6 @@ export function Contact() {
                 />
               </div>
 
-              {/* Name — directly under image */}
               <div className="mb-4">
                 <span className="font-display text-xl font-bold text-foreground block">Helgi Hreinn Hjálmarsson</span>
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
@@ -64,7 +62,6 @@ export function Contact() {
                 </span>
               </div>
 
-              {/* Contact details */}
               <div className="space-y-3 mb-6">
                 {[
                   { Icon: Mail, label: "helgihreinn@me.com", href: "mailto:helgihreinn@me.com" },
@@ -84,7 +81,6 @@ export function Contact() {
                 ))}
               </div>
 
-              {/* Action buttons — pushed down */}
               <div className="flex flex-wrap gap-2 mt-auto">
                 {[
                   { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/helgihreinn" },
@@ -119,7 +115,7 @@ export function Contact() {
               </div>
             </motion.div>
 
-            {/* Right — Description higher + form */}
+            {/* Right — Description + form */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -190,7 +186,7 @@ export function Contact() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ ...smooth, delay: 0.2 }}
-          className="mt-auto pt-4 pb-4 border-t border-border flex flex-col md:flex-row justify-between items-center gap-2 shrink-0"
+          className="mt-auto pt-4 border-t border-border flex flex-col md:flex-row justify-between items-center gap-2 shrink-0"
         >
           <div className="flex items-center gap-3">
             <span className="font-display text-xl font-bold text-foreground">H</span>
