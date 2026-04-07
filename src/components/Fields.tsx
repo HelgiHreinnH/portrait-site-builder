@@ -41,17 +41,17 @@ export function Fields() {
   return (
     <section
       id="fields"
-      className="relative h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10 overflow-hidden"
+      className="relative h-full flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10 overflow-hidden"
     >
-      <div className="mb-6 max-w-7xl mx-auto w-full shrink-0">
+      <div className="mb-4 max-w-7xl mx-auto w-full shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="my-[48px]"
+          className="mt-[24px] mb-[16px]"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-2 px-[4px]">
             Three Fields. One Approach.
           </h2>
           <p className="max-w-xl leading-relaxed text-muted-foreground text-base px-[4px]">
@@ -61,8 +61,8 @@ export function Fields() {
       </div>
 
       {/* Three vertical cards */}
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto w-full flex-1 min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
           {services.map((service, i) => {
             const isActive = active === i;
             return (
@@ -72,12 +72,12 @@ export function Fields() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className="relative flex flex-col border border-border rounded-xl p-6 md:p-8 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30"
+                className="relative flex flex-col border border-border rounded-xl p-5 md:p-6 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30 max-h-full overflow-hidden"
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
               >
                 {/* Image — fixed height, centered */}
-                <div className="w-full h-[180px] md:h-[200px] flex items-center justify-center rounded-lg overflow-hidden mb-4">
+                <div className="w-full h-[160px] md:h-[180px] flex items-center justify-center rounded-lg overflow-hidden mb-3">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -92,21 +92,21 @@ export function Fields() {
                 </h3>
 
                 {/* Discipline */}
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-3">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-2">
                   {service.discipline}
                 </span>
 
-                {/* Description */}
+                {/* Description — pushed down slightly */}
                 <motion.p
                   animate={{ opacity: isActive ? 1 : 0.6 }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm text-muted-foreground leading-relaxed"
+                  className="text-sm text-muted-foreground leading-relaxed mt-1"
                 >
                   {service.description}
                 </motion.p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+                {/* Tags — bottom aligned with space */}
+                <div className="flex flex-wrap gap-1.5 mt-auto pt-3">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}

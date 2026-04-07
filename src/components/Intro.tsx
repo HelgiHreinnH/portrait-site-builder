@@ -5,7 +5,6 @@ import portraitImage from "@/assets/portrait_image.png";
 const smooth = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
 const fade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
 
-
 type ActiveView = "image" | "what" | "who";
 
 export function Intro() {
@@ -19,18 +18,18 @@ export function Intro() {
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-16 left-6 right-6 h-px bg-foreground/5" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-12 md:pt-16 pb-6 h-full flex flex-col">
-        {/* Breathing room where heading used to be */}
-        <div className="my-[48px]" />
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-14 pt-8 md:pt-10 pb-6 h-full flex flex-col">
+        {/* Reduced breathing room */}
+        <div className="my-[20px]" />
 
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center min-h-0">
-          {/* Left column - buttons */}
+          {/* Left column - buttons — bigger text */}
           <div className="flex flex-col gap-8 items-center justify-center">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
-              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "what"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
@@ -42,7 +41,7 @@ export function Intro() {
               onMouseEnter={() => setActiveView("who")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
-              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "who"
                   ? "border-foreground text-foreground"
                   : "border-transparent text-muted-foreground hover:text-foreground"
@@ -52,12 +51,12 @@ export function Intro() {
             </button>
           </div>
 
-          {/* Right column - image or content */}
+          {/* Right column - image or content — moved up more */}
           <motion.div
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
-            className="relative h-[calc(100vh-200px)] min-h-[300px] -mt-24"
+            className="relative h-[calc(100vh-160px)] min-h-[300px] -mt-32"
           >
             <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">
@@ -75,10 +74,10 @@ export function Intro() {
                       alt="Helgi Hreinn Hjálmarsson"
                       className="w-full flex-1 min-h-0 object-cover object-top"
                     />
-                    {/* Name overlay at bottom of image */}
+                    {/* Name overlay at bottom — black text */}
                     <div className="w-full bg-gradient-to-t from-background/80 to-transparent px-4 py-3 -mt-16 relative z-10">
-                      <p className="font-display text-user-blue text-base font-medium">Helgi Hreinn Hjálmarsson</p>
-                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-user-blue/70">Architect · Copenhagen</p>
+                      <p className="font-display text-foreground text-base font-medium">Helgi Hreinn Hjálmarsson</p>
+                      <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-foreground/70">Architect · Copenhagen</p>
                     </div>
                   </motion.div>
                 )}
@@ -183,7 +182,6 @@ export function Intro() {
             </div>
           </motion.div>
         </div>
-
       </div>
     </section>
   );

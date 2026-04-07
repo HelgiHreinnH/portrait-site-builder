@@ -23,31 +23,31 @@ export function About() {
 
   return (
     <section id="about" className="h-full flex flex-col">
-      {/* Top container — 2/3 height */}
-      <div className="flex-[2] flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10">
+      {/* Top container — slightly more than half */}
+      <div className="flex-[1.2] flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10">
         <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={smooth}
-            className="my-[48px]"
+            className="mt-[24px] mb-[12px]"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0 px-[4px]">
               From Convention to Insight
             </h2>
           </motion.div>
 
-          {/* Centered card */}
-          <div className="flex-1 flex items-center justify-center">
+          {/* Centered card — bigger */}
+          <div className="flex-1 flex items-center justify-center -mt-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ ...smooth, delay: 0.1 }}
-              className="w-full max-w-3xl border border-border rounded-xl px-8 py-6 bg-background"
+              className="w-full max-w-4xl border border-border rounded-xl px-8 md:px-10 py-8 bg-background"
             >
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-4">
                 {shifts.map(([from, to], i) => (
                   <motion.div
                     key={i}
@@ -75,8 +75,8 @@ export function About() {
         </div>
       </div>
 
-      {/* Bottom container — 1/3 height, subtle background */}
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-10 bg-muted/40">
+      {/* Bottom container — taller, subtle background */}
+      <div className="flex-[1] flex flex-col justify-start pt-6 pb-6 px-6 md:px-10 bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

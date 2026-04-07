@@ -158,16 +158,18 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right — subtitle */}
+        {/* Right — subtitle: one sentence per line, bigger, right-aligned */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ ...smooth, delay: 0.5 }}
-          className="hidden md:flex flex-col gap-1 font-mono text-base md:text-lg font-medium leading-relaxed text-muted-foreground text-right pb-2"
+          className="hidden md:flex flex-col gap-0.5 font-mono text-lg md:text-xl lg:text-2xl font-medium leading-snug text-muted-foreground text-right pb-2"
         >
-          <span>I analyse. I strategise.</span>
-          <span>I design. I deliver.</span>
+          <span>I analyse.</span>
+          <span>I strategise.</span>
+          <span>I design.</span>
+          <span>I deliver.</span>
         </motion.div>
       </div>
 
