@@ -92,7 +92,7 @@ export function Methodology() {
         </div>
 
         {/* Circular Process Diagram */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
+        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
           {/* Circle Container - Desktop & Tablet */}
           <div className="hidden md:flex items-center justify-center shrink-0" style={{ width: "500px", height: "500px" }}>
             {/* Center label */}
