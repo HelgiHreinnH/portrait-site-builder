@@ -60,8 +60,8 @@ export function Fields() {
         </div>
 
         {/* Row 2: Cards */}
-        <div className="flex-1 min-h-0">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
+        <div className="flex-1 min-h-0 flex items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
             {services.map((service, i) => {
               const isActive = active === i;
               return (
