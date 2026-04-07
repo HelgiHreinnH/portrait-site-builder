@@ -6,10 +6,8 @@ import { ProjectPopover } from "./ProjectPopover";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-/* ── Featured project IDs ── */
 const featuredIds = ["felles", "archi-ar", "a-place-to-work"];
 
-/* ── Tile types ── */
 type TileType =
   | { kind: "project"; project: ProjectData; w: number; h: number }
   | { kind: "quote"; text: string; author?: string; h: number }
@@ -38,8 +36,6 @@ function buildBentoLayout(restProjects: ProjectData[]): Column[] {
   };
 
   const columns: Column[] = [];
-
-  // Distribute remaining projects across columns with organic sizing
   const chunks: ProjectData[][] = [];
   for (let i = 0; i < restProjects.length; i += 2) {
     chunks.push(restProjects.slice(i, i + 2));
@@ -72,17 +68,14 @@ function buildBentoLayout(restProjects: ProjectData[]): Column[] {
   return columns;
 }
 
-/* ── Sub-components ── */
-
 function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
       className="group relative flex flex-col overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
     >
-      {/* Image area */}
       <div className="relative w-full flex-[1.2] min-h-0 overflow-hidden">
-      <img
+        <img
           src={project.heroImage}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
@@ -102,22 +95,21 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
         </div>
       </div>
 
-      {/* Info area — 1/3 height, white background */}
-      <div className="flex-[1] bg-background px-5 py-4 flex flex-col justify-center gap-1.5">
+      <div className="flex-[1] bg-background px-5 py-3 flex flex-col justify-center gap-1">
         <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
           {project.client}
         </p>
         <h3 className="font-display text-sm sm:text-base md:text-lg font-semibold text-foreground leading-tight">
           {project.title}
         </h3>
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 sm:line-clamp-2">
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
           {project.subtitle}
         </p>
         <div className="flex flex-wrap gap-1.5 mt-1">
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="font-mono text-[10px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5"
+              className="font-mono text-[10px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5 bg-muted/50"
             >
               {tag}
             </span>
@@ -200,8 +192,6 @@ function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
   );
 }
 
-/* ── Main section ── */
-
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [showIndicator, setShowIndicator] = useState(true);
@@ -241,18 +231,18 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10 overflow-hidden">
+      <section id="projects" className="h-full flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10 overflow-hidden">
         <div className="max-w-7xl mx-auto w-full flex flex-col flex-1 min-h-0">
-          {/* Header */}
-          <div className="flex items-end justify-between mb-4 shrink-0">
+          {/* Header — moved up */}
+          <div className="flex items-end justify-between mb-3 shrink-0">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={smooth}
-              className="my-[48px]"
+              className="mt-[24px] mb-[8px]"
             >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-2 px-[4px]">
                 Examples
               </h2>
               <p className="text-base leading-relaxed text-muted-foreground max-w-lg px-[4px]">
@@ -261,7 +251,6 @@ export function Projects() {
             </motion.div>
 
             <div className="hidden md:flex items-center gap-3">
-              {/* Progress bar */}
               <div className="w-24 h-0.5 bg-border rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-foreground/50 rounded-full"
@@ -292,7 +281,6 @@ export function Projects() {
               style={{ scrollbarWidth: "none" }}
             >
               <div className="flex gap-4 h-full min-w-max pr-10 items-start">
-                {/* Zone 1: Featured Trio */}
                 {featured.map((project, i) => (
                   <motion.div
                     key={project.id}
@@ -310,10 +298,8 @@ export function Projects() {
                   </motion.div>
                 ))}
 
-                {/* Spacer between zones */}
                 <div className="flex-shrink-0 w-8" />
 
-                {/* Zone 2: Bento Grid */}
                 {bentoColumns.map((col, ci) => (
                   <motion.div
                     key={`bento-${ci}`}
@@ -349,7 +335,7 @@ export function Projects() {
               </div>
             </div>
 
-            {/* Scroll indicator — right-edge gradient */}
+            {/* Right-edge gradient */}
             <div
               className="absolute top-0 right-0 bottom-0 w-[120px] pointer-events-none flex items-center justify-end pr-4 transition-opacity duration-500"
               style={{

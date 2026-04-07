@@ -12,7 +12,6 @@ const phases = [
     description:
       "I start by understanding the situation properly. User interviews, data analysis, observations, workshops. Insight before solution.",
     methods: ["User Research", "Stakeholder Mapping", "Data Analysis", "Behavioural Observation"],
-    bg: "#D5DEF4",
   },
   {
     num: "02",
@@ -22,7 +21,6 @@ const phases = [
     description:
       "Insight is translated into a clear strategic foundation. What is the right thing to do, and why? This step prevents the most expensive mistakes.",
     methods: ["Strategic Brief", "Framework Design", "Alignment", "Prioritisation"],
-    bg: "#B8C9EE",
   },
   {
     num: "03",
@@ -32,7 +30,6 @@ const phases = [
     description:
       "Design is communication. I design solutions that are clear, usable, and meaningful — for spaces, systems, and interfaces.",
     methods: ["Design Brief", "Wireframing", "Prototyping", "Spatial Concept"],
-    bg: "#DCE8E6",
   },
   {
     num: "04",
@@ -42,7 +39,6 @@ const phases = [
     description:
       "Output can be a brief, a product, a space, or a strategy. It depends on the project — not on a fixed template.",
     methods: ["Project Management", "Quality Assurance", "Handover", "Implementation"],
-    bg: "#C5D5EC",
   },
 ];
 
@@ -57,7 +53,8 @@ export function Method() {
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
   }, []);
-  const radius = 180;
+
+  const radius = 160;
 
   const getPosition = (index: number) => {
     const angle = (245 + index * 90) * (Math.PI / 180);
@@ -70,19 +67,19 @@ export function Method() {
   return (
     <section
       id="method"
-      className="relative h-full flex flex-col justify-start pt-12 md:pt-16 px-6 md:px-10 overflow-hidden"
+      className="relative h-full flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10 overflow-hidden"
     >
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        {/* Header */}
-        <div className="mb-6 md:mb-8 shrink-0">
+      <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col">
+        {/* Header — moved up */}
+        <div className="shrink-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="my-[48px]"
+            className="mt-[24px] mb-[16px]"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3 px-[4px]">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-2 px-[4px]">
               How I Work
             </h2>
             <p className="max-w-xl leading-relaxed text-muted-foreground text-base px-[4px]">
@@ -91,87 +88,145 @@ export function Method() {
           </motion.div>
         </div>
 
-        {/* Circular Process Diagram */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
-          {/* Circle Container - Desktop & Tablet */}
-          <div className="hidden md:flex items-center justify-center shrink-0" style={{ width: "500px", height: "500px" }}>
-            {/* Center label */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10"
-            >
-              <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/40 uppercase">
-                Continuous Process
-              </div>
-            </motion.div>
-
-            {/* Connecting circle path */}
-            <svg
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-              width="440"
-              height="440"
-              viewBox="0 0 440 440"
-            >
-              <motion.circle
-                cx="220"
-                cy="220"
-                r="180"
-                fill="none"
-                stroke="hsl(var(--border))"
-                strokeWidth="2"
-                strokeDasharray="8 8"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
+        {/* Two-column layout: diagram left, text right */}
+        <div className="flex-1 min-h-0 relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
+          {/* Left: Circle Diagram — centered in its half */}
+          <div className="hidden md:flex flex-1 items-center justify-center">
+            <div className="relative" style={{ width: "400px", height: "400px" }}>
+              {/* Center label */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 2, delay: 0.4, ease: "easeOut" }}
-              />
-            </svg>
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10"
+              >
+                <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/40 uppercase">
+                  Continuous Process
+                </div>
+              </motion.div>
 
-            {/* Phase nodes */}
-            {phases.map((phase, i) => {
-              const pos = getPosition(i);
-              const isActive = activePhase === i;
-
-              return (
-                <motion.div
-                  key={phase.num}
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
+              {/* Connecting circle path */}
+              <svg
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                width="380"
+                height="380"
+                viewBox="0 0 380 380"
+              >
+                <motion.circle
+                  cx="190"
+                  cy="190"
+                  r={radius}
+                  fill="none"
+                  stroke="hsl(var(--border))"
+                  strokeWidth="2"
+                  strokeDasharray="8 8"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  whileInView={{ pathLength: 1, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ ...smooth, delay: 0.5 + i * 0.15 }}
-                  className="absolute cursor-pointer group"
-                  style={{
-                    left: "50%",
-                    top: "50%",
-                    marginLeft: `${pos.x}px`,
-                    marginTop: `${pos.y}px`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  onMouseEnter={() => setActivePhase(i)}
-                  onMouseLeave={() => setActivePhase(null)}
-                  onClick={() => setActivePhase(activePhase === i ? null : i)}
-                >
+                  transition={{ duration: 2, delay: 0.4, ease: "easeOut" }}
+                />
+              </svg>
+
+              {/* Phase nodes */}
+              {phases.map((phase, i) => {
+                const pos = getPosition(i);
+                const isActive = activePhase === i;
+
+                return (
                   <motion.div
-                    className="relative rounded-full px-5 py-2.5 bg-background border-2 border-border"
+                    key={phase.num}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ ...smooth, delay: 0.5 + i * 0.15 }}
+                    className="absolute cursor-pointer group"
                     style={{
-                      boxShadow: isActive
-                        ? "0 12px 40px hsl(var(--foreground) / 0.1)"
-                        : "0 4px 20px hsl(var(--foreground) / 0.04)",
-                      borderColor: isActive ? "hsl(var(--foreground))" : undefined,
+                      left: "50%",
+                      top: "50%",
+                      marginLeft: `${pos.x}px`,
+                      marginTop: `${pos.y}px`,
+                      transform: "translate(-50%, -50%)",
                     }}
-                    animate={{ scale: isActive ? 1.08 : 1 }}
-                    transition={{ duration: 0.3 }}
+                    onMouseEnter={() => setActivePhase(i)}
+                    onMouseLeave={() => setActivePhase(null)}
+                    onClick={() => setActivePhase(activePhase === i ? null : i)}
                   >
-                    <span className="font-mono text-xs tracking-[0.2em] uppercase text-foreground font-bold">
-                      {phase.label}
-                    </span>
+                    <motion.div
+                      className="relative rounded-full px-5 py-2.5 bg-background border-2 border-border"
+                      style={{
+                        boxShadow: isActive
+                          ? "0 12px 40px hsl(var(--foreground) / 0.1)"
+                          : "0 4px 20px hsl(var(--foreground) / 0.04)",
+                        borderColor: isActive ? "hsl(var(--foreground))" : undefined,
+                      }}
+                      animate={{ scale: isActive ? 1.08 : 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="font-mono text-xs tracking-[0.2em] uppercase text-foreground font-bold">
+                        {phase.label}
+                      </span>
+                    </motion.div>
                   </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Detail Panel — top-aligned, narrower */}
+          <div className="hidden md:flex flex-1 items-start justify-start pt-8">
+            <motion.div
+              className="max-w-xs"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              {activePhase !== null ? (
+                <motion.div
+                  key={activePhase}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-3 border border-border bg-background">
+                    <span className="font-display text-foreground text-sm font-bold">
+                      Phase {phases[activePhase].num}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-foreground leading-tight mb-2 tracking-tight text-2xl md:text-3xl font-bold">
+                    {phases[activePhase].title}
+                  </h3>
+
+                  <p className="text-xs text-muted-foreground mb-3">
+                    {phases[activePhase].subtitle}
+                  </p>
+
+                  <p className="leading-relaxed mb-4 text-muted-foreground text-base">
+                    {phases[activePhase].description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {phases[activePhase].methods.map((m) => (
+                      <span
+                        key={m}
+                        className="font-mono text-[10px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
+                      >
+                        {m}
+                      </span>
+                    ))}
+                  </div>
                 </motion.div>
-              );
-            })}
+              ) : (
+                <div className="py-12">
+                  <p className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground/40 uppercase">
+                    {isTouch ? 'Tap a phase to explore' : 'Hover over a phase to explore'}
+                  </p>
+                </div>
+              )}
+            </motion.div>
           </div>
 
           {/* Mobile stacked view */}
@@ -206,60 +261,6 @@ export function Method() {
               </motion.div>
             ))}
           </div>
-
-          {/* Detail Panel - Desktop & Tablet */}
-          <motion.div
-            className="hidden md:flex md:items-center flex-1 max-w-sm pl-12 lg:pl-20"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            {activePhase !== null ? (
-              <motion.div
-                key={activePhase}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-3 border border-border bg-background">
-                  <span className="font-display text-foreground text-sm font-bold">
-                    Phase {phases[activePhase].num}
-                  </span>
-                </div>
-
-                <h3 className="font-display text-foreground leading-tight mb-2 tracking-tight text-2xl md:text-3xl font-bold">
-                  {phases[activePhase].title}
-                </h3>
-
-                <p className="text-xs text-muted-foreground mb-3">
-                  {phases[activePhase].subtitle}
-                </p>
-
-                <p className="leading-relaxed mb-4 text-muted-foreground text-base">
-                  {phases[activePhase].description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {phases[activePhase].methods.map((m) => (
-                    <span
-                      key={m}
-                      className="font-mono text-[10px] tracking-wider uppercase rounded-full px-2.5 py-1 text-foreground border border-border bg-background"
-                    >
-                      {m}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground/40 uppercase">
-                  {isTouch ? 'Tap a phase to explore' : 'Hover over a phase to explore'}
-                </p>
-              </div>
-            )}
-          </motion.div>
         </div>
       </div>
     </section>
