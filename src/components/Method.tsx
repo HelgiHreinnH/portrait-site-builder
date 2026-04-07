@@ -65,33 +65,30 @@ export function Method() {
   };
 
   return (
-    <section
-      id="method"
-      className="relative h-full flex flex-col justify-start pt-8 md:pt-10 px-6 md:px-10 overflow-hidden"
-    >
-      <div className="relative z-10 max-w-7xl mx-auto w-full h-full flex flex-col">
-        {/* Header — moved up */}
+    <section id="method" className="relative h-full flex flex-col overflow-hidden">
+      <div className="section-inner">
+        {/* Row 1: Header */}
         <div className="shrink-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mt-[24px] mb-[16px]"
+            className="mb-4"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-2 px-[4px]">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-1">
               How I Work
             </h2>
-            <p className="max-w-xl leading-relaxed text-muted-foreground text-base px-[4px]">
+            <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
               Every project — whether it's about a workplace, an app, or a strategy — goes through the same four phases. It's not a model. It's a way of thinking.
             </p>
           </motion.div>
         </div>
 
-        {/* Two-column layout: diagram left, text right */}
-        <div className="flex-1 min-h-0 relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
-          {/* Left: Circle Diagram — centered in its half */}
-          <div className="hidden md:flex flex-1 items-center justify-center">
+        {/* Row 2: Two-column — 2/3 diagram, 1/3 text */}
+        <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center">
+          {/* Left: Circle Diagram — 2/3 width */}
+          <div className="hidden md:flex flex-[2] items-center justify-center h-full">
             <div className="relative" style={{ width: "400px", height: "400px" }}>
               {/* Center label */}
               <motion.div
@@ -106,7 +103,7 @@ export function Method() {
                 </div>
               </motion.div>
 
-              {/* Connecting circle path */}
+              {/* Circle path */}
               <svg
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                 width="380"
@@ -173,8 +170,8 @@ export function Method() {
             </div>
           </div>
 
-          {/* Right: Detail Panel — top-aligned, narrower */}
-          <div className="hidden md:flex flex-1 items-start justify-start pt-8">
+          {/* Right: Detail Panel — 1/3 width */}
+          <div className="hidden md:flex flex-[1] items-start justify-start pt-8 h-full">
             <motion.div
               className="max-w-xs"
               initial={{ opacity: 0, x: 20 }}

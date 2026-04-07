@@ -93,86 +93,87 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={ref} className="relative h-full flex flex-col justify-center items-center overflow-hidden">
-      <div className="absolute inset-0 bg-background" />
+    <section ref={ref} className="relative h-full flex flex-col overflow-hidden bg-background">
+      <div className="section-inner justify-center">
+        <div className="flex items-end justify-between w-full">
+          {/* Left — animated headline */}
+          <div>
+            <motion.div
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+                turn
+              </span>
+            </motion.div>
 
-      <div className="relative z-10 w-full max-w-7xl px-6 md:px-10 flex items-end justify-between">
-        {/* Left — animated headline */}
-        <div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
+                <AnimatePresence mode="wait">
+                  <TypewriterWord
+                    key={`top-${topIndex}`}
+                    text={TOP_WORDS[topIndex]}
+                    typing={topTyping}
+                    onComplete={onTopComplete}
+                  />
+                </AnimatePresence>
+              </span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
+                into
+              </span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
+                <AnimatePresence mode="wait">
+                  <TypewriterWord
+                    key={`bottom-${bottomIndex}`}
+                    text={BOTTOM_WORDS[bottomIndex]}
+                    typing={bottomTyping}
+                    onComplete={onBottomComplete}
+                  />
+                </AnimatePresence>
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Right — subtitle */}
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 1, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ ...smooth, delay: 0.5 }}
+            className="hidden md:flex flex-col gap-0.5 font-mono text-lg md:text-xl lg:text-2xl font-medium leading-snug text-muted-foreground text-right pb-2"
           >
-            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
-              turn
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground" style={{ minHeight: '1.1em' }}>
-              <AnimatePresence mode="wait">
-                <TypewriterWord
-                  key={`top-${topIndex}`}
-                  text={TOP_WORDS[topIndex]}
-                  typing={topTyping}
-                  onComplete={onTopComplete}
-                />
-              </AnimatePresence>
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-foreground">
-              into
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="block font-display text-5xl md:text-7xl lg:text-8xl xl:text-[8rem] font-bold tracking-[-0.03em] leading-[0.9] uppercase text-user-blue" style={{ minHeight: '1.1em' }}>
-              <AnimatePresence mode="wait">
-                <TypewriterWord
-                  key={`bottom-${bottomIndex}`}
-                  text={BOTTOM_WORDS[bottomIndex]}
-                  typing={bottomTyping}
-                  onComplete={onBottomComplete}
-                />
-              </AnimatePresence>
-            </span>
+            <span>I analyse.</span>
+            <span>I strategise.</span>
+            <span>I design.</span>
+            <span>I deliver.</span>
           </motion.div>
         </div>
-
-        {/* Right — subtitle: one sentence per line, bigger, right-aligned */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ ...smooth, delay: 0.5 }}
-          className="hidden md:flex flex-col gap-0.5 font-mono text-lg md:text-xl lg:text-2xl font-medium leading-snug text-muted-foreground text-right pb-2"
-        >
-          <span>I analyse.</span>
-          <span>I strategise.</span>
-          <span>I design.</span>
-          <span>I deliver.</span>
-        </motion.div>
       </div>
 
+      {/* Bottom tag */}
       <div className="absolute bottom-6 left-0 right-0 z-10 flex justify-center">
         <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
           People, Buildings, Technology
