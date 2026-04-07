@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Intro } from "@/components/Intro";
-import { QuoteBreak } from "@/components/QuoteBreak";
-import { Services } from "@/components/Services";
-import { Methodology } from "@/components/Methodology";
+import { Hero } from "@/components/Hero";
+import { Fields } from "@/components/Fields";
+import { Method } from "@/components/Method";
 import { Projects } from "@/components/Projects";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";

@@ -35,7 +35,7 @@ const services = [
   },
 ];
 
-export function Services() {
+export function Fields() {
   const [active, setActive] = useState<number | null>(null);
 
   return (

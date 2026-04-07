@@ -46,7 +46,7 @@ const phases = [
   },
 ];
 
-export function Methodology() {
+export function Method() {
   const [activePhase, setActivePhase] = useState<number | null>(null);
   const [isTouch, setIsTouch] = useState(false);
 
