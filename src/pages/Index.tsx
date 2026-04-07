@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Hero } from "@/components/Hero";
+import { Intro } from "@/components/Intro";
 import { QuoteBreak } from "@/components/QuoteBreak";
 import { Services } from "@/components/Services";
 import { Methodology } from "@/components/Methodology";
@@ -28,8 +28,8 @@ const Index = () => {
         <div className="snap-section">
           <QuoteBreak />
         </div>
-        <div className="snap-section" id="sub-hero">
-          <Hero />
+        <div className="snap-section" id="intro">
+          <Intro />
         </div>
         <div className="snap-section">
           <Services />

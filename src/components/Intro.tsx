@@ -8,7 +8,7 @@ const fade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
 
 type ActiveView = "image" | "what" | "who";
 
-export function Hero() {
+export function Intro() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const shouldReduceMotion = useReducedMotion();
