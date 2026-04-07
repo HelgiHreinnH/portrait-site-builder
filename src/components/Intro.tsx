@@ -173,19 +173,6 @@ export function Intro() {
                       I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a
                       fundamental sense that the same challenges look very different depending on perspective.
                     </p>
-
-                    <div className="space-y-2">
-                      {[
-                        { l: "Email", v: "helgihreinn@me.com" },
-                        { l: "Phone", v: "+45 4083 1842" },
-                        { l: "Base", v: "Copenhagen, Denmark" },
-                      ].map(({ l, v }) => (
-                        <div key={l} className="flex items-center gap-4 border-b border-border pb-2">
-                          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground w-14">
-                            {l}
-                          </span>
-                          <span className="text-sm text-foreground">{v}</span>
-                        </div>
                       ))}
                     </div>
                   </motion.div>
