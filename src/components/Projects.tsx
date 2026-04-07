@@ -95,7 +95,7 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
         </div>
       </div>
 
-      <div className="flex-[1] bg-background px-5 py-3 flex flex-col justify-center gap-1">
+      <div className="flex-[0.8] bg-background px-5 py-3 flex flex-col justify-start gap-1">
         <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
           {project.client}
         </p>
