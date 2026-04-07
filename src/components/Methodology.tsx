@@ -92,9 +92,9 @@ export function Methodology() {
         </div>
 
         {/* Circular Process Diagram */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-start gap-8 lg:gap-16">
+        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
           {/* Circle Container - Desktop & Tablet */}
-          <div className="hidden md:block relative" style={{ width: "500px", height: "500px" }}>
+          <div className="hidden md:flex items-center justify-center shrink-0" style={{ width: "500px", height: "500px" }}>
             {/* Center label */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -209,7 +209,7 @@ export function Methodology() {
 
           {/* Detail Panel - Desktop & Tablet */}
           <motion.div
-            className="hidden md:block flex-1 max-w-lg"
+            className="hidden md:flex md:items-center flex-1 max-w-sm pl-12 lg:pl-20"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
