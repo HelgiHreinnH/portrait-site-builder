@@ -107,7 +107,7 @@ export function Services() {
                 </motion.p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-1.5 pt-auto">
+                <div className="flex flex-wrap gap-1.5 mt-auto pt-1.5">
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
