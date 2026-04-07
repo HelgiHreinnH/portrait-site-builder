@@ -28,8 +28,8 @@ const Index = () => {
         <div className="snap-section">
           <QuoteBreak />
         </div>
-        <div className="snap-section" id="sub-hero">
-          <Hero />
+        <div className="snap-section" id="intro">
+          <Intro />
         </div>
         <div className="snap-section">
           <Services />
