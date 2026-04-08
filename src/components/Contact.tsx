@@ -29,7 +29,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ ...smooth }}
-          className="shrink-0 mb-4"
+          className="shrink-0 mb-3"
         >
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0">
             Let's Talk
@@ -123,7 +123,7 @@ export function Contact() {
               transition={{ ...smooth, delay: 0.2 }}
               className="flex flex-col"
             >
-              <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-6 max-w-md">
+              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground mb-6 max-w-md">
                 I'm available for advisory work, project collaborations, and strategic partnerships within workplace design, digital product development, and user experience.
               </p>
 

@@ -31,7 +31,7 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={smooth}
-            className="mb-4"
+            className="mb-3"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0">
               From Convention to Insight
@@ -76,7 +76,7 @@ export function About() {
       </div>
 
       {/* Bottom half */}
-      <div className="flex-[1] flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-6 pb-[var(--section-pb)] bg-muted/40">
+      <div className="flex-[1] flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-3 pb-[var(--section-pb)] bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

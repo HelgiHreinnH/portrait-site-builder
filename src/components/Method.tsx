@@ -74,9 +74,9 @@ export function Method() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-4"
+            className="mb-3"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-1">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0.5">
               How I Work
             </h2>
             <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
@@ -171,7 +171,7 @@ export function Method() {
           </div>
 
           {/* Right: Detail Panel — 1/3 width */}
-          <div className="hidden md:flex flex-[1] items-start justify-start pt-8 h-full">
+          <div className="hidden md:flex flex-[1] items-start justify-start pt-2 h-full">
             <motion.div
               className="max-w-xs"
               initial={{ opacity: 0, x: 20 }}
