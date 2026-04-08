@@ -29,10 +29,10 @@ export function Intro() {
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "what" ? "image" : "what")}
-              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "what"
                   ? "border-foreground text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-foreground/50 hover:text-foreground"
               }`}
             >
               What I do<span className="text-user-blue">.</span>
@@ -41,10 +41,10 @@ export function Intro() {
               onMouseEnter={() => setActiveView("who")}
               onMouseLeave={() => setActiveView("image")}
               onClick={() => setActiveView(activeView === "who" ? "image" : "who")}
-              className={`whitespace-nowrap font-display text-xl md:text-2xl lg:text-3xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
+              className={`whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl tracking-tight transition-colors duration-300 px-4 md:px-6 py-3 border-b-2 ${
                 activeView === "who"
                   ? "border-foreground text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-foreground/50 hover:text-foreground"
               }`}
             >
               Who I am<span className="text-user-blue">.</span>
@@ -56,7 +56,7 @@ export function Intro() {
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
-            className="relative h-[calc(100vh-200px)] min-h-[300px] -mt-24"
+            className="relative h-[calc(100vh-200px)] min-h-[300px] -mt-36"
           >
             <div className="relative overflow-hidden h-full">
               <AnimatePresence mode="wait">

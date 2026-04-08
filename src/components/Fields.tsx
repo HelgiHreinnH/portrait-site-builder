@@ -48,9 +48,9 @@ export function Fields() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-4"
+            className="mb-3"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-1">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0.5">
               Three Fields. One Approach.
             </h2>
             <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
@@ -105,7 +105,7 @@ export function Fields() {
                   </motion.p>
 
                   {/* Tags — bottom aligned */}
-                  <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+                  <div className="flex flex-wrap gap-1.5 mt-auto pt-4">
                     {service.tags.map((tag) => (
                       <span
                         key={tag}

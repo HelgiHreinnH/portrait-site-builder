@@ -163,7 +163,7 @@ export function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ ...smooth, delay: 0.5 }}
-            className="hidden md:flex flex-col gap-0.5 font-mono text-lg md:text-xl lg:text-2xl font-medium leading-snug text-muted-foreground text-right pb-2"
+            className="hidden md:flex flex-col gap-1 font-mono text-2xl md:text-3xl lg:text-[2rem] font-medium leading-snug text-foreground text-right pb-2"
           >
             <span>I analyse.</span>
             <span>I strategise.</span>

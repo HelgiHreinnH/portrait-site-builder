@@ -82,6 +82,7 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
           style={{ filter: 'grayscale(10%) contrast(1.02)' }}
         />
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'hsla(var(--foreground) / 0.05)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none" style={{ background: 'linear-gradient(to top, hsl(var(--background)) 0%, transparent 100%)' }} />
         <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
           <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
             {project.number}
@@ -234,7 +235,7 @@ export function Projects() {
       <section id="projects" className="h-full flex flex-col overflow-hidden">
         <div className="section-inner">
           {/* Row 1: Header */}
-          <div className="flex items-end justify-between mb-3 shrink-0">
+          <div className="flex items-end justify-between mb-2 shrink-0">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
