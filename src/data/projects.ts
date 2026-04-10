@@ -71,7 +71,7 @@ export const projects: Record<string, ProjectData> = {
     category: "B",
     categoryLabel: "Digital Product",
     accentColor: "#DCE8E6",
-    heroImage: IMG_FELLES,
+    heroImage: fellesImg,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
       challenge: "Build a digital platform for property and facilities management — serving building managers and residents with tasks, maintenance, shared spaces, and communication in one place.",
@@ -125,7 +125,7 @@ export const projects: Record<string, ProjectData> = {
     category: "B",
     categoryLabel: "Digital Product / Tool",
     accentColor: "#C5D5EC",
-    heroImage: IMG_AEC,
+    heroImage: aecHackathonImg,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
       challenge: "Build a tool that solves a real problem in the architecture, engineering, and construction industry — within a hackathon timeframe.",
@@ -231,7 +231,7 @@ export const projects: Record<string, ProjectData> = {
     category: "A",
     categoryLabel: "Physical + Strategy",
     accentColor: "#D5DEF4",
-    heroImage: IMG_LEGO,
+    heroImage: legoImg,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
       challenge: "Develop the atrium experience at a new global headquarters — a complete programme spanning floor plans across 3 floors, zone strategy, and user experience.",
@@ -391,7 +391,7 @@ export const projects: Record<string, ProjectData> = {
     category: "B",
     categoryLabel: "Digital Product",
     accentColor: "#D5DEF4",
-    heroImage: IMG_UBIQISENSE,
+    heroImage: ubiqisenseImg,
     phasesLed: ["Analyse", "Design"],
     brief: {
       challenge: "Design the user interface for a platform that visualises occupancy sensor data — making complex spatial data accessible and actionable.",
@@ -500,7 +500,7 @@ export const projects: Record<string, ProjectData> = {
     category: "C",
     categoryLabel: "Strategy & Process",
     accentColor: "#B8C9EE",
-    heroImage: IMG_BARCLAYS,
+    heroImage: barclaysImg,
     phasesLed: ["Analyse", "Design"],
     brief: {
       challenge: "Develop an employee experience strategy across three global locations — 10,000+ employees. Part of a major global key account.",
@@ -659,7 +659,7 @@ export const projects: Record<string, ProjectData> = {
     category: "A",
     categoryLabel: "Physical + Strategy",
     accentColor: "#DCE8E6",
-    heroImage: IMG_BEUMER,
+    heroImage: beumerImg,
     phasesLed: ["Analyse", "Strategise", "Design"],
     brief: {
       challenge: "Design an activity-based workplace for a large industrial organisation's Aarhus domicile — 580 employees transitioning from traditional office layout.",
