@@ -211,12 +211,7 @@ export function Projects() {
                   ))}
                 </div>
 
-                {/* Page 2: 9 projects in bento layout */}
-                {/* Layout: 3 cols x 3 rows, with some cells spanning for variety
-                    Row 1: [large 2-col] [small]
-                    Row 2: [small] [small] [small]
-                    Row 3: [small] [large 2-col]
-                */}
+                {/* Page 2: 9 projects in uniform small bento grid */}
                 <div
                   className="snap-start shrink-0 h-full grid gap-3"
                   style={{
@@ -225,44 +220,11 @@ export function Projects() {
                     gridTemplateRows: "1fr 1fr 1fr",
                   }}
                 >
-                  {/* Row 1 */}
-                  <div className="col-span-2 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[0]} onClick={() => setSelectedProject(rest[0])} size="large" index={0} />
-                  </div>
-                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[1]} onClick={() => setSelectedProject(rest[1])} size="small" index={1} />
-                  </div>
-
-                  {/* Row 2 */}
-                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[2]} onClick={() => setSelectedProject(rest[2])} size="small" index={2} />
-                  </div>
-                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[3]} onClick={() => setSelectedProject(rest[3])} size="small" index={3} />
-                  </div>
-                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[4]} onClick={() => setSelectedProject(rest[4])} size="small" index={4} />
-                  </div>
-
-                  {/* Row 3 */}
-                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[5]} onClick={() => setSelectedProject(rest[5])} size="small" index={5} />
-                  </div>
-                  <div className="col-span-2 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                    <BentoCard project={rest[6]} onClick={() => setSelectedProject(rest[6])} size="large" index={6} />
-                  </div>
-
-                  {/* Remaining 2 overlay on row 3 if needed — use absolute or extra row */}
-                  {rest[7] && (
-                    <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                      <BentoCard project={rest[7]} onClick={() => setSelectedProject(rest[7])} size="small" index={7} />
+                  {rest.slice(0, 9).map((project, i) => (
+                    <div key={project.id} className="min-h-0 overflow-hidden rounded-xl">
+                      <BentoCard project={project} onClick={() => setSelectedProject(project)} size="small" index={i} />
                     </div>
-                  )}
-                  {rest[8] && (
-                    <div className="col-span-2 row-span-1 min-h-0 overflow-hidden rounded-xl">
-                      <BentoCard project={rest[8]} onClick={() => setSelectedProject(rest[8])} size="large" index={8} />
-                    </div>
-                  )}
+                  ))}
                 </div>
               </div>
             </div>
