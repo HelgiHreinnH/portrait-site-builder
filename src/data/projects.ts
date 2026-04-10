@@ -4,6 +4,12 @@ import kvittImg from "@/assets/project-kvitt.jpg";
 import htasImg from "@/assets/project-htas.jpg";
 import formImg from "@/assets/project-form.jpg";
 import clnImg from "@/assets/project-cln.jpg";
+import fellesImg from "@/assets/project-felles.jpg";
+import aecHackathonImg from "@/assets/project-aec-hackathon.jpg";
+import legoImg from "@/assets/project-lego.jpg";
+import ubiqisenseImg from "@/assets/project-ubiqisense.jpg";
+import barclaysImg from "@/assets/project-barclays.jpg";
+import beumerImg from "@/assets/project-beumer.jpg";
 
 export interface ProjectData {
   id: string;
@@ -48,20 +54,9 @@ export function getGalleryCaption(item: string | GalleryItem): string | undefine
   return typeof item === "string" ? undefined : item.caption;
 }
 
-const IMG_LEGO =
-  "https://images.unsplash.com/photo-1771908997889-6d043c4a9ef7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHN0dWRpbyUyMHdvcmtzcGFjZSUyMGRyYW1hdGljJTIwbGlnaHRpbmd8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_BARCLAYS =
-  "https://images.unsplash.com/photo-1573306366674-5d42fa734860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZGl0b3JpYWwlMjBvZmZpY2UlMjBpbnRlcmlvciUyMHBlb3BsZSUyMHdvcmtpbmclMjBDb3BlbmhhZ2VuJTIwbWluaW1hbHxlbnwxfHx8fDE3NzMxNDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_BEUMER =
-  "https://images.unsplash.com/photo-1770944182416-911214039dae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWVyc2slMjBzaGlwcGluZyUyMGluZHVzdHJpYWwlMjBkcmFtYXRpYyUyMHdpZGV8ZW58MXx8fHwxNzczMTQ0MDQ1fDA&ixlib=rb-4.1.0&q=80&w=1080";
-const IMG_AEC =
-  "https://images.unsplash.com/photo-1739054730201-4b6463484e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYmx1ZXByaW50JTIwZGF0YSUyMHZpc3VhbGl6YXRpb24lMjBkYXJrJTIwYmx1ZSUyMHRlY2h8ZW58MXx8fHwxNzczMTQ0MDQyfDA&ixlib=rb-4.1.0&q=80&w=1080";
 const UBI_BUCKET = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/projects/Ubiqisense";
 const IMG_UBIQISENSE_LOGO = `${UBI_BUCKET}/logo.png`;
-const IMG_UBIQISENSE =
-  `${UBI_BUCKET}/Figma%20design%20-%20Ubi%20NEW%20Landing.pngDashboard.png`;
 const FELLES_BUCKET = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/projects/Felles";
-const IMG_FELLES = `${FELLES_BUCKET}/felles%20landing%20page.png`;
 
 export const projects: Record<string, ProjectData> = {
   "felles": {
@@ -76,7 +71,7 @@ export const projects: Record<string, ProjectData> = {
     category: "B",
     categoryLabel: "Digital Product",
     accentColor: "#DCE8E6",
-    heroImage: IMG_FELLES,
+    heroImage: fellesImg,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
       challenge: "Build a digital platform for property and facilities management — serving building managers and residents with tasks, maintenance, shared spaces, and communication in one place.",
@@ -130,7 +125,7 @@ export const projects: Record<string, ProjectData> = {
     category: "B",
     categoryLabel: "Digital Product / Tool",
     accentColor: "#C5D5EC",
-    heroImage: IMG_AEC,
+    heroImage: aecHackathonImg,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
       challenge: "Build a tool that solves a real problem in the architecture, engineering, and construction industry — within a hackathon timeframe.",
@@ -236,7 +231,7 @@ export const projects: Record<string, ProjectData> = {
     category: "A",
     categoryLabel: "Physical + Strategy",
     accentColor: "#D5DEF4",
-    heroImage: IMG_LEGO,
+    heroImage: legoImg,
     phasesLed: ["Analyse", "Strategise", "Design", "Deliver"],
     brief: {
       challenge: "Develop the atrium experience at a new global headquarters — a complete programme spanning floor plans across 3 floors, zone strategy, and user experience.",
@@ -396,7 +391,7 @@ export const projects: Record<string, ProjectData> = {
     category: "B",
     categoryLabel: "Digital Product",
     accentColor: "#D5DEF4",
-    heroImage: IMG_UBIQISENSE,
+    heroImage: ubiqisenseImg,
     phasesLed: ["Analyse", "Design"],
     brief: {
       challenge: "Design the user interface for a platform that visualises occupancy sensor data — making complex spatial data accessible and actionable.",
@@ -505,7 +500,7 @@ export const projects: Record<string, ProjectData> = {
     category: "C",
     categoryLabel: "Strategy & Process",
     accentColor: "#B8C9EE",
-    heroImage: IMG_BARCLAYS,
+    heroImage: barclaysImg,
     phasesLed: ["Analyse", "Design"],
     brief: {
       challenge: "Develop an employee experience strategy across three global locations — 10,000+ employees. Part of a major global key account.",
@@ -664,7 +659,7 @@ export const projects: Record<string, ProjectData> = {
     category: "A",
     categoryLabel: "Physical + Strategy",
     accentColor: "#DCE8E6",
-    heroImage: IMG_BEUMER,
+    heroImage: beumerImg,
     phasesLed: ["Analyse", "Strategise", "Design"],
     brief: {
       challenge: "Design an activity-based workplace for a large industrial organisation's Aarhus domicile — 580 employees transitioning from traditional office layout.",
