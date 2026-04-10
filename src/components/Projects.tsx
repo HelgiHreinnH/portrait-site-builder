@@ -6,14 +6,16 @@ import { ProjectPopover } from "./ProjectPopover";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-function ProjectCard({ project, onClick, index }: { project: ProjectData; onClick: () => void; index: number }) {
+const featuredIds = ["felles", "archi-ar", "a-place-to-work"];
+
+function FeaturedCard({ project, onClick, index }: { project: ProjectData; onClick: () => void; index: number }) {
   return (
     <motion.button
       onClick={onClick}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ ...smooth, delay: index * 0.05 }}
+      transition={{ ...smooth, delay: index * 0.08 }}
       className="group relative flex flex-col overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
     >
       <div className="relative w-full flex-[1.2] min-h-0 overflow-hidden">
@@ -63,31 +65,74 @@ function ProjectCard({ project, onClick, index }: { project: ProjectData; onClic
   );
 }
 
+function BentoCard({ project, onClick, size, index }: { project: ProjectData; onClick: () => void; size: "large" | "small"; index: number }) {
+  return (
+    <motion.button
+      onClick={onClick}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ ...smooth, delay: index * 0.05 }}
+      className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
+    >
+      <img
+        src={project.heroImage}
+        alt={project.title}
+        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+        style={{ filter: "grayscale(10%) contrast(1.02)" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
+
+      <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
+          {project.number}
+        </span>
+        <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+          {project.outcome}
+        </span>
+      </div>
+
+      <div className="absolute bottom-3 left-3 right-3 transition-transform duration-500 group-hover:translate-y-[-2px]">
+        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-0.5">
+          {project.client}
+        </p>
+        <h3 className={`font-display font-semibold text-primary-foreground leading-tight ${size === "large" ? "text-base md:text-lg" : "text-sm"}`}>
+          {project.title}
+        </h3>
+        {size === "large" && (
+          <p className="text-xs text-primary-foreground/60 leading-relaxed line-clamp-2 mt-1">
+            {project.subtitle}
+          </p>
+        )}
+      </div>
+
+      <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <ArrowUpRight size={14} className="text-primary-foreground" />
+      </div>
+    </motion.button>
+  );
+}
+
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [page, setPage] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
-  const pageSize = 6;
-  const totalPages = Math.ceil(allProjects.length / pageSize);
-  const page1 = allProjects.slice(0, pageSize);
-  const page2 = allProjects.slice(pageSize, pageSize * 2);
-  const pages = [page1, page2].filter((p) => p.length > 0);
+  const featured = allProjects.filter((p) => featuredIds.includes(p.id));
+  const rest = allProjects.filter((p) => !featuredIds.includes(p.id));
 
   const scrollToPage = useCallback((p: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    const target = p * el.clientWidth;
-    el.scrollTo({ left: target, behavior: "smooth" });
+    el.scrollTo({ left: p * el.clientWidth, behavior: "smooth" });
     setPage(p);
   }, []);
 
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const currentPage = Math.round(el.scrollLeft / el.clientWidth);
-    setPage(currentPage);
+    setPage(Math.round(el.scrollLeft / el.clientWidth));
   }, []);
 
   useEffect(() => {
@@ -118,9 +163,8 @@ export function Projects() {
             </motion.div>
 
             <div className="hidden md:flex items-center gap-3">
-              {/* Page dots */}
               <div className="flex gap-1.5 mr-2">
-                {pages.map((_, i) => (
+                {[0, 1].map((i) => (
                   <button
                     key={i}
                     onClick={() => scrollToPage(i)}
@@ -131,15 +175,15 @@ export function Projects() {
                 ))}
               </div>
               <button
-                onClick={() => scrollToPage(Math.max(0, page - 1))}
+                onClick={() => scrollToPage(0)}
                 disabled={page === 0}
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors disabled:opacity-30"
               >
                 <ChevronLeft size={18} />
               </button>
               <button
-                onClick={() => scrollToPage(Math.min(totalPages - 1, page + 1))}
-                disabled={page === totalPages - 1}
+                onClick={() => scrollToPage(1)}
+                disabled={page === 1}
                 className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors disabled:opacity-30"
               >
                 <ChevronRight size={18} />
@@ -147,30 +191,79 @@ export function Projects() {
             </div>
           </div>
 
-          {/* Horizontal snap scroll with 2 pages */}
+          {/* Two-page horizontal snap scroll */}
           <div className="relative flex-1 min-h-0">
             <div
               ref={scrollRef}
               className="overflow-x-auto overflow-y-hidden scrollbar-hide h-full snap-x snap-mandatory"
               style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex h-full" style={{ width: `${pages.length * 100}%` }}>
-                {pages.map((pageProjects, pi) => (
-                  <div
-                    key={pi}
-                    className="snap-start w-full h-full shrink-0 grid grid-cols-2 md:grid-cols-3 gap-4 pr-4"
-                    style={{ width: `${100 / pages.length}%` }}
-                  >
-                    {pageProjects.map((project, i) => (
-                      <ProjectCard
-                        key={project.id}
-                        project={project}
-                        onClick={() => setSelectedProject(project)}
-                        index={i}
-                      />
-                    ))}
+              <div className="flex h-full" style={{ width: "200%" }}>
+                {/* Page 1: 3 Featured cards */}
+                <div className="snap-start shrink-0 h-full grid grid-cols-3 gap-4" style={{ width: "50%" }}>
+                  {featured.map((project, i) => (
+                    <FeaturedCard
+                      key={project.id}
+                      project={project}
+                      onClick={() => setSelectedProject(project)}
+                      index={i}
+                    />
+                  ))}
+                </div>
+
+                {/* Page 2: 9 projects in bento layout */}
+                {/* Layout: 3 cols x 3 rows, with some cells spanning for variety
+                    Row 1: [large 2-col] [small]
+                    Row 2: [small] [small] [small]
+                    Row 3: [small] [large 2-col]
+                */}
+                <div
+                  className="snap-start shrink-0 h-full grid gap-3"
+                  style={{
+                    width: "50%",
+                    gridTemplateColumns: "1fr 1fr 1fr",
+                    gridTemplateRows: "1fr 1fr 1fr",
+                  }}
+                >
+                  {/* Row 1 */}
+                  <div className="col-span-2 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[0]} onClick={() => setSelectedProject(rest[0])} size="large" index={0} />
                   </div>
-                ))}
+                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[1]} onClick={() => setSelectedProject(rest[1])} size="small" index={1} />
+                  </div>
+
+                  {/* Row 2 */}
+                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[2]} onClick={() => setSelectedProject(rest[2])} size="small" index={2} />
+                  </div>
+                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[3]} onClick={() => setSelectedProject(rest[3])} size="small" index={3} />
+                  </div>
+                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[4]} onClick={() => setSelectedProject(rest[4])} size="small" index={4} />
+                  </div>
+
+                  {/* Row 3 */}
+                  <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[5]} onClick={() => setSelectedProject(rest[5])} size="small" index={5} />
+                  </div>
+                  <div className="col-span-2 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                    <BentoCard project={rest[6]} onClick={() => setSelectedProject(rest[6])} size="large" index={6} />
+                  </div>
+
+                  {/* Remaining 2 overlay on row 3 if needed — use absolute or extra row */}
+                  {rest[7] && (
+                    <div className="col-span-1 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                      <BentoCard project={rest[7]} onClick={() => setSelectedProject(rest[7])} size="small" index={7} />
+                    </div>
+                  )}
+                  {rest[8] && (
+                    <div className="col-span-2 row-span-1 min-h-0 overflow-hidden rounded-xl">
+                      <BentoCard project={rest[8]} onClick={() => setSelectedProject(rest[8])} size="large" index={8} />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
