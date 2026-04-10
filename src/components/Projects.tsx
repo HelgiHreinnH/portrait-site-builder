@@ -6,72 +6,14 @@ import { ProjectPopover } from "./ProjectPopover";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
-const featuredIds = ["felles", "archi-ar", "a-place-to-work"];
-
-type TileType =
-  | { kind: "project"; project: ProjectData; w: number; h: number }
-  | { kind: "quote"; text: string; author?: string; h: number }
-  | { kind: "stat"; value: string; label: string; sublabel?: string; h: number };
-
-type FillerBase =
-  | { kind: "quote"; text: string; author?: string }
-  | { kind: "stat"; value: string; label: string; sublabel?: string };
-
-const fillerContent: FillerBase[] = [
-  { kind: "quote", text: "Good work starts with understanding the problem — not the solution." },
-  { kind: "stat", value: "12", label: "Projects", sublabel: "People · Buildings · Tech" },
-  { kind: "quote", text: "Strategy without making is just commentary. Making without strategy is just decoration.", author: "— Method" },
-  { kind: "stat", value: "4", label: "Phases", sublabel: "Analyse · Strategise · Design · Deliver" },
-  { kind: "quote", text: "The building should be the best workplace in the world for the people who use it." },
-  { kind: "stat", value: "10k+", label: "People impacted", sublabel: "Across three continents" },
-];
-
-type Column = { widthPx: number; tiles: TileType[]; offsetY?: number };
-
-function buildBentoLayout(restProjects: ProjectData[]): Column[] {
-  let fi = 0;
-  const filler = (h: number): TileType => {
-    const f = fillerContent[fi++ % fillerContent.length];
-    return { ...f, h } as TileType;
-  };
-
-  const columns: Column[] = [];
-  const chunks: ProjectData[][] = [];
-  for (let i = 0; i < restProjects.length; i += 2) {
-    chunks.push(restProjects.slice(i, i + 2));
-  }
-
-  const widths = [400, 320, 360, 280, 340];
-  const offsets = [0, 24, 8, 36, 16];
-
-  chunks.forEach((chunk, ci) => {
-    const w = widths[ci % widths.length];
-    const offset = offsets[ci % offsets.length];
-    const tiles: TileType[] = [];
-
-    if (ci % 3 === 0) tiles.push(filler(0.18));
-
-    chunk.forEach((p, pi) => {
-      tiles.push({
-        kind: "project",
-        project: p,
-        w,
-        h: pi === 0 ? 0.5 : 0.34,
-      });
-    });
-
-    if (ci % 2 === 1) tiles.push(filler(0.22));
-
-    columns.push({ widthPx: w, offsetY: offset, tiles });
-  });
-
-  return columns;
-}
-
-function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () => void }) {
+function ProjectCard({ project, onClick, index }: { project: ProjectData; onClick: () => void; index: number }) {
   return (
-    <button
+    <motion.button
       onClick={onClick}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ ...smooth, delay: index * 0.05 }}
       className="group relative flex flex-col overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
     >
       <div className="relative w-full flex-[1.2] min-h-0 overflow-hidden">
@@ -79,10 +21,10 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
           src={project.heroImage}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-          style={{ filter: 'grayscale(10%) contrast(1.02)' }}
+          style={{ filter: "grayscale(10%) contrast(1.02)" }}
         />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'hsla(var(--foreground) / 0.05)' }} />
-        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none" style={{ background: 'linear-gradient(to top, hsl(var(--background)) 0%, transparent 100%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "hsla(var(--foreground) / 0.05)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)) 0%, transparent 100%)" }} />
         <div className="absolute top-3 left-4 right-4 flex justify-between items-start">
           <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
             {project.number}
@@ -117,103 +59,35 @@ function FeaturedCard({ project, onClick }: { project: ProjectData; onClick: () 
           ))}
         </div>
       </div>
-    </button>
-  );
-}
-
-function ProjectTile({ tile, onClick }: { tile: TileType & { kind: "project" }; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="group relative block overflow-hidden rounded-xl w-full h-full text-left"
-    >
-      <img
-        src={tile.project.heroImage}
-        alt={tile.project.title}
-        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-        style={{ filter: 'grayscale(10%) contrast(1.02)' }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent rounded-xl transition-opacity duration-500 group-hover:from-foreground/80" />
-
-      <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
-        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/70">
-          {tile.project.number}
-        </span>
-        <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/70 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
-          {tile.project.outcome}
-        </span>
-      </div>
-
-      <div className="absolute bottom-2.5 left-3 right-3 transition-transform duration-500 group-hover:translate-y-[-2px]">
-        <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/60 mb-0.5">
-          {tile.project.client}
-        </p>
-        <h3 className="font-display text-sm md:text-base font-semibold text-primary-foreground leading-tight">
-          {tile.project.title}
-        </h3>
-      </div>
-
-      <div className="absolute top-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <ArrowUpRight size={14} className="text-primary-foreground" />
-      </div>
-    </button>
-  );
-}
-
-function QuoteTile({ tile }: { tile: TileType & { kind: "quote" } }) {
-  return (
-    <div className="flex flex-col justify-center items-start rounded-xl bg-muted/60 border border-border px-5 py-4 h-full">
-      <p className="font-display text-sm md:text-[15px] leading-relaxed text-foreground/80 italic">
-        "{tile.text}"
-      </p>
-      {tile.author && (
-        <span className="mt-2 font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground">
-          {tile.author}
-        </span>
-      )}
-    </div>
-  );
-}
-
-function StatTile({ tile }: { tile: TileType & { kind: "stat" } }) {
-  return (
-    <div className="flex flex-col justify-center items-center text-center rounded-xl bg-foreground px-5 py-4 h-full">
-      <span className="font-display text-3xl md:text-4xl font-bold text-primary-foreground">
-        {tile.value}
-      </span>
-      <span className="mt-1 font-mono text-[10px] tracking-[0.2em] uppercase text-primary-foreground/70">
-        {tile.label}
-      </span>
-      {tile.sublabel && (
-        <span className="mt-0.5 font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/40">
-          {tile.sublabel}
-        </span>
-      )}
-    </div>
+    </motion.button>
   );
 }
 
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
-  const [showIndicator, setShowIndicator] = useState(true);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [page, setPage] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
-  const featured = allProjects.filter((p) => featuredIds.includes(p.id));
-  const rest = allProjects.filter((p) => !featuredIds.includes(p.id));
-  const bentoColumns = buildBentoLayout(rest);
+  const pageSize = 6;
+  const totalPages = Math.ceil(allProjects.length / pageSize);
+  const page1 = allProjects.slice(0, pageSize);
+  const page2 = allProjects.slice(pageSize, pageSize * 2);
+  const pages = [page1, page2].filter((p) => p.length > 0);
+
+  const scrollToPage = useCallback((p: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const target = p * el.clientWidth;
+    el.scrollTo({ left: target, behavior: "smooth" });
+    setPage(p);
+  }, []);
 
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
-    if (el.scrollLeft > 200) {
-      setShowIndicator(false);
-    } else {
-      setShowIndicator(true);
-    }
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    setScrollProgress(maxScroll > 0 ? el.scrollLeft / maxScroll : 0);
+    const currentPage = Math.round(el.scrollLeft / el.clientWidth);
+    setPage(currentPage);
   }, []);
 
   useEffect(() => {
@@ -223,19 +97,12 @@ export function Projects() {
     return () => el.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const scroll = (dir: "left" | "right") => {
-    scrollRef.current?.scrollBy({
-      left: dir === "left" ? -400 : 400,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <>
       <section id="projects" className="h-full flex flex-col overflow-hidden">
         <div className="section-inner">
-          {/* Row 1: Header */}
-          <div className="flex items-end justify-between mb-2 shrink-0">
+          {/* Header */}
+          <div className="flex items-end justify-between mb-4 shrink-0">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -251,100 +118,60 @@ export function Projects() {
             </motion.div>
 
             <div className="hidden md:flex items-center gap-3">
-              <div className="w-24 h-0.5 bg-border rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-foreground/50 rounded-full"
-                  style={{ width: `${Math.max(10, scrollProgress * 100)}%` }}
-                  transition={{ duration: 0.1 }}
-                />
+              {/* Page dots */}
+              <div className="flex gap-1.5 mr-2">
+                {pages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => scrollToPage(i)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      page === i ? "bg-foreground scale-110" : "bg-border hover:bg-muted-foreground"
+                    }`}
+                  />
+                ))}
               </div>
               <button
-                onClick={() => scroll("left")}
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                onClick={() => scrollToPage(Math.max(0, page - 1))}
+                disabled={page === 0}
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors disabled:opacity-30"
               >
                 <ChevronLeft size={18} />
               </button>
               <button
-                onClick={() => scroll("right")}
-                className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                onClick={() => scrollToPage(Math.min(totalPages - 1, page + 1))}
+                disabled={page === totalPages - 1}
+                className="p-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors disabled:opacity-30"
               >
                 <ChevronRight size={18} />
               </button>
             </div>
           </div>
 
-          {/* Row 2: Horizontal scroll */}
+          {/* Horizontal snap scroll with 2 pages */}
           <div className="relative flex-1 min-h-0">
             <div
               ref={scrollRef}
-              className="overflow-x-auto overflow-y-hidden scrollbar-hide h-full"
+              className="overflow-x-auto overflow-y-hidden scrollbar-hide h-full snap-x snap-mandatory"
               style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex gap-4 h-full min-w-max pr-10 items-start">
-                {featured.map((project, i) => (
-                  <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-30px" }}
-                    transition={{ ...smooth, delay: i * 0.08 }}
-                    className="flex-shrink-0 h-full"
-                    style={{ width: "calc((min(100vw - 112px, 1280px) - 32px) / 3)" }}
+              <div className="flex h-full" style={{ width: `${pages.length * 100}%` }}>
+                {pages.map((pageProjects, pi) => (
+                  <div
+                    key={pi}
+                    className="snap-start w-full h-full shrink-0 grid grid-cols-2 md:grid-cols-3 gap-4 pr-4"
+                    style={{ width: `${100 / pages.length}%` }}
                   >
-                    <FeaturedCard
-                      project={project}
-                      onClick={() => setSelectedProject(project)}
-                    />
-                  </motion.div>
-                ))}
-
-                <div className="flex-shrink-0 w-8" />
-
-                {bentoColumns.map((col, ci) => (
-                  <motion.div
-                    key={`bento-${ci}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-30px" }}
-                    transition={{ ...smooth, delay: (featured.length + ci) * 0.06 }}
-                    className="flex-shrink-0 flex flex-col gap-3"
-                    style={{
-                      width: col.widthPx,
-                      height: `calc(100% - ${col.offsetY || 0}px)`,
-                      marginTop: col.offsetY || 0,
-                    }}
-                  >
-                    {col.tiles.map((tile, ti) => (
-                      <div
-                        key={ti}
-                        className="min-h-0 overflow-hidden rounded-xl"
-                        style={{ flex: `${tile.h} 0 0%` }}
-                      >
-                        {tile.kind === "project" && (
-                          <ProjectTile
-                            tile={tile}
-                            onClick={() => setSelectedProject(tile.project)}
-                          />
-                        )}
-                        {tile.kind === "quote" && <QuoteTile tile={tile as TileType & { kind: "quote" }} />}
-                        {tile.kind === "stat" && <StatTile tile={tile as TileType & { kind: "stat" }} />}
-                      </div>
+                    {pageProjects.map((project, i) => (
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        onClick={() => setSelectedProject(project)}
+                        index={i}
+                      />
                     ))}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </div>
-
-            <div
-              className="absolute top-0 right-0 bottom-0 w-[120px] pointer-events-none flex items-center justify-end pr-4 transition-opacity duration-500"
-              style={{
-                background: "linear-gradient(to left, hsl(var(--background)) 0%, transparent 100%)",
-                opacity: showIndicator ? 1 : 0,
-              }}
-            >
-              <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground whitespace-nowrap">
-                More projects →
-              </span>
             </div>
           </div>
         </div>
