@@ -93,25 +93,36 @@ export function Intro() {
                     transition={fade}
                     className="flex flex-col justify-center p-4 md:p-6 h-full"
                   >
-                    <div className="mb-6">
-                      <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
-                        What I do
-                      </span>
-                      <span className="font-display text-xl md:text-3xl font-light text-user-blue tracking-tight">
-                        .
-                      </span>
+                    <div className="flex flex-col gap-0">
+                      <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
+                        <span className="text-muted-foreground font-light">I turn </span>
+                        <span>knowledge</span>
+                      </div>
+                      <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
+                        <span className="text-muted-foreground font-light">into </span>
+                        <span>design</span>
+                      </div>
                     </div>
 
-                    <div className="mt-2">
+                    <div className="mt-6">
                       <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
-                        I use experience across three disciplines — architecture, digital product, and workplace strategy — to help teams move from a complex problem to a clear solution.
+                        I use experience across three disciplines — architecture, digital product, and workplace strategy — to help teams move from a complex problem to a clear solution. I've spent ten years working on problems that don't fit neatly into one box: spaces that need to work better for the people using them, digital tools that need to fit how teams actually operate, strategies that need to survive contact with reality. My approach is analytical and collaborative — and I stay involved long enough to see it through.
                       </p>
-                      <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md mt-4">
-                        I've spent ten years working on problems that don't fit neatly into one box: spaces that need to work better for the people using them, digital tools that need to fit how teams actually operate, strategies that need to survive contact with reality.
-                      </p>
-                      <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md mt-4">
-                        My approach is analytical and collaborative — and I stay involved long enough to see it through.
-                      </p>
+
+                      <div className="flex gap-8 mt-6">
+                        {[
+                          { v: "10+", l: "Years" },
+                          { v: "10K+", l: "People impacted" },
+                          { v: "3", l: "Countries" },
+                        ].map(({ v, l }) => (
+                          <div key={l} className="text-center">
+                            <div className="font-display text-3xl font-bold text-foreground">{v}</div>
+                            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                              {l}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 )}
