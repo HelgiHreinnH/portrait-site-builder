@@ -77,14 +77,16 @@ export function Contact() {
               className="flex flex-col justify-between pb-[48px]"
             >
               <div className="pt-12">
-                <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-2">
-                  <img
-                    src={portraitImage}
-                    alt="Helgi Hreinn Hjálmarsson"
-                    className="w-full h-full object-cover"
-                  />
+                <div className="inline-flex flex-col items-center mb-2">
+                  <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-2">
+                    <img
+                      src={portraitImage}
+                      alt="Helgi Hreinn Hjálmarsson"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span className="font-display text-xl font-bold text-foreground">Helgi Hreinn Hjálmarsson</span>
                 </div>
-                <span className="font-display text-xl font-bold text-foreground block mb-2">Helgi Hreinn Hjálmarsson</span>
               </div>
 
               <div className="space-y-3 mb-6">
