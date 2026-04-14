@@ -79,7 +79,7 @@
 :root {
   --section-px: 1.5rem;
   --section-px-md: 2.5rem;
-  --section-pt: 5rem;
+  --section-pt: calc(5rem + 24px);
   --section-pb: 4.5rem;
   --section-max-w: 80rem;
   --section-gap: 1rem;
