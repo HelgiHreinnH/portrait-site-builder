@@ -185,6 +185,7 @@ export function Contact() {
                     <option value="Hiring / freelance">Hiring / freelance 📋</option>
                     <option value="Something else">Something else ✨</option>
                   </select>
+                </div>
                 <div>
                   <label className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
                     Email
