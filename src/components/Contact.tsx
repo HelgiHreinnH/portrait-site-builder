@@ -8,7 +8,7 @@ import portraitImage from "@/assets/portrait_image.png";
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
 
 export function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sending, setSending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,12 +33,12 @@ export function Contact() {
           templateName: "contact-confirmation",
           recipientEmail: "helgihreinn@me.com",
           idempotencyKey: `contact-notify-${id}`,
-          templateData: { name: `New message from ${form.name} (${form.email}): ${form.message}` },
+          templateData: { name: `New message from ${form.name} (${form.email})\nSubject: ${form.subject}\n\n${form.message}` },
         },
       });
 
       toast({ title: "Message sent", description: "Thanks for reaching out. I'll get back to you soon." });
-      setForm({ name: "", email: "", message: "" });
+      setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
     } finally {
@@ -166,6 +166,25 @@ export function Contact() {
                     placeholder="Your name"
                   />
                 </div>
+                <div>
+                  <label className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
+                    Subject
+                  </label>
+                  <select
+                    required
+                    value={form.subject}
+                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                    className="w-full border border-border rounded-lg bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-foreground transition-colors appearance-none"
+                  >
+                    <option value="" disabled>Pick a topic...</option>
+                    <option value="Just curious">Just curious 👀</option>
+                    <option value="I have a project">I have a project 🏗️</option>
+                    <option value="Coffee date?">Coffee date? ☕</option>
+                    <option value="Virtual meeting">Virtual meeting 💻</option>
+                    <option value="Let's collaborate">Let's collaborate 🤝</option>
+                    <option value="Hiring / freelance">Hiring / freelance 📋</option>
+                    <option value="Something else">Something else ✨</option>
+                  </select>
                 <div>
                   <label className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-1.5 block">
                     Email
