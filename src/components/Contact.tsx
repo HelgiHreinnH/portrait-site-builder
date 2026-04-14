@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Github, Linkedin, Download, Send } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import portraitImage from "@/assets/portrait_image.png";
 
 const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
@@ -10,14 +11,39 @@ export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
+    try {
+      const id = crypto.randomUUID();
+
+      // Send confirmation email to the person who submitted the form
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "contact-confirmation",
+          recipientEmail: form.email,
+          idempotencyKey: `contact-confirm-${id}`,
+          templateData: { name: form.name },
+        },
+      });
+
+      // Also send notification to you
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "contact-confirmation",
+          recipientEmail: "helgihreinn@me.com",
+          idempotencyKey: `contact-notify-${id}`,
+          templateData: { name: `New message from ${form.name} (${form.email}): ${form.message}` },
+        },
+      });
+
       toast({ title: "Message sent", description: "Thanks for reaching out. I'll get back to you soon." });
       setForm({ name: "", email: "", message: "" });
-    }, 1200);
+    } catch (err) {
+      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (

@@ -7,6 +7,7 @@ import { Nav } from "@/components/Nav";
 import Index from "./pages/Index.tsx";
 import { ProjectDetail } from "./pages/ProjectDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Unsubscribe from "./pages/Unsubscribe.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/projects/:projectId" element={<ProjectDetail />} />
+          <Route path="/unsubscribe" element={<Unsubscribe />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
