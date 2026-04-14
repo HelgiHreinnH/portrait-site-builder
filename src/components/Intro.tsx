@@ -93,7 +93,7 @@ export function Intro() {
                     transition={fade}
                     className="flex flex-col items-center justify-center p-4 md:p-6 h-full"
                   >
-                    <div className="flex flex-col gap-0">
+                    <div className="flex flex-col gap-0 text-center">
                       <div className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
                         <span className="text-muted-foreground font-light">I turn </span>
                         <span>knowledge</span>
