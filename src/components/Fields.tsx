@@ -86,7 +86,7 @@ export function Fields() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1 mb-0.5">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1 mb-2">
                     {service.title}
                   </h3>
 
