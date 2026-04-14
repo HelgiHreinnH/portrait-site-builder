@@ -31,7 +31,7 @@ export function Contact() {
           transition={{ ...smooth }}
           className="shrink-0 mb-3"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
             Let's Talk
           </h2>
         </motion.div>
