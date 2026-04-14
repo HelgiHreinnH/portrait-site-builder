@@ -171,7 +171,7 @@ export function Method() {
           </div>
 
           {/* Right: Detail Panel — 1/3 width */}
-          <div className="hidden md:flex flex-[1] items-start justify-start pt-[74px] h-full">
+          <div className="hidden md:flex flex-[1] items-center justify-start h-full">
             <motion.div
               className="max-w-xs"
               initial={{ opacity: 0, x: 20 }}
