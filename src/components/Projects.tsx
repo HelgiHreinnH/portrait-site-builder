@@ -195,7 +195,7 @@ export function Projects() {
           <div className="relative flex-1 min-h-0 flex items-end">
             <div
               ref={scrollRef}
-              className="overflow-x-auto overflow-y-hidden scrollbar-hide h-full snap-x snap-mandatory"
+              className="overflow-x-auto overflow-y-hidden scrollbar-hide snap-x snap-mandatory"
               style={{ scrollbarWidth: "none" }}
             >
               <div className="flex" style={{ width: "200%", height: "560px" }}>
