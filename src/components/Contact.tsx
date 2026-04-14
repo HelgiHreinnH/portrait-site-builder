@@ -150,7 +150,7 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...smooth, delay: 0.2 }}
-              className="flex flex-col"
+              className="flex flex-col justify-end pb-6"
             >
               <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
                 <div>
