@@ -60,7 +60,7 @@ export function Contact() {
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
             Let's Talk
           </h2>
-          <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">
+          <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-2xl">
             I'm always open for dialogue. If you have a project in mind, a problem you're trying to frame, or just want to explore what a collaboration might look like — reach out. I work across workplace design, digital product, and strategic briefs. But the starting point is always just a good conversation.
           </p>
         </motion.div>
