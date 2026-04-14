@@ -88,7 +88,7 @@ export function Method() {
         {/* Row 2: Two-column — 2/3 diagram, 1/3 text */}
         <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center">
           {/* Left: Circle Diagram — 2/3 width */}
-          <div className="hidden md:flex flex-[2] items-center justify-center h-full -ml-12">
+          <div className="hidden md:flex flex-[2] items-center justify-center h-full -ml-12" style={{ paddingRight: '48px' }}>
             <div className="relative" style={{ width: "400px", height: "400px" }}>
               {/* Center label */}
               <motion.div
