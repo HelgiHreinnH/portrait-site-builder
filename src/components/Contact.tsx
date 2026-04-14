@@ -74,7 +74,7 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...smooth, delay: 0.1 }}
-              className="flex flex-col justify-between pb-[72px]"
+              className="flex flex-col justify-between pb-[48px]"
             >
               <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-4">
                 <img
@@ -150,7 +150,7 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...smooth, delay: 0.2 }}
-              className="flex flex-col justify-end pb-[72px]"
+              className="flex flex-col justify-end pb-[48px]"
             >
               <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
                 <div>
