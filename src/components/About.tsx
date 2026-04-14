@@ -99,7 +99,7 @@ export function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ ...smooth, delay: 0.1 + i * 0.08 }}
-                    className="relative cursor-pointer group md:pr-8 md:border-r md:last:border-r-0 border-border"
+                    className="relative cursor-pointer group md:pr-10 md:border-r md:last:border-r-0 border-border"
                     onMouseEnter={() => setActiveNode(i)}
                     onMouseLeave={() => setActiveNode(null)}
                   >
