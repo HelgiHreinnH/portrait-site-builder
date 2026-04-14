@@ -12,7 +12,7 @@ function FeaturedCard({ project, onClick, index }: { project: ProjectData; onCli
   return (
     <motion.button
       onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ ...smooth, delay: index * 0.08 }}
@@ -69,7 +69,7 @@ function BentoCard({ project, onClick, size, index }: { project: ProjectData; on
   return (
     <motion.button
       onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ ...smooth, delay: index * 0.05 }}
@@ -149,7 +149,7 @@ export function Projects() {
           {/* Header */}
           <div className="flex items-end justify-between mb-4 shrink-0">
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={smooth}

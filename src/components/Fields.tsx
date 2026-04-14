@@ -44,10 +44,10 @@ export function Fields() {
         {/* Row 1: Header */}
         <div className="shrink-0">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 1 }}
             className="mb-3"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
@@ -67,7 +67,7 @@ export function Fields() {
               return (
                 <motion.div
                   key={service.number}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ ...smooth, delay: i * 0.1 }}
