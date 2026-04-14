@@ -76,15 +76,15 @@ export function Contact() {
               transition={{ ...smooth, delay: 0.1 }}
               className="flex flex-col justify-between pb-[48px]"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-36 h-36 rounded-full overflow-hidden border border-border shrink-0">
+              <div className="pt-6">
+                <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-2">
                   <img
                     src={portraitImage}
                     alt="Helgi Hreinn Hjálmarsson"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <span className="font-display text-xl font-bold text-foreground">Helgi Hreinn Hjálmarsson</span>
+                <span className="font-display text-xl font-bold text-foreground block mb-4">Helgi Hreinn Hjálmarsson</span>
               </div>
 
               <div className="space-y-3 mb-6">
