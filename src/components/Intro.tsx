@@ -159,7 +159,7 @@ export function Intro() {
                       </span>
                     </div>
 
-                    <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-8">
+                    <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-10">
                       Helgi Hreinn
                       <br />
                       Hjálmarsson

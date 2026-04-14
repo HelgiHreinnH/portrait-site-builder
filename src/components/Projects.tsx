@@ -154,7 +154,7 @@ export function Projects() {
               viewport={{ once: true }}
               transition={smooth}
             >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-4">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5.5">
                 Examples
               </h2>
               <p className="text-base leading-relaxed text-muted-foreground max-w-lg">

@@ -33,7 +33,7 @@ export function About() {
             transition={smooth}
             className="mb-3"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-5">
               From Convention to Insight
             </h2>
           </motion.div>
