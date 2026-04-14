@@ -202,7 +202,7 @@ export const projects: Record<string, ProjectData> = {
       description: "A platform where designers upload a GLB model, choose a presentation mode, and share a link. The client opens it on their phone and sees the design in AR — instantly.",
       interventions: [
         { title: "Tabletop Mode", description: "Markerless AR placement on any surface — orbit, zoom, and rotate with touch. Perfect for furniture and fixtures." },
-        { name: "Multi-Point Mode", description: "Full-scale room overlays using printed color-coded markers — gyro-stabilized anchoring with up to 20 markers." },
+        { title: "Multi-Point Mode", description: "Full-scale room overlays using printed color-coded markers — gyro-stabilized anchoring with up to 20 markers." },
         { title: "Designer Dashboard", description: "Manage AR experiences, upload models (up to 250 MB), generate QR codes, and share links from one interface." },
       ],
     },
