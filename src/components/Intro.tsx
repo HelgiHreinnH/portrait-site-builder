@@ -104,8 +104,8 @@ export function Intro() {
                       </div>
                     </div>
 
-                    <div className="mt-6">
-                      <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md">
+                    <div className="mt-6 flex flex-col items-center">
+                      <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-md text-center">
                         I use experience across three disciplines — architecture, digital product, and workplace strategy — to help teams move from a complex problem to a clear solution. I've spent ten years working on problems that don't fit neatly into one box: spaces that need to work better for the people using them, digital tools that need to fit how teams actually operate, strategies that need to survive contact with reality. My approach is analytical and collaborative — and I stay involved long enough to see it through.
                       </p>
 
