@@ -76,19 +76,15 @@ export function Contact() {
               transition={{ ...smooth, delay: 0.1 }}
               className="flex flex-col justify-between pb-[48px]"
             >
-              <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-4">
-                <img
-                  src={portraitImage}
-                  alt="Helgi Hreinn Hjálmarsson"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="mb-4">
-                <span className="font-display text-xl font-bold text-foreground block">Helgi Hreinn Hjálmarsson</span>
-                <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Architect · Copenhagen
-                </span>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-36 h-36 rounded-full overflow-hidden border border-border shrink-0">
+                  <img
+                    src={portraitImage}
+                    alt="Helgi Hreinn Hjálmarsson"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="font-display text-xl font-bold text-foreground">Helgi Hreinn Hjálmarsson</span>
               </div>
 
               <div className="space-y-3 mb-6">
