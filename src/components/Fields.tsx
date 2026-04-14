@@ -64,6 +64,7 @@ export function Fields() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
             {services.map((service, i) => {
               const isActive = active === i;
+              const isInactive = active !== null && !isActive;
               return (
                 <motion.div
                   key={service.number}
@@ -71,7 +72,15 @@ export function Fields() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ ...smooth, delay: i * 0.1 }}
-                  className="relative border border-border rounded-xl p-5 md:p-6 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30 overflow-hidden flex flex-col items-center justify-start h-[560px]"
+                  animate={{
+                    scale: isActive ? 1.02 : 1,
+                    opacity: isInactive ? 0.5 : 1,
+                  }}
+                  className={`relative rounded-xl p-5 md:p-6 cursor-pointer transition-all duration-500 bg-background overflow-hidden flex flex-col items-center justify-start h-[560px] border ${
+                    isActive
+                      ? "border-[hsl(var(--user-blue)/0.4)] shadow-[0_0_0_1px_hsl(var(--user-blue)/0.15),0_4px_20px_-4px_hsl(var(--user-blue)/0.1)]"
+                      : "border-border"
+                  }`}
                   onMouseEnter={() => setActive(i)}
                   onMouseLeave={() => setActive(null)}
                 >
