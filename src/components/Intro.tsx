@@ -152,12 +152,12 @@ export function Intro() {
                     </h2>
 
                     <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
-                      Architect (MAA) from the Aarhus School of Architecture with 10+ years across workplace strategy,
-                      digital product development, and hands-on design.
+                      Architect by training, designer by instinct.
+                      What drives me is curiosity — about how people work, how spaces behave, and how digital tools either fit or fail the people using them.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-3 max-w-md">
-                      I grew up in Iceland and have worked across many professional and cultural contexts. That shaped a
-                      fundamental sense that the same challenges look very different depending on perspective.
+                      Over ten years I've built a practice across architecture, workplace strategy, and digital product, always drawn to problems that sit at the edges of disciplines.
+                      I'm always engaged when the problem isn't fully defined yet, and the work starts with good questions rather than assumed answers. I always try to work with the same drive — to understand a problem carefully, then make something worth making.
                     </p>
                   </motion.div>
                 )}
