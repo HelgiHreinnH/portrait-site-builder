@@ -71,7 +71,7 @@ export function Fields() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ ...smooth, delay: i * 0.1 }}
-                  className="relative border border-border rounded-xl p-5 md:p-6 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30 overflow-hidden flex flex-col items-center justify-start max-h-[560px]"
+                  className="relative border border-border rounded-xl p-5 md:p-6 cursor-pointer transition-colors duration-300 bg-background hover:bg-muted/30 overflow-hidden flex flex-col items-center justify-start h-[560px]"
                   onMouseEnter={() => setActive(i)}
                   onMouseLeave={() => setActive(null)}
                 >
