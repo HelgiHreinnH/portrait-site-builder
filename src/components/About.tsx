@@ -115,15 +115,15 @@ export function About() {
                     </div>
 
                     <div className="md:pt-7 md:pl-0">
-                      <p className="font-display text-sm font-bold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
+                      <p className="font-display text-base font-bold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
                         {item.title}
                       </p>
-                      <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-2.5">
+                      <p className="font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground mb-2.5">
                         {item.duration}
                       </p>
                       <motion.p
                         animate={{ opacity: activeNode === i ? 1 : 0.6 }}
-                        className="text-xs text-muted-foreground leading-relaxed"
+                        className="text-sm text-muted-foreground leading-relaxed"
                       >
                         {item.description}
                       </motion.p>
