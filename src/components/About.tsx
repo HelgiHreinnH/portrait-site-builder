@@ -76,7 +76,7 @@ export function About() {
       </div>
 
       {/* Bottom half */}
-      <div className="h-[320px] shrink-0 flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-8 pb-[72px] bg-muted/40">
+      <div className="h-[360px] shrink-0 flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-8 pb-[72px] bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
