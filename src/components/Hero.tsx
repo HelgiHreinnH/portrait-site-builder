@@ -110,7 +110,7 @@ export function Hero() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
@@ -128,7 +128,7 @@ export function Hero() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
@@ -139,7 +139,7 @@ export function Hero() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
@@ -159,7 +159,7 @@ export function Hero() {
 
           {/* Right — subtitle */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ ...smooth, delay: 0.5 }}

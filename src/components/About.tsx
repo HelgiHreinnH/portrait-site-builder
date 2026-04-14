@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
+const smooth = { duration: 1, ease: [0.22, 1, 0.36, 1] as const };
 
 const shifts = [
   ["Assume how spaces should be used", "Observe how spaces are actually used"],
@@ -27,7 +27,7 @@ export function About() {
       <div className="flex-1 flex flex-col section-inner !pb-0">
         <div className="shrink-0">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={smooth}
@@ -42,7 +42,7 @@ export function About() {
         {/* Centered card */}
         <div className="flex-1 flex items-center justify-center min-h-0">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ ...smooth, delay: 0.1 }}
@@ -52,7 +52,7 @@ export function About() {
               {shifts.map(([from, to], i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ ...smooth, delay: 0.08 * i }}
@@ -79,7 +79,7 @@ export function About() {
       <div className="h-[360px] shrink-0 flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-8 pb-[72px] bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ ...smooth, delay: 0.2 }}
@@ -95,7 +95,7 @@ export function About() {
                 {engagements.map((item, i) => (
                   <motion.div
                     key={item.title}
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ ...smooth, delay: 0.1 + i * 0.08 }}

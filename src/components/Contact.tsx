@@ -5,7 +5,7 @@ import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import portraitImage from "@/assets/portrait_image.png";
 
-const smooth = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
+const smooth = { duration: 1, ease: [0.22, 1, 0.36, 1] as const };
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -51,7 +51,7 @@ export function Contact() {
       <div className="section-inner">
         {/* Row 1: Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ ...smooth }}
@@ -70,7 +70,7 @@ export function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 h-full">
             {/* Left — Portrait + info + buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...smooth, delay: 0.1 }}
@@ -144,7 +144,7 @@ export function Contact() {
 
             {/* Right — Description + form */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...smooth, delay: 0.2 }}
