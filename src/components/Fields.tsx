@@ -50,7 +50,7 @@ export function Fields() {
             transition={{ duration: 0.6 }}
             className="mb-3"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-0.5">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] text-foreground mb-3.5">
               Three Fields. One Approach.
             </h2>
             <p className="max-w-xl leading-relaxed text-muted-foreground text-base">
