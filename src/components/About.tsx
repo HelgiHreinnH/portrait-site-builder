@@ -24,7 +24,7 @@ export function About() {
   return (
     <section id="about" className="h-full flex flex-col">
       {/* Top half */}
-      <div className="flex-[1.2] flex flex-col section-inner !pb-0">
+      <div className="flex-1 flex flex-col section-inner !pb-0">
         <div className="shrink-0">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -76,7 +76,7 @@ export function About() {
       </div>
 
       {/* Bottom half */}
-      <div className="flex-[1] flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-3 pb-[var(--section-pb)] bg-muted/40">
+      <div className="h-[320px] shrink-0 flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-3 pb-[72px] bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
