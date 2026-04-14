@@ -74,7 +74,7 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ ...smooth, delay: 0.1 }}
-              className="flex flex-col"
+              className="flex flex-col justify-between pb-[72px]"
             >
               <div className="w-36 h-36 rounded-full overflow-hidden border border-border mb-4">
                 <img
@@ -110,7 +110,7 @@ export function Contact() {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-2 mt-auto">
+              <div className="flex flex-wrap gap-2">
                 {[
                   { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/helgihreinn" },
                 ].map(({ Icon, label, href }) => (
@@ -119,7 +119,7 @@ export function Contact() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group font-mono text-[11px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
+                    className="group font-mono text-[11px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-3.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
                   >
                     <Icon size={14} className="group-hover:scale-110 transition-transform" />
                     {label}
@@ -127,7 +127,7 @@ export function Contact() {
                 ))}
                 <button
                   onClick={() => window.open("/cv.pdf", "_blank")}
-                  className="group font-mono text-[11px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
+                  className="group font-mono text-[11px] tracking-[0.2em] uppercase text-foreground flex items-center gap-2 border border-border rounded-lg px-4 py-3.5 bg-background hover:border-foreground hover:shadow-sm transition-all duration-300"
                 >
                   <Download size={14} className="group-hover:translate-y-0.5 transition-transform" />
                   Download CV
@@ -136,7 +136,7 @@ export function Contact() {
                   href="https://github.com/HelgiHreinnH"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground flex items-center gap-2 border border-border/60 rounded-lg px-4 py-2.5 bg-background hover:border-foreground hover:text-foreground hover:shadow-sm transition-all duration-300"
+                  className="group font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground flex items-center gap-2 border border-border/60 rounded-lg px-4 py-3.5 bg-background hover:border-foreground hover:text-foreground hover:shadow-sm transition-all duration-300"
                 >
                   <Github size={14} className="group-hover:scale-110 transition-transform" />
                   GitHub
