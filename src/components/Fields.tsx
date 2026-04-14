@@ -76,7 +76,7 @@ export function Fields() {
                   onMouseLeave={() => setActive(null)}
                 >
                   {/* Image */}
-                  <div className="w-full h-[140px] md:h-[160px] flex items-center justify-center rounded-lg overflow-hidden mb-3 shrink-0">
+                  <div className="w-full h-[146px] md:h-[166px] flex items-center justify-center rounded-lg overflow-hidden mb-6 shrink-0">
                     <img
                       src={service.image}
                       alt={service.title}
@@ -86,7 +86,7 @@ export function Fields() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1 mb-2">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-2">
                     {service.title}
                   </h3>
 
