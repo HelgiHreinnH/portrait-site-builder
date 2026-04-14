@@ -174,17 +174,17 @@ export function Method() {
           <div className="hidden md:flex flex-[1] items-center justify-start h-full">
             <motion.div
               className="max-w-xs"
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 8 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 1, delay: 0.6 }}
             >
               {activePhase !== null ? (
                 <motion.div
                   key={activePhase}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.4 }}
                 >
                   <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-3 border border-border bg-background">
@@ -231,7 +231,7 @@ export function Method() {
             {phases.map((phase, i) => (
               <motion.div
                 key={phase.num}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
