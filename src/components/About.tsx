@@ -76,7 +76,7 @@ export function About() {
       </div>
 
       {/* Bottom half */}
-      <div className="h-[320px] shrink-0 flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-3 pb-[72px] bg-muted/40">
+      <div className="h-[320px] shrink-0 flex flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-8 pb-[72px] bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -84,14 +84,14 @@ export function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ ...smooth, delay: 0.2 }}
           >
-            <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.02em] text-foreground mb-5">
+            <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-[-0.02em] text-foreground mb-8">
               Ways to Work Together
             </h3>
 
             <div className="relative">
               <div className="hidden md:block absolute top-[6px] left-0 right-0 h-px bg-border" />
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-0">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-0">
                 {engagements.map((item, i) => (
                   <motion.div
                     key={item.title}
@@ -99,7 +99,7 @@ export function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ ...smooth, delay: 0.1 + i * 0.08 }}
-                    className="relative cursor-pointer group md:pr-4 md:border-r md:last:border-r-0 border-border"
+                    className="relative cursor-pointer group md:pr-8 md:border-r md:last:border-r-0 border-border"
                     onMouseEnter={() => setActiveNode(i)}
                     onMouseLeave={() => setActiveNode(null)}
                   >
@@ -114,11 +114,11 @@ export function About() {
                       />
                     </div>
 
-                    <div className="md:pt-5 md:pl-0">
-                      <p className="font-display text-sm font-bold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors">
+                    <div className="md:pt-7 md:pl-0">
+                      <p className="font-display text-sm font-bold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
                         {item.title}
                       </p>
-                      <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-1.5">
+                      <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-2.5">
                         {item.duration}
                       </p>
                       <motion.p
