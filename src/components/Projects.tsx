@@ -16,7 +16,7 @@ function FeaturedCard({ project, onClick, index }: { project: ProjectData; onCli
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ ...smooth, delay: index * 0.08 }}
-      className="group relative flex flex-col overflow-hidden rounded-xl w-full h-full text-left border border-border/40"
+      className="group relative flex flex-col overflow-hidden rounded-xl w-full h-[560px] text-left border border-border/40"
     >
       <div className="relative w-full flex-[1.2] min-h-0 overflow-hidden">
         <img
@@ -192,15 +192,15 @@ export function Projects() {
           </div>
 
           {/* Two-page horizontal snap scroll */}
-          <div className="relative flex-1 min-h-0">
+          <div className="relative flex-1 min-h-0 flex items-end">
             <div
               ref={scrollRef}
               className="overflow-x-auto overflow-y-hidden scrollbar-hide h-full snap-x snap-mandatory"
               style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex h-full" style={{ width: "200%" }}>
+              <div className="flex" style={{ width: "200%", height: "560px" }}>
                 {/* Page 1: 3 Featured cards */}
-                <div className="snap-start shrink-0 h-full grid grid-cols-3 gap-4" style={{ width: "50%" }}>
+                <div className="snap-start shrink-0 grid grid-cols-3 gap-4" style={{ width: "50%", height: "560px" }}>
                   {featured.map((project, i) => (
                     <FeaturedCard
                       key={project.id}
@@ -213,9 +213,10 @@ export function Projects() {
 
                 {/* Page 2: 9 projects in uniform small bento grid */}
                 <div
-                  className="snap-start shrink-0 h-full grid gap-3"
+                  className="snap-start shrink-0 grid gap-3"
                   style={{
                     width: "50%",
+                    height: "560px",
                     gridTemplateColumns: "1fr 1fr 1fr",
                     gridTemplateRows: "1fr 1fr 1fr",
                   }}
