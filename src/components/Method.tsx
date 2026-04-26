@@ -228,65 +228,88 @@ export function Method() {
           </div>
 
           {/* Mobile stacked view */}
-          <div className="md:hidden w-full max-w-md flex-1 min-h-0 overflow-y-auto pb-4 -mx-2 px-2">
-            <div className="relative pl-8">
-              {/* Connecting vertical line — animates as you scroll */}
-              <motion.div
-                initial={{ scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                style={{ transformOrigin: "top" }}
-                className="absolute left-[14px] top-3 bottom-3 w-px bg-gradient-to-b from-foreground/30 via-foreground/20 to-foreground/5"
-                aria-hidden
-              />
-
+          <div className="md:hidden w-full max-w-md flex-1 min-h-0 overflow-y-auto pb-4 -mx-2 px-2 pt-16">
+            <motion.div
+              className="relative pl-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+            >
               <div className="flex flex-col gap-2.5">
-                {phases.map((phase, i) => (
-                  <motion.div
-                    key={phase.num}
-                    initial={{ opacity: 0, x: -8 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.6 }}
-                    transition={{ ...smooth, delay: 0.15 + i * 0.12 }}
-                    className="relative"
-                  >
-                    {/* Step dot on the connecting line */}
-                    <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true, amount: 0.6 }}
-                      transition={{ duration: 0.5, delay: 0.25 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute -left-8 top-1/2 -translate-y-1/2 w-[11px] h-[11px] rounded-full bg-background border-2 border-foreground/60 z-10"
-                      aria-hidden
-                    />
+                {phases.map((phase, i) => {
+                  // Per-step timing — keeps line, dot, and card in sync
+                  const stepStart = 0.15 + i * 0.45;
+                  return (
+                    <div key={phase.num} className="relative">
+                      {/* Connecting line segment — grows down from previous step */}
+                      {i > 0 && (
+                        <motion.div
+                          variants={{
+                            hidden: { scaleY: 0 },
+                            visible: { scaleY: 1 },
+                          }}
+                          transition={{
+                            duration: 0.35,
+                            delay: stepStart - 0.2,
+                            ease: [0.16, 1, 0.3, 1],
+                          }}
+                          style={{ transformOrigin: "top" }}
+                          className="absolute -left-[18px] -top-2.5 h-2.5 w-px bg-foreground/25"
+                          aria-hidden
+                        />
+                      )}
 
-                    <button
-                      type="button"
-                      onClick={() => setActivePhase(i)}
-                      className="w-full text-left rounded-2xl p-4 border-2 border-border bg-background cursor-pointer"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
-                            {phase.num}
-                          </span>
-                          <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground font-bold truncate">
-                            {phase.label}
+                      {/* Step dot on the connecting line */}
+                      <motion.div
+                        variants={{
+                          hidden: { scale: 0, opacity: 0 },
+                          visible: { scale: 1, opacity: 1 },
+                        }}
+                        transition={{
+                          duration: 0.4,
+                          delay: stepStart,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                        className="absolute -left-[23px] top-1/2 -translate-y-1/2 w-[11px] h-[11px] rounded-full bg-background border-2 border-foreground/60 z-10"
+                        aria-hidden
+                      />
+
+                      {/* Card */}
+                      <motion.button
+                        type="button"
+                        variants={{
+                          hidden: { opacity: 0, x: -8 },
+                          visible: { opacity: 1, x: 0 },
+                        }}
+                        transition={{
+                          ...smooth,
+                          delay: stepStart + 0.1,
+                        }}
+                        onClick={() => setActivePhase(i)}
+                        className="w-full text-left rounded-2xl p-4 border-2 border-border bg-background cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
+                              {phase.num}
+                            </span>
+                            <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground font-bold truncate">
+                              {phase.label}
+                            </span>
+                          </div>
+                          <span
+                            className="font-display text-foreground/40 text-xl leading-none shrink-0"
+                            aria-hidden
+                          >
+                            +
                           </span>
                         </div>
-                        <span
-                          className="font-display text-foreground/40 text-xl leading-none shrink-0"
-                          aria-hidden
-                        >
-                          +
-                        </span>
-                      </div>
-                    </button>
-                  </motion.div>
-                ))}
+                      </motion.button>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Mobile overlay modal */}
