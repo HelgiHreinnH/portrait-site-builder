@@ -67,7 +67,7 @@ export function Intro() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={fade}
-                    className="w-full h-full relative flex flex-col items-center -mt-8 md:mt-0"
+                    className="w-full h-full relative flex flex-col items-center -mt-20 md:mt-0"
                   >
                     <img
                       src={portraitImage}
@@ -75,7 +75,7 @@ export function Intro() {
                       className="w-full flex-1 min-h-0 object-cover object-top"
                     />
                     {/* Name overlay at bottom of image */}
-                    <div className="w-full bg-gradient-to-t from-background/80 to-transparent px-4 py-3 -mt-16 relative z-10">
+                    <div className="w-full bg-gradient-to-t from-background/80 to-transparent px-4 pt-2 pb-3 mt-2 md:-mt-16 relative z-10 text-center md:text-left">
                       <p className="font-display text-foreground md:text-user-blue text-sm md:text-base font-medium">Helgi Hreinn Hjálmarsson</p>
                       <p className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-foreground/70 md:text-user-blue/70">
                         Architect · Copenhagen
