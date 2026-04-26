@@ -452,21 +452,36 @@ export function Contact() {
             >
               {/* Overlay header */}
               <div className="shrink-0 flex items-center justify-between px-5 py-4 border-b border-border">
+                <button
+                  onClick={() => setFormOpen(false)}
+                  aria-label="Back to contact section"
+                  className="group flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+                  Back
+                </button>
                 <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-foreground">
                   Send a message
                 </span>
                 <button
                   onClick={() => setFormOpen(false)}
                   aria-label="Close"
-                  className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
+                  className="w-9 h-9 flex items-center justify-center rounded-full border border-border hover:bg-muted transition-colors"
                 >
-                  <X size={18} />
+                  <X size={16} />
                 </button>
               </div>
 
               {/* Scrollable form area */}
-              <div className="flex-1 overflow-y-auto px-5 py-5">
+              <div className="flex-1 overflow-y-auto px-5 py-5 pb-8">
                 <ContactFormFields />
+                <button
+                  onClick={() => setFormOpen(false)}
+                  className="mt-5 w-full flex items-center justify-center gap-2 font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground border border-border rounded-lg px-6 py-3.5 bg-background hover:text-foreground hover:border-foreground transition-colors"
+                >
+                  <ArrowLeft size={14} />
+                  Back to section
+                </button>
               </div>
             </motion.div>
           </motion.div>
