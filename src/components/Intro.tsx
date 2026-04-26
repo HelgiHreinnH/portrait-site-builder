@@ -56,9 +56,9 @@ export function Intro() {
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
-            className="relative flex-1 min-h-0 h-full md:h-[calc(100vh-200px)] md:min-h-[300px] md:-mt-36"
+            className="relative w-full flex-1 min-h-0 h-full md:h-[calc(100vh-200px)] md:min-h-[300px] md:-mt-36"
           >
-            <div className="relative overflow-hidden h-full">
+            <div className="relative overflow-hidden h-full w-full">
               <AnimatePresence mode="wait">
                 {activeView === "image" && (
                   <motion.div
