@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const smooth = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
@@ -86,7 +86,7 @@ export function Method() {
         </div>
 
         {/* Row 2: Two-column — 2/3 diagram, 1/3 text */}
-        <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center">
+        <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center md:items-center">
           {/* Left: Circle Diagram — 2/3 width */}
           <div className="hidden md:flex flex-[2] items-center justify-center h-full -ml-12" style={{ paddingRight: '48px' }}>
             <div className="relative" style={{ width: "400px", height: "400px" }}>
@@ -227,7 +227,7 @@ export function Method() {
           </div>
 
           {/* Mobile stacked view */}
-          <div className="flex flex-col gap-4 md:hidden w-full max-w-md">
+          <div className="flex flex-col gap-2.5 md:hidden w-full max-w-md flex-1 min-h-0 overflow-y-auto pb-4 -mx-2 px-2">
             {phases.map((phase, i) => (
               <motion.div
                 key={phase.num}
@@ -235,26 +235,60 @@ export function Method() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className="rounded-2xl p-4 border-2 border-border bg-background"
+                className={`rounded-2xl p-4 border-2 bg-background cursor-pointer transition-colors ${
+                  activePhase === i ? "border-foreground" : "border-border"
+                }`}
                 onClick={() => setActivePhase(activePhase === i ? null : i)}
               >
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-foreground text-2xl font-bold opacity-20">
-                    {phase.num}
-                  </span>
-                  <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-foreground font-bold">
-                    {phase.label}
-                  </span>
-                </div>
-                {activePhase === i && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="overflow-hidden mt-2"
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
+                      {phase.num}
+                    </span>
+                    <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground font-bold truncate">
+                      {phase.label}
+                    </span>
+                  </div>
+                  <motion.span
+                    animate={{ rotate: activePhase === i ? 45 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="font-display text-foreground/40 text-xl leading-none shrink-0"
+                    aria-hidden
                   >
-                    <p className="text-muted-foreground text-sm leading-relaxed">{phase.description}</p>
-                  </motion.div>
-                )}
+                    +
+                  </motion.span>
+                </div>
+                <AnimatePresence initial={false}>
+                  {activePhase === i && (
+                    <motion.div
+                      key="content"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-3 mt-3 border-t border-border">
+                        <p className="text-foreground text-sm font-medium mb-2">
+                          {phase.subtitle}
+                        </p>
+                        <p className="text-muted-foreground text-sm leading-relaxed mb-3">
+                          {phase.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {phase.methods.map((m) => (
+                            <span
+                              key={m}
+                              className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2 py-0.5 text-foreground/70 border border-border bg-muted/30"
+                            >
+                              {m}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
