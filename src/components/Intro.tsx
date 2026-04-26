@@ -22,9 +22,9 @@ export function Intro() {
         {/* Breathing room where heading used to be */}
         <div className="my-6 md:my-[48px]" />
 
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center min-h-0">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-start md:items-center min-h-0">
           {/* Left column - buttons */}
-          <div className="flex flex-row md:flex-col gap-4 md:gap-8 items-center justify-center shrink-0">
+          <div className="flex flex-row md:flex-col gap-4 md:gap-8 items-center justify-center shrink-0 self-start">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
@@ -56,9 +56,9 @@ export function Intro() {
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={shouldReduceMotion ? { duration: 0.1 } : { ...smooth, delay: 0.3 }}
-            className="relative flex-1 min-h-0 h-full md:h-[calc(100vh-200px)] md:min-h-[300px] md:-mt-36"
+            className="relative w-full flex-1 min-h-0 h-full md:h-[calc(100vh-200px)] md:min-h-[300px] md:-mt-36"
           >
-            <div className="relative overflow-hidden h-full">
+            <div className="relative overflow-hidden h-full w-full">
               <AnimatePresence mode="wait">
                 {activeView === "image" && (
                   <motion.div
