@@ -264,10 +264,10 @@ export function Projects() {
               <div className="flex h-full" style={{ width: "200%" }}>
                 {/* Page 1: 3 featured cards stacked */}
                 <div
-                  className="snap-start shrink-0 h-full overflow-y-auto px-[var(--section-px,1.25rem)]"
+                  className="snap-start shrink-0 h-full px-[var(--section-px,1.25rem)]"
                   style={{ width: "50%" }}
                 >
-                  <div className="flex flex-col gap-3 pb-2">
+                  <div className="flex flex-col gap-2.5 h-full pb-1">
                     {featured.map((project, i) => (
                       <motion.button
                         key={project.id}
@@ -276,9 +276,10 @@ export function Projects() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ ...smooth, delay: i * 0.06 }}
-                        className="group relative block w-full overflow-hidden rounded-xl text-left border border-border/40 bg-background"
+                        className="group relative flex w-full flex-1 min-h-0 overflow-hidden rounded-xl text-left border border-border/40 bg-background"
                       >
-                        <div className="relative w-full aspect-[4/3] overflow-hidden">
+                        {/* Left: image */}
+                        <div className="relative h-full w-[42%] shrink-0 overflow-hidden">
                           <img
                             src={project.heroImage}
                             alt={project.title}
@@ -286,27 +287,26 @@ export function Projects() {
                             className="w-full h-full object-cover"
                             style={{ filter: "grayscale(10%) contrast(1.02)" }}
                           />
-                          <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
-                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/80">
+                          <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
+                            <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-primary-foreground/80">
                               {project.number}
-                            </span>
-                            <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/80 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
-                              {project.outcome}
                             </span>
                           </div>
                         </div>
-                        <div className="px-4 py-3 flex flex-col gap-1.5">
-                          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
+
+                        {/* Right: content */}
+                        <div className="flex-1 min-w-0 px-3.5 py-2.5 flex flex-col justify-center gap-1.5">
+                          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground truncate">
                             {project.client}
                           </p>
-                          <h3 className="font-display text-base font-semibold text-foreground leading-tight">
+                          <h3 className="font-display text-sm font-semibold text-foreground leading-tight line-clamp-2">
                             {project.title}
                           </h3>
-                          <div className="flex flex-wrap gap-1.5 mt-1">
-                            {project.tags.slice(0, 3).map((tag) => (
+                          <div className="flex flex-wrap gap-1 mt-0.5">
+                            {project.tags.slice(0, 2).map((tag) => (
                               <span
                                 key={tag}
-                                className="font-mono text-[9px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5 bg-muted/50"
+                                className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-1.5 py-0.5 bg-muted/50"
                               >
                                 {tag}
                               </span>
