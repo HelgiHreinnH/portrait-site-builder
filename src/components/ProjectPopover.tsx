@@ -23,32 +23,25 @@ interface ProjectPopoverProps {
 /* ─── Overview Slide ─── */
 function OverviewSlide({ project }: { project: ProjectData }) {
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-full overflow-hidden">
       {/* Info */}
-      <div className="p-6 md:p-12 flex flex-col justify-center max-w-3xl mx-auto h-full">
-        {project.clientLogo && (
-          <img
-            src={project.clientLogo}
-            alt={`${project.client} logo`}
-            className="h-8 w-auto object-contain mb-4 opacity-70"
-          />
-        )}
-        <div className="flex items-center gap-3 mb-3">
+      <div className="p-5 md:p-8 flex flex-col justify-center max-w-3xl mx-auto h-full">
+        <div className="flex items-center gap-3 mb-2">
           <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
             {project.number} — {project.client}
           </span>
           <span className="font-mono text-[9px] text-muted-foreground/50">{project.year}</span>
         </div>
 
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground tracking-[-0.02em] leading-tight mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground tracking-[-0.02em] leading-tight mb-3">
           {project.title}
         </h2>
 
-        <p className="text-[15px] leading-relaxed text-muted-foreground mb-6 max-w-xl">
+        <p className="text-[14px] leading-relaxed text-muted-foreground mb-4 max-w-xl">
           {project.subtitle}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-1.5 mb-5">
           <span className="font-mono text-[9px] tracking-[0.15em] uppercase bg-muted text-muted-foreground px-2.5 py-1">
             {project.categoryLabel}
           </span>
@@ -63,7 +56,7 @@ function OverviewSlide({ project }: { project: ProjectData }) {
           <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
             The Challenge
           </p>
-          <p className="text-[13px] leading-relaxed text-muted-foreground max-w-xl">
+          <p className="text-[13px] leading-relaxed text-muted-foreground max-w-xl line-clamp-6">
             {project.brief.challenge}
           </p>
         </div>
@@ -75,21 +68,21 @@ function OverviewSlide({ project }: { project: ProjectData }) {
 /* ─── Process Slide ─── */
 function ProcessSlide({ project }: { project: ProjectData }) {
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-full overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 h-full">
         {/* Left column — approach + phases */}
-        <div className="md:col-span-2 p-6 md:p-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-border">
+        <div className="md:col-span-2 p-5 md:p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-border min-h-0">
           {/* Phase diagram */}
-          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-3">
+          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
             Method Phases
           </p>
-          <div className="flex gap-1 mb-8">
+          <div className="flex gap-1 mb-5">
             {PHASES.map((phase) => {
               const isLed = project.phasesLed.includes(phase);
               return (
                 <div
                   key={phase}
-                  className={`flex-1 text-center py-2.5 font-mono text-[9px] tracking-[0.1em] uppercase transition-colors ${
+                  className={`flex-1 text-center py-2 font-mono text-[9px] tracking-[0.1em] uppercase transition-colors ${
                     isLed
                       ? "bg-user-blue text-primary-foreground"
                       : "bg-muted text-muted-foreground/40"
@@ -101,50 +94,32 @@ function ProcessSlide({ project }: { project: ProjectData }) {
             })}
           </div>
 
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3 leading-tight">
+          <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-2 leading-tight">
             {project.approach.title}
           </h3>
-          <p className="text-[13px] leading-relaxed text-muted-foreground">
+          <p className="text-[13px] leading-relaxed text-muted-foreground line-clamp-6">
             {project.approach.description}
           </p>
         </div>
 
-        {/* Right column — methods + gallery */}
-        <div className="md:col-span-3 flex flex-col">
+        {/* Right column — methods only (gallery strip removed for compact layout) */}
+        <div className="md:col-span-3 flex flex-col min-h-0">
           {/* Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-3 flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 flex-1 min-h-0">
             {project.approach.methods.map((method, i) => (
               <div
                 key={i}
-                className={`p-6 md:p-8 flex flex-col ${
+                className={`p-5 md:p-7 flex flex-col justify-center ${
                   i < project.approach.methods.length - 1
                     ? "border-b md:border-b-0 md:border-r border-border"
                     : ""
                 }`}
               >
-                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-user-blue mb-3">
+                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-user-blue mb-2">
                   0{i + 1}
                 </div>
-                <h4 className="font-display text-base font-semibold text-foreground mb-2">{method.name}</h4>
-                <p className="text-[13px] leading-relaxed text-muted-foreground">{method.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Gallery strip */}
-          <div className="grid grid-cols-3 border-t border-border flex-shrink-0">
-            {project.gallery.slice(0, 3).map((img, i) => (
-              <div
-                key={i}
-                className={`relative aspect-[4/3] overflow-hidden ${
-                  i < 2 ? "border-r border-border" : ""
-                }`}
-              >
-                <img
-                  src={getGallerySrc(img)}
-                  alt={`${project.title} — ${i + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <h4 className="font-display text-base font-semibold text-foreground mb-1.5">{method.name}</h4>
+                <p className="text-[12px] leading-relaxed text-muted-foreground line-clamp-5">{method.description}</p>
               </div>
             ))}
           </div>
@@ -157,49 +132,49 @@ function ProcessSlide({ project }: { project: ProjectData }) {
 /* ─── Outcomes Slide ─── */
 function OutcomesSlide({ project }: { project: ProjectData }) {
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-full overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-5 h-full">
         {/* Left — impact metrics */}
-        <div className="md:col-span-2 p-6 md:p-10 border-b md:border-b-0 md:border-r border-border flex flex-col justify-center">
-          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-8">
+        <div className="md:col-span-2 p-5 md:p-8 border-b md:border-b-0 md:border-r border-border flex flex-col justify-center min-h-0">
+          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-5">
             Impact
           </p>
-          <div className="space-y-8">
+          <div className="space-y-5">
             {project.impact.map((item, i) => (
               <div key={i}>
-                <div className="font-display text-4xl font-bold text-foreground mb-1">{item.value}</div>
+                <div className="font-display text-3xl font-bold text-foreground mb-1">{item.value}</div>
                 <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground mb-1">{item.metric}</div>
-                <p className="text-[12px] text-muted-foreground/70">{item.description}</p>
+                <p className="text-[12px] text-muted-foreground/70 line-clamp-2">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right — insights + quote */}
-        <div className="md:col-span-3 flex flex-col">
+        <div className="md:col-span-3 flex flex-col min-h-0">
           {/* Insights */}
-          <div className="flex-1 p-6 md:p-10">
-            <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
+          <div className="flex-1 p-5 md:p-8 min-h-0 overflow-hidden">
+            <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
               Key Insights
             </p>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {project.insights.slice(0, 3).map((insight, i) => (
                 <div key={i} className="border-l-2 border-border pl-4">
                   {insight.stat && (
-                    <div className="font-display text-xl font-bold text-user-blue mb-1">{insight.stat}</div>
+                    <div className="font-display text-lg font-bold text-user-blue mb-0.5">{insight.stat}</div>
                   )}
-                  <h4 className="font-display text-base font-semibold text-foreground mb-1">{insight.title}</h4>
-                  <p className="text-[13px] leading-relaxed text-muted-foreground">{insight.description}</p>
+                  <h4 className="font-display text-sm font-semibold text-foreground mb-1">{insight.title}</h4>
+                  <p className="text-[12px] leading-relaxed text-muted-foreground line-clamp-2">{insight.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Quote or solution strip */}
-          <div className="border-t border-border p-6 md:p-10 bg-muted/20">
+          <div className="border-t border-border p-5 md:p-8 bg-muted/20 flex-shrink-0">
             {project.quote ? (
               <div>
-                <p className="font-display text-lg italic text-foreground/80 mb-3 leading-relaxed">
+                <p className="font-display text-base italic text-foreground/80 mb-2 leading-relaxed line-clamp-3">
                   "{project.quote.text}"
                 </p>
                 <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
@@ -211,7 +186,7 @@ function OutcomesSlide({ project }: { project: ProjectData }) {
                 <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
                   Solution
                 </p>
-                <p className="text-[13px] leading-relaxed text-muted-foreground">
+                <p className="text-[13px] leading-relaxed text-muted-foreground line-clamp-3">
                   {project.solution.description}
                 </p>
               </div>
