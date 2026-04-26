@@ -145,7 +145,7 @@ export function Contact() {
   return (
     <section id="contact" className="h-full flex flex-col bg-muted/50">
       {/* ─── DESKTOP (md+) ─── */}
-      <div className="hidden md:flex section-inner">
+      <div className="hidden md:flex flex-col flex-1 min-h-0 h-full w-full max-w-[var(--section-max-w)] mx-auto px-[var(--section-px)] md:px-[var(--section-px-md)] pt-[var(--section-pt)] pb-[var(--section-pb)]">
         {/* Row 1: Header */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
