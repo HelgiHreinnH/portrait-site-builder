@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
 const smooth = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
 
@@ -235,10 +236,8 @@ export function Method() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...smooth, delay: i * 0.1 }}
-                className={`rounded-2xl p-4 border-2 bg-background cursor-pointer transition-colors ${
-                  activePhase === i ? "border-foreground" : "border-border"
-                }`}
-                onClick={() => setActivePhase(activePhase === i ? null : i)}
+                className="rounded-2xl p-4 border-2 border-border bg-background cursor-pointer"
+                onClick={() => setActivePhase(i)}
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
@@ -249,49 +248,77 @@ export function Method() {
                       {phase.label}
                     </span>
                   </div>
-                  <motion.span
-                    animate={{ rotate: activePhase === i ? 45 : 0 }}
-                    transition={{ duration: 0.25 }}
+                  <span
                     className="font-display text-foreground/40 text-xl leading-none shrink-0"
                     aria-hidden
                   >
                     +
-                  </motion.span>
+                  </span>
                 </div>
-                <AnimatePresence initial={false}>
-                  {activePhase === i && (
-                    <motion.div
-                      key="content"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pt-3 mt-3 border-t border-border">
-                        <p className="text-foreground text-sm font-medium mb-2">
-                          {phase.subtitle}
-                        </p>
-                        <p className="text-muted-foreground text-sm leading-relaxed mb-3">
-                          {phase.description}
-                        </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {phase.methods.map((m) => (
-                            <span
-                              key={m}
-                              className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2 py-0.5 text-foreground/70 border border-border bg-muted/30"
-                            >
-                              {m}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </motion.div>
             ))}
           </div>
+
+          {/* Mobile overlay modal */}
+          <AnimatePresence>
+            {activePhase !== null && (
+              <motion.div
+                key="method-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="fixed inset-0 z-50 md:hidden flex items-center justify-center p-5 bg-foreground/40 backdrop-blur-sm"
+                onClick={() => setActivePhase(null)}
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-full max-w-sm max-h-[85vh] overflow-y-auto rounded-2xl bg-background border-2 border-border p-5"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setActivePhase(null)}
+                    aria-label="Close"
+                    className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-muted transition-colors text-foreground/60 hover:text-foreground"
+                  >
+                    <X size={18} />
+                  </button>
+
+                  <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-3 border border-border bg-background">
+                    <span className="font-display text-foreground text-xs font-bold">
+                      Phase {phases[activePhase].num}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-foreground leading-tight mb-2 tracking-tight text-2xl font-bold pr-8">
+                    {phases[activePhase].title}
+                  </h3>
+
+                  <p className="text-xs text-muted-foreground mb-3">
+                    {phases[activePhase].subtitle}
+                  </p>
+
+                  <p className="leading-relaxed mb-4 text-muted-foreground text-sm">
+                    {phases[activePhase].description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {phases[activePhase].methods.map((m) => (
+                      <span
+                        key={m}
+                        className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2 py-0.5 text-foreground/70 border border-border bg-muted/30"
+                      >
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
