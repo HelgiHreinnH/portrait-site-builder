@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin, Github, Linkedin, Download, Send, X } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Download, Send, X, ArrowLeft } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import portraitImage from "@/assets/portrait_image.png";
