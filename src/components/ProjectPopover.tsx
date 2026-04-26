@@ -68,6 +68,7 @@ function OverviewSlide({ project }: { project: ProjectData }) {
           </p>
         </div>
       </div>
+    </div>
   );
 }
 
