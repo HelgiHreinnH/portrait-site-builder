@@ -23,19 +23,6 @@ export function About() {
   const [mobilePage, setMobilePage] = useState(0);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  const handleMobileScroll = () => {
-    const el = mobileScrollRef.current;
-    if (!el) return;
-    const page = Math.round(el.scrollLeft / el.clientWidth);
-    if (page !== mobilePage) setMobilePage(page);
-  };
-
-  const scrollToMobilePage = (page: number) => {
-    const el = mobileScrollRef.current;
-    if (!el) return;
-    el.scrollTo({ left: page * el.clientWidth, behavior: "smooth" });
-  };
-
   return (
     <section id="about" className="h-full flex flex-col">
       {/* ─── DESKTOP (md+) ─── */}
@@ -152,88 +139,75 @@ export function About() {
         </div>
       </div>
 
-      {/* ─── MOBILE (<md) — horizontal snap pages ─── */}
-      <div className="md:hidden flex-1 flex flex-col min-h-0 overflow-hidden">
-        {/* Shared header (single, never duplicated on page 2) */}
-        <div className="shrink-0 px-[var(--section-px)] pt-[var(--section-pt)] pb-3">
-          <div className="flex items-baseline justify-between gap-3">
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-              {mobilePage === 0 ? "01 — Mindset Shifts" : "02 — Ways to Work Together"}
-            </p>
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
-              {String(mobilePage + 1).padStart(2, "0")} / 02
-            </p>
-          </div>
-          <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.02em] text-foreground mt-2">
+      {/* ─── MOBILE (<md) — single-screen toggle card ─── */}
+      <div className="md:hidden flex-1 flex flex-col min-h-0 px-[var(--section-px)] pt-[var(--section-pt)] pb-6 overflow-hidden">
+        <div className="shrink-0 mb-4">
+          <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.02em] text-foreground">
             From Convention to Insight
           </h2>
         </div>
 
-        {/* Horizontal snap carousel */}
-        <div
-          ref={mobileScrollRef}
-          onScroll={handleMobileScroll}
-          className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide"
-        >
-          <div className="flex h-full">
-            {/* Page 1 — Mindset shifts */}
-            <div className="snap-start shrink-0 w-screen h-full px-[var(--section-px)] pt-1 pb-2 flex">
-              <div className="w-full h-full border border-border rounded-xl bg-background flex flex-col justify-center px-4 py-4">
-                <div className="flex flex-col gap-3">
-                  {shifts.map(([from, to], i) => (
-                    <div key={i} className="flex flex-col gap-0.5">
-                      <span className="text-[11px] text-muted-foreground/60 font-mono leading-tight line-through decoration-muted-foreground/30">
-                        {from}
-                      </span>
-                      <span className="text-[13px] font-medium text-foreground leading-snug">
-                        {to}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Page 2 — Ways to Work Together */}
-            <div className="snap-start shrink-0 w-screen h-full px-[var(--section-px)] pt-1 pb-2 flex">
-              <div className="w-full h-full bg-muted/40 rounded-xl flex flex-col justify-center px-4 py-4">
-                <div className="flex flex-col gap-2.5">
-                  {engagements.map((item) => (
-                    <div
-                      key={item.title}
-                      className="border-b border-border/60 last:border-b-0 pb-2 last:pb-0"
-                    >
-                      <div className="flex items-baseline justify-between gap-3 mb-0.5">
-                        <p className="font-display text-[14px] font-bold text-foreground leading-tight">
-                          {item.title}
-                        </p>
-                        <p className="font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground shrink-0">
-                          {item.duration}
-                        </p>
-                      </div>
-                      <p className="text-[11.5px] text-muted-foreground leading-snug">
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="shrink-0 mb-4 grid grid-cols-2 gap-2 rounded-lg bg-muted/50 p-1">
+          <button
+            type="button"
+            onClick={() => setMobilePage(0)}
+            aria-pressed={mobilePage === 0}
+            className={`min-h-[40px] rounded-md px-3 py-2 text-left transition-colors ${
+              mobilePage === 0 ? "bg-background text-foreground shadow-sm" : "text-muted-foreground"
+            }`}
+          >
+            <span className="block font-mono text-[10px] tracking-[0.18em] uppercase">01</span>
+            <span className="block font-display text-[13px] font-bold leading-tight mt-1">Mindset shifts</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setMobilePage(1)}
+            aria-pressed={mobilePage === 1}
+            className={`min-h-[40px] rounded-md px-3 py-2 text-left transition-colors ${
+              mobilePage === 1 ? "bg-background text-foreground shadow-sm" : "text-muted-foreground"
+            }`}
+          >
+            <span className="block font-mono text-[10px] tracking-[0.18em] uppercase">02</span>
+            <span className="block font-display text-[13px] font-bold leading-tight mt-1">Ways to work together</span>
+          </button>
         </div>
 
-        {/* Pagination dots + tap targets */}
-        <div className="shrink-0 flex items-center justify-center gap-2 py-3">
-          {[0, 1].map((p) => (
-            <button
-              key={p}
-              onClick={() => scrollToMobilePage(p)}
-              aria-label={`Go to page ${p + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                mobilePage === p ? "w-6 bg-foreground" : "w-1.5 bg-muted-foreground/30"
-              }`}
-            />
-          ))}
+        <div className="flex-1 min-h-0">
+          <div
+            ref={mobileScrollRef}
+            className={`h-full w-full rounded-xl border border-border ${
+              mobilePage === 0 ? "bg-background" : "bg-muted/40"
+            } px-4 py-4 overflow-y-auto`}
+          >
+            {mobilePage === 0 ? (
+              <div className="flex flex-col gap-4">
+                {shifts.map(([from, to], i) => (
+                  <div key={i} className="flex flex-col gap-1.5">
+                    <span className="text-[12px] text-muted-foreground/60 font-mono leading-tight line-through decoration-muted-foreground/30">
+                      {from}
+                    </span>
+                    <span className="text-[15px] font-medium text-foreground leading-snug">
+                      {to}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {engagements.map((item) => (
+                  <div key={item.title} className="border-b border-border/60 last:border-b-0 pb-3 last:pb-0">
+                    <div className="flex flex-col gap-1 mb-1.5">
+                      <p className="font-display text-[15px] font-bold text-foreground leading-tight">{item.title}</p>
+                      <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground">
+                        {item.duration}
+                      </p>
+                    </div>
+                    <p className="text-[13px] text-muted-foreground leading-relaxed">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
