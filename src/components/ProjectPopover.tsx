@@ -25,7 +25,7 @@ function OverviewSlide({ project }: { project: ProjectData }) {
   return (
     <div className="h-full grid grid-cols-1 md:grid-cols-2 overflow-hidden">
       {/* Left — hero image */}
-      <div className="relative min-h-[240px] md:min-h-0 overflow-hidden">
+      <div className="relative h-[28%] md:h-auto md:min-h-0 overflow-hidden">
         <img
           src={project.heroImage}
           alt={project.title}
@@ -35,45 +35,45 @@ function OverviewSlide({ project }: { project: ProjectData }) {
       </div>
 
       {/* Right — info */}
-      <div className="p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+      <div className="p-4 md:p-10 flex flex-col justify-start md:justify-center overflow-hidden md:overflow-y-auto min-h-0">
         {project.clientLogo && (
           <img
             src={project.clientLogo}
             alt={`${project.client} logo`}
-            className="h-8 w-auto object-contain mb-4 opacity-70"
+            className="hidden md:block h-8 w-auto object-contain mb-4 opacity-70"
           />
         )}
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-3 mb-2 md:mb-3">
           <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
             {project.number} — {project.client}
           </span>
           <span className="font-mono text-[9px] text-muted-foreground/50">{project.year}</span>
         </div>
 
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground tracking-[-0.02em] leading-tight mb-4">
+        <h2 className="font-display text-xl md:text-4xl font-bold text-foreground tracking-[-0.02em] leading-tight mb-2 md:mb-4">
           {project.title}
         </h2>
 
-        <p className="text-[15px] leading-relaxed text-muted-foreground mb-6 max-w-md">
+        <p className="text-[13px] md:text-[15px] leading-relaxed text-muted-foreground mb-3 md:mb-6 max-w-md line-clamp-3 md:line-clamp-none">
           {project.subtitle}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-8">
-          <span className="font-mono text-[9px] tracking-[0.15em] uppercase bg-muted text-muted-foreground px-2.5 py-1">
+        <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-8">
+          <span className="font-mono text-[8px] md:text-[9px] tracking-[0.15em] uppercase bg-muted text-muted-foreground px-2 md:px-2.5 py-0.5 md:py-1">
             {project.categoryLabel}
           </span>
-          {project.tags.map((tag) => (
-            <span key={tag} className="font-mono text-[9px] tracking-[0.1em] uppercase text-muted-foreground border border-border px-2.5 py-1">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span key={tag} className="font-mono text-[8px] md:text-[9px] tracking-[0.1em] uppercase text-muted-foreground border border-border px-2 md:px-2.5 py-0.5 md:py-1">
               {tag}
             </span>
           ))}
         </div>
 
-        <div>
-          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
+        <div className="min-h-0">
+          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-1.5 md:mb-2">
             The Challenge
           </p>
-          <p className="text-[13px] leading-relaxed text-muted-foreground max-w-md">
+          <p className="text-[12px] md:text-[13px] leading-relaxed text-muted-foreground max-w-md line-clamp-4 md:line-clamp-none">
             {project.brief.challenge}
           </p>
         </div>
@@ -85,21 +85,21 @@ function OverviewSlide({ project }: { project: ProjectData }) {
 /* ─── Process Slide ─── */
 function ProcessSlide({ project }: { project: ProjectData }) {
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-full overflow-hidden md:overflow-y-auto">
       <div className="grid grid-cols-1 md:grid-cols-5 h-full">
         {/* Left column — approach + phases */}
-        <div className="md:col-span-2 p-6 md:p-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-border">
+        <div className="md:col-span-2 p-4 md:p-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-border">
           {/* Phase diagram */}
-          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-3">
+          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-2 md:mb-3">
             Method Phases
           </p>
-          <div className="flex gap-1 mb-8">
+          <div className="flex gap-1 mb-3 md:mb-8">
             {PHASES.map((phase) => {
               const isLed = project.phasesLed.includes(phase);
               return (
                 <div
                   key={phase}
-                  className={`flex-1 text-center py-2.5 font-mono text-[9px] tracking-[0.1em] uppercase transition-colors ${
+                  className={`flex-1 text-center py-1.5 md:py-2.5 font-mono text-[8px] md:text-[9px] tracking-[0.1em] uppercase transition-colors ${
                     isLed
                       ? "bg-user-blue text-primary-foreground"
                       : "bg-muted text-muted-foreground/40"
@@ -111,38 +111,36 @@ function ProcessSlide({ project }: { project: ProjectData }) {
             })}
           </div>
 
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3 leading-tight">
+          <h3 className="font-display text-lg md:text-3xl font-bold text-foreground mb-2 md:mb-3 leading-tight">
             {project.approach.title}
           </h3>
-          <p className="text-[13px] leading-relaxed text-muted-foreground">
+          <p className="text-[12px] md:text-[13px] leading-relaxed text-muted-foreground line-clamp-3 md:line-clamp-none">
             {project.approach.description}
           </p>
         </div>
 
         {/* Right column — methods + gallery */}
-        <div className="md:col-span-3 flex flex-col">
+        <div className="md:col-span-3 flex flex-col flex-1 min-h-0">
           {/* Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-3 flex-1">
+          <div className="grid grid-cols-3 md:grid-cols-3 flex-1 min-h-0">
             {project.approach.methods.map((method, i) => (
               <div
                 key={i}
-                className={`p-6 md:p-8 flex flex-col ${
-                  i < project.approach.methods.length - 1
-                    ? "border-b md:border-b-0 md:border-r border-border"
-                    : ""
+                className={`p-3 md:p-8 flex flex-col min-h-0 overflow-hidden ${
+                  i < project.approach.methods.length - 1 ? "border-r border-border" : ""
                 }`}
               >
-                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-user-blue mb-3">
+                <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-user-blue mb-1.5 md:mb-3">
                   0{i + 1}
                 </div>
-                <h4 className="font-display text-base font-semibold text-foreground mb-2">{method.name}</h4>
-                <p className="text-[13px] leading-relaxed text-muted-foreground">{method.description}</p>
+                <h4 className="font-display text-xs md:text-base font-semibold text-foreground mb-1 md:mb-2 leading-tight">{method.name}</h4>
+                <p className="text-[11px] md:text-[13px] leading-snug md:leading-relaxed text-muted-foreground line-clamp-3 md:line-clamp-none">{method.description}</p>
               </div>
             ))}
           </div>
 
-          {/* Gallery strip */}
-          <div className="grid grid-cols-3 border-t border-border flex-shrink-0">
+          {/* Gallery strip — desktop only to preserve mobile vertical fit */}
+          <div className="hidden md:grid grid-cols-3 border-t border-border flex-shrink-0">
             {project.gallery.slice(0, 3).map((img, i) => (
               <div
                 key={i}
@@ -167,46 +165,56 @@ function ProcessSlide({ project }: { project: ProjectData }) {
 /* ─── Outcomes Slide ─── */
 function OutcomesSlide({ project }: { project: ProjectData }) {
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-full overflow-hidden md:overflow-y-auto">
       <div className="grid grid-cols-1 md:grid-cols-5 h-full">
         {/* Left — impact metrics */}
-        <div className="md:col-span-2 p-6 md:p-10 border-b md:border-b-0 md:border-r border-border flex flex-col justify-center">
-          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-8">
+        <div className="md:col-span-2 p-4 md:p-10 border-b md:border-b-0 md:border-r border-border flex flex-col justify-center">
+          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-3 md:mb-8">
             Impact
           </p>
-          <div className="space-y-8">
-            {project.impact.map((item, i) => (
-              <div key={i}>
-                <div className="font-display text-4xl font-bold text-foreground mb-1">{item.value}</div>
-                <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground mb-1">{item.metric}</div>
-                <p className="text-[12px] text-muted-foreground/70">{item.description}</p>
+          {/* Mobile: horizontal row; Desktop: vertical stack */}
+          <div className="grid grid-cols-3 gap-2 md:flex md:flex-col md:space-y-8 md:gap-0">
+            {project.impact.slice(0, 3).map((item, i) => (
+              <div key={i} className="min-w-0">
+                <div className="font-display text-xl md:text-4xl font-bold text-foreground mb-0.5 md:mb-1 leading-none">{item.value}</div>
+                <div className="font-mono text-[8px] md:text-[9px] tracking-[0.15em] uppercase text-muted-foreground mb-0.5 md:mb-1 truncate">{item.metric}</div>
+                <p className="hidden md:block text-[12px] text-muted-foreground/70">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right — insights + quote */}
-        <div className="md:col-span-3 flex flex-col">
+        <div className="md:col-span-3 flex flex-col flex-1 min-h-0">
           {/* Insights */}
-          <div className="flex-1 p-6 md:p-10">
-            <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
+          <div className="flex-1 min-h-0 p-4 md:p-10 overflow-hidden">
+            <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-3 md:mb-6">
               Key Insights
             </p>
-            <div className="space-y-6">
-              {project.insights.slice(0, 3).map((insight, i) => (
-                <div key={i} className="border-l-2 border-border pl-4">
+            <div className="space-y-3 md:space-y-6">
+              {project.insights.slice(0, 2).map((insight, i) => (
+                <div key={i} className="border-l-2 border-border pl-3 md:pl-4">
                   {insight.stat && (
-                    <div className="font-display text-xl font-bold text-user-blue mb-1">{insight.stat}</div>
+                    <div className="font-display text-base md:text-xl font-bold text-user-blue mb-0.5 md:mb-1">{insight.stat}</div>
                   )}
-                  <h4 className="font-display text-base font-semibold text-foreground mb-1">{insight.title}</h4>
-                  <p className="text-[13px] leading-relaxed text-muted-foreground">{insight.description}</p>
+                  <h4 className="font-display text-sm md:text-base font-semibold text-foreground mb-0.5 md:mb-1 leading-tight">{insight.title}</h4>
+                  <p className="text-[12px] md:text-[13px] leading-snug md:leading-relaxed text-muted-foreground line-clamp-2 md:line-clamp-none">{insight.description}</p>
                 </div>
               ))}
+              {project.insights.length > 2 && (
+                <div className="hidden md:block border-l-2 border-border pl-4">
+                  {project.insights[2].stat && (
+                    <div className="font-display text-xl font-bold text-user-blue mb-1">{project.insights[2].stat}</div>
+                  )}
+                  <h4 className="font-display text-base font-semibold text-foreground mb-1">{project.insights[2].title}</h4>
+                  <p className="text-[13px] leading-relaxed text-muted-foreground">{project.insights[2].description}</p>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Quote or solution strip */}
-          <div className="border-t border-border p-6 md:p-10 bg-muted/20">
+          {/* Quote or solution strip — desktop only to preserve mobile vertical fit */}
+          <div className="hidden md:block border-t border-border p-6 md:p-10 bg-muted/20">
             {project.quote ? (
               <div>
                 <p className="font-display text-lg italic text-foreground/80 mb-3 leading-relaxed">
@@ -297,13 +305,13 @@ function GallerySlide({ project }: { project: ProjectData }) {
       </div>
 
       {/* Caption bar */}
-      <div className="border-t border-border px-6 md:px-10 py-4 flex items-center justify-between flex-shrink-0">
+      <div className="border-t border-border px-4 md:px-10 py-2 md:py-4 flex items-center justify-between flex-shrink-0">
         <div className="flex-1">
-          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground mb-1">
+          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground mb-0.5 md:mb-1">
             {currentImage + 1} / {galleryLength}
           </p>
           {caption && (
-            <p className="text-[13px] leading-relaxed text-muted-foreground max-w-2xl">
+            <p className="text-[11px] md:text-[13px] leading-snug md:leading-relaxed text-muted-foreground max-w-2xl line-clamp-2 md:line-clamp-none">
               {caption}
             </p>
           )}
@@ -367,18 +375,18 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-8 md:inset-16 lg:inset-20 z-50 bg-background border border-border flex flex-col overflow-hidden rounded-sm shadow-2xl"
+            className="fixed inset-0 md:inset-16 lg:inset-20 z-50 bg-background md:border md:border-border flex flex-col overflow-hidden md:rounded-sm md:shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top bar: tabs + close */}
-            <div className="flex items-center justify-between border-b border-border px-4 md:px-6 flex-shrink-0">
-              {/* Tabs */}
-              <div className="flex">
+            <div className="flex items-center justify-between border-b border-border px-2 md:px-6 flex-shrink-0 gap-2">
+              {/* Tabs — scrollable on mobile */}
+              <div className="flex flex-1 min-w-0 overflow-x-auto scrollbar-hide">
                 {TABS.map((tab) => (
                   <button
                     key={tab.key}
                     onClick={() => goTo(tab.key)}
-                    className={`relative px-5 py-4 font-mono text-[10px] tracking-[0.2em] uppercase transition-colors ${
+                    className={`relative shrink-0 px-3 md:px-5 py-3.5 md:py-4 font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase transition-colors ${
                       activeTab === tab.key
                         ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground"
@@ -397,27 +405,28 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
               </div>
 
               {/* Arrow nav + close */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 md:gap-2 shrink-0">
                 <button
                   onClick={goPrev}
                   disabled={currentIndex === 0}
-                  className="p-1.5 text-muted-foreground hover:text-foreground disabled:opacity-20 transition-colors"
+                  className="hidden md:inline-flex p-1.5 text-muted-foreground hover:text-foreground disabled:opacity-20 transition-colors"
                 >
                   <ArrowLeft size={16} />
                 </button>
                 <button
                   onClick={goNext}
                   disabled={currentIndex === TABS.length - 1}
-                  className="p-1.5 text-muted-foreground hover:text-foreground disabled:opacity-20 transition-colors"
+                  className="hidden md:inline-flex p-1.5 text-muted-foreground hover:text-foreground disabled:opacity-20 transition-colors"
                 >
                   <ArrowRight size={16} />
                 </button>
-                <div className="w-px h-5 bg-border mx-2" />
+                <div className="hidden md:block w-px h-5 bg-border mx-2" />
                 <button
                   onClick={onClose}
-                  className="p-1.5 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Close"
+                  className="p-2 md:p-1.5 -mr-1 md:mr-0 rounded-full md:rounded-none border border-border md:border-0 text-foreground md:text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <X size={16} />
+                  <X size={18} />
                 </button>
               </div>
             </div>
