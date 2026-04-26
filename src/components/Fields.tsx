@@ -194,18 +194,13 @@ export function Fields() {
                     <X size={18} />
                   </button>
 
-                  <div className="flex items-center gap-3 mb-3 pr-8">
-                    <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
-                      {services[active].number}
+                  <div className="text-center mb-3 pr-6">
+                    <h3 className="font-display text-foreground text-xl font-bold tracking-tight">
+                      {services[active].title}
+                    </h3>
+                    <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
+                      {services[active].discipline}
                     </span>
-                    <div className="min-w-0">
-                      <h3 className="font-display text-foreground text-xl font-bold tracking-tight">
-                        {services[active].title}
-                      </h3>
-                      <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
-                        {services[active].discipline}
-                      </span>
-                    </div>
                   </div>
 
                   <div className="w-full h-[140px] flex items-center justify-center rounded-lg overflow-hidden mb-3 bg-muted/30">
