@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 const STORAGE_BASE = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/site-images";
 
@@ -141,10 +142,8 @@ export function Fields() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ ...smooth, delay: i * 0.1 }}
-                  className={`rounded-2xl p-4 border-2 bg-background cursor-pointer transition-colors ${
-                    isActive ? "border-[hsl(var(--user-blue)/0.5)]" : "border-border"
-                  }`}
-                  onClick={() => setActive(isActive ? null : i)}
+                  className="rounded-2xl p-4 border-2 border-border bg-background cursor-pointer"
+                  onClick={() => setActive(i)}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
@@ -160,56 +159,87 @@ export function Fields() {
                         </span>
                       </div>
                     </div>
-                    <motion.span
-                      animate={{ rotate: isActive ? 45 : 0 }}
-                      transition={{ duration: 0.25 }}
+                    <span
                       className="font-display text-foreground/40 text-xl leading-none shrink-0"
                       aria-hidden
                     >
                       +
-                    </motion.span>
+                    </span>
                   </div>
-
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
-                        key="content"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-3 mt-3 border-t border-border">
-                          <div className="w-full h-[120px] flex items-center justify-center rounded-lg overflow-hidden mb-3">
-                            <img
-                              src={service.image}
-                              alt={service.title}
-                              loading="lazy"
-                              className="max-w-full max-h-full object-contain"
-                            />
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                            {service.description}
-                          </p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {service.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2 py-0.5 text-foreground/70 border border-border bg-muted/30"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </motion.div>
               );
             })}
           </div>
+
+          {/* Mobile overlay modal */}
+          <AnimatePresence>
+            {active !== null && (
+              <motion.div
+                key="fields-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="fixed inset-0 z-50 md:hidden flex items-center justify-center p-5 bg-foreground/40 backdrop-blur-sm"
+                onClick={() => setActive(null)}
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-full max-w-sm max-h-[85vh] overflow-y-auto rounded-2xl bg-background border-2 border-border p-5"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setActive(null)}
+                    aria-label="Close"
+                    className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-muted transition-colors text-foreground/60 hover:text-foreground"
+                  >
+                    <X size={18} />
+                  </button>
+
+                  <div className="flex items-center gap-3 mb-3 pr-8">
+                    <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
+                      {services[active].number}
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="font-display text-foreground text-xl font-bold tracking-tight">
+                        {services[active].title}
+                      </h3>
+                      <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
+                        {services[active].discipline}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="w-full h-[140px] flex items-center justify-center rounded-lg overflow-hidden mb-3 bg-muted/30">
+                    <img
+                      src={services[active].image}
+                      alt={services[active].title}
+                      loading="lazy"
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                    {services[active].description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {services[active].tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2 py-0.5 text-foreground/70 border border-border bg-muted/30"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
