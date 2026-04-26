@@ -405,9 +405,10 @@ export function ProjectPopover({ project, onClose }: ProjectPopoverProps) {
                 <div className="w-px h-5 bg-border mx-2" />
                 <button
                   onClick={onClose}
-                  className="p-1.5 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Close"
+                  className="p-2 ml-1 border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-sm"
                 >
-                  <X size={16} />
+                  <X size={18} strokeWidth={2.25} />
                 </button>
               </div>
             </div>
