@@ -23,19 +23,9 @@ interface ProjectPopoverProps {
 /* ─── Overview Slide ─── */
 function OverviewSlide({ project }: { project: ProjectData }) {
   return (
-    <div className="h-full grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-      {/* Left — hero image */}
-      <div className="relative min-h-[240px] md:min-h-0 overflow-hidden">
-        <img
-          src={project.heroImage}
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/10" />
-      </div>
-
-      {/* Right — info */}
-      <div className="p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+    <div className="h-full overflow-y-auto">
+      {/* Info */}
+      <div className="p-6 md:p-12 flex flex-col justify-center max-w-3xl mx-auto h-full">
         {project.clientLogo && (
           <img
             src={project.clientLogo}
@@ -54,7 +44,7 @@ function OverviewSlide({ project }: { project: ProjectData }) {
           {project.title}
         </h2>
 
-        <p className="text-[15px] leading-relaxed text-muted-foreground mb-6 max-w-md">
+        <p className="text-[15px] leading-relaxed text-muted-foreground mb-6 max-w-xl">
           {project.subtitle}
         </p>
 
@@ -73,12 +63,11 @@ function OverviewSlide({ project }: { project: ProjectData }) {
           <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-muted-foreground mb-2">
             The Challenge
           </p>
-          <p className="text-[13px] leading-relaxed text-muted-foreground max-w-md">
+          <p className="text-[13px] leading-relaxed text-muted-foreground max-w-xl">
             {project.brief.challenge}
           </p>
         </div>
       </div>
-    </div>
   );
 }
 
