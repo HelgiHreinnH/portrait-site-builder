@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const STORAGE_BASE = "https://pcubpqskliewraygeosc.supabase.co/storage/v1/object/public/site-images";
 
@@ -61,7 +61,8 @@ export function Fields() {
 
         {/* Row 2: Cards */}
         <div className="flex-1 min-h-0 flex items-end">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+          {/* Desktop grid — unchanged */}
+          <div className="hidden md:grid grid-cols-3 gap-12 w-full">
             {services.map((service, i) => {
               const isActive = active === i;
               const isInactive = active !== null && !isActive;
@@ -124,6 +125,87 @@ export function Fields() {
                       </span>
                     ))}
                   </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Mobile accordion */}
+          <div className="flex md:hidden flex-col gap-2.5 w-full max-w-md flex-1 min-h-0 overflow-y-auto pb-4 -mx-2 px-2">
+            {services.map((service, i) => {
+              const isActive = active === i;
+              return (
+                <motion.div
+                  key={service.number}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ ...smooth, delay: i * 0.1 }}
+                  className={`rounded-2xl p-4 border-2 bg-background cursor-pointer transition-colors ${
+                    isActive ? "border-[hsl(var(--user-blue)/0.5)]" : "border-border"
+                  }`}
+                  onClick={() => setActive(isActive ? null : i)}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
+                        {service.number}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="font-display text-foreground text-lg font-bold tracking-tight truncate">
+                          {service.title}
+                        </h3>
+                        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground truncate block">
+                          {service.discipline}
+                        </span>
+                      </div>
+                    </div>
+                    <motion.span
+                      animate={{ rotate: isActive ? 45 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="font-display text-foreground/40 text-xl leading-none shrink-0"
+                      aria-hidden
+                    >
+                      +
+                    </motion.span>
+                  </div>
+
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        key="content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-3 mt-3 border-t border-border">
+                          <div className="w-full h-[120px] flex items-center justify-center rounded-lg overflow-hidden mb-3">
+                            <img
+                              src={service.image}
+                              alt={service.title}
+                              loading="lazy"
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                            {service.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {service.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="font-mono text-[9px] tracking-wider uppercase rounded-full px-2 py-0.5 text-foreground/70 border border-border bg-muted/30"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               );
             })}
