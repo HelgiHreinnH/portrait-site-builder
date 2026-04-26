@@ -117,6 +117,8 @@ export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [page, setPage] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
+  const [mobilePage, setMobilePage] = useState(0);
 
   const allProjects = projectOrder.map((id) => projects[id]).filter(Boolean);
   const featured = allProjects.filter((p) => featuredIds.includes(p.id));
@@ -141,6 +143,26 @@ export function Projects() {
     el.addEventListener("scroll", handleScroll, { passive: true });
     return () => el.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
+
+  const scrollMobileToPage = useCallback((p: number) => {
+    const el = mobileScrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: p * el.clientWidth, behavior: "smooth" });
+    setMobilePage(p);
+  }, []);
+
+  const handleMobileScroll = useCallback(() => {
+    const el = mobileScrollRef.current;
+    if (!el) return;
+    setMobilePage(Math.round(el.scrollLeft / el.clientWidth));
+  }, []);
+
+  useEffect(() => {
+    const el = mobileScrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", handleMobileScroll, { passive: true });
+    return () => el.removeEventListener("scroll", handleMobileScroll);
+  }, [handleMobileScroll]);
 
   return (
     <>
@@ -232,104 +254,108 @@ export function Projects() {
             </div>
           </div>
 
-          {/* Mobile: featured stack + compact 2-col grid */}
-          <div className="md:hidden flex-1 min-h-0 overflow-y-auto -mx-2 px-2 pb-6">
-            {/* Featured (stacked) */}
-            <div className="flex flex-col gap-3 mb-4">
-              {featured.map((project, i) => (
-                <motion.button
-                  key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ ...smooth, delay: i * 0.06 }}
-                  className="group relative block w-full overflow-hidden rounded-xl text-left border border-border/40 bg-background"
+          {/* Mobile: two-page horizontal snap scroll */}
+          <div className="md:hidden flex-1 min-h-0 flex flex-col">
+            <div
+              ref={mobileScrollRef}
+              className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden scrollbar-hide snap-x snap-mandatory -mx-[var(--section-px,1.25rem)]"
+              style={{ scrollbarWidth: "none" }}
+            >
+              <div className="flex h-full" style={{ width: "200%" }}>
+                {/* Page 1: 3 featured cards stacked */}
+                <div
+                  className="snap-start shrink-0 h-full overflow-y-auto px-[var(--section-px,1.25rem)]"
+                  style={{ width: "50%" }}
                 >
-                  <div className="relative w-full aspect-[4/3] overflow-hidden">
-                    <img
-                      src={project.heroImage}
-                      alt={project.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                      style={{ filter: "grayscale(10%) contrast(1.02)" }}
-                    />
-                    <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
-                      <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/80">
-                        {project.number}
-                      </span>
-                      <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/80 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
-                        {project.outcome}
-                      </span>
-                    </div>
+                  <div className="flex flex-col gap-3 pb-2">
+                    {featured.map((project, i) => (
+                      <motion.button
+                        key={project.id}
+                        onClick={() => setSelectedProject(project)}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ ...smooth, delay: i * 0.06 }}
+                        className="group relative block w-full overflow-hidden rounded-xl text-left border border-border/40 bg-background"
+                      >
+                        <div className="relative w-full aspect-[4/3] overflow-hidden">
+                          <img
+                            src={project.heroImage}
+                            alt={project.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                            style={{ filter: "grayscale(10%) contrast(1.02)" }}
+                          />
+                          <div className="absolute top-2.5 left-3 right-3 flex justify-between items-start">
+                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary-foreground/80">
+                              {project.number}
+                            </span>
+                            <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-primary-foreground/80 bg-primary-foreground/10 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+                              {project.outcome}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="px-4 py-3 flex flex-col gap-1.5">
+                          <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
+                            {project.client}
+                          </p>
+                          <h3 className="font-display text-base font-semibold text-foreground leading-tight">
+                            {project.title}
+                          </h3>
+                          <div className="flex flex-wrap gap-1.5 mt-1">
+                            {project.tags.slice(0, 3).map((tag) => (
+                              <span
+                                key={tag}
+                                className="font-mono text-[9px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5 bg-muted/50"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.button>
+                    ))}
                   </div>
-                  <div className="px-4 py-3 flex flex-col gap-1.5">
-                    <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground">
-                      {project.client}
-                    </p>
-                    <h3 className="font-display text-base font-semibold text-foreground leading-tight">
-                      {project.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-1.5 mt-1">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="font-mono text-[9px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-2 py-0.5 bg-muted/50"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                </div>
+
+                {/* Page 2: 9 small cards in a 3×3 grid */}
+                <div
+                  className="snap-start shrink-0 h-full px-[var(--section-px,1.25rem)]"
+                  style={{ width: "50%" }}
+                >
+                  <div
+                    className="grid gap-2 h-full"
+                    style={{
+                      gridTemplateColumns: "1fr 1fr 1fr",
+                      gridTemplateRows: "1fr 1fr 1fr",
+                    }}
+                  >
+                    {rest.slice(0, 9).map((project, i) => (
+                      <div key={project.id} className="min-h-0 overflow-hidden rounded-lg">
+                        <BentoCard
+                          project={project}
+                          onClick={() => setSelectedProject(project)}
+                          size="small"
+                          index={i}
+                        />
+                      </div>
+                    ))}
                   </div>
-                </motion.button>
-              ))}
+                </div>
+              </div>
             </div>
 
-            {/* Rest — compact 2-column grid */}
-            <div className="grid grid-cols-2 gap-2.5">
-              {rest.map((project, i) => (
-                <motion.button
-                  key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ ...smooth, delay: (i % 4) * 0.05 }}
-                  className="group relative flex flex-col overflow-hidden rounded-xl text-left border border-border/40 bg-background"
-                >
-                  <div className="relative w-full aspect-square overflow-hidden">
-                    <img
-                      src={project.heroImage}
-                      alt={project.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                      style={{ filter: "grayscale(10%) contrast(1.02)" }}
-                    />
-                    <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
-                      <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-primary-foreground/80">
-                        {project.number}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="px-3 py-2.5 flex flex-col gap-1">
-                    <p className="font-mono text-[8px] tracking-[0.2em] uppercase text-muted-foreground truncate">
-                      {project.client}
-                    </p>
-                    <h3 className="font-display text-xs font-semibold text-foreground leading-tight line-clamp-2">
-                      {project.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-1 mt-0.5">
-                      {project.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground border border-border rounded-full px-1.5 py-0.5 bg-muted/50"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.button>
+            {/* Mobile page dots */}
+            <div className="flex justify-center gap-2 pt-3 shrink-0">
+              {[0, 1].map((i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollMobileToPage(i)}
+                  aria-label={`Go to page ${i + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    mobilePage === i ? "w-6 bg-foreground" : "w-2 bg-border"
+                  }`}
+                />
               ))}
             </div>
           </div>
