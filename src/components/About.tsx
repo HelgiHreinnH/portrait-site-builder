@@ -27,7 +27,8 @@ export function About() {
     <section id="about" className="h-full flex flex-col">
       {/* ─── DESKTOP (md+) ─── */}
       {/* Top half */}
-      <div className="hidden md:flex flex-1 flex-col section-inner !pb-0">
+      <div className="hidden md:flex flex-1 flex-col min-h-0">
+        <div className="flex-1 flex flex-col min-h-0 w-full max-w-[var(--section-max-w)] mx-auto px-[var(--section-px)] md:px-[var(--section-px-md)] pt-[var(--section-pt)]">
         <div className="shrink-0">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -75,6 +76,7 @@ export function About() {
               ))}
             </div>
           </motion.div>
+        </div>
         </div>
       </div>
 
