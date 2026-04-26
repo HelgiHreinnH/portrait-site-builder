@@ -1,30 +1,77 @@
+## Plan
 
+Redesign the mobile-only version of the "From Convention to Insight" section into two deliberate screens that fit within a single mobile viewport, while leaving the desktop layout unchanged.
 
-## Layout Analysis
+## Recommended mobile interaction
 
-Looking at the three screenshots, here are the core problems:
+Use a **two-screen horizontal pager** for mobile.
 
-1. **Massive vertical gap** between the buttons and the image — the buttons sit at the top of the grid while the image floats in the lower half, creating a disconnected feel
-2. **Image container is too tall and unanchored** — it uses `flex-1` with `maxHeight: calc(100vh - 320px)` which makes the image drift downward in the available space
-3. **Buttons feel orphaned** — they're tiny text elements in a huge empty left column with no visual relationship to the right content
-4. **Name + marquee collision** — "Helgi Hreinn Hjálmarsson" and the client marquee crowd together at the bottom
-5. **Text content views lack vertical grounding** — when "What I do" or "Who am I" content shows, it floats in a tall container with uneven whitespace
+Why this is the best fit here:
+- It matches the interaction already used in the Projects section, so the site stays behaviorally consistent.
+- It avoids the current "double scroll" problem caused by stacked content and nested vertical scrolling.
+- It keeps both desktop ideas intact as two separate mobile experiences instead of compressing both into one overloaded screen.
+- It works with touch naturally, and can still be supported with tapable dots/buttons.
 
-## Proposed Fix
+I would not recommend:
+- **Vertical scroll between screen 1 and screen 2**: too easy to feel like one long broken section again.
+- **Single tap only**: usable, but less discoverable and less natural than a swipe on mobile.
 
-Restructure the grid area so buttons and content are vertically centered together, with a controlled-height right column.
+## What I’ll build
 
-### Changes to `src/components/Hero.tsx`:
+### 1. Keep desktop exactly as-is
+- Leave the `md+` About layout untouched.
+- Restrict all redesign work to the `md:hidden` mobile block in `src/components/About.tsx`.
 
-1. **Vertically center the grid content** — change `items-start` to `items-center` so buttons align with the middle of the right column
-2. **Give the right column a fixed height** instead of `flex-1` — use something like `h-[calc(100vh-380px)]` so the image/content area has a predictable, proportional size
-3. **Remove `-mt-8`** from the image container — no longer needed once the layout is properly centered
-4. **Move the name inside the image container** as an overlay at the bottom, so it doesn't add extra height below
-5. **Add subtle vertical centering padding to the button column** so buttons feel anchored to the content area
-6. **Tighten the marquee spacing** — reduce `pt-4` to `pt-2` and pin it to the bottom with `mt-auto`
+### 2. Turn mobile into two true screens
+Build the mobile version as a fixed two-page pager inside the About section:
 
-The result: buttons and image/content share a visual center line, the image fills a well-proportioned rectangle, and the name overlays the image bottom rather than pushing everything down.
+```text
+Mobile About
+├─ Shared section header (shown once)
+├─ Horizontal pager
+│  ├─ Screen 1: Mindset shifts
+│  └─ Screen 2: Ways to work together
+└─ Page indicator / tap controls
+```
 
-### File to edit
-- `src/components/Hero.tsx`
+### 3. Fix the current broken layout issues
+Address the problems visible in the screenshot:
+- Remove the feeling of two stacked sections on mobile.
+- Prevent the second screen from reintroducing the full large heading in a way that makes the section look duplicated.
+- Eliminate awkward nested scrolling where possible.
+- Ensure each mobile screen fits within the available viewport height under the nav.
 
+### 4. Refine each mobile screen for fit
+#### Screen 1 — Mindset shifts
+- Keep the large title and intro framing here.
+- Present the shifts inside one clean card sized to the remaining viewport.
+- Tighten vertical spacing and type scale only on mobile so all five pairs fit comfortably.
+
+#### Screen 2 — Ways to Work Together
+- Do **not** repeat the full large section heading.
+- Use a smaller internal label/subheading so it feels like page 2 of the same section, not a new section.
+- Reformat engagement items into a compact stacked card layout optimized for mobile height.
+- If necessary, slightly reduce padding and metadata spacing before allowing any inner scroll.
+
+### 5. Improve navigation clarity
+- Keep horizontal swipe.
+- Keep or refine the pagination dots.
+- Add optional tap targets such as "01 / 02" or previous/next micro-controls if needed for discoverability.
+
+## Technical details
+
+- File to update: `src/components/About.tsx`
+- Preserve existing desktop blocks under `hidden md:flex`.
+- Rework only the mobile block under `md:hidden`.
+- Use a single mobile header region plus a pager container sized against the section height.
+- Use `w-screen`/viewport-based slide sizing carefully so each page snaps cleanly.
+- Prefer `overflow-hidden` on the mobile section wrapper and avoid `overflow-y-auto` inside cards unless content truly cannot fit on very small devices.
+- If needed, use a height formula for the pager area so the card content fits below the title and above the dots.
+
+## Expected result
+
+On mobile, this section will feel like one polished two-step story:
+1. "From Convention to Insight" with the mindset shifts
+2. "Ways to Work Together" as the follow-up screen
+
+Users can swipe horizontally between them, desktop remains unchanged, and the broken stacked/mobile overflow behavior is removed.
