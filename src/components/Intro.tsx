@@ -22,9 +22,9 @@ export function Intro() {
         {/* Breathing room where heading used to be */}
         <div className="my-6 md:my-[48px]" />
 
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center min-h-0">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-start md:items-center min-h-0">
           {/* Left column - buttons */}
-          <div className="flex flex-row md:flex-col gap-4 md:gap-8 items-center justify-center shrink-0">
+          <div className="flex flex-row md:flex-col gap-4 md:gap-8 items-center justify-center shrink-0 self-start">
             <button
               onMouseEnter={() => setActiveView("what")}
               onMouseLeave={() => setActiveView("image")}
