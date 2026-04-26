@@ -154,28 +154,32 @@ export function About() {
 
       {/* ─── MOBILE (<md) — horizontal snap pages ─── */}
       <div className="md:hidden flex-1 flex flex-col min-h-0 overflow-hidden">
-        {/* Header */}
+        {/* Shared header (single, never duplicated on page 2) */}
         <div className="shrink-0 px-[var(--section-px)] pt-[var(--section-pt)] pb-3">
-          <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-foreground leading-tight">
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+              {mobilePage === 0 ? "01 — Mindset Shifts" : "02 — Ways to Work Together"}
+            </p>
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground/50">
+              {String(mobilePage + 1).padStart(2, "0")} / 02
+            </p>
+          </div>
+          <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.02em] text-foreground mt-2">
             From Convention to Insight
           </h2>
-          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1.5">
-            {mobilePage === 0 ? "01 — Mindset Shifts" : "02 — Ways to Work Together"}
-          </p>
         </div>
 
         {/* Horizontal snap carousel */}
         <div
           ref={mobileScrollRef}
           onScroll={handleMobileScroll}
-          className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide"
         >
           <div className="flex h-full">
             {/* Page 1 — Mindset shifts */}
-            <div className="snap-start shrink-0 w-screen h-full px-[var(--section-px)] py-2 flex">
-              <div className="w-full h-full border border-border rounded-xl bg-background flex flex-col overflow-y-auto">
-                <div className="p-4 flex flex-col gap-3 my-auto">
+            <div className="snap-start shrink-0 w-screen h-full px-[var(--section-px)] pt-1 pb-2 flex">
+              <div className="w-full h-full border border-border rounded-xl bg-background flex flex-col justify-center px-4 py-4">
+                <div className="flex flex-col gap-3">
                   {shifts.map(([from, to], i) => (
                     <div key={i} className="flex flex-col gap-0.5">
                       <span className="text-[11px] text-muted-foreground/60 font-mono leading-tight line-through decoration-muted-foreground/30">
@@ -191,16 +195,16 @@ export function About() {
             </div>
 
             {/* Page 2 — Ways to Work Together */}
-            <div className="snap-start shrink-0 w-screen h-full px-[var(--section-px)] py-2 flex">
-              <div className="w-full h-full bg-muted/40 rounded-xl flex flex-col overflow-y-auto">
-                <div className="p-4 flex flex-col gap-3 my-auto">
+            <div className="snap-start shrink-0 w-screen h-full px-[var(--section-px)] pt-1 pb-2 flex">
+              <div className="w-full h-full bg-muted/40 rounded-xl flex flex-col justify-center px-4 py-4">
+                <div className="flex flex-col gap-2.5">
                   {engagements.map((item) => (
                     <div
                       key={item.title}
-                      className="border-b border-border/60 last:border-b-0 pb-2.5 last:pb-0"
+                      className="border-b border-border/60 last:border-b-0 pb-2 last:pb-0"
                     >
                       <div className="flex items-baseline justify-between gap-3 mb-0.5">
-                        <p className="font-display text-[14px] font-bold text-foreground">
+                        <p className="font-display text-[14px] font-bold text-foreground leading-tight">
                           {item.title}
                         </p>
                         <p className="font-mono text-[9px] tracking-[0.15em] uppercase text-muted-foreground shrink-0">
@@ -218,7 +222,7 @@ export function About() {
           </div>
         </div>
 
-        {/* Pagination dots */}
+        {/* Pagination dots + tap targets */}
         <div className="shrink-0 flex items-center justify-center gap-2 py-3">
           {[0, 1].map((p) => (
             <button
