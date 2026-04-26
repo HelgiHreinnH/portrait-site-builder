@@ -228,35 +228,65 @@ export function Method() {
           </div>
 
           {/* Mobile stacked view */}
-          <div className="flex flex-col gap-2.5 md:hidden w-full max-w-md flex-1 min-h-0 overflow-y-auto pb-4 -mx-2 px-2">
-            {phases.map((phase, i) => (
+          <div className="md:hidden w-full max-w-md flex-1 min-h-0 overflow-y-auto pb-4 -mx-2 px-2">
+            <div className="relative pl-8">
+              {/* Connecting vertical line — animates as you scroll */}
               <motion.div
-                key={phase.num}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...smooth, delay: i * 0.1 }}
-                className="rounded-2xl p-4 border-2 border-border bg-background cursor-pointer"
-                onClick={() => setActivePhase(i)}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
-                      {phase.num}
-                    </span>
-                    <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground font-bold truncate">
-                      {phase.label}
-                    </span>
-                  </div>
-                  <span
-                    className="font-display text-foreground/40 text-xl leading-none shrink-0"
-                    aria-hidden
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                style={{ transformOrigin: "top" }}
+                className="absolute left-[14px] top-3 bottom-3 w-px bg-gradient-to-b from-foreground/30 via-foreground/20 to-foreground/5"
+                aria-hidden
+              />
+
+              <div className="flex flex-col gap-2.5">
+                {phases.map((phase, i) => (
+                  <motion.div
+                    key={phase.num}
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ ...smooth, delay: 0.15 + i * 0.12 }}
+                    className="relative"
                   >
-                    +
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+                    {/* Step dot on the connecting line */}
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.6 }}
+                      transition={{ duration: 0.5, delay: 0.25 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute -left-8 top-1/2 -translate-y-1/2 w-[11px] h-[11px] rounded-full bg-background border-2 border-foreground/60 z-10"
+                      aria-hidden
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setActivePhase(i)}
+                      className="w-full text-left rounded-2xl p-4 border-2 border-border bg-background cursor-pointer"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span className="font-display text-foreground text-xl font-bold opacity-20 shrink-0">
+                            {phase.num}
+                          </span>
+                          <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-foreground font-bold truncate">
+                            {phase.label}
+                          </span>
+                        </div>
+                        <span
+                          className="font-display text-foreground/40 text-xl leading-none shrink-0"
+                          aria-hidden
+                        >
+                          +
+                        </span>
+                      </div>
+                    </button>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Mobile overlay modal */}
