@@ -142,11 +142,14 @@ export function About() {
       </div>
 
       {/* ─── MOBILE (<md) — single-screen toggle card ─── */}
-      <div className="md:hidden flex-1 flex flex-col min-h-0 px-[var(--section-px)] pt-[var(--section-pt)] pb-6 overflow-hidden">
+      <div className="md:hidden flex-1 flex flex-col min-h-0 px-[var(--section-px)] pt-[var(--section-pt)] pb-6 overflow-y-auto">
         <div className="shrink-0 mb-4">
           <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.02em] text-foreground">
             From Convention to Insight
           </h2>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">
+            How my approach differs from convention — and the ways we can work together to put it into practice.
+          </p>
         </div>
 
         <div className="shrink-0 mb-4 grid grid-cols-2 gap-2 rounded-lg bg-muted/50 p-1">
@@ -174,12 +177,12 @@ export function About() {
           </button>
         </div>
 
-        <div className="flex-1 min-h-0">
+        <div className="shrink-0">
           <div
             ref={mobileScrollRef}
-            className={`h-full w-full rounded-xl border border-border ${
+            className={`w-full rounded-xl border border-border ${
               mobilePage === 0 ? "bg-background" : "bg-muted/40"
-            } px-4 py-4 overflow-y-auto`}
+            } px-4 py-4`}
           >
             {mobilePage === 0 ? (
               <div className="flex flex-col gap-4">
