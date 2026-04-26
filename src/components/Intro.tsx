@@ -91,7 +91,7 @@ export function Intro() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={fade}
-                    className="flex flex-col items-center justify-center p-2 md:p-6 h-full overflow-y-auto"
+                    className="flex flex-col items-center justify-start md:justify-center pt-0 md:p-6 px-2 h-full overflow-y-auto"
                   >
                     <div className="flex flex-col gap-0 text-center">
                       <div className="font-display text-2xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight">
@@ -134,7 +134,7 @@ export function Intro() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={fade}
-                    className="flex flex-col justify-center p-2 md:p-6 h-full overflow-y-auto"
+                    className="flex flex-col justify-start md:justify-center pt-0 md:p-6 px-2 h-full overflow-y-auto"
                   >
                     <div className="mb-4 md:mb-6">
                       <span className="font-display text-xl md:text-3xl font-light italic text-muted-foreground tracking-tight">
