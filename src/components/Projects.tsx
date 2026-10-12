@@ -16,7 +16,7 @@ function FeaturedCard({ project, onClick, index }: { project: ProjectData; onCli
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ ...smooth, delay: index * 0.08 }}
-      className="group relative flex flex-col overflow-hidden rounded-xl w-full h-[560px] text-left border border-border/40"
+      className="group relative flex flex-col overflow-hidden rounded-xl w-full h-[var(--card-h)] text-left border border-border/40"
     >
       <div className="relative w-full flex-[1.2] min-h-0 overflow-hidden">
         <img
@@ -221,9 +221,9 @@ export function Projects() {
               className="overflow-x-auto overflow-y-hidden scrollbar-hide snap-x snap-mandatory"
               style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex" style={{ width: "200%", height: "560px" }}>
+              <div className="flex" style={{ width: "200%", height: "var(--card-h)" }}>
                 {/* Page 1: 3 Featured cards */}
-                <div className="snap-start shrink-0 grid grid-cols-3 gap-4" style={{ width: "50%", height: "560px" }}>
+                <div className="snap-start shrink-0 grid grid-cols-3 gap-4" style={{ width: "50%", height: "var(--card-h)" }}>
                   {featured.map((project, i) => (
                     <FeaturedCard
                       key={project.id}
@@ -239,7 +239,7 @@ export function Projects() {
                   className="snap-start shrink-0 grid gap-3"
                   style={{
                     width: "50%",
-                    height: "560px",
+                    height: "var(--card-h)",
                     gridTemplateColumns: "1fr 1fr 1fr",
                     gridTemplateRows: "1fr 1fr 1fr",
                   }}

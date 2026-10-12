@@ -78,7 +78,7 @@ export function Fields() {
                     scale: isActive ? 1.02 : 1,
                     opacity: isInactive ? 0.5 : 1,
                   }}
-                  className={`relative rounded-xl p-5 md:p-6 cursor-pointer transition-all duration-500 bg-background overflow-hidden flex flex-col items-center justify-start h-[560px] border ${
+                  className={`relative rounded-xl p-5 md:p-6 cursor-pointer transition-all duration-500 bg-background overflow-hidden flex flex-col items-center justify-start h-[var(--card-h)] border ${
                     isActive
                       ? "border-[hsl(var(--user-blue)/0.4)] shadow-[0_0_0_1px_hsl(var(--user-blue)/0.15),0_4px_20px_-4px_hsl(var(--user-blue)/0.1)]"
                       : "border-border"

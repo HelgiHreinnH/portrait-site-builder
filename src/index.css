@@ -83,6 +83,8 @@
   --section-pb: 4.5rem;
   --section-max-w: 80rem;
   --section-gap: 1rem;
+  /* Card row height: shrinks on short windows, never taller than 560px */
+  --card-h: clamp(480px, calc(100vh - 23rem), 560px);
 }
 
 .snap-container {
@@ -132,6 +134,31 @@
   .section-inner {
     padding-left: var(--section-px-md);
     padding-right: var(--section-px-md);
+  }
+}
+
+/* ─── Flow sections (desktop/tablet) ───
+   Sections that have a header + body (Fields, Method, Projects, About, Contact)
+   grow to fit their content instead of being clipped to 100vh, so the body can
+   never paint over the header/sub-header. On short windows the page simply
+   scrolls a little further. Mobile keeps the fixed-height behaviour. */
+@media (min-width: 768px) {
+  .snap-section.flow,
+  .snap-section-hscroll.flow {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+  .flow > section {
+    flex: 1 0 auto;
+    height: auto;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+  .flow .section-inner {
+    height: auto;
   }
 }
 

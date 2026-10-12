@@ -31,19 +31,19 @@ const Index = () => {
         <div className="snap-section" id="intro">
           <Intro />
         </div>
-        <div className="snap-section" id="fields">
+        <div className="snap-section flow" id="fields">
           <Fields />
         </div>
-        <div className="snap-section" id="method">
+        <div className="snap-section flow" id="method">
           <Method />
         </div>
-        <div className="snap-section-hscroll">
+        <div className="snap-section-hscroll flow">
           <Projects />
         </div>
-        <div className="snap-section">
+        <div className="snap-section flow">
           <About />
         </div>
-        <div className="snap-section">
+        <div className="snap-section flow">
           <Contact />
         </div>
       </div>
