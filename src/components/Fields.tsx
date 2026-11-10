@@ -78,7 +78,7 @@ export function Fields() {
                     scale: isActive ? 1.02 : 1,
                     opacity: isInactive ? 0.5 : 1,
                   }}
-                  className={`relative rounded-xl p-5 md:p-6 cursor-pointer transition-all duration-500 bg-background overflow-hidden flex flex-col items-center justify-start h-[var(--card-h)] border ${
+                  className={`relative rounded-xl p-5 md:p-6 cursor-pointer transition-all duration-500 bg-background overflow-hidden flex flex-col items-center justify-start min-h-[var(--card-h)] border ${
                     isActive
                       ? "border-[hsl(var(--user-blue)/0.4)] shadow-[0_0_0_1px_hsl(var(--user-blue)/0.15),0_4px_20px_-4px_hsl(var(--user-blue)/0.1)]"
                       : "border-border"
@@ -87,7 +87,7 @@ export function Fields() {
                   onMouseLeave={() => setActive(null)}
                 >
                   {/* Image */}
-                  <div className="w-full h-[146px] md:h-[166px] flex items-center justify-center rounded-lg overflow-hidden mb-6 shrink-0">
+                  <div className="w-full h-[146px] md:h-[var(--img-h)] flex items-center justify-center rounded-lg overflow-hidden mb-6 shrink-0">
                     <img
                       src={service.image}
                       alt={service.title}
