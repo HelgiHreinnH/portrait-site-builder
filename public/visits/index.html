@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Visits - Helgi Hreinn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/visits/styles.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-title">Helgi Hreinn <span class="sep">/</span> Visits</div>
+    <div class="bar-actions">
+      <div class="seg" role="group" aria-label="Time range" id="range">
+        <button type="button" data-days="7">7 days</button>
+        <button type="button" data-days="30" aria-pressed="true">30 days</button>
+        <button type="button" data-days="90">90 days</button>
+      </div>
+      <span class="updated" id="updated" aria-live="polite"></span>
+      <button type="button" class="link" id="refresh">Refresh</button>
+      <a class="out" href="/visits/logout">Sign out</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-label">
+      <div class="hero-main">
+        <p class="label" id="hero-label">Page views, <span id="hero-range">last 30 days</span></p>
+        <p class="numeral" id="numeral" aria-live="polite">-</p>
+        <p class="hero-sub" id="hero-sub">Loading visits...</p>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <ul class="legend" aria-label="Legend">
+            <li><i class="sw sw-views"></i>Views</li>
+            <li><i class="sw sw-visitors"></i>Visitors</li>
+          </ul>
+          <button type="button" class="link" id="toggle-table" aria-pressed="false">Show as table</button>
+        </div>
+        <div id="chart" class="chart" role="img" aria-label="Daily page views and visitors"></div>
+        <div id="chart-table" class="table-scroll" hidden></div>
+      </div>
+    </section>
+
+    <section class="kpis" aria-label="Summary">
+      <div class="kpi"><p class="kpi-v" id="k-visitors">-</p><p class="kpi-l">Visitors</p></div>
+      <div class="kpi"><p class="kpi-v" id="k-cv">-</p><p class="kpi-l">CV opened</p></div>
+      <div class="kpi"><p class="kpi-v" id="k-countries">-</p><p class="kpi-l">Countries</p></div>
+      <div class="kpi"><p class="kpi-v" id="k-links">-</p><p class="kpi-l">Named links used</p></div>
+    </section>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="p-countries"><h2 id="p-countries">Countries</h2><div id="countries"></div></section>
+      <section class="panel" aria-labelledby="p-cities"><h2 id="p-cities">Cities</h2><div id="cities"></div></section>
+      <section class="panel" aria-labelledby="p-sources"><h2 id="p-sources">Where they came from</h2><div id="sources"></div></section>
+
+      <section class="panel wide" aria-labelledby="p-links">
+        <h2 id="p-links">Named links</h2>
+        <div id="links"></div>
+        <form class="mk" id="mk" autocomplete="off">
+          <label for="mk-name">Make a link for someone</label>
+          <div class="mk-row">
+            <span class="mk-pre">helgi.dk/?c=</span>
+            <input id="mk-name" type="text" inputmode="text" maxlength="40" placeholder="company-name" pattern="[a-z0-9_-]+" spellcheck="false" autocapitalize="none">
+            <button type="submit" class="solid">Copy link</button>
+          </div>
+          <p class="hint" id="mk-hint">Use letters, numbers and dashes. Visits through that link show up above under the same name.</p>
+        </form>
+      </section>
+      <section class="panel" aria-labelledby="p-actions"><h2 id="p-actions">What they did</h2><div id="actions"></div><h2 class="sub" id="p-devices">Devices</h2><div id="devices"></div></section>
+
+      <section class="panel" aria-labelledby="p-pages"><h2 id="p-pages">Pages</h2><div id="pages"></div></section>
+      <section class="panel feed" aria-labelledby="p-recent"><h2 id="p-recent">Latest activity</h2><div id="recent" class="table-scroll"></div></section>
+    </div>
+
+    <footer class="foot">
+      <p>Visitors are counted once per day, anonymously. No IP addresses or cookies are stored, and Do Not Track is respected. Place is approximate and city-level. Visits from this browser are not counted.</p>
+    </footer>
+  </main>
+
+  <div id="tip" class="tip" role="status" hidden></div>
+  <script src="/visits/app.js" defer></script>
+</body>
+</html>
