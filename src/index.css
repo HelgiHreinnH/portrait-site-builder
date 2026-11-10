@@ -84,11 +84,14 @@
   --section-max-w: 80rem;
   --section-gap: 1rem;
   /* Card row height: shrinks on short windows, never taller than 560px */
-  --card-h: clamp(480px, calc(100vh - 23rem), 560px);
+  --card-h: clamp(340px, calc(100svh - 23rem), 560px);
+  /* Illustration height inside cards: follows window height */
+  --img-h: clamp(88px, 20svh, 166px);
 }
 
 .snap-container {
   height: 100vh;
+  height: 100svh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -99,6 +102,8 @@
   scroll-snap-align: start;
   height: 100vh;
   max-height: 100vh;
+  height: 100svh;
+  max-height: 100svh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -109,6 +114,8 @@
   scroll-snap-align: start;
   height: 100vh;
   max-height: 100vh;
+  height: 100svh;
+  max-height: 100svh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -147,6 +154,7 @@
   .snap-section-hscroll.flow {
     height: auto;
     min-height: 100vh;
+    min-height: 100svh;
     max-height: none;
     overflow-x: clip;
     overflow-y: visible;

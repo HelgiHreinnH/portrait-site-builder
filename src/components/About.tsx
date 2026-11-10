@@ -81,7 +81,7 @@ export function About() {
       </div>
 
       {/* Desktop bottom half */}
-      <div className="hidden md:flex h-[360px] shrink-0 flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-8 pb-[72px] bg-muted/40">
+      <div className="hidden md:flex min-h-[360px] shrink-0 flex-col justify-start px-[var(--section-px)] md:px-[var(--section-px-md)] pt-8 pb-[72px] bg-muted/40">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 10 }}

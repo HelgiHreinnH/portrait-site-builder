@@ -59,17 +59,17 @@ export function Nav() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 h-16">
         {/* Logo */}
-        <button onClick={goHome} className="font-mono text-xs tracking-[0.3em] uppercase text-foreground whitespace-nowrap">
+        <button onClick={goHome} className="font-mono text-xs tracking-[0.2em] lg:tracking-[0.3em] uppercase text-foreground whitespace-nowrap">
           Helgi Hreinn
         </button>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 lg:gap-8">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => scrollTo(link.href)}
-              className="font-mono text-[11px] tracking-[0.3em] uppercase relative group transition-colors duration-500 text-foreground/60 hover:text-foreground"
+              className="font-mono text-[11px] tracking-[0.15em] lg:tracking-[0.3em] uppercase whitespace-nowrap relative group transition-colors duration-500 text-foreground/60 hover:text-foreground"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground group-hover:w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" />
@@ -83,7 +83,7 @@ export function Nav() {
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="hidden md:block font-mono text-[11px] tracking-widest uppercase px-5 py-2 border border-foreground/10 bg-foreground/5 text-foreground/65 rounded-full transition-colors duration-500 hover:bg-foreground/10"
+          className="hidden md:block whitespace-nowrap font-mono text-[11px] tracking-widest uppercase px-3 lg:px-5 py-2 border border-foreground/10 bg-foreground/5 text-foreground/65 rounded-full transition-colors duration-500 hover:bg-foreground/10"
         >
           Get in touch
         </motion.button>
